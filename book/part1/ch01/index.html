@@ -1,0 +1,1447 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Korean public projection of the Claude Agent SDK book onto executable Claude cookbook examples.">
+      
+      
+      
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part1/ch01/">
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../../../projection/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>1장: AI 코딩 에이전트의 전체 기술 스택 - Speaky Claude Cookbooks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-ai" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-header__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Speaky Claude Cookbooks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1장: AI 코딩 에이전트의 전체 기술 스택
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-orange"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nfbs2000/speaky-claude-cookbooks" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nfbs2000/speaky-claude-cookbooks
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-nav__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Speaky Claude Cookbooks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nfbs2000/speaky-claude-cookbooks" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nfbs2000/speaky-claude-cookbooks
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    홈
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    책 본문
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            책 본문
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1장: AI 코딩 에이전트의 전체 기술 스택
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1장: AI 코딩 에이전트의 전체 기술 스택
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK 관점으로 보기
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 SDK를 사건으로 다시 보기
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 실행 전 설정과 세션 시작
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 3계층 아키텍처
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 3계층 아키텍처">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      애플리케이션 표면
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      에이전트 런타임
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      외부 의존성
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 상태는 어디에 남는가
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 공개판에서 바꿔 읽어야 하는 것
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      학생 실습
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projection/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    공개 투영
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            공개 투영
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/chapter-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    전체 챕터 매핑
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1부 아키텍처
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2부 프롬프트 엔지니어링
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3부 세션과 메시지 관측
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4부 프롬프트 캐싱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5부 안전성과 권한
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6부 고급 서브시스템
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7부 구축자를 위한 교훈
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../recipes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    레시피
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            레시피
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recipes/categories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    카테고리별 레시피
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recipes/agent-sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent SDK 레시피
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    기준
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            기준
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/public-boundary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    공개 경계
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/source-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    출처와 검증
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK 관점으로 보기
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 SDK를 사건으로 다시 보기
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 실행 전 설정과 세션 시작
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 3계층 아키텍처
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 3계층 아키텍처">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      애플리케이션 표면
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      에이전트 런타임
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      외부 의존성
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 상태는 어디에 남는가
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 공개판에서 바꿔 읽어야 하는 것
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      학생 실습
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="1-ai">1장: AI 코딩 에이전트의 전체 기술 스택<a class="headerlink" href="#1-ai" title="Permanent link">&para;</a></h1>
+<p>이 장은 Claude Code를 “채팅창이 달린 CLI”로 보지 않고, 여러 계층이 함께 움직이는 실행 시스템으로 읽기 위한 출발점이다. 원래 책의 핵심 문장은 다음 관점으로 공개판에 옮길 수 있다.</p>
+<blockquote>
+<p>AI 코딩 에이전트는 모델 API 호출 래퍼가 아니라, 사용자 표면, 에이전트 런타임, 도구, 상태, 외부 의존성이 함께 움직이는 작업 운영체제다.</p>
+</blockquote>
+<p>공개 Python cookbook 기준으로 이 문장을 다시 쓰면 더 구체적이다. <code>claude_agent_sdk</code>의 <code>query()</code>는 한 번의 agent run을 시작하고, <code>ClaudeSDKClient</code>는 여러 turn과 도구 결과가 이어지는 대화를 유지한다. <code>ClaudeAgentOptions</code>는 모델, 도구, 시스템 프롬프트, 작업 디렉터리, 버퍼 크기 같은 실행 전 조건을 묶는다. agent가 실행되면 assistant message, tool use, tool result, final result가 스트림으로 나오고, UI나 notebook renderer는 그 스트림을 사람이 볼 수 있는 화면으로 바꾼다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">Cookbook 근거</p>
+<ul>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/README.md"><code>claude_agent_sdk/README.md</code></a>는 Agent SDK 튜토리얼을 <code>query()</code>, <code>ClaudeSDKClient</code>, <code>ClaudeAgentOptions</code>, WebSearch, Read, MCP, hooks, subagents, hosting으로 전개한다.</li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/00_The_one_liner_research_agent.ipynb"><code>claude_agent_sdk/00_The_one_liner_research_agent.ipynb</code></a>는 <code>query()</code> 기반의 stateless run과 <code>ClaudeSDKClient</code> 기반의 stateful run을 나란히 보여준다.</li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/research_agent/agent.py"><code>claude_agent_sdk/research_agent/agent.py</code></a>는 실제 Python 코드에서 <code>ClaudeAgentOptions(model=..., allowed_tools=["WebSearch", "Read"], system_prompt=..., max_buffer_size=...)</code>를 구성하고 <code>ClaudeSDKClient</code>로 message stream을 받는다.</li>
+</ul>
+</div>
+<div class="admonition evidence">
+<p class="admonition-title">공식 문서 근거</p>
+<ul>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/overview.md">Agent SDK overview</a>는 Agent SDK가 Claude Code의 도구, agent loop, context management를 Python/TypeScript 라이브러리로 제공한다고 설명한다.</li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/agent-loop.md">How the agent loop works</a>는 message lifecycle, tool execution, context window를 Agent SDK agent의 핵심으로 다룬다.</li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/python.md">Agent SDK Python reference</a>는 Python SDK의 공개 API 표면을 확인하는 기준 문서다.</li>
+</ul>
+</div>
+<h2 id="sdk">SDK 관점으로 보기<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
+<p>이 장의 질문은 “공개 SDK 메시지와 cookbook 코드만 보고도 앱 표면, 세션 런타임, 외부 도구가 분리되어 있음을 설명할 수 있는가?”다.</p>
+<p>원래 책은 <code>SDKMessage</code>, <code>SDKSystemMessage.init</code>, <code>SDKAssistantMessage</code>, <code>SDKUserMessage</code>, <code>SDKResultMessage</code> 같은 메시지 관측을 중심에 둔다. Python cookbook에서는 이름이 조금 다르게 드러나지만 구조는 같다. notebook과 agent 파일에서 실제로 보는 것은 다음 네 가지다.</p>
+<table>
+<thead>
+<tr>
+<th>책의 관점</th>
+<th>공개 Python SDK/cookbook 대응</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실행 전 설정</td>
+<td><code>ClaudeAgentOptions</code></td>
+<td>모델, 도구, 프롬프트, 버퍼, 권한, 세션 조건을 정한다.</td>
+</tr>
+<tr>
+<td>세션 실행</td>
+<td><code>query()</code> 또는 <code>ClaudeSDKClient</code></td>
+<td>한 번의 run 또는 여러 turn의 agent session을 시작한다.</td>
+</tr>
+<tr>
+<td>모델 출력</td>
+<td>assistant message, text block, tool use block</td>
+<td>모델이 답하거나 도구 호출을 요청한다.</td>
+</tr>
+<tr>
+<td>외부 세계의 결과</td>
+<td>user/tool result message</td>
+<td>WebSearch, Read, MCP, Bash 같은 외부 실행 결과가 다시 대화로 들어온다.</td>
+</tr>
+<tr>
+<td>종료 상태</td>
+<td>result-bearing message, usage/cost/duration 표시</td>
+<td>run이 끝났고 어떤 비용과 결과를 남겼는지 확인한다.</td>
+</tr>
+</tbody>
+</table>
+<p>이 표만으로도 AI coding agent가 단순 API wrapper가 아니라는 점이 보인다. API wrapper라면 prompt를 보내고 text를 받는 것이 끝이다. Agent SDK run은 시작 조건을 만들고, 도구 표면을 열고, 도구 호출을 수행하고, 결과를 다시 context에 넣고, 최종 결과와 usage를 남긴다.</p>
+<h2 id="11-sdk">1.1 SDK를 사건으로 다시 보기<a class="headerlink" href="#11-sdk" title="Permanent link">&para;</a></h2>
+<p>책의 첫 번째 전환은 “SDK를 함수 호출이 아니라 사건 흐름으로 읽자”는 것이다. 공개 cookbook에서 가장 작은 사건 흐름은 <code>00_The_one_liner_research_agent.ipynb</code>의 <code>query()</code> 예제다.</p>
+<p>```python
+from claude_agent_sdk import ClaudeAgentOptions, query</p>
+<p>async for msg in query(
+    prompt="Research the latest AI agent trends",
+    options=ClaudeAgentOptions(model=MODEL, allowed_tools=["WebSearch"]),
+):
+    ...
+```</p>
+<p>이 코드는 겉으로는 짧지만, 실제로는 여러 사건을 만든다.</p>
+<ol>
+<li>사용자가 research prompt를 제출한다.</li>
+<li><code>ClaudeAgentOptions</code>가 모델과 허용 도구를 정한다.</li>
+<li>SDK가 agent run을 시작한다.</li>
+<li>assistant가 필요하면 <code>WebSearch</code>를 호출한다.</li>
+<li>search 결과가 다시 message stream에 들어온다.</li>
+<li>assistant가 최종 요약을 만든다.</li>
+<li>result와 usage/cost/duration 같은 실행 증거가 남는다.</li>
+</ol>
+<p>notebook 출력에는 <code>Using: WebSearch()</code> 같은 활동 표시와 result card가 나온다. 이것이 원래 책에서 말한 “runtime event -&gt; message store -&gt; synthesized view -&gt; user-facing surface”의 공개 Python 버전이다. 내부 UI store나 Electron canvas를 몰라도, cookbook은 같은 구조를 notebook cell output과 renderer로 보여준다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">화면 투영 근거</p>
+<ul>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/utils/html_renderer.py"><code>claude_agent_sdk/utils/html_renderer.py</code></a>는 SDK message list를 사람이 읽을 수 있는 HTML card로 렌더링한다.</li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/utils/agent_visualizer.py"><code>claude_agent_sdk/utils/agent_visualizer.py</code></a>는 agent 활동을 notebook에서 추적하는 보조 도구다.</li>
+</ul>
+</div>
+<p>여기서 중요한 점은 UI가 “답변 텍스트를 예쁘게 보여주는 층”이 아니라는 것이다. UI는 진행 중인 tool use, tool result, final result, usage를 서로 다른 상태로 표시해야 한다. 그렇지 않으면 사용자는 agent가 생각 중인지, 도구를 기다리는지, 권한을 기다리는지, 이미 실패했는지 구분할 수 없다.</p>
+<h2 id="12">1.2 실행 전 설정과 세션 시작<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<p>원래 책은 세션 시작을 <code>SDKSystemMessage.init</code> 전후의 startup boundary로 설명한다. 공개 Python cookbook에서는 이 boundary가 <code>ClaudeAgentOptions</code>와 첫 message stream 사이에서 관찰된다.</p>
+<p><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/research_agent/agent.py"><code>research_agent/agent.py</code></a>의 <code>send_query()</code>는 이 구조를 잘 보여준다.</p>
+<p>```python
+options = ClaudeAgentOptions(
+    model=model,
+    allowed_tools=["WebSearch", "Read"],
+    continue_conversation=continue_conversation,
+    system_prompt=RESEARCH_SYSTEM_PROMPT,
+    max_buffer_size=10 * 1024 * 1024,
+)</p>
+<p>async with ClaudeSDKClient(options=options) as agent:
+    await agent.query(prompt=prompt)
+    async for msg in agent.receive_response():
+        ...
+```</p>
+<p>이 코드에서 agent는 prompt를 받기 전에 이미 다음 실행 조건을 가진다.</p>
+<ul>
+<li>어떤 모델을 쓸지</li>
+<li>어떤 도구를 사용할 수 있는지</li>
+<li>대화를 이어갈지 새로 시작할지</li>
+<li>어떤 system prompt를 덧붙일지</li>
+<li>이미지나 큰 tool result를 처리하기 위해 버퍼를 얼마나 둘지</li>
+</ul>
+<p>이것이 책에서 말하는 “세션이 첫 응답 전에 이미 실행 조건을 준비한다”는 내용의 공개 SDK 대응이다. 다만 공개판에서는 기능 플래그나 내부 preload를 단정하지 않는다. 대신 Python 코드에서 확인되는 option과 공식 SDK 문서에서 설명하는 session/tool/context surface만 사용한다.</p>
+<h2 id="13-3">1.3 3계층 아키텍처<a class="headerlink" href="#13-3" title="Permanent link">&para;</a></h2>
+<p>이 장의 중심 프레임은 세 계층이다.</p>
+<p><code>mermaid
+flowchart TB
+    A["Application Surface&lt;br/&gt;notebook, chat UI, docs page, CLI wrapper"] --&gt; B["Agent Runtime&lt;br/&gt;query, ClaudeSDKClient, message stream, tool loop"]
+    B --&gt; C["External Dependencies&lt;br/&gt;model API, WebSearch, Read, MCP, filesystem, shell"]
+    C --&gt; B
+    B --&gt; A</code></p>
+<h3 id="_1">애플리케이션 표면<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>애플리케이션 표면은 사용자가 직접 만지는 층이다. cookbook에서는 Jupyter notebook이 이 역할을 한다. 사용자는 cell에 prompt를 넣고, 결과 card를 보고, WebSearch가 호출됐는지 확인한다. 나중에 같은 구조는 web app, Slack bot, hosted HTTP API, book canvas로 바뀔 수 있다.</p>
+<p>이 층의 책임은 다음과 같다.</p>
+<ul>
+<li>prompt 입력을 받는다.</li>
+<li>실행 옵션을 선택하게 한다.</li>
+<li>tool progress와 result를 보여준다.</li>
+<li>최종 artifact를 연결한다.</li>
+<li>실패나 권한 대기 상태를 사용자에게 설명한다.</li>
+</ul>
+<p><code>html_renderer.py</code>와 notebook output은 이 계층이 단순 로그 출력보다 더 구조화되어야 함을 보여준다.</p>
+<h3 id="_2">에이전트 런타임<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>런타임 계층은 <code>query()</code>와 <code>ClaudeSDKClient</code>가 대표한다. 이 층은 모델에게 prompt를 보내는 것만 하지 않는다. message stream을 열고, assistant가 요청한 도구 호출을 처리하고, 도구 결과를 다시 대화에 넣고, 종료 상태를 만든다.</p>
+<p><code>query()</code>는 독립적인 한 번의 run에 적합하다. cookbook은 이를 stateless interaction으로 설명한다. 반대로 <code>ClaudeSDKClient</code>는 여러 query가 이전 context를 공유해야 할 때 적합하다. <code>00_The_one_liner_research_agent.ipynb</code>는 같은 연구 agent를 stateless <code>query()</code>와 stateful <code>ClaudeSDKClient</code>로 비교한다.</p>
+<p>이 구분은 제품 설계에서 중요하다. “한 번 검색하고 요약해 줘”는 <code>query()</code>로 충분할 수 있다. “이 차트를 먼저 읽고, 그 다음 결과를 바탕으로 추가 검색해 줘”는 <code>ClaudeSDKClient</code>가 더 자연스럽다.</p>
+<h3 id="_3">외부 의존성<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>외부 의존성은 모델 바깥의 세계다. WebSearch, Read, MCP server, filesystem, shell, GitHub API, Slack API가 여기에 들어간다. 모델은 외부 세계를 직접 소유하지 않는다. tool call을 만들고, 실행 결과를 message로 돌려받는다.</p>
+<p><code>research_agent/agent.py</code>는 <code>allowed_tools=["WebSearch", "Read"]</code>만 열어 연구 agent의 세계를 제한한다. 그래서 이 agent는 웹을 검색하고 파일/이미지를 읽을 수 있지만, 임의의 shell command를 실행하는 agent는 아니다. 이 작은 차이가 바로 agent architecture다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">도구 표면 근거</p>
+<ul>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/00_The_one_liner_research_agent.ipynb"><code>claude_agent_sdk/00_The_one_liner_research_agent.ipynb</code></a>는 <code>allowed_tools=["WebSearch"]</code>와 <code>allowed_tools=["WebSearch", "Read"]</code>의 의미를 설명한다.</li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/02_The_observability_agent.ipynb"><code>claude_agent_sdk/02_The_observability_agent.ipynb</code></a>는 MCP server를 붙여 Git/GitHub 같은 외부 시스템을 agent runtime으로 연결한다.</li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/mcp.md">Connect to external tools with MCP</a>는 MCP가 외부 도구를 SDK agent에 연결하는 공개 방식임을 설명한다.</li>
+</ul>
+</div>
+<h2 id="14">1.4 상태는 어디에 남는가<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<p>책은 AppState를 <code>session_id</code>, 권한 모드, pending tool use, final result 같은 상태 증거로 읽는다. 공개 Python cookbook에서는 같은 개념이 <code>messages</code> list, <code>continue_conversation</code>, <code>result</code>, renderer, session browser로 나타난다.</p>
+<p><code>research_agent/agent.py</code>는 response stream에서 모든 message를 <code>messages</code> 배열에 모은다. 그리고 <code>hasattr(msg, "result")</code>로 최종 result를 꺼낸다. 이후 <code>display_agent_response(messages)</code>가 전체 실행을 화면에 투영한다. 즉 상태는 다음 세 곳에 남는다.</p>
+<table>
+<thead>
+<tr>
+<th>상태 위치</th>
+<th>cookbook 예</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDK option</td>
+<td><code>continue_conversation</code>, <code>allowed_tools</code>, <code>system_prompt</code></td>
+<td>실행 전 조건</td>
+</tr>
+<tr>
+<td>message buffer</td>
+<td><code>messages: list[Any]</code></td>
+<td>실행 중 관측된 event history</td>
+</tr>
+<tr>
+<td>rendered output</td>
+<td><code>display_agent_response(messages)</code></td>
+<td>사용자에게 보여주는 projection</td>
+</tr>
+</tbody>
+</table>
+<p><code>05_Building_a_session_browser.ipynb</code>로 가면 이 생각이 더 명확해진다. session은 단순히 화면에 지나간 로그가 아니라 나중에 list, read, rename, tag, fork, resume할 수 있는 작업 이력이다. 그러므로 에이전트 제품을 만들 때는 “답변만 저장할지”가 아니라 “어떤 message와 tool result를 어느 수준으로 보존할지”를 설계해야 한다.</p>
+<h2 id="15">1.5 공개판에서 바꿔 읽어야 하는 것<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<p>원래 책의 1장은 강의 화면, SDK 메시지, 내부 feature surface, startup trace를 함께 말한다. 공개 cookbook판에서는 이 중 일부를 조정해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>원래 책의 표현</th>
+<th>공개판 처리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>내부 feature flag나 build flag</td>
+<td>공개 SDK options, loaded tools, skills/plugins 문서로만 설명한다.</td>
+</tr>
+<tr>
+<td>특정 내부 startup trace</td>
+<td><code>ClaudeAgentOptions</code>와 첫 message stream 사이의 관측 가능한 boundary로 바꾼다.</td>
+</tr>
+<tr>
+<td>앱 내부 store 이름</td>
+<td>notebook message buffer, renderer, session browser 같은 공개 예제로 바꾼다.</td>
+</tr>
+<tr>
+<td>숨은 사고 과정</td>
+<td>다루지 않는다. tool call, tool result, final result만 관측한다.</td>
+</tr>
+</tbody>
+</table>
+<p>이 조정은 내용을 약하게 만드는 것이 아니다. 오히려 공개 사용자에게는 더 강한 설명이다. 직접 실행할 수 있는 Python notebook과 agent 파일을 기준으로 삼기 때문이다.</p>
+<h2 id="_4">학생 실습<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>첫 실습은 무겁게 시작하지 않는다. <code>claude_agent_sdk/00_The_one_liner_research_agent.ipynb</code>에서 WebSearch만 허용한 <code>query()</code> 예제를 먼저 본다.</p>
+<p>실습 질문:</p>
+<p>```text
+현재 AI 코딩 에이전트를 세 계층으로 설명해 줘.</p>
+<ol>
+<li>사용자가 직접 만지는 애플리케이션 표면</li>
+<li>세션과 도구 실행을 조율하는 런타임</li>
+<li>모델, 파일 시스템, 웹 검색, MCP 같은 외부 의존성</li>
+</ol>
+<p>각 계층마다 cookbook에서 실제로 관찰 가능한 코드나 이벤트를 함께 적어 줘.
+```</p>
+<p>관찰할 항목:</p>
+<ul>
+<li><code>ClaudeAgentOptions</code>에 어떤 실행 조건이 들어갔는가</li>
+<li><code>allowed_tools</code>가 agent의 행동 범위를 어떻게 제한하는가</li>
+<li><code>query()</code>와 <code>ClaudeSDKClient</code>의 차이가 무엇인가</li>
+<li>tool use가 UI에 어떻게 표시되는가</li>
+<li>final result와 usage/cost/duration은 어디에 남는가</li>
+</ul>
+<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
+<p>1장의 결론은 기술 스택 이름을 외우는 것이 아니다. 핵심은 agent를 세 층으로 분리해서 보는 습관이다.</p>
+<ul>
+<li>애플리케이션 표면은 prompt를 받고 실행 상태를 보여준다.</li>
+<li>에이전트 런타임은 message stream과 tool loop를 조율한다.</li>
+<li>외부 의존성은 tool result로 agent context에 들어온다.</li>
+</ul>
+<p>공개 Python cookbook은 이 구조를 실제 코드로 보여준다. <code>query()</code> 한 줄도 내부적으로는 도구 권한, message stream, result handling을 포함한 작은 agent runtime이다. <code>ClaudeSDKClient</code>로 넘어가면 그 runtime은 여러 turn과 session state를 유지하는 제품 표면으로 확장된다. 따라서 Claude Agent SDK를 배운다는 것은 모델 호출법을 배우는 것이 아니라, 관측 가능하고 통제 가능한 agent 실행 시스템을 설계하는 법을 배우는 것이다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
