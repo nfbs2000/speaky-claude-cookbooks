@@ -2,6 +2,14 @@
 
 The Claude Cookbooks provide code and guides designed to help developers build with Claude, offering copy-able code snippets that you can easily integrate into your own projects.
 
+## Korean Agent SDK Book Projection
+
+This fork includes a GitHub Pages documentation site that maps the Korean Claude Agent SDK book structure onto public Claude Agent SDK documentation and the executable Python/Jupyter cookbook examples in this repository.
+
+- Site: [Speaky Claude Cookbooks](https://nfbs2000.github.io/speaky-claude-cookbooks/)
+- Source mapping: [`docs/data/book_projection.yml`](docs/data/book_projection.yml)
+- Generated chapter map: [`docs/projection/chapter-map.md`](docs/projection/chapter-map.md)
+
 ## Prerequisites
 
 To make the most of the examples in this cookbook, you'll need a Claude API key (sign up for free [here](https://www.anthropic.com)).

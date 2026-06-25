@@ -1,0 +1,64 @@
+site_name: Speaky Claude Cookbooks
+site_description: Korean public projection of the Claude Agent SDK book onto executable Claude cookbook examples.
+site_url: https://nfbs2000.github.io/speaky-claude-cookbooks/
+repo_url: https://github.com/nfbs2000/speaky-claude-cookbooks
+repo_name: nfbs2000/speaky-claude-cookbooks
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - scheme: default
+      primary: black
+      accent: deep orange
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search:
+      lang:
+        - en
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+nav:
+  - 홈: index.md
+  - 공개 투영:
+      - 개요: projection/index.md
+      - 전체 챕터 매핑: projection/chapter-map.md
+      - 1부 아키텍처: projection/part1.md
+      - 2부 프롬프트 엔지니어링: projection/part2.md
+      - 3부 세션과 메시지 관측: projection/part3.md
+      - 4부 프롬프트 캐싱: projection/part4.md
+      - 5부 안전성과 권한: projection/part5.md
+      - 6부 고급 서브시스템: projection/part6.md
+      - 7부 구축자를 위한 교훈: projection/part7.md
+      - 부록: projection/appendix.md
+  - 레시피:
+      - 전체 레시피: recipes/index.md
+      - 카테고리별 레시피: recipes/categories.md
+      - Agent SDK 레시피: recipes/agent-sdk.md
+  - 기준:
+      - 공개 경계: reference/public-boundary.md
+      - 출처와 검증: reference/source-policy.md
