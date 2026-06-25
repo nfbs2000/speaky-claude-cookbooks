@@ -44,6 +44,8 @@ extra_css:
 
 nav:
   - 홈: index.md
+  - 책 본문:
+      - "1장: AI 코딩 에이전트의 전체 기술 스택": book/part1/ch01.md
   - 공개 투영:
       - 개요: projection/index.md
       - 전체 챕터 매핑: projection/chapter-map.md
