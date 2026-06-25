@@ -1,0 +1,3052 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Korean public projection of the Claude Agent SDK book onto executable Claude cookbook examples.">
+      
+      
+      
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch05/">
+      
+      
+        <link rel="prev" href="../../part1/ch04b/">
+      
+      
+        <link rel="next" href="../ch06/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>5장: 시스템 프롬프트 아키텍처 - Speaky Claude Cookbooks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-header__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Speaky Claude Cookbooks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5장: 시스템 프롬프트 아키텍처
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-orange"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nfbs2000/speaky-claude-cookbooks" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nfbs2000/speaky-claude-cookbooks
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-nav__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Speaky Claude Cookbooks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nfbs2000/speaky-claude-cookbooks" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nfbs2000/speaky-claude-cookbooks
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    홈
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    책 본문
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            책 본문
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제1부: 아키텍처
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            제1부: 아키텍처
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1장: AI 코딩 에이전트의 전체 기술 스택
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2장: 도구 시스템 - 모델의 손이 되는 40개 이상의 도구
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4장: 도구 실행 오케스트레이션 - 권한, 동시성, 스트리밍, 인터럽트
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4b장: 플랜 모드 - 뛰기 전에 살펴보기
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제2부: 프롬프트 엔지니어링
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            제2부: 프롬프트 엔지니어링
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    5장: 시스템 프롬프트 아키텍처
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    5장: 시스템 프롬프트 아키텍처
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      이 장의 공개판 요지
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      원문 절 구조를 공개 SDK로 다시 읽기
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="원문 절 구조를 공개 SDK로 다시 읽기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 시스템 프롬프트에 아키텍처가 필요한 이유
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-systempromptsection-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 원본의 systemPromptSection을 SDK로 번역하기
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dangerous_uncachedsystempromptsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 DANGEROUS_uncachedSystemPromptSection의 의미
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-optionssystemprompt-system_prompt_dynamic_boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Options.systemPrompt의 SYSTEM_PROMPT_DYNAMIC_BOUNDARY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-systemprompt-prefix-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 systemPrompt prefix를 SDK 관점으로 읽기
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-buildeffectivesystemprompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6 buildEffectiveSystemPrompt: 우선순위는 반드시 설명해야 한다
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#57" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7 직접 보이는 것과 추론해야 하는 것
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#58" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.8 책 캔버스 요구사항
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#59" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.9 학생 실습
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#builder-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      공개판 본문
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      공개 경계
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      실습 방향
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6장: 프롬프트를 통한 동작 제어
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7장: 모델별 튜닝과 A/B 테스트
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8장: 마이크로 하니스로서의 도구 프롬프트
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8d장: 동적 프롬프트 레이어 - 세션, 메모리, 팀, MCP가 뒤에 붙는 법
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08e/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08f/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제3부: 세션과 메시지 관측
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            제3부: 세션과 메시지 관측
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9장: 자동 컴팩션 - 언제, 어떻게 컨텍스트가 압축되는가
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10장: 컴팩션 이후의 파일 상태 보존
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11장: 마이크로 컴팩션 - 정밀한 컨텍스트 가지치기
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12장: 토큰 예산 전략
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제4부: 프롬프트 캐싱
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            제4부: 프롬프트 캐싱
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13장: 캐시 아키텍처와 브레이크포인트 설계
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14장: 캐시 브레이크 감지 시스템
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15장: 캐시 최적화 패턴
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제5부: 안전성과 권한
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            제5부: 안전성과 권한
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16장: 권한 시스템
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17장: YOLO 분류기
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch17b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17b장: 프롬프트 인젝션 방어
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18장: 훅 - 사용자 정의 가로채기 지점
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch18b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18b장: 샌드박스 시스템 - 격리된 실행 환경
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part5/ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19장: CLAUDE.md - 사용자 지침의 오버라이드 계층
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제6부: 고급 서브시스템
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            제6부: 고급 서브시스템
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20장: 에이전트 생성과 오케스트레이션
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch20b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20b장: 팀과 멀티프로세스 협업
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch20c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20c장: Ultraplan - 원격 멀티 에이전트 계획 수립
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    21장: Effort, Fast Mode, 그리고 Thinking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    22장: Skills 시스템 - 기본 제공에서 사용자 정의까지
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch22b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    22b장: 플러그인 시스템 - 패키징에서 마켓플레이스 확장 엔지니어링까지
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    23장: 비공개 기능 파이프라인 - 기능 플래그와 재현 조건
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch23b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    23b장: 기능 플래그의 생명주기 - 실험에서 재현 조건까지
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part6/ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    24장: 세션 간 메모리 - 망각에서 지속적 학습으로
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    제7부: AI 에이전트 구축자를 위한 교훈
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            제7부: AI 에이전트 구축자를 위한 교훈
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    25장: 하니스 엔지니어링 원칙
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    26장: 핵심 역량으로서의 세션과 메시지 관측
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    27장: 프로덕션급 AI 코딩 패턴
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    28장: Claude Code의 한계
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part7/ch30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    30장: 나만의 AI 에이전트 만들기 - Claude Code 패턴에서 실전까지
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    부록
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            부록
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 A: 주요 파일 인덱스
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 B: 환경 변수 참조
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 C: 용어집
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 D: 기능 플래그 전체 목록
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-e/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 E: 버전 진화 로그
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-f/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 F: 엔드투엔드 사례 추적
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-g/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 G: 인증 및 구독 시스템
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-h/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 H: 프롬프트 표면 인덱스
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/appendix-i/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록 I: 강좌 플러그인 배포 청사진
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projection/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    공개 투영
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            공개 투영
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/chapter-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    전체 챕터 매핑
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1부 아키텍처
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2부 프롬프트 엔지니어링
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3부 세션과 메시지 관측
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4부 프롬프트 캐싱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5부 안전성과 권한
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6부 고급 서브시스템
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/part7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7부 구축자를 위한 교훈
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projection/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    부록
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../recipes/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    레시피
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            레시피
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recipes/categories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    카테고리별 레시피
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../recipes/agent-sdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent SDK 레시피
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    기준
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            기준
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/public-boundary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    공개 경계
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/source-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    출처와 검증
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      이 장의 공개판 요지
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      원문 절 구조를 공개 SDK로 다시 읽기
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="원문 절 구조를 공개 SDK로 다시 읽기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 시스템 프롬프트에 아키텍처가 필요한 이유
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-systempromptsection-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 원본의 systemPromptSection을 SDK로 번역하기
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-dangerous_uncachedsystempromptsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 DANGEROUS_uncachedSystemPromptSection의 의미
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-optionssystemprompt-system_prompt_dynamic_boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Options.systemPrompt의 SYSTEM_PROMPT_DYNAMIC_BOUNDARY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-systemprompt-prefix-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 systemPrompt prefix를 SDK 관점으로 읽기
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-buildeffectivesystemprompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6 buildEffectiveSystemPrompt: 우선순위는 반드시 설명해야 한다
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#57" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7 직접 보이는 것과 추론해야 하는 것
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#58" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.8 책 캔버스 요구사항
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#59" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.9 학생 실습
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#builder-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      공개판 본문
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      공개 경계
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      실습 방향
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-takeaway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder takeaway
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="5">5장: 시스템 프롬프트 아키텍처<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 한국어 SDK 책의 <code>5장: 시스템 프롬프트 아키텍처</code>을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.</p>
+<p><strong>분류:</strong> 제2부: 프롬프트 엔지니어링<br>
+<strong>공개 상태:</strong> <code>public-rewrite</code><br>
+<strong>근거 신뢰도:</strong> <code>medium</code><br>
+<strong>원문 위치:</strong> <code>docs/book-sdk-ko/src/part2/ch05.md</code></p>
+<h2 id="_1">이 장의 공개판 요지<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>이 장은 원문의 내부 구현 표현을 공개 SDK 옵션, 메시지, 도구, 세션, notebook 실행 증거로 바꿔 읽어야 한다.</p>
+<p>공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-staff agent는 <code>CLAUDE.md</code>와 output style을 실제 작업 디렉터리 설정으로 로드하는 예를 제공한다. 중요한 메시지는 "프롬프트도 배포 가능한 설정"이라는 점이다. 공개 사이트에서는 우선순위와 조합 규칙을 문서화하되, 숨은 기본 프롬프트 원문을 재현하려 하지 않는다.</p>
+<p><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb">Chief of staff prompt and output style examples</a>를 근거로 삼는다. <a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/CLAUDE.md">Chief of staff CLAUDE.md</a>를 근거로 삼는다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">주요 cookbook 근거</p>
+<ul>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb">Chief of staff prompt and output style examples</a></li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/CLAUDE.md">Chief of staff CLAUDE.md</a></li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/skills/CLAUDE.md">Skills project instructions</a></li>
+</ul>
+</div>
+<div class="admonition evidence">
+<p class="admonition-title">공식 문서 근거</p>
+<ul>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md">Modifying system prompts</a></li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/claude-code-features.md">Use Claude Code features in the SDK</a></li>
+<li><a href="https://code.claude.com/docs/en/memory.md">How Claude remembers your project</a></li>
+</ul>
+</div>
+<h2 id="sdk">원문 절 구조를 공개 SDK로 다시 읽기<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 시스템 프롬프트에 아키텍처가 필요한 이유<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>이 절은 숨은 prompt 원문이 아니라 <code>system_prompt</code>, <code>CLAUDE.md</code>, tool description, skill instruction, output style처럼 공개적으로 조정 가능한 표면으로 바꿔 설명한다.</p>
+<h3 id="52-systempromptsection-sdk">5.2 원본의 <code>systemPromptSection</code>을 SDK로 번역하기<a class="headerlink" href="#52-systempromptsection-sdk" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.2 원본의</code>systemPromptSection<code>을 SDK로 번역하기</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저 <code>Chief of staff prompt and output style examples</code>를 기준 예제로 읽는다.</p>
+<h3 id="53-dangerous_uncachedsystempromptsection">5.3 <code>DANGEROUS_uncachedSystemPromptSection</code>의 의미<a class="headerlink" href="#53-dangerous_uncachedsystempromptsection" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.3</code>DANGEROUS_uncachedSystemPromptSection<code>의 의미</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저 <code>Chief of staff prompt and output style examples</code>를 기준 예제로 읽는다.</p>
+<h3 id="54-optionssystemprompt-system_prompt_dynamic_boundary">5.4 <code>Options.systemPrompt</code>의 <code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code><a class="headerlink" href="#54-optionssystemprompt-system_prompt_dynamic_boundary" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.4</code>Options.systemPrompt<code>의</code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY<code>` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의</code>system_prompt<code>,</code>claude_code<code>preset,</code>append<code>,</code>CLAUDE.md<code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저</code>Chief of staff prompt and output style examples`를 기준 예제로 읽는다.</p>
+<h3 id="55-systemprompt-prefix-sdk">5.5 <code>systemPrompt</code> prefix를 SDK 관점으로 읽기<a class="headerlink" href="#55-systemprompt-prefix-sdk" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.5</code>systemPrompt<code>prefix를 SDK 관점으로 읽기</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저 <code>Chief of staff prompt and output style examples</code>를 기준 예제로 읽는다.</p>
+<h3 id="56-buildeffectivesystemprompt">5.6 <code>buildEffectiveSystemPrompt</code>: 우선순위는 반드시 설명해야 한다<a class="headerlink" href="#56-buildeffectivesystemprompt" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.6</code>buildEffectiveSystemPrompt<code>: 우선순위는 반드시 설명해야 한다</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저 <code>Chief of staff prompt and output style examples</code>를 기준 예제로 읽는다.</p>
+<h3 id="57">5.7 직접 보이는 것과 추론해야 하는 것<a class="headerlink" href="#57" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>5.7 직접 보이는 것과 추론해야 하는 것</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 시스템 프롬프트를 내부 섹션명으로 설명하지 않는다. 대신 Agent SDK의 <code>system_prompt</code>, <code>claude_code</code> preset, <code>append</code>, <code>CLAUDE.md</code>, output styles, project settings로 나눈다. cookbook의 chief-of-s... 이며, 먼저 <code>Chief of staff prompt and output style examples</code>를 기준 예제로 읽는다.</p>
+<h3 id="58">5.8 책 캔버스 요구사항<a class="headerlink" href="#58" title="Permanent link">&para;</a></h3>
+<p>이 절은 화면 구성의 문제가 아니라 evidence projection 문제로 읽는다. prompt, tool use, tool result, final result, usage를 한 화면에서 분리해 보여주는 구조가 필요하다.</p>
+<h3 id="59">5.9 학생 실습<a class="headerlink" href="#59" title="Permanent link">&para;</a></h3>
+<p>이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.</p>
+<h3 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h3>
+<p>이 절의 결론은 builder checklist로 바꾼다. agent를 만들 때 prompt, tools, permissions, memory, observability, deployment 중 어느 경계를 설계해야 하는지 정리한다.</p>
+<h2 id="_2">공개판 본문<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.</p>
+<p>첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.</p>
+<p>둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.</p>
+<p>셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.</p>
+<p>이 장을 읽을 때는 아래 순서가 좋다.</p>
+<ol>
+<li>먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.</li>
+<li><code>ClaudeAgentOptions</code>, <code>query()</code>, <code>ClaudeSDKClient</code>, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.</li>
+<li>원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.</li>
+<li>마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.</li>
+</ol>
+<h2 id="_3">공개 경계<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>기본 시스템 프롬프트 원문이나 내부 boundary token은 게시하지 않는다.</li>
+<li>공개 옵션으로 재현 가능한 계층만 설명한다.</li>
+</ul>
+<h2 id="_4">실습 방향<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>setting_sources</code>를 바꿔 project 설정이 로드되는지 확인한다.</li>
+<li><code>CLAUDE.md</code> 수정 전후로 같은 prompt의 tool use 차이를 기록한다.</li>
+</ul>
+<h2 id="builder-takeaway_1">Builder takeaway<a class="headerlink" href="#builder-takeaway_1" title="Permanent link">&para;</a></h2>
+<p>이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
