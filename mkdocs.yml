@@ -105,6 +105,11 @@ nav:
           - "부록 G: 인증 및 구독 시스템": book/appendix/appendix-g.md
           - "부록 H: 프롬프트 표면 인덱스": book/appendix/appendix-h.md
           - "부록 I: 강좌 플러그인 배포 청사진": book/appendix/appendix-i.md
+          - "부록 J: 비공식 프롬프트 자료 독해": book/appendix/appendix-j.md
+          - "부록 K: Fable 5 하니스 독해": book/appendix/appendix-k.md
+          - "부록 L: Fable 5와 Opus 5 비교": book/appendix/appendix-l.md
+          - "부록 M: 프롬프트 버전 진화": book/appendix/appendix-m.md
+  - 공개 슬라이드: https://nfbs2000.github.io/speaky-claude-cookbooks/slides/book-sdk-ko/
   - 공개 투영:
       - 개요: projection/index.md
       - 전체 챕터 매핑: projection/chapter-map.md

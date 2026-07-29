@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "book-sdk.public-slide.v1",
+  "publicUrl": "https://nfbs2000.github.io/speaky-claude-cookbooks/slides/book-sdk-ko/",
+  "source": {
+    "repository": "nfbs2000/vibe-with-claude-code-education",
+    "path": "slide/book-sdk-ko/site",
+    "commit": "8e149e0826edf496637124a2c9bf2fb279907e56"
+  },
+  "build": {
+    "sha256": "9c9052b59a081eb3d014cb5590e8142a7a9a404e783e2bd3f161f883cb56e540",
+    "bytes": 6198559,
+    "sceneCount": 227
+  }
+}

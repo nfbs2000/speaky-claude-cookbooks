@@ -9,6 +9,7 @@ on:
       - mkdocs.yml
       - registry.yaml
       - scripts/build_pages_docs.py
+      - scripts/sync_book_sdk_slides.mjs
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
@@ -38,6 +39,9 @@ jobs:
 
       - name: Generate projection pages
         run: python scripts/build_pages_docs.py
+
+      - name: Verify packaged Book SDK slides
+        run: node scripts/sync_book_sdk_slides.mjs --verify
 
       - name: Build site
         run: mkdocs build --strict
