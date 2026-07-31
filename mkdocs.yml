@@ -109,6 +109,9 @@ nav:
           - "부록 K: Fable 5 하니스 독해": book/appendix/appendix-k.md
           - "부록 L: Fable 5와 Opus 5 비교": book/appendix/appendix-l.md
           - "부록 M: 프롬프트 버전 진화": book/appendix/appendix-m.md
+          - "부록 N: 비공식 선택 연구 자료": book/appendix/appendix-n.md
+          - "부록 O: TradingAgents 멀티에이전트 금융 워크플로 읽기": book/appendix/appendix-o.md
+          - "부록 P: 공개 GitHub Pages 통합 목차": book/appendix/appendix-p.md
   - 공개 슬라이드: https://nfbs2000.github.io/speaky-claude-cookbooks/slides/book-sdk-ko/
   - 공개 투영:
       - 개요: projection/index.md
