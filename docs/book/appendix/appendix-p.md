@@ -138,14 +138,17 @@ Code 스킬과 팀을 어떻게 올리는가”를 보여 주는 비교 자료�
 ## P.8 CopilotKit 리포 설명 페이지
 
 `speaky-CopilotKit` Pages는 CopilotKit을 다른 프로젝트에 억지로 투영한 해설이 아니라,
-현재 리포 트리에서 보이는 구조를 그대로 읽는 공개 목차다. landing page는
-`packages/`, `examples/`, `showcase/`, `skills/`, `dev-docs/`, `.claude/`,
-`.github/workflows/`를 큰 덩어리로 나누고, 기존 7장 Source Notes는 심화 문서로
-남긴다.
+현재 GitHub repository에서 보이는 구조를 그대로 읽는 공개 목차다. 첫 화면은
+GitHub 링크 기준으로 `packages/`, `examples/`, `showcase/`, `skills/`, `dev-docs/`,
+`.claude/`, `.github/workflows/`를 큰 덩어리로 요약하고, 새 Repository Guide
+7장은 리포 지도, 패키지 레이어, Runtime/AG-UI, frontend/rendering, bot surfaces,
+examples/showcase, skills/workflow를 순서대로 설명한다. 기존 7장 Source Notes는
+심화 문서로 남긴다.
 
 | 진입점 | URL | 역할 |
 | --- | --- | --- |
-| CopilotKit Repository Notes | [speaky-CopilotKit](https://nfbs2000.github.io/speaky-CopilotKit/) | monorepo 구조, 패키지 지도, examples/showcase, agent skills, 할 수 있는 일과 아닌 것 |
+| CopilotKit Repository Notes | [speaky-CopilotKit](https://nfbs2000.github.io/speaky-CopilotKit/) | CopilotKit 리포 설명 홈과 전체 목차 |
+| Repository Guide | [repo map](https://nfbs2000.github.io/speaky-CopilotKit/repository-guide/01-repo-map) | 7장 구성의 monorepo 구조, 패키지 지도, runtime/AG-UI, frontend/rendering, bot surfaces, examples/showcase, agent skills 해설 |
 | 기존 Source Notes | [introduction](https://nfbs2000.github.io/speaky-CopilotKit/copilotkit-source/01-introduction) | AG-UI, runtime, UI tools, A2UI, application layer를 더 깊게 읽는 기존 문서 |
 | Pages 소스 브랜치 | [codex/copilotkit-source-pages/site](https://github.com/nfbs2000/speaky-CopilotKit/tree/codex/copilotkit-source-pages/site) | VitePress 기반 GitHub Pages 원본 |
 
