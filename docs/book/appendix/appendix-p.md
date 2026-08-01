@@ -20,6 +20,7 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 | SDK Agent Flow | [speaky-agent-flow/education](https://nfbs2000.github.io/speaky-agent-flow/education/) | SDK agent flow 증거 리플레이를 열 때 |
 | TinyTroupe 글쓰기 팀 | [speaky-TinyTroupe/education](https://nfbs2000.github.io/speaky-TinyTroupe/education/) | 팀 글쓰기 실험과 evidence anchor를 설명할 때 |
 | Mineflayer 봇 팀 | [speaky-mineflayer](https://nfbs2000.github.io/speaky-mineflayer/) | Minecraft 봇 팀, Claude skills와 Mineflayer runtime 경계를 설명할 때 |
+| TradingAgents 팀·스킬 | [speaky-TradingAgents/part5/ch12-claude-team-skills](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | TradingAgents 포크의 `.claude` agent team과 skill 운영층을 설명할 때 |
 
 ## P.2 SDK 강좌 공개 자산
 
@@ -38,6 +39,7 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 | [Claude Code from Source 한국어 동반판](https://nfbs2000.github.io/speaky-claude-code-from-source/) | source-reference | public | Claude Code source 분석 자료의 선택 참고판 |
 | [Claude Code 소스 탐색 가이드](https://nfbs2000.github.io/speaky-claude-code/) | source-reference | public | 비공식 Claude Code source snapshot을 찾는 지도 |
 | [TradingAgents 한국어 소스 해설](https://nfbs2000.github.io/speaky-TradingAgents/) | source-reference | public | LangGraph 기반 멀티에이전트 금융 workflow 비교 자료 |
+| [TradingAgents Claude 팀과 스킬](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | team-skills | public | TradingAgents `.claude/TEAM.md`, `agents/`, `skills/` 운영층 해설 |
 
 아래 두 항목은 repository의 Pages 루트는 살아 있지만, SDK 강좌용 특정 공개 자산은
 `public-resources.json`에서 아직 `pending`으로 남아 있다.
@@ -75,7 +77,7 @@ Pages source 설정이며, `상태`는 API의 build status 또는 루트 URL HTT
 | `speaky-claude-code` | [site](https://nfbs2000.github.io/speaky-claude-code/) | `main` / `/docs` | built, HTTP 200 | Claude Code 소스 탐색 가이드 |
 | `speaky-claude-code-from-source` | [site](https://nfbs2000.github.io/speaky-claude-code-from-source/) | `main` / `/docs` | built, HTTP 200 | Claude Code from Source 동반판 |
 | `speaky-Dive-into-Claude-Code` | [site](https://nfbs2000.github.io/speaky-Dive-into-Claude-Code/) | `main` / `/docs` | built, HTTP 200 | Dive into Claude Code 동반판 |
-| `speaky-TradingAgents` | [site](https://nfbs2000.github.io/speaky-TradingAgents/) | `main` / `/docs` | built, HTTP 200 | TradingAgents 소스 해설 |
+| `speaky-TradingAgents` | [site](https://nfbs2000.github.io/speaky-TradingAgents/) | `main` / `/docs` | built, HTTP 200 | TradingAgents 소스 해설, Claude Code 팀·스킬 해설 |
 | `speaky-CopilotKit` | [site](https://nfbs2000.github.io/speaky-CopilotKit/) | `main` / `/` | Pages active, HTTP 200 | CopilotKit 공개 source/coursegraph 참고 |
 | `speaky-cocos4` | [site](https://nfbs2000.github.io/speaky-cocos4/) | `v4.0.0` / `/` | Pages active, HTTP 200 | Cocos 계열 공개 Pages |
 | `speaky-sim` | [site](https://nfbs2000.github.io/speaky-sim/) | `main` / `/` | Pages active, HTTP 200 | Sim 계열 공개 Pages |
@@ -119,7 +121,19 @@ Code 스킬과 팀을 어떻게 올리는가”를 보여 주는 비교 자료�
 | 한국어 소스 해설 | [source guide](https://nfbs2000.github.io/speaky-mineflayer/#/ko/source-guide) | Mineflayer를 관찰/행동 runtime으로 읽기 |
 | Claude 스킬 팀 해설 | [skills and team](https://nfbs2000.github.io/speaky-mineflayer/#/ko/claude-minecraft-team) | `minecraft-team`, `minecraft-operate`, 역할별 봇 팀 소개 |
 
-## P.7 사용 규칙
+## P.7 TradingAgents 팀·스킬 페이지
+
+`speaky-TradingAgents`의 새 팀·스킬 페이지는 TradingAgents Python LangGraph
+파이프라인이 아니라, 이 포크를 Claude Code로 읽고 고치고 검증하기 위한 `.claude`
+운영층을 설명한다.
+
+| 진입점 | URL | 역할 |
+| --- | --- | --- |
+| TradingAgents Pages 홈 | [speaky-TradingAgents](https://nfbs2000.github.io/speaky-TradingAgents/) | 한국어 소스 해설 홈 |
+| Claude Code 팀과 스킬 | [team and skills](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | `ta-lead`, specialist agents, runtime research team과 `ta-*` skills 소개 |
+| 소스 지도와 출처 | [source map](https://nfbs2000.github.io/speaky-TradingAgents/source-map.html) | Python pipeline source와 `.claude` 운영층 진입점 |
+
+## P.8 사용 규칙
 
 1. 강좌 정본은 공개 Pages가 아니라 `docs/book-sdk-ko` Markdown이다.
 2. 공개 Pages는 학생에게 열어 줄 수 있는 보조판, replay, game, source guide다.
