@@ -2280,9 +2280,18 @@
 </li>
 
         <li class="md-nav__item">
-  <a href="#p8" class="md-nav__link">
+  <a href="#p8-copilotkit" class="md-nav__link">
     <span class="md-ellipsis">
-      P.8 사용 규칙
+      P.8 CopilotKit 리포 설명 페이지
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#p9" class="md-nav__link">
+    <span class="md-ellipsis">
+      P.9 사용 규칙
     </span>
   </a>
 
@@ -2940,9 +2949,18 @@
 </li>
 
         <li class="md-nav__item">
-  <a href="#p8" class="md-nav__link">
+  <a href="#p8-copilotkit" class="md-nav__link">
     <span class="md-ellipsis">
-      P.8 사용 규칙
+      P.8 CopilotKit 리포 설명 페이지
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#p9" class="md-nav__link">
+    <span class="md-ellipsis">
+      P.9 사용 규칙
     </span>
   </a>
 
@@ -3030,6 +3048,11 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 <td><a href="https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html">speaky-TradingAgents/part5/ch12-claude-team-skills</a></td>
 <td>TradingAgents 포크의 <code>.claude</code> agent team과 skill 운영층을 설명할 때</td>
 </tr>
+<tr>
+<td>CopilotKit 리포 구조</td>
+<td><a href="https://nfbs2000.github.io/speaky-CopilotKit/">speaky-CopilotKit</a></td>
+<td>CopilotKit monorepo의 packages, examples, showcase, skills를 있는 그대로 설명할 때</td>
+</tr>
 </tbody>
 </table>
 <h2 id="p2-sdk">P.2 SDK 강좌 공개 자산<a class="headerlink" href="#p2-sdk" title="Permanent link">&para;</a></h2>
@@ -3110,6 +3133,12 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 <td>team-skills</td>
 <td>public</td>
 <td>TradingAgents <code>.claude/TEAM.md</code>, <code>agents/</code>, <code>skills/</code> 운영층 해설</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-CopilotKit/">CopilotKit Repository Notes</a></td>
+<td>source-reference</td>
+<td>public</td>
+<td>CopilotKit monorepo 구조와 agent-native application framework 경계 해설</td>
 </tr>
 </tbody>
 </table>
@@ -3282,7 +3311,7 @@ Pages source 설정이며, <code>상태</code>는 API의 build status 또는 루
 <td><a href="https://nfbs2000.github.io/speaky-CopilotKit/">site</a></td>
 <td><code>main</code> / <code>/</code></td>
 <td>Pages active, HTTP 200</td>
-<td>CopilotKit 공개 source/coursegraph 참고</td>
+<td>CopilotKit 리포 구조, packages, examples, showcase, skills 해설</td>
 </tr>
 <tr>
 <td><code>speaky-cocos4</code></td>
@@ -3452,7 +3481,39 @@ Code 스킬과 팀을 어떻게 올리는가”를 보여 주는 비교 자료�
 </tr>
 </tbody>
 </table>
-<h2 id="p8">P.8 사용 규칙<a class="headerlink" href="#p8" title="Permanent link">&para;</a></h2>
+<h2 id="p8-copilotkit">P.8 CopilotKit 리포 설명 페이지<a class="headerlink" href="#p8-copilotkit" title="Permanent link">&para;</a></h2>
+<p><code>speaky-CopilotKit</code> Pages는 CopilotKit을 다른 프로젝트에 억지로 투영한 해설이 아니라,
+현재 리포 트리에서 보이는 구조를 그대로 읽는 공개 목차다. landing page는
+<code>packages/</code>, <code>examples/</code>, <code>showcase/</code>, <code>skills/</code>, <code>dev-docs/</code>, <code>.claude/</code>,
+<code>.github/workflows/</code>를 큰 덩어리로 나누고, 기존 7장 Source Notes는 심화 문서로
+남긴다.</p>
+<table>
+<thead>
+<tr>
+<th>진입점</th>
+<th>URL</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CopilotKit Repository Notes</td>
+<td><a href="https://nfbs2000.github.io/speaky-CopilotKit/">speaky-CopilotKit</a></td>
+<td>monorepo 구조, 패키지 지도, examples/showcase, agent skills, 할 수 있는 일과 아닌 것</td>
+</tr>
+<tr>
+<td>기존 Source Notes</td>
+<td><a href="https://nfbs2000.github.io/speaky-CopilotKit/copilotkit-source/01-introduction">introduction</a></td>
+<td>AG-UI, runtime, UI tools, A2UI, application layer를 더 깊게 읽는 기존 문서</td>
+</tr>
+<tr>
+<td>Pages 소스 브랜치</td>
+<td><a href="https://github.com/nfbs2000/speaky-CopilotKit/tree/codex/copilotkit-source-pages/site">codex/copilotkit-source-pages/site</a></td>
+<td>VitePress 기반 GitHub Pages 원본</td>
+</tr>
+</tbody>
+</table>
+<h2 id="p9">P.9 사용 규칙<a class="headerlink" href="#p9" title="Permanent link">&para;</a></h2>
 <ol>
 <li>강좌 정본은 공개 Pages가 아니라 <code>docs/book-sdk-ko</code> Markdown이다.</li>
 <li>공개 Pages는 학생에게 열어 줄 수 있는 보조판, replay, game, source guide다.</li>

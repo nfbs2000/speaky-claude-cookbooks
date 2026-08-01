@@ -21,6 +21,7 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 | TinyTroupe 글쓰기 팀 | [speaky-TinyTroupe/education](https://nfbs2000.github.io/speaky-TinyTroupe/education/) | 팀 글쓰기 실험과 evidence anchor를 설명할 때 |
 | Mineflayer 봇 팀 | [speaky-mineflayer](https://nfbs2000.github.io/speaky-mineflayer/) | Minecraft 봇 팀, Claude skills와 Mineflayer runtime 경계를 설명할 때 |
 | TradingAgents 팀·스킬 | [speaky-TradingAgents/part5/ch12-claude-team-skills](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | TradingAgents 포크의 `.claude` agent team과 skill 운영층을 설명할 때 |
+| CopilotKit 리포 구조 | [speaky-CopilotKit](https://nfbs2000.github.io/speaky-CopilotKit/) | CopilotKit monorepo의 packages, examples, showcase, skills를 있는 그대로 설명할 때 |
 
 ## P.2 SDK 강좌 공개 자산
 
@@ -40,6 +41,7 @@ deep link를 매번 검증했다는 뜻은 아니다. 하위 목차는 각 사�
 | [Claude Code 소스 탐색 가이드](https://nfbs2000.github.io/speaky-claude-code/) | source-reference | public | 비공식 Claude Code source snapshot을 찾는 지도 |
 | [TradingAgents 한국어 소스 해설](https://nfbs2000.github.io/speaky-TradingAgents/) | source-reference | public | LangGraph 기반 멀티에이전트 금융 workflow 비교 자료 |
 | [TradingAgents Claude 팀과 스킬](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | team-skills | public | TradingAgents `.claude/TEAM.md`, `agents/`, `skills/` 운영층 해설 |
+| [CopilotKit Repository Notes](https://nfbs2000.github.io/speaky-CopilotKit/) | source-reference | public | CopilotKit monorepo 구조와 agent-native application framework 경계 해설 |
 
 아래 두 항목은 repository의 Pages 루트는 살아 있지만, SDK 강좌용 특정 공개 자산은
 `public-resources.json`에서 아직 `pending`으로 남아 있다.
@@ -78,7 +80,7 @@ Pages source 설정이며, `상태`는 API의 build status 또는 루트 URL HTT
 | `speaky-claude-code-from-source` | [site](https://nfbs2000.github.io/speaky-claude-code-from-source/) | `main` / `/docs` | built, HTTP 200 | Claude Code from Source 동반판 |
 | `speaky-Dive-into-Claude-Code` | [site](https://nfbs2000.github.io/speaky-Dive-into-Claude-Code/) | `main` / `/docs` | built, HTTP 200 | Dive into Claude Code 동반판 |
 | `speaky-TradingAgents` | [site](https://nfbs2000.github.io/speaky-TradingAgents/) | `main` / `/docs` | built, HTTP 200 | TradingAgents 소스 해설, Claude Code 팀·스킬 해설 |
-| `speaky-CopilotKit` | [site](https://nfbs2000.github.io/speaky-CopilotKit/) | `main` / `/` | Pages active, HTTP 200 | CopilotKit 공개 source/coursegraph 참고 |
+| `speaky-CopilotKit` | [site](https://nfbs2000.github.io/speaky-CopilotKit/) | `main` / `/` | Pages active, HTTP 200 | CopilotKit 리포 구조, packages, examples, showcase, skills 해설 |
 | `speaky-cocos4` | [site](https://nfbs2000.github.io/speaky-cocos4/) | `v4.0.0` / `/` | Pages active, HTTP 200 | Cocos 계열 공개 Pages |
 | `speaky-sim` | [site](https://nfbs2000.github.io/speaky-sim/) | `main` / `/` | Pages active, HTTP 200 | Sim 계열 공개 Pages |
 
@@ -133,7 +135,21 @@ Code 스킬과 팀을 어떻게 올리는가”를 보여 주는 비교 자료�
 | Claude Code 팀과 스킬 | [team and skills](https://nfbs2000.github.io/speaky-TradingAgents/part5/ch12-claude-team-skills.html) | `ta-lead`, specialist agents, runtime research team과 `ta-*` skills 소개 |
 | 소스 지도와 출처 | [source map](https://nfbs2000.github.io/speaky-TradingAgents/source-map.html) | Python pipeline source와 `.claude` 운영층 진입점 |
 
-## P.8 사용 규칙
+## P.8 CopilotKit 리포 설명 페이지
+
+`speaky-CopilotKit` Pages는 CopilotKit을 다른 프로젝트에 억지로 투영한 해설이 아니라,
+현재 리포 트리에서 보이는 구조를 그대로 읽는 공개 목차다. landing page는
+`packages/`, `examples/`, `showcase/`, `skills/`, `dev-docs/`, `.claude/`,
+`.github/workflows/`를 큰 덩어리로 나누고, 기존 7장 Source Notes는 심화 문서로
+남긴다.
+
+| 진입점 | URL | 역할 |
+| --- | --- | --- |
+| CopilotKit Repository Notes | [speaky-CopilotKit](https://nfbs2000.github.io/speaky-CopilotKit/) | monorepo 구조, 패키지 지도, examples/showcase, agent skills, 할 수 있는 일과 아닌 것 |
+| 기존 Source Notes | [introduction](https://nfbs2000.github.io/speaky-CopilotKit/copilotkit-source/01-introduction) | AG-UI, runtime, UI tools, A2UI, application layer를 더 깊게 읽는 기존 문서 |
+| Pages 소스 브랜치 | [codex/copilotkit-source-pages/site](https://github.com/nfbs2000/speaky-CopilotKit/tree/codex/copilotkit-source-pages/site) | VitePress 기반 GitHub Pages 원본 |
+
+## P.9 사용 규칙
 
 1. 강좌 정본은 공개 Pages가 아니라 `docs/book-sdk-ko` Markdown이다.
 2. 공개 Pages는 학생에게 열어 줄 수 있는 보조판, replay, game, source guide다.
