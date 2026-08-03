@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch07/">
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/evidence/ch07-live/">
       
       
-        <link rel="prev" href="../../evidence/ch06b-live/">
+        <link rel="prev" href="../../part2/ch07/">
       
       
-        <link rel="next" href="../../evidence/ch07-live/">
+        <link rel="next" href="../../part2/ch08/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>7장: 모델별 튜닝과 A/B 테스트 - Speaky Claude Cookbooks</title>
+        <title>7장 실제 Python SDK 관찰 - Speaky Claude Cookbooks</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#7-ab" class="md-skip">
+        <a href="#7-python-sdk" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              7장: 모델별 튜닝과 A/B 테스트
+              7장 실제 Python SDK 관찰
             
           </span>
         </div>
@@ -429,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch01-live/" class="md-nav__link">
+      <a href="../ch01-live/" class="md-nav__link">
         
   
   
@@ -475,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch02-live/" class="md-nav__link">
+      <a href="../ch02-live/" class="md-nav__link">
         
   
   
@@ -521,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch03-live/" class="md-nav__link">
+      <a href="../ch03-live/" class="md-nav__link">
         
   
   
@@ -567,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch04-live/" class="md-nav__link">
+      <a href="../ch04-live/" class="md-nav__link">
         
   
   
@@ -691,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch05/" class="md-nav__link">
+      <a href="../../part2/ch05/" class="md-nav__link">
         
   
   
@@ -714,7 +714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch05-live/" class="md-nav__link">
+      <a href="../ch05-live/" class="md-nav__link">
         
   
   
@@ -737,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch06/" class="md-nav__link">
+      <a href="../../part2/ch06/" class="md-nav__link">
         
   
   
@@ -760,7 +760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch06-live/" class="md-nav__link">
+      <a href="../ch06-live/" class="md-nav__link">
         
   
   
@@ -783,7 +783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch06b/" class="md-nav__link">
+      <a href="../../part2/ch06b/" class="md-nav__link">
         
   
   
@@ -806,12 +806,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch06b-live/" class="md-nav__link">
+      <a href="../ch06b-live/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     6b장 실제 Python SDK 관찰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7장: 모델별 튜닝과 A/B 테스트
     
   </span>
   
@@ -843,7 +866,7 @@
   
   
   <span class="md-ellipsis">
-    7장: 모델별 튜닝과 A/B 테스트
+    7장 실제 Python SDK 관찰
     
   </span>
   
@@ -856,7 +879,7 @@
   
   
   <span class="md-ellipsis">
-    7장: 모델별 튜닝과 A/B 테스트
+    7장 실제 Python SDK 관찰
     
   </span>
   
@@ -879,90 +902,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#71" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      7.1 모델 튜닝은 감상이 아니라 이벤트 비교다
+      실행 신원
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#72-model-launch" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      7.2 원본의 @[MODEL LAUNCH]를 강의용 체크리스트로 번역하기
+      무결성 검증된 실제 실행과 보조 출처
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#73-prompt-patch" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      7.3 모델별 행동 완화는 prompt patch로 시작한다
+      관찰 판정
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#74-sdk-ab" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      7.4 SDK A/B 테스트 설계
+      무효 시도
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#75-sdkmessage-undercover-mode" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      7.5 SDKMessage 윤리로 번역한 Undercover mode
+      같은 증거를 보는 공개 표면
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#76" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      7.6 평가 데이터 구조
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#77-opus-5-prompt-policy-ab" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.7 실제 Opus 5 prompt-policy A/B
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#78" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.8 캔버스 요구사항
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#79" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.9 학생 실습
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      Builder takeaway
+      공개 경계
     </span>
   </a>
   
@@ -984,30 +971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch07-live/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    7장 실제 Python SDK 관찰
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ch08/" class="md-nav__link">
+      <a href="../../part2/ch08/" class="md-nav__link">
         
   
   
@@ -1030,7 +994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08c/" class="md-nav__link">
+      <a href="../../part2/ch08c/" class="md-nav__link">
         
   
   
@@ -1053,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08d/" class="md-nav__link">
+      <a href="../../part2/ch08d/" class="md-nav__link">
         
   
   
@@ -1076,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08e/" class="md-nav__link">
+      <a href="../../part2/ch08e/" class="md-nav__link">
         
   
   
@@ -1099,7 +1063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08f/" class="md-nav__link">
+      <a href="../../part2/ch08f/" class="md-nav__link">
         
   
   
@@ -2074,7 +2038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch30-live/" class="md-nav__link">
+      <a href="../ch30-live/" class="md-nav__link">
         
   
   
@@ -3111,90 +3075,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#71" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      7.1 모델 튜닝은 감상이 아니라 이벤트 비교다
+      실행 신원
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#72-model-launch" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      7.2 원본의 @[MODEL LAUNCH]를 강의용 체크리스트로 번역하기
+      무결성 검증된 실제 실행과 보조 출처
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#73-prompt-patch" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      7.3 모델별 행동 완화는 prompt patch로 시작한다
+      관찰 판정
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#74-sdk-ab" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      7.4 SDK A/B 테스트 설계
+      무효 시도
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#75-sdkmessage-undercover-mode" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      7.5 SDKMessage 윤리로 번역한 Undercover mode
+      같은 증거를 보는 공개 표면
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#76" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      7.6 평가 데이터 구조
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#77-opus-5-prompt-policy-ab" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.7 실제 Opus 5 prompt-policy A/B
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#78" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.8 캔버스 요구사항
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#79" class="md-nav__link">
-    <span class="md-ellipsis">
-      7.9 학생 실습
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      Builder takeaway
+      공개 경계
     </span>
   </a>
   
@@ -3219,309 +3147,249 @@
   
 
 
-<h1 id="7-ab">7장: 모델별 튜닝과 A/B 테스트<a class="headerlink" href="#7-ab" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>공개 GitHub Pages 투영판: <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch07/">7장: 모델별 튜닝과 A/B 테스트</a></p>
-<p>실제 실행 증거: <a href="../../evidence/ch07-live/">같은 Opus 5의 prompt-policy A/B와 cross-model 미관찰 경계</a></p>
-</blockquote>
-<p>같은 프롬프트와 같은 도구를 주더라도, 모델이 바뀌면 행동도 함께 달라집니다. 어떤 모델은 문서를 잘 찾지만 조금 장황하고, 어떤 모델은 빠르지만 검증을 건너뛰기도 하고, 어떤 모델은 계획은 좋은데 실행을 살짝 주저하기도 합니다.</p>
-<p>원본 Claude Code 관점에서 이 장은 <code>@[MODEL LAUNCH]</code> 주석, ant-only gating, GrowthBook 기능 플래그, Undercover mode, 모델별 행동 완화를 다뤘습니다. SDK판에서는 내부 릴리스 시스템을 그대로 따라 하기보다는, <code>query()</code>로 같은 prompt를 실행하고 <code>SDKMessage</code> 스트림, <code>SDKResultMessage.usage</code>, <code>SDKResultMessage.modelUsage</code>로 <strong>모델 차이를 이벤트 기반으로 실험하고 기록하는 방법</strong>을 함께 살펴보겠습니다. 단, 한 번의 차이는 그 attempt의 관찰이지 모델 전체의 성향이나 prompt patch의 인과 효과가 아닙니다.</p>
-<h2 id="71">7.1 모델 튜닝은 감상이 아니라 이벤트 비교다<a class="headerlink" href="#71" title="Permanent link">&para;</a></h2>
-<p>나쁜 비교:</p>
-<div class="highlight"><pre><span></span><code>모델 A가 더 똑똑해 보인다.
-모델 B가 더 자연스럽다.
-</code></pre></div>
-<p>좋은 비교:</p>
-<div class="highlight"><pre><span></span><code>모델 A는 질문 뒤 2개의 문서를 읽고 답했다.
-모델 B는 문서를 읽지 않고 일반론으로 답했다.
-모델 A는 실패한 테스트 출력을 인용했다.
-모델 B는 실패를 보고도 완료라고 말했다.
-</code></pre></div>
-<p>SDK가 주는 강점이 바로 후자에 있습니다. <code>SDKMessage</code> stream을 저장해 두면, 모델의 행동 차이를 다음 축으로 차분히 비교해 볼 수 있습니다.</p>
-<table>
-<thead>
-<tr>
-<th>축</th>
-<th>좋은 신호</th>
-<th>나쁜 신호</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>근거 탐색</td>
-<td>질문과 관련된 Grep/Read</td>
-<td>문서 없이 일반론</td>
-</tr>
-<tr>
-<td>도구 절제</td>
-<td>필요한 도구만 호출</td>
-<td>무관한 반복 호출</td>
-</tr>
-<tr>
-<td>실패 복구</td>
-<td>실패 결과를 읽고 입력 수정</td>
-<td>실패 무시</td>
-</tr>
-<tr>
-<td>권한 감각</td>
-<td>위험 작업에서 permission</td>
-<td>승인 없이 시도</td>
-</tr>
-<tr>
-<td>정확한 보고</td>
-<td>실행/미실행 검증 분리</td>
-<td>“통과” 허위 주장</td>
-</tr>
-<tr>
-<td>비용/지연</td>
-<td><code>SDKResultMessage.usage</code>, <code>modelUsage</code>, 적절한 turn/tool 수</td>
-<td>긴 루프, 불필요 retry, 과도한 token/cost</td>
-</tr>
-</tbody>
-</table>
-<h2 id="72-model-launch">7.2 원본의 <code>@[MODEL LAUNCH]</code>를 강의용 체크리스트로 번역하기<a class="headerlink" href="#72-model-launch" title="Permanent link">&para;</a></h2>
-<p>원본의 <code>@[MODEL LAUNCH]</code>는 새 모델 출시 때 확인해야 할 지점을 코드 주석으로 곳곳에 적어 둔 분산 체크리스트였습니다. SDK 강좌에서도 같은 패턴이 도움이 됩니다. 다만 체크리스트의 대상은 내부 모델명이 아니라 “강의 실험에서 다시 한번 측정해 볼 행동”입니다.</p>
-<div class="highlight"><pre><span></span><code>@[MODEL EVAL]: false claim rate 다시 측정
-@[MODEL EVAL]: Read/Grep 우선 사용 여부 확인
-@[MODEL EVAL]: permission request 처리 확인
-@[MODEL EVAL]: 한국어 응답 품질 확인
-@[MODEL EVAL]: tool_result 실패 후 복구 확인
-</code></pre></div>
-<p>이 체크리스트는 책 캔버스와 연결됩니다. 새 모델을 붙였을 때 “강사가 기억에 의존해 판단”하는 대신, 같은 실습 prompt를 다시 돌려 보고 event diff를 비교하는 것이지요.</p>
-<h2 id="73-prompt-patch">7.3 모델별 행동 완화는 prompt patch로 시작한다<a class="headerlink" href="#73-prompt-patch" title="Permanent link">&para;</a></h2>
-<p>원본에는 특정 모델 세대가 과도한 주석, 검증 누락, 거짓 성공 보고, 과잉 실행 같은 성향을 보일 때 prompt-level mitigation을 넣는 패턴이 있었습니다.</p>
-<p>SDK판에서는 이 mitigation을 다음처럼 기록합니다.</p>
-<table>
-<thead>
-<tr>
-<th>문제</th>
-<th>prompt patch</th>
-<th>검증 이벤트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>검증 없이 완료 주장</td>
-<td>“검증하지 못했으면 못했다고 말하라”</td>
-<td>final text에 미실행 검증 표시</td>
-</tr>
-<tr>
-<td>도구 없이 답변</td>
-<td>“관련 문서를 먼저 찾아라”</td>
-<td>Read/Grep before claim</td>
-</tr>
-<tr>
-<td>과잉 수정</td>
-<td>“요청 범위 밖 변경 금지”</td>
-<td>Edit path/diff scope</td>
-</tr>
-<tr>
-<td>위험 명령 시도</td>
-<td>“비가역 작업은 승인 후 실행”</td>
-<td>permission event</td>
-</tr>
-<tr>
-<td>장황함</td>
-<td>“최종 답변 300단어 이하”</td>
-<td>answer length</td>
-</tr>
-</tbody>
-</table>
-<p>여기서 꼭 기억할 점은, prompt patch가 정말 효과를 냈는지 같은 task로 A/B 해 보는 것이 좋다는 점입니다. 한 쌍만 보고 승자를 정하지 말고, 같은 fixture와 평가 기준으로 여러 attempt를 직렬 실행해야 합니다.</p>
-<div class="highlight"><pre><span></span><code>Baseline prompt
-  -&gt; model A event tape
-Patched prompt
-  -&gt; model A event tape
-Diff
-  -&gt; 어떤 행동이 바뀌었는가
-</code></pre></div>
-<p>이때 비용과 지연은 감에 의존해 적기보다 직접 확인하는 편이 좋습니다. <code>SDKResultMessage.usage</code>는 최종 usage를, <code>SDKResultMessage.modelUsage</code>는 모델별 token/cost/context window 값을 남겨 주므로, Opik에는 같은 <code>runId</code>, <code>model</code>, <code>promptId</code>와 함께 연결합니다. <code>duration_api_ms</code>는 provider/API 수행 시간에 관한 값이지 UI 체감 지연과 동일한 값은 아닙니다.</p>
-<h2 id="74-sdk-ab">7.4 SDK A/B 테스트 설계<a class="headerlink" href="#74-sdk-ab" title="Permanent link">&para;</a></h2>
-<p>모델 A/B를 할 때는 최소한 다음 조건을 고정해 두는 것이 좋습니다.</p>
-<div class="highlight"><pre><span></span><code>same cwd
-same prompt
-same systemPrompt/append policy
-same tools
-same skills/plugins
-same permissionMode
-same evaluation rubric
-different model or prompt patch
-</code></pre></div>
-<p>SDK 옵션으로는 다음을 명시합니다.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">baseOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">cwd</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">systemPrompt</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;preset&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">preset</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;claude_code&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">append</span><span class="o">:</span><span class="w"> </span><span class="kt">coursePolicy</span><span class="w"> </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">tools</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;preset&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">preset</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;claude_code&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">settingSources</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nx">includePartialMessages</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">includeHookEvents</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">maxTurns</span><span class="o">:</span><span class="w"> </span><span class="kt">8</span><span class="p">,</span>
-<span class="p">};</span>
+<!-- Generated by scripts/publish_book_sdk_live_evidence.mjs. -->
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">runA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">query</span><span class="p">({</span><span class="w"> </span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">baseOptions</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="kt">modelA</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">runB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">query</span><span class="p">({</span><span class="w"> </span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">baseOptions</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="kt">modelB</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span>
-</code></pre></div>
-<p>모델 이름은 강좌 환경에 따라 Claude 공식 모델일 수도 있고, Claude Code 호환 하니스 뒤에 붙은 다른 provider일 수도 있습니다. 핵심은 모델 브랜드 자체가 아니라, 같은 하니스에서 나온 <code>SDKMessage</code>를 같은 루브릭으로 비교하는 데 있습니다.</p>
-<h2 id="75-sdkmessage-undercover-mode">7.5 <code>SDKMessage</code> 윤리로 번역한 Undercover mode<a class="headerlink" href="#75-sdkmessage-undercover-mode" title="Permanent link">&para;</a></h2>
-<p>원본의 Undercover mode는 내부 모델명/코드명/어트리뷰션이 공개 저장소로 새어 나가는 것을 막는 방어 장치였다는 Inferred 배경 설명입니다. SDK 강의에서는 이를 좀 더 일반적인 원칙으로 바꿔 봅니다. Observed 근거는 공개 <code>SDKMessage</code> 필드, <code>SDKSystemMessage.init.model</code>, <code>SDKResultMessage.usage</code>, <code>SDKResultMessage.modelUsage</code>까지만 사용합니다.</p>
-<blockquote>
-<p>관찰할 수 없는 내부 정보를 관찰한 것처럼 말하지 않는다.</p>
-</blockquote>
-<p>그래서 책과 캔버스에는 다음과 같은 약속이 필요합니다.</p>
-<ul>
-<li>내부 시스템 프롬프트 전문을 복원했다고 말하지 않습니다.</li>
-<li>모델의 chain-of-thought를 얻었다고 말하지 않습니다.</li>
-<li>private SDK/CLI 내부 파일 경로를 학생 실습의 근거로 삼지 않습니다.</li>
-<li>공개 SDK 이벤트와 사용자가 제공한 문서/프롬프트만 근거로 삼습니다.</li>
-<li>추론은 반드시 <code>Inferred</code>로 표시합니다.</li>
-</ul>
-<p>바로 이 점이, 이 강좌가 “역공학 책”에서 “SDK로 합법적으로 관찰 가능한 책”으로 바뀌는 핵심입니다.</p>
-<h2 id="76">7.6 평가 데이터 구조<a class="headerlink" href="#76" title="Permanent link">&para;</a></h2>
-<p>모델 비교 결과는 자연어 감상으로만 남기기보다 JSON으로 남겨 둡니다.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;runId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;book-ch07-model-a&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;model-a&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;promptId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tool-system-explain&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;readCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grepCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;mutationToolCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;permissionRequests&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;apiRetries&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;usage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;inputTokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12400</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;outputTokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1800</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;cacheReadInputTokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;modelUsage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;model-a&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;costUSD&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;contextWindow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;finalWordCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">248</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;claimsWithEvidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;claimsMarkedInferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;verdict&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;better-grounded&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>이 구조가 갖춰져 있어야 나중에 Genkit/Opik/캔버스 투영으로 자연스럽게 이어집니다. 화면은 얼마든지 예쁘게 만들 수 있지만, 그에 앞서 event-to-metric 데이터가 먼저 마련되어 있어야 하니까요. 위 JSON의 <code>verdict: "better-grounded"</code>는 예시 스키마일 뿐 자동 판정 규칙이 아닙니다. 실제 winner는 raw event와 반복 표본을 사람이 검토한 뒤에만 기록합니다.</p>
-<h2 id="77-opus-5-prompt-policy-ab">7.7 실제 Opus 5 prompt-policy A/B<a class="headerlink" href="#77-opus-5-prompt-policy-ab" title="Permanent link">&para;</a></h2>
-<p>2026-08-03에 Python <code>claude-agent-sdk==0.2.128</code>, Claude Code <code>2.1.220</code>, 실제 <code>claude-opus-5</code>로 두 attempt를 순차 실행했습니다. fixture SHA-256과 user prompt SHA-256은 같고, system prompt policy만 baseline과 evidence-first로 달랐습니다.</p>
+<h1 id="7-python-sdk">7장 실제 Python SDK 관찰<a class="headerlink" href="#7-python-sdk" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
+<code>claude-opus-5</code>로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">한 번 수집하고 여러 표면에서 재생</p>
+<p>원전은 216개 사건이고 공개 projection은 46개다.
+credential, private prompt, 비공개 추론 payload, 사용자 절대 경로는 공개하지 않았다. 공개 사건은
+source event ID와 SHA-256을 유지한다.</p>
+</div>
+<h2 id="_1">실행 신원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>관찰</th>
-<th>baseline</th>
-<th>evidence-first patch</th>
+<th>항목</th>
+<th>값</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>attempt</td>
+<td>campaign</td>
+<td><code>book-sdk-live-20260803</code></td>
+</tr>
+<tr>
+<td>model</td>
+<td><code>claude-opus-5</code></td>
+</tr>
+<tr>
+<td>proof gate</td>
+<td><code>accepted_with_notes</code></td>
+</tr>
+<tr>
+<td>secret scan</td>
+<td><code>passed</code></td>
+</tr>
+<tr>
+<td>raw source / public</td>
+<td><strong>216 / 46</strong></td>
+</tr>
+<tr>
+<td>observed / correction / more evidence</td>
+<td><strong>5 / 4 / 4</strong></td>
+</tr>
+<tr>
+<td>trace SHA-256</td>
+<td><code>95af65433b8b95eb9078465917b7c5d34696e3a2cd55aae0859a05c953d6c2b8</code></td>
+</tr>
+<tr>
+<td>summary SHA-256</td>
+<td><code>7ab6e7152344f41c5dda6585c918f93298d9d6486bb3c2194e500918d841b871</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">무결성 검증된 실제 실행과 보조 출처<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>attempt</th>
+<th>source chapter</th>
+<th>role</th>
+<th>case</th>
+<th>actual model</th>
+<th style="text-align: right;">source events</th>
+<th>raw SDK SHA-256</th>
+<th>host process SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td><code>104030-78617aa1</code></td>
+<td><code>ch07</code></td>
+<td><strong>replayed</strong></td>
+<td><code>baseline-policy</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">121</td>
+<td><code>cba5927ea6fc74fcb45f37223273027795d40ac326c9f29688925ca4b6016a0f</code></td>
+<td><code>d62cae719942e12eb031674e28d71a4dacb3fa4cf8b2d3fde3707d395b9d397a</code></td>
+</tr>
+<tr>
 <td><code>104110-7a6f1e3e</code></td>
-</tr>
-<tr>
-<td>actual model</td>
+<td><code>ch07</code></td>
+<td><strong>replayed</strong></td>
+<td><code>evidence-first-policy</code></td>
 <td><code>claude-opus-5</code></td>
-<td><code>claude-opus-5</code></td>
-</tr>
-<tr>
-<td>tool path</td>
-<td>Grep 3, Read 1</td>
-<td>Grep 2, Read 2. 첫 Read 1회 실패 후 복구</td>
-</tr>
-<tr>
-<td>최종 길이</td>
-<td>371단어</td>
-<td>196단어</td>
-</tr>
-<tr>
-<td>API duration</td>
-<td>31,784ms</td>
-<td>24,641ms</td>
-</tr>
-<tr>
-<td>총 비용</td>
-<td>USD 0.0804645</td>
-<td>USD 0.043071</td>
-</tr>
-<tr>
-<td>정책값/marker</td>
-<td>모두 근거 파일에서 정확히 확인</td>
-<td>모두 근거 파일에서 정확히 확인</td>
+<td style="text-align: right;">95</td>
+<td><code>bac07f42a80025a6b1955af7d564731ed8607bfa97c2c184208ea1571d667176</code></td>
+<td><code>58a3f2433d1bc99bb51a88655ff1fab4bc3031b803dc2671564886a343f27a57</code></td>
 </tr>
 </tbody>
 </table>
-<p>두 실행 모두 주장 전에 <code>docs/runtime-policy.md</code>를 검색하고 읽었습니다. 따라서 이번 한 쌍은 evidence-first patch가 근거 사용을 새로 만들었다는 증거가 아닙니다. patched 결과가 더 짧고 이 attempt의 비용이 낮았다는 차이는 관찰됐지만, 반복 없이 그 차이를 일반화하거나 인과 효과로 선언할 수 없습니다. 또한 두 실행 모두 Opus 5이므로 cross-model A/B는 수행하지 않았습니다.</p>
-<p>init, AssistantMessage, Result <code>modelUsage</code>에서 실제 Opus 5 identity를 확인했습니다. Result에는 내부 보조 호출로 보이는 Haiku usage도 함께 기록됐습니다. 이 책의 모델 비용 표시는 요청 모델 이름 하나만 복사하지 않고 Result의 모델별 usage를 그대로 보존해야 합니다.</p>
-<p>두 attempt에는 같은 시점의 <code>RateLimitEvent</code>도 하나씩 있었지만, 그 사건만으로 rate limit이
-두 결과의 비용·지연 차이를 만들었다고 결론 내릴 수 없습니다. Python raw 객체에서는
-<code>ResultMessage.model_usage</code>, 직렬화된 공개 tape에서는 <code>model_usage</code>로 보존했습니다.
-TypeScript <code>SDKResultMessage.modelUsage</code>와 언어별 이름을 섞어 쓰지 않습니다.</p>
-<h2 id="78">7.8 캔버스 요구사항<a class="headerlink" href="#78" title="Permanent link">&para;</a></h2>
-<p>7장 캔버스는 A/B matrix입니다.</p>
-<div class="highlight"><pre><span></span><code>Prompt
-  ├─ Model A
-  │   ├─ tool path
-  │   ├─ evidence docs/keywords
-  │   ├─ claims
-  │   └─ score
-  └─ Model B
-      ├─ tool path
-      ├─ evidence docs/keywords
-      ├─ claims
-      └─ score
-</code></pre></div>
-<p>사용자가 봐야 하는 것은 “A가 좋다”가 아니라 “A가 왜 좋았는가”입니다.</p>
+<p><code>supporting-only</code>는 다른 장이 소유한 원본 실행을 이 장의 claim 출처로만 인용한다는 뜻이다.
+그 실행은 이 장의 replay timeline에 다시 삽입하거나 복제하지 않는다.</p>
+<h2 id="_3">관찰 판정<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>비교 항목</th>
-<th>화면 표현</th>
+<th>claim</th>
+<th>판정</th>
+<th>실제 관찰 또는 경계</th>
+<th>첫 source ref</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>검색 단어</td>
-<td>keyword chips</td>
+<td><code>fixed-input-system-policy-only-diff</code></td>
+<td><strong>관찰됨</strong></td>
+<td>fixture, user prompt, requested/actual model, 도구와 최대 턴은 같고 system prompt hash만 달랐다.</td>
+<td><code>attempt:104030-78617aa1:manifest:option_summary</code></td>
 </tr>
 <tr>
-<td>읽은 문서</td>
-<td>document cards</td>
+<td><code>baseline-grounded-before-final</code></td>
+<td><strong>관찰됨</strong></td>
+<td>baseline도 두 키워드 Grep과 정책 파일 Read를 최종 주장 전에 수행하고 성공 Result로 끝났다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:24</code></td>
 </tr>
 <tr>
-<td>주장</td>
-<td>claim cards</td>
+<td><code>patched-read-error-and-recovery</code></td>
+<td><strong>관찰됨</strong></td>
+<td>patched run은 잘못된 절대경로 Read의 error result를 받은 뒤 cwd를 반영한 Read로 복구하고 성공했다.</td>
+<td><code>attempt:104110-7a6f1e3e:sdk-message:47</code></td>
 </tr>
 <tr>
-<td>근거 연결</td>
-<td>edge: document -&gt; claim</td>
+<td><code>single-pair-metrics-differed</code></td>
+<td><strong>관찰됨</strong></td>
+<td>patched attempt는 이 한 쌍에서 175단어 짧고 API duration과 total cost가 작았으며 두 run 모두 5턴 성공이었다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:115</code></td>
 </tr>
 <tr>
-<td>추론</td>
-<td>dashed edge 또는 inferred badge</td>
+<td><code>both-finals-separated-evidence-and-inference</code></td>
+<td><strong>관찰됨</strong></td>
+<td>두 최종 답변 모두 정책 파일에서 확인한 값과 저장소가 확립하지 않은 추론을 구분해 보고했다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:115</code></td>
 </tr>
 <tr>
-<td>실패/재시도</td>
-<td>warning lane</td>
+<td><code>primary-opus-is-not-only-provider-usage</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>init과 assistant primary는 Opus 5지만 두 Result model_usage에는 Haiku 4.5 보조 사용도 기록됐다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:119</code></td>
+</tr>
+<tr>
+<td><code>same-model-policy-ab-is-not-cross-model-ab</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>두 attempt의 actual model은 모두 claude-opus-5이므로 이 tape는 cross-model A/B가 아니라 same-model prompt-policy A/B다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:1</code></td>
+</tr>
+<tr>
+<td><code>single-pair-does-not-prove-patch-superiority</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>baseline도 근거를 읽었고 독립 반복이 없으므로 한 쌍의 비용과 길이 차이를 patch의 일반적 인과 우월성으로 선언하면 안 된다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:52</code></td>
+</tr>
+<tr>
+<td><code>duration-api-is-not-ui-latency</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>Result의 duration_api_ms는 관찰됐지만 제품 UI timestamp를 수집하지 않아 UI 체감 지연이라고 부를 수 없다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:119</code></td>
+</tr>
+<tr>
+<td><code>prompt-patch-general-effect-needs-repetition</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>prompt patch의 행동, 비용, 길이 효과 분포를 말하려면 같은 조건의 독립 fresh-session 반복이 필요하다.</td>
+<td><code>spec:claims:prompt-patch-general-effect-needs-repetition</code></td>
+</tr>
+<tr>
+<td><code>cross-model-behavior-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>서로 다른 실제 model을 같은 fixture와 policy로 실행하지 않았으므로 모델별 성향 차이는 관찰하지 않았다.</td>
+<td><code>spec:claims:cross-model-behavior-not-observed</code></td>
+</tr>
+<tr>
+<td><code>permission-behavior-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>두 run은 auto-approved Grep과 Read만 사용했고 permission callback은 0개이므로 위험 작업 승인 행동은 관찰하지 않았다.</td>
+<td><code>spec:claims:permission-behavior-not-observed</code></td>
+</tr>
+<tr>
+<td><code>rate-limit-event-influence-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>두 RateLimitEvent의 allowed_warning과 utilization 0.76은 보였지만 결과 차이에 미친 인과 영향은 계측하지 않았다.</td>
+<td><code>attempt:104030-78617aa1:sdk-message:3</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="79">7.9 학생 실습<a class="headerlink" href="#79" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>같은 질문에 대해 두 가지 전략을 비교해 줘.
-
-전략 A: 먼저 문서를 찾아보고 근거 기반으로 답한다.
-전략 B: 일반 지식으로 초안을 만든 뒤 검증할 항목을 표시한다.
-
-마지막에 이 프로젝트에서 어떤 전략이 더 안전한지 평가해 줘.
-</code></pre></div>
-<p>강사용 SDK 화면에서는 두 전략의 event tape를 나란히 비교해 봅니다.</p>
-<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
-<p>모델 튜닝은 “어떤 모델이 더 똑똑한가”를 가리는 일이 아닙니다. 같은 하니스에서 어떤 모델이 더 근거 기반이고, 더 안전하며, 실패를 더 잘 복구하는지를 이벤트로 측정하는 일입니다.</p>
-<p>다음 장에서는 이 행동 차이를 만들어 내는 더 작은 단위인 도구 프롬프트를 함께 살펴보겠습니다.</p>
+<p>중요한 판정 규칙은 다음과 같다.</p>
+<ul>
+<li><strong>관찰됨</strong>: 기대 사건과 순서가 이번 raw evidence에 직접 존재한다.</li>
+<li><strong>수정 필요</strong>: 같은 버전·설정·도구 범위에서 책 문장과 직접 충돌할 때만 사용한다.</li>
+<li><strong>추가 관측 필요</strong>: 사건을 유도하지 않았거나 범위가 달라 이번 실행만으로 판단할 수 없다.</li>
+<li>따라서 <strong>관찰하지 못했다는 사실만으로 책이 틀렸다고 판정하지 않는다.</strong></li>
+</ul>
+<h2 id="_4">무효 시도<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>없음</li>
+</ul>
+<h2 id="_5">같은 증거를 보는 공개 표면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>표면</th>
+<th>시각화 관점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch07">Agent Flow · ch07 실행</a></td>
+<td>원인, tool use/result, permission, claim 경계</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch07:book-sdk-live-20260803">Runtime City · ch07 실행</a></td>
+<td>OTel 시간축, 실행 zone, Observed/Missing</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch07">Pixel Agents · ch07 증거</a></td>
+<td>actor와 tool lifecycle 상태</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch07">Hypnagonia · Observation Ordeal</a></td>
+<td>검증 주장, 선택, 관찰 consequence</td>
+</tr>
+</tbody>
+</table>
+<p>각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
+시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
+표현한다. 어느 renderer도 raw evidence의 판정을 바꿀 수 없다.</p>
+<h2 id="_6">공개 경계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>primary-opus-is-not-only-provider-usage</code>: init과 assistant primary는 Opus 5지만 두 Result model_usage에는 Haiku 4.5 보조 사용도 기록됐다.</li>
+<li><code>same-model-policy-ab-is-not-cross-model-ab</code>: 두 attempt의 actual model은 모두 claude-opus-5이므로 이 tape는 cross-model A/B가 아니라 same-model prompt-policy A/B다.</li>
+<li><code>single-pair-does-not-prove-patch-superiority</code>: baseline도 근거를 읽었고 독립 반복이 없으므로 한 쌍의 비용과 길이 차이를 patch의 일반적 인과 우월성으로 선언하면 안 된다.</li>
+<li><code>duration-api-is-not-ui-latency</code>: Result의 duration_api_ms는 관찰됐지만 제품 UI timestamp를 수집하지 않아 UI 체감 지연이라고 부를 수 없다.</li>
+<li><code>prompt-patch-general-effect-needs-repetition</code>: prompt patch의 행동, 비용, 길이 효과 분포를 말하려면 같은 조건의 독립 fresh-session 반복이 필요하다.</li>
+<li><code>cross-model-behavior-not-observed</code>: 서로 다른 실제 model을 같은 fixture와 policy로 실행하지 않았으므로 모델별 성향 차이는 관찰하지 않았다.</li>
+<li><code>permission-behavior-not-observed</code>: 두 run은 auto-approved Grep과 Read만 사용했고 permission callback은 0개이므로 위험 작업 승인 행동은 관찰하지 않았다.</li>
+<li>
+<p><code>rate-limit-event-influence-not-observed</code>: 두 RateLimitEvent의 allowed_warning과 utilization 0.76은 보였지만 결과 차이에 미친 인과 영향은 계측하지 않았다.</p>
+</li>
+<li>
+<p>공개 JSON: <a href="../ch07-live.json">ch07-live.json</a></p>
+</li>
+</ul>
 
 
 
