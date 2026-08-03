@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch06b/">
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/evidence/ch06b-live/">
       
       
-        <link rel="prev" href="../../evidence/ch06-live/">
+        <link rel="prev" href="../../part2/ch06b/">
       
       
-        <link rel="next" href="../../evidence/ch06b-live/">
+        <link rel="next" href="../../part2/ch07/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응 - Speaky Claude Cookbooks</title>
+        <title>6b장 실제 Python SDK 관찰 - Speaky Claude Cookbooks</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#6b-api" class="md-skip">
+        <a href="#6b-python-sdk" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응
+              6b장 실제 Python SDK 관찰
             
           </span>
         </div>
@@ -429,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch01-live/" class="md-nav__link">
+      <a href="../ch01-live/" class="md-nav__link">
         
   
   
@@ -475,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch02-live/" class="md-nav__link">
+      <a href="../ch02-live/" class="md-nav__link">
         
   
   
@@ -521,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch03-live/" class="md-nav__link">
+      <a href="../ch03-live/" class="md-nav__link">
         
   
   
@@ -567,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch04-live/" class="md-nav__link">
+      <a href="../ch04-live/" class="md-nav__link">
         
   
   
@@ -689,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch05/" class="md-nav__link">
+      <a href="../../part2/ch05/" class="md-nav__link">
         
   
   
@@ -712,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch05-live/" class="md-nav__link">
+      <a href="../ch05-live/" class="md-nav__link">
         
   
   
@@ -735,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch06/" class="md-nav__link">
+      <a href="../../part2/ch06/" class="md-nav__link">
         
   
   
@@ -758,12 +758,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch06-live/" class="md-nav__link">
+      <a href="../ch06-live/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     6장 실제 Python SDK 관찰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch06b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응
     
   </span>
   
@@ -795,7 +818,7 @@
   
   
   <span class="md-ellipsis">
-    6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응
+    6b장 실제 Python SDK 관찰
     
   </span>
   
@@ -808,7 +831,7 @@
   
   
   <span class="md-ellipsis">
-    6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응
+    6b장 실제 Python SDK 관찰
     
   </span>
   
@@ -831,90 +854,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#6b1-ux" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.1 스트리밍은 UX가 아니라 증거 파이프다
+      실행 신원
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b2" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.2 재시도는 중복 실행 위험을 만든다
+      무결성 검증된 실제 실행과 보조 출처
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b3-sdk" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.3 SDK에서 제어할 수 있는 통신 옵션
+      관찰 판정
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b4" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.4 실패 분류: 답변 실패와 파이프 실패는 다르다
+      무효 시도
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b5-watchdog-sdk" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.5 watchdog 관점을 SDK 화면으로 옮기기
+      같은 증거를 보는 공개 표면
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b6-files-api" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.6 Files API와 파일 증거
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b7-opus-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.7 실제 Opus 5 실행에서 관찰한 것
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b8" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.8 캔버스 요구사항
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b9" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.9 학생 실습
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      Builder takeaway
+      공개 경계
     </span>
   </a>
   
@@ -936,30 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch06b-live/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    6b장 실제 Python SDK 관찰
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ch07/" class="md-nav__link">
+      <a href="../../part2/ch07/" class="md-nav__link">
         
   
   
@@ -982,7 +946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08/" class="md-nav__link">
+      <a href="../../part2/ch08/" class="md-nav__link">
         
   
   
@@ -1005,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08c/" class="md-nav__link">
+      <a href="../../part2/ch08c/" class="md-nav__link">
         
   
   
@@ -1028,7 +992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08d/" class="md-nav__link">
+      <a href="../../part2/ch08d/" class="md-nav__link">
         
   
   
@@ -1051,7 +1015,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08e/" class="md-nav__link">
+      <a href="../../part2/ch08e/" class="md-nav__link">
         
   
   
@@ -1074,7 +1038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08f/" class="md-nav__link">
+      <a href="../../part2/ch08f/" class="md-nav__link">
         
   
   
@@ -2049,7 +2013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch30-live/" class="md-nav__link">
+      <a href="../ch30-live/" class="md-nav__link">
         
   
   
@@ -3086,90 +3050,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#6b1-ux" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.1 스트리밍은 UX가 아니라 증거 파이프다
+      실행 신원
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b2" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.2 재시도는 중복 실행 위험을 만든다
+      무결성 검증된 실제 실행과 보조 출처
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b3-sdk" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.3 SDK에서 제어할 수 있는 통신 옵션
+      관찰 판정
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b4" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.4 실패 분류: 답변 실패와 파이프 실패는 다르다
+      무효 시도
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b5-watchdog-sdk" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.5 watchdog 관점을 SDK 화면으로 옮기기
+      같은 증거를 보는 공개 표면
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6b6-files-api" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      6b.6 Files API와 파일 증거
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b7-opus-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.7 실제 Opus 5 실행에서 관찰한 것
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b8" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.8 캔버스 요구사항
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6b9" class="md-nav__link">
-    <span class="md-ellipsis">
-      6b.9 학생 실습
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      Builder takeaway
+      공개 경계
     </span>
   </a>
   
@@ -3194,395 +3122,295 @@
   
 
 
-<h1 id="6b-api">6b장: API 통신 계층 — 재시도, 스트리밍, 성능 저하 대응<a class="headerlink" href="#6b-api" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>공개 GitHub Pages 투영판: <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch06b/">6b장: API 통신 계층 — 재시도, 스트리밍, 성능 저하 대응</a></p>
-<p>실제 실행 증거: <a href="../../evidence/ch06b-live/">partial stream, interrupt, max turns, checkpoint, session store, API retry</a></p>
-</blockquote>
-<p>사용자는 에이전트를 하나의 대화 상대로 봅니다. 그런데 제품을 만드는 입장에서 보면, 이건 단순한 대화가 아니라 요청 전송, 스트리밍, 부분 응답, 도구 호출, 도구 결과, 재시도, 오류, fallback, 최종 result가 차례로 이어지는 통신 파이프랍니다.</p>
-<p>원본 Claude Code 관점에서 이 장은 <code>withRetry</code>, streaming watchdog, Fast Mode cache-aware retry, persistent retry, API observability, Files API를 다뤘습니다. SDK판에서는 같은 관점을 공식 <code>SDKMessage</code> stream으로 번역해서 살펴봅니다. 단, 아래 이름을 모든 언어에 공통이라고 읽으면 안 됩니다. TypeScript <code>@anthropic-ai/claude-agent-sdk==0.3.177</code>에는 <code>SDKAPIRetryMessage</code>, <code>SDKPartialAssistantMessage.ttft_ms</code>, <code>abortController</code>, <code>debug</code>, <code>debugFile</code>이 있고, 이 장을 실제 실행한 Python <code>claude-agent-sdk==0.2.128</code>에는 <code>StreamEvent</code>, <code>ClaudeSDKClient.interrupt()</code>, <code>fallback_model</code>, <code>stderr</code>, <code>session_store</code>, <code>enable_file_checkpointing</code>, <code>rewind_files()</code>가 있습니다.</p>
-<h2 id="6b1-ux">6b.1 스트리밍은 UX가 아니라 증거 파이프다<a class="headerlink" href="#6b1-ux" title="Permanent link">&para;</a></h2>
-<p>스트리밍은 “글자가 빨리 보이는 기능”이라기보다는, 강의 화면에서 관찰 가능한 실행 경로를 다시 복원해 주는 증거 파이프에 가깝습니다. 공개 stream으로 내부 chain-of-thought를 복원할 수 있다는 뜻은 아닙니다.</p>
-<div class="highlight"><pre><span></span><code>Prompt submit
-  -&gt; stream_event(partial)
-  -&gt; assistant(tool_use)
-  -&gt; user(tool_result)
-  -&gt; stream_event(partial)
-  -&gt; result(success/error)
-</code></pre></div>
-<p>TypeScript SDK에서 <code>includePartialMessages: true</code>를 켜면 <code>SDKPartialAssistantMessage</code>가 나옵니다. 타입상 이 메시지는 다음 정보를 담고 있어요. Python 0.2.128에서는 <code>include_partial_messages=True</code>로 <code>StreamEvent</code>를 받습니다.</p>
+<!-- Generated by scripts/publish_book_sdk_live_evidence.mjs. -->
+
+<h1 id="6b-python-sdk">6b장 실제 Python SDK 관찰<a class="headerlink" href="#6b-python-sdk" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
+<code>claude-opus-5</code>로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">한 번 수집하고 여러 표면에서 재생</p>
+<p>원전은 392개 사건이고 공개 projection은 101개다.
+credential, private prompt, 비공개 추론 payload, 사용자 절대 경로는 공개하지 않았다. 공개 사건은
+source event ID와 SHA-256을 유지한다.</p>
+</div>
+<h2 id="_1">실행 신원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>필드</th>
-<th>의미</th>
+<th>항목</th>
+<th>값</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>type: "stream_event"</code></td>
-<td>부분 스트리밍 이벤트</td>
+<td>campaign</td>
+<td><code>book-sdk-live-20260803</code></td>
 </tr>
 <tr>
-<td><code>event</code></td>
-<td>raw stream event</td>
+<td>model</td>
+<td><code>claude-opus-5</code></td>
 </tr>
 <tr>
-<td><code>parent_tool_use_id</code></td>
-<td>subagent/nested 흐름 연결</td>
+<td>proof gate</td>
+<td><code>accepted_with_notes</code></td>
 </tr>
 <tr>
-<td><code>ttft_ms</code></td>
-<td>첫 토큰까지 시간. 이 필드는 이 장의 TypeScript 버전 표면이며 Python 0.2.128에는 없음</td>
+<td>secret scan</td>
+<td><code>passed</code></td>
 </tr>
 <tr>
-<td><code>uuid</code>, <code>session_id</code></td>
-<td>세션 추적 키</td>
-</tr>
-</tbody>
-</table>
-<p>책 캔버스에서 <code>ttft_ms</code>는 꽤 중요한 값입니다. 사용자가 “느리다”고 느낄 때, 병목이 모델의 첫 토큰인지, 도구 실행인지, 아니면 UI 반영인지를 나눠서 볼 수 있게 도와주기 때문이에요. Python에서는 host가 capture 시작과 첫 SDK message 도착 시각을 재서 별도 필드로 보완할 수 있지만, 그 값은 provider가 보고한 TTFT가 아닙니다.</p>
-<h2 id="6b2">6b.2 재시도는 중복 실행 위험을 만든다<a class="headerlink" href="#6b2" title="Permanent link">&para;</a></h2>
-<p>원본 구현에서 재시도는 단순한 <code>try again</code>이 아니었습니다. 429/529, 네트워크 오류, 인증 오류, context overflow, streaming 중단 등이 저마다 다른 정책을 가지고 있었죠. TypeScript SDK에서는 그 일부를 <code>SDKAPIRetryMessage</code>로 관측할 수 있습니다. 이후 Python 0.2.128 실제 실행에서도 generic <code>SystemMessage(subtype="api_retry")</code>를 관찰했습니다. 아래 TypeScript type 이름과 Python의 generic message shape는 구분해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">SDKAPIRetryMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;system&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">subtype</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;api_retry&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">attempt</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">max_retries</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">retry_delay_ms</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">error_status</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">SDKAssistantMessageError</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">uuid</span><span class="o">:</span><span class="w"> </span><span class="kt">UUID</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">session_id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="p">};</span>
-</code></pre></div>
-<p>이 이벤트가 중요한 이유는, “같은 의도”가 여러 번 시도되었음을 숨기지 않기 때문입니다. 다만 <code>api_retry</code> 하나만 보고 도구 부작용도 반복됐다고 결론 내리면 안 됩니다. 이번 실제 529 실행에서는 세 retry 뒤 도구가 한 번 실행됐고 성공했습니다. 아래 그림은 stream 중단 이후 host가 요청을 재구성하는 시스템에서 따로 점검해야 할 <strong>개념적 중복 위험</strong>이지, 이번 실행의 실제 사건 순서가 아닙니다.</p>
-<table>
-<thead>
-<tr>
-<th>중복 대상</th>
-<th>위험</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>텍스트 생성</td>
-<td>대체로 낮음</td>
+<td>raw source / public</td>
+<td><strong>392 / 101</strong></td>
 </tr>
 <tr>
-<td>Read/Grep</td>
-<td>낮음</td>
+<td>observed / correction / more evidence</td>
+<td><strong>6 / 3 / 5</strong></td>
 </tr>
 <tr>
-<td>Edit/FileWrite</td>
-<td>중간: 같은 변경 중복 가능</td>
+<td>trace SHA-256</td>
+<td><code>4b09f5cd25159082da94cf4ddc1909b3631cecf9c8ea13db7c8ca81b0cf9e200</code></td>
 </tr>
 <tr>
-<td>Bash test</td>
-<td>낮음~중간</td>
-</tr>
-<tr>
-<td>Bash deploy/rm/git push</td>
-<td>높음</td>
-</tr>
-<tr>
-<td>MCP 외부 호출</td>
-<td>높음</td>
+<td>summary SHA-256</td>
+<td><code>92e334585788d8cc6d65e76863b8cab3800fd0423a5a4e24c09cbe1ce308fd38</code></td>
 </tr>
 </tbody>
 </table>
-<p>그래서 강의용 이벤트 그래프에서는 retry를 숨기지 않는 것이 좋습니다.</p>
-<div class="highlight"><pre><span></span><code>flowchart TD
-    A[&quot;request #1&quot;] --&gt; B[&quot;stream starts&quot;]
-    B --&gt; C[&quot;tool_use: Edit&quot;]
-    C --&gt; D[&quot;stream error&quot;]
-    D --&gt; E[&quot;api_retry&quot;]
-    E --&gt; F[&quot;request #2&quot;]
-    F --&gt; G{&quot;same tool_use repeated?&quot;}
-    G --&gt;|&quot;yes&quot;| H[&quot;duplicate-risk marker&quot;]
-    G --&gt;|&quot;no&quot;| I[&quot;safe continuation&quot;]
-</code></pre></div>
-<h2 id="6b3-sdk">6b.3 SDK에서 제어할 수 있는 통신 옵션<a class="headerlink" href="#6b3-sdk" title="Permanent link">&para;</a></h2>
-<p>SDK 소비자가 직접 제어할 수 있는 주요 옵션을 함께 살펴봅시다.</p>
+<h2 id="_2">무결성 검증된 실제 실행과 보조 출처<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>역할</th>
-<th>TypeScript</th>
-<th>Python 0.2.128</th>
-<th>강의에서 보여줄 의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>partial event 노출</td>
-<td><code>includePartialMessages</code></td>
-<td><code>include_partial_messages</code></td>
-<td>응답이 언제 시작됐는가</td>
-</tr>
-<tr>
-<td>hook event 노출</td>
-<td><code>includeHookEvents</code></td>
-<td><code>include_hook_events</code></td>
-<td>권한/가로채기/후처리 가시화</td>
-</tr>
-<tr>
-<td>대체 모델</td>
-<td><code>fallbackModel</code></td>
-<td><code>fallback_model</code></td>
-<td>품질 변화와 availability tradeoff</td>
-</tr>
-<tr>
-<td>실행 취소</td>
-<td><code>abortController</code></td>
-<td><code>ClaudeSDKClient.interrupt()</code></td>
-<td>사용자/host 중단과 타임아웃</td>
-</tr>
-<tr>
-<td>턴 제한</td>
-<td><code>maxTurns</code></td>
-<td><code>max_turns</code></td>
-<td>runaway 방지</td>
-</tr>
-<tr>
-<td>비용 제한</td>
-<td><code>maxBudgetUsd</code></td>
-<td><code>max_budget_usd</code></td>
-<td>강의/실습 안전장치</td>
-</tr>
-<tr>
-<td>내부 디버그 로그</td>
-<td><code>debug</code>, <code>debugFile</code>, <code>stderr</code></td>
-<td><code>stderr</code></td>
-<td>SDK 이벤트로 안 보이는 통신 오류 보강</td>
-</tr>
-<tr>
-<td>transcript 외부 저장</td>
-<td><code>sessionStore</code></td>
-<td><code>session_store</code></td>
-<td>장기 실험 재현</td>
-</tr>
-</tbody>
-</table>
-<p>원본의 Fast Mode cache-aware retry나 persistent retry를 SDK 소비자가 전부 직접 재현할 필요는 없습니다. 다만 강의 화면에서는 최소한 retry/fallback/partial/result 정도는 구분해 두는 게 좋아요. 이 구분이 없으면 “모델이 이상하게 답했다”와 “통신 파이프가 중간에 끊겼다”를 가려내기 어렵기 때문입니다.</p>
-<h2 id="6b4">6b.4 실패 분류: 답변 실패와 파이프 실패는 다르다<a class="headerlink" href="#6b4" title="Permanent link">&para;</a></h2>
-<p><code>SDKResultMessage</code>에는 성공과 오류가 모두 함께 들어옵니다. 오류 subtype은 인증, 실행 중 오류, max budget, invalid request 같은 실행 실패를 나타내는데요, 이것은 모델의 추론 품질과는 따로 떼어 보는 것이 좋습니다.</p>
-<table>
-<thead>
-<tr>
-<th>실패 종류</th>
-<th>예</th>
-<th>대응</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>파이프 실패</td>
-<td>api retry, stream 중단, auth error</td>
-<td>통신 계층/환경 수정</td>
-</tr>
-<tr>
-<td>권한 실패</td>
-<td>permission denied</td>
-<td>사용자 승인/정책 수정</td>
-</tr>
-<tr>
-<td>도구 실패</td>
-<td>Bash exit non-zero, Read path missing</td>
-<td>에이전트 복구 행동 평가</td>
-</tr>
-<tr>
-<td>추론 실패</td>
-<td>문서를 읽었지만 결론이 틀림</td>
-<td>프롬프트/모델/근거 연결 개선</td>
-</tr>
-<tr>
-<td>제품 투영 실패</td>
-<td>result는 왔지만 UI에 안 보임</td>
-<td>renderer/store projection 수정</td>
-</tr>
-</tbody>
-</table>
-<p>책에서 추론 흐름을 보여주려면 이 실패 종류들을 나눠서 다루는 것이 좋습니다. 모든 실패를 “LLM이 틀렸다”로 뭉뚱그리면 강좌가 정확하지 않게 되니까요.</p>
-<h2 id="6b5-watchdog-sdk">6b.5 watchdog 관점을 SDK 화면으로 옮기기<a class="headerlink" href="#6b5-watchdog-sdk" title="Permanent link">&para;</a></h2>
-<p>원본은 streaming idle timeout과 stall detection을 구분해서 다뤘습니다.</p>
-<table>
-<thead>
-<tr>
-<th>원본 개념</th>
-<th>의미</th>
-<th>SDK/제품 투영</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TTFB/TTFT</td>
-<td>첫 이벤트 또는 첫 토큰까지 시간</td>
-<td>TypeScript <code>ttft_ms</code>; Python에서는 host timestamp를 별도 측정</td>
-</tr>
-<tr>
-<td>Stall</td>
-<td>이벤트 간 간격이 비정상적으로 큼</td>
-<td>partial event gap</td>
-</tr>
-<tr>
-<td>Idle timeout</td>
-<td>일정 시간 이벤트 없음</td>
-<td>timeout marker 또는 abort</td>
-</tr>
-<tr>
-<td>Non-stream fallback</td>
-<td>streaming 실패 후 non-stream 재시도</td>
-<td>retry/fallback marker</td>
-</tr>
-</tbody>
-</table>
-<p>SDK 이벤트만으로는 내부 watchdog 전체를 다 보기 어려울 수 있습니다. 이럴 때 제품은 자체 timestamp를 붙여 주면 됩니다.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stream_gap&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;session_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;gap_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42137</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;previous&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stream_event&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant.tool_use&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;classification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stall-inferred&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>여기서 <code>classification</code>이 <code>inferred</code>라는 점을 표시해 두면 좋습니다. 내부 watchdog 이벤트가 직접 온 것이 아니라, SDK event timestamp 차이를 통해 추론한 값이기 때문이에요. 큰 gap 하나만으로 네트워크 stall, 모델 계산, 도구 대기 중 무엇이 원인이었는지도 확정할 수 없습니다.</p>
-<h2 id="6b6-files-api">6b.6 Files API와 파일 증거<a class="headerlink" href="#6b6-files-api" title="Permanent link">&para;</a></h2>
-<p>원본의 Files API는 세션 파일 첨부, 원격 seed bundle, 변경 파일 persistence 같은 역할을 했다고 볼 수 있습니다. SDK 책에서는 이 내부 역할을 직접 관측했다고 말하기보다는, 공식 <code>SDKMessage</code>와 파일 관련 이벤트에서 보이는 artifact 신호로 번역해서 다룹니다. 그리고 무엇보다 파일이 증거 그래프의 결과물이 된다는 점이 중요해요.</p>
-<table>
-<thead>
-<tr>
-<th>파일 이벤트</th>
-<th>강의 의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>attachment download</td>
-<td>사용자가 어떤 자료를 세션에 제공했는가</td>
-</tr>
-<tr>
-<td>file edit/write</td>
-<td>모델이 어떤 산출물을 만들었는가</td>
-</tr>
-<tr>
-<td>file persisted</td>
-<td>세션 이후에도 어떤 결과가 남았는가</td>
-</tr>
-<tr>
-<td>checkpoint/rewind</td>
-<td>어느 사용자 메시지 기준으로 되돌릴 수 있는가</td>
-</tr>
-</tbody>
-</table>
-<p>TypeScript SDK에는 <code>enableFileCheckpointing</code>과 <code>Query.rewindFiles()</code>가 있고, Python 0.2.128에는 <code>enable_file_checkpointing</code>과 <code>ClaudeSDKClient.rewind_files(user_message_uuid)</code>가 있습니다. 강의에서는 “AI가 파일을 만들었다”에서 한 걸음 더 나아가, “어느 prompt, 어느 evidence, 어느 tool_use 뒤에 이 파일이 생겼는가”를 보여 주면 좋습니다. 단, checkpoint/rewind 한 사례가 attachment download나 원격 Files API 전체를 증명하는 것은 아닙니다.</p>
-<h2 id="6b7-opus-5">6b.7 실제 Opus 5 실행에서 관찰한 것<a class="headerlink" href="#6b7-opus-5" title="Permanent link">&para;</a></h2>
-<p>2026-08-03에 Python <code>claude-agent-sdk==0.2.128</code>, Claude Code <code>2.1.220</code>, 요청 모델 <code>claude-opus-5</code>로 다섯 case를 순차 실행했습니다. init과 assistant의 primary model은 Opus 5였지만 <code>ResultMessage.model_usage</code>에는 Haiku 4.5 보조 사용도 기록됐습니다. mock event나 fixture verdict를 런타임 증거로 사용하지 않았습니다. fixture 파일은 모델이 실제 Read/Edit할 통제 자극으로만 사용했고, 판정은 raw SDK JSONL, host process event, OTel, 파일 hash를 직접 대조했습니다.</p>
-<table>
-<thead>
-<tr>
+<th>attempt</th>
+<th>source chapter</th>
+<th>role</th>
 <th>case</th>
-<th>실제 관찰</th>
-<th>판정 경계</th>
+<th>actual model</th>
+<th style="text-align: right;">source events</th>
+<th>raw SDK SHA-256</th>
+<th>host process SHA-256</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>partial stream</td>
-<td>attempt <code>103238-e1ac26b5</code>, StreamEvent 58개, Read tool result, 성공 Result</td>
-<td>host 첫 이벤트 지연은 관찰했지만 provider TTFT는 아님</td>
+<td><code>103238-e1ac26b5</code></td>
+<td><code>ch06b</code></td>
+<td><strong>replayed</strong></td>
+<td><code>partial-stream-read-result</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">85</td>
+<td><code>acc2be7f32a7cd05d74c963e3b6175e06ddfbe3007b21930d4c402d163f99d9a</code></td>
+<td><code>01de41219306565965bc0fda682319b85795780f7b881aaaa4966a61e1865967</code></td>
 </tr>
 <tr>
-<td>interrupt</td>
-<td>attempt <code>103316-15c0b725</code>, 장기 MCP handler 시작 뒤 <code>interrupt()</code>, <code>aborted_streaming</code></td>
-<td>Python interrupt 증거이며 TypeScript AbortController 증거는 아님</td>
+<td><code>103316-15c0b725</code></td>
+<td><code>ch06b</code></td>
+<td><strong>replayed</strong></td>
+<td><code>host-interrupt-long-tool</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">26</td>
+<td><code>ca2ecd5f4e8a791953dfb5c01365f29ab8f47bd0864c48e8e8b2a1f31aa2fe65</code></td>
+<td><code>5f7670a0b5c165f29ee54e98391b260654f2d43e113150a42e73a865cac476db</code></td>
 </tr>
 <tr>
-<td>max turns</td>
-<td>attempt <code>103340-dfe3c027</code>, 도구 성공 결과 직후 <code>error_max_turns</code></td>
-<td>도구 실패가 아니라 런타임 종료 경계</td>
+<td><code>103340-dfe3c027</code></td>
+<td><code>ch06b</code></td>
+<td><strong>replayed</strong></td>
+<td><code>max-turns-after-tool</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">25</td>
+<td><code>3c0f378fefb33c8696794a56037459ccb169004119354c66609407f60ca239d0</code></td>
+<td><code>e06d0a41ff434354ebf3769799d3213869d4203102fb2a76f96b4b3f8911287b</code></td>
 </tr>
 <tr>
-<td>checkpoint</td>
-<td>attempt <code>103401-427be665</code>, Edit 뒤 hash 변경, 실제 UserMessage UUID로 rewind 뒤 원래 hash 복원</td>
-<td>checkpoint/rewind는 관찰, Files API 전체는 미검증</td>
+<td><code>103401-427be665</code></td>
+<td><code>ch06b</code></td>
+<td><strong>replayed</strong></td>
+<td><code>checkpoint-edit-rewind</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">111</td>
+<td><code>6ebe7d2d2f8d8db3a53a0c5190bcbcbed65af80113e9ae80f2694ffc3fe02735</code></td>
+<td><code>a4e2c639af4bbedf737e711dceeaee65120fe3830cd75ceccefe60c08220c35e</code></td>
 </tr>
 <tr>
-<td>session store</td>
-<td>attempt <code>103439-e3093bb2</code>, Result와 같은 session ID로 21개 항목 저장</td>
-<td>append/flush/count는 관찰, 비공개 transcript 본문 동일성은 미검증</td>
+<td><code>103439-e3093bb2</code></td>
+<td><code>ch06b</code></td>
+<td><strong>replayed</strong></td>
+<td><code>session-store-mirror</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">97</td>
+<td><code>86efb5731c365e810644452bcd06a1815a855ddf46ba93291b18c7905f709e6e</code></td>
+<td><code>8bfb9ff0fa53fb1acfa86b0c89502c15f3d7e42f242d8fe282df58ed130bb39a</code></td>
+</tr>
+<tr>
+<td><code>113303-a2d4890a</code></td>
+<td><code>ch12</code></td>
+<td><strong>supporting-only</strong></td>
+<td><code>cross-chapter evidence</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">48</td>
+<td><code>ecd6dbbbd645025a1644108405bacfd7a4df1b45b2ce1e5fb6d638e8d0e37a59</code></td>
+<td><code>4bb0472cf331bfc77e483b07f948eaf9673c67a3bc35391947a38f04a9bb60f5</code></td>
 </tr>
 </tbody>
 </table>
-<p>최초 다섯 case에서는 <code>api_retry</code>와 fallback이 관찰되지 않았습니다. 그러나 12장 token-budget 실험이 소유한 실제 attempt <code>113303-a2d4890a</code>에서 provider 529 overloaded가 자연 발생했고 Python raw SDK stream에 generic <code>SystemMessage(subtype="api_retry")</code>가 세 번 나타났습니다. attempt 1/2/3의 <code>retry_delay_ms</code>는 520/1169/2440, <code>max_retries=10</code>, <code>error_status=529</code>, <code>error="overloaded"</code>였고 이후 같은 session의 run이 성공했습니다. OTel trace ID는 <code>fc90c18181caadc8ba3ea9faea841e15</code>입니다. 이 보조 증거는 6b장 실행으로 복제하지 않고 12장 원본 attempt를 그대로 인용합니다.</p>
-<p>따라서 Python의 <code>api_retry</code>는 이제 <code>Observed</code>입니다. 다만 이 한 사건으로 429, network error, retry exhaustion, mutation 중복, fallback까지 증명한 것은 아닙니다. fallback은 여전히 <code>Not observed / TODO</code>입니다.</p>
-<h2 id="6b8">6b.8 캔버스 요구사항<a class="headerlink" href="#6b8" title="Permanent link">&para;</a></h2>
-<p>6b장 캔버스는 request/stream timeline입니다.</p>
-<div class="highlight"><pre><span></span><code>Prompt
-  -&gt; Request
-  -&gt; Partial stream
-  -&gt; Tool use
-  -&gt; Tool result
-  -&gt; Retry/Fallback
-  -&gt; Final result
-  -&gt; UI projection
-</code></pre></div>
-<p>각 노드는 다음 필드를 갖추는 것이 좋습니다.</p>
+<p><code>supporting-only</code>는 다른 장이 소유한 원본 실행을 이 장의 claim 출처로만 인용한다는 뜻이다.
+그 실행은 이 장의 replay timeline에 다시 삽입하거나 복제하지 않는다.</p>
+<h2 id="_3">관찰 판정<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>필드</th>
-<th>이유</th>
+<th>claim</th>
+<th>판정</th>
+<th>실제 관찰 또는 경계</th>
+<th>첫 source ref</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>session_id</code></td>
-<td>세션 연결</td>
+<td><code>partial-stream-tool-result-final-order</code></td>
+<td><strong>관찰됨</strong></td>
+<td>58개 StreamEvent 사이에서 Read 요청과 같은 ID의 결과가 연결되고 최종 assistant 뒤 성공 Result가 왔다.</td>
+<td><code>attempt:103238-e1ac26b5:sdk-message:5</code></td>
 </tr>
 <tr>
-<td><code>uuid</code></td>
-<td>메시지 연결</td>
+<td><code>python-interrupt-cancelled-running-handler</code></td>
+<td><strong>관찰됨</strong></td>
+<td>장기 handler가 시작된 뒤 host interrupt가 전송됐고 error result, aborted_streaming, handler cancelled가 이어졌다.</td>
+<td><code>attempt:103316-15c0b725:sdk-message:15</code></td>
 </tr>
 <tr>
-<td><code>timestamp</code></td>
-<td>지연/순서 분석</td>
+<td><code>max-turns-is-runtime-boundary-after-tool-success</code></td>
+<td><strong>관찰됨</strong></td>
+<td>MCP tool은 ONE_STEP_COMPLETE를 반환했고 그 다음 Result가 error_max_turns로 실행을 닫았다.</td>
+<td><code>attempt:103340-dfe3c027:sdk-message:16</code></td>
 </tr>
 <tr>
-<td><code>parent_tool_use_id</code></td>
-<td>subagent/nested flow 연결</td>
+<td><code>checkpoint-rewind-restored-original-hash</code></td>
+<td><strong>관찰됨</strong></td>
+<td>실제 최초 UserMessage UUID로 rewind_files를 호출했고 Edit 뒤 바뀐 파일 hash가 실행 전 hash로 복원됐다.</td>
+<td><code>attempt:103401-427be665:sdk-message:5</code></td>
 </tr>
 <tr>
-<td><code>retry_attempt</code></td>
-<td>중복 실행 분석</td>
+<td><code>session-store-count-and-identity</code></td>
+<td><strong>관찰됨</strong></td>
+<td>eager session store에 한 session의 21개 항목이 남았고 store session ID는 성공 Result와 같았다.</td>
+<td><code>attempt:103439-e3093bb2:sdk-message:75</code></td>
 </tr>
 <tr>
-<td><code>error_status</code></td>
-<td>API 실패 분류</td>
+<td><code>python-generic-api-retry-and-recovery</code></td>
+<td><strong>관찰됨</strong></td>
+<td>12장 소유 실행에서 529 overloaded retry가 520, 1169, 2440ms 지연으로 세 번 나타난 뒤 같은 run이 성공했다.</td>
+<td><code>attempt:113303-a2d4890a:sdk-message:4</code></td>
 </tr>
 <tr>
-<td><code>tool_use_id</code></td>
-<td>tool_result 연결</td>
+<td><code>primary-opus-is-not-only-provider-usage</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>요청, init, assistant primary는 Opus 5지만 Result model_usage에는 Haiku 4.5 보조 사용도 기록됐다.</td>
+<td><code>attempt:103238-e1ac26b5:sdk-message:82</code></td>
+</tr>
+<tr>
+<td><code>python-host-latency-is-not-provider-ttft</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>Python 0.2.128 StreamEvent에는 ttft_ms가 없으므로 capture 시작과 첫 message의 host clock 차이를 provider TTFT라고 부르면 안 된다.</td>
+<td><code>spec:claims:python-host-latency-is-not-provider-ttft</code></td>
+</tr>
+<tr>
+<td><code>interrupt-protocol-text-is-not-human-ui-click</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>Request interrupted by user라는 protocol text는 host 프로그램의 interrupt 결과이며 사람의 UI 버튼 클릭을 입증하지 않는다.</td>
+<td><code>attempt:103316-15c0b725:process-event:17</code></td>
+</tr>
+<tr>
+<td><code>event-gap-cause-needs-more-observation</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>host event gap은 계산할 수 있지만 큰 gap 하나로 network, model, tool 중 원인을 식별할 수 없다.</td>
+<td><code>spec:claims:event-gap-cause-needs-more-observation</code></td>
+</tr>
+<tr>
+<td><code>session-store-content-equivalence-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>store의 ID와 항목 수는 읽었지만 transcript 본문과 raw stream의 완전 동일성은 비교하지 않았다.</td>
+<td><code>spec:claims:session-store-content-equivalence-not-observed</code></td>
+</tr>
+<tr>
+<td><code>retry-mutation-duplication-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>529 retry 뒤 host tool은 한 번 실행됐으며 mutation 부작용 중복은 이번 tape에 없다.</td>
+<td><code>spec:claims:retry-mutation-duplication-not-observed</code></td>
+</tr>
+<tr>
+<td><code>availability-fallback-not-observed</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>다섯 6b 실행은 fallback_model을 설정하지 않았고 실제 model 전환 사건도 없었다.</td>
+<td><code>spec:claims:availability-fallback-not-observed</code></td>
+</tr>
+<tr>
+<td><code>checkpoint-does-not-prove-files-api-whole</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>checkpoint와 rewind는 관찰했지만 attachment download와 원격 Files API 전체는 관찰하지 않았다.</td>
+<td><code>spec:claims:checkpoint-does-not-prove-files-api-whole</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="6b9">6b.9 학생 실습<a class="headerlink" href="#6b9" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>긴 답변을 만들기 전에 먼저 3단계 계획을 보여 줘.
-각 단계마다 필요한 문서를 확인하고 답변해 줘.
-답변 마지막에는 어느 단계에서 시간이 오래 걸렸는지, 그리고 그 이유가 모델/도구/권한/네트워크 중 어디에 가까운지 추정해 줘.
-</code></pre></div>
-<p>강사용 SDK 화면에서는 다음을 함께 확인해 봅니다.</p>
+<p>중요한 판정 규칙은 다음과 같다.</p>
 <ul>
-<li>첫 partial event까지 시간이 얼마였는가</li>
-<li>문서 Read/Grep가 어느 단계에 발생했는가</li>
-<li>tool_result gap이 긴 구간은 어디인가</li>
-<li>retry가 있었는가</li>
-<li>최종 result가 어떤 request 흐름에 속하는가</li>
+<li><strong>관찰됨</strong>: 기대 사건과 순서가 이번 raw evidence에 직접 존재한다.</li>
+<li><strong>수정 필요</strong>: 같은 버전·설정·도구 범위에서 책 문장과 직접 충돌할 때만 사용한다.</li>
+<li><strong>추가 관측 필요</strong>: 사건을 유도하지 않았거나 범위가 달라 이번 실행만으로 판단할 수 없다.</li>
+<li>따라서 <strong>관찰하지 못했다는 사실만으로 책이 틀렸다고 판정하지 않는다.</strong></li>
 </ul>
-<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
-<p>API 통신 계층은 눈에 잘 띄지 않는 배관이지만, 에이전트 제품에서는 관찰 가능한 실행 경로의 신뢰성을 좌우하는 중요한 부분입니다. 이벤트가 누락되거나 중복되면 시각화도, 평가도 함께 흔들리게 되죠.</p>
-<p>다음 장에서는 같은 하니스라도 모델별 행동 차이를 어떻게 실험하고 비교할 수 있는지 함께 살펴보겠습니다.</p>
+<h2 id="_4">무효 시도<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>없음</li>
+</ul>
+<h2 id="_5">같은 증거를 보는 공개 표면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>표면</th>
+<th>시각화 관점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch06b">Agent Flow · ch06b 실행</a></td>
+<td>원인, tool use/result, permission, claim 경계</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch06b:book-sdk-live-20260803">Runtime City · ch06b 실행</a></td>
+<td>OTel 시간축, 실행 zone, Observed/Missing</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch06b">Pixel Agents · ch06b 증거</a></td>
+<td>actor와 tool lifecycle 상태</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch06b">Hypnagonia · Observation Ordeal</a></td>
+<td>검증 주장, 선택, 관찰 consequence</td>
+</tr>
+</tbody>
+</table>
+<p>각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
+시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
+표현한다. 어느 renderer도 raw evidence의 판정을 바꿀 수 없다.</p>
+<h2 id="_6">공개 경계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>primary-opus-is-not-only-provider-usage</code>: 요청, init, assistant primary는 Opus 5지만 Result model_usage에는 Haiku 4.5 보조 사용도 기록됐다.</li>
+<li><code>python-host-latency-is-not-provider-ttft</code>: Python 0.2.128 StreamEvent에는 ttft_ms가 없으므로 capture 시작과 첫 message의 host clock 차이를 provider TTFT라고 부르면 안 된다.</li>
+<li><code>interrupt-protocol-text-is-not-human-ui-click</code>: Request interrupted by user라는 protocol text는 host 프로그램의 interrupt 결과이며 사람의 UI 버튼 클릭을 입증하지 않는다.</li>
+<li><code>event-gap-cause-needs-more-observation</code>: host event gap은 계산할 수 있지만 큰 gap 하나로 network, model, tool 중 원인을 식별할 수 없다.</li>
+<li><code>session-store-content-equivalence-not-observed</code>: store의 ID와 항목 수는 읽었지만 transcript 본문과 raw stream의 완전 동일성은 비교하지 않았다.</li>
+<li><code>retry-mutation-duplication-not-observed</code>: 529 retry 뒤 host tool은 한 번 실행됐으며 mutation 부작용 중복은 이번 tape에 없다.</li>
+<li><code>availability-fallback-not-observed</code>: 다섯 6b 실행은 fallback_model을 설정하지 않았고 실제 model 전환 사건도 없었다.</li>
+<li>
+<p><code>checkpoint-does-not-prove-files-api-whole</code>: checkpoint와 rewind는 관찰했지만 attachment download와 원격 Files API 전체는 관찰하지 않았다.</p>
+</li>
+<li>
+<p>공개 JSON: <a href="../ch06b-live.json">ch06b-live.json</a></p>
+</li>
+</ul>
 
 
 

@@ -60,7 +60,7 @@ await verify(outputMarkdown, outputJson)
 
 function renderMarkdown(evidence) {
   const attemptRows = evidence.attempts.map((attempt) =>
-    `| \`${attempt.attempt_id}\` | \`${attempt.case_id}\` | \`${attempt.actual_model}\` | ${attempt.source_event_count} | \`${attempt.raw_sdk_sha256}\` | \`${attempt.raw_process_sha256}\` |`,
+    `| \`${attempt.attempt_id}\` | \`${attempt.source_chapter_id || evidence.chapterSlug}\` | **${attempt.projection_role || 'replayed'}** | \`${attempt.case_id || 'cross-chapter evidence'}\` | \`${attempt.actual_model}\` | ${attempt.source_event_count} | \`${attempt.raw_sdk_sha256}\` | \`${attempt.raw_process_sha256}\` |`,
   ).join('\n')
   const claimRows = evidence.claims.map((claim) => {
     const status = claimStatusLabel(claim.status)
@@ -113,11 +113,14 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 | trace SHA-256 | \`${evidence.source.traceSha256}\` |
 | summary SHA-256 | \`${evidence.source.summarySha256}\` |
 
-## 유효한 실제 실행
+## 무결성 검증된 실제 실행과 보조 출처
 
-| attempt | case | actual model | source events | raw SDK SHA-256 | host process SHA-256 |
-| --- | --- | --- | ---: | --- | --- |
+| attempt | source chapter | role | case | actual model | source events | raw SDK SHA-256 | host process SHA-256 |
+| --- | --- | --- | --- | --- | ---: | --- | --- |
 ${attemptRows}
+
+\`supporting-only\`는 다른 장이 소유한 원본 실행을 이 장의 claim 출처로만 인용한다는 뜻이다.
+그 실행은 이 장의 replay timeline에 다시 삽입하거나 복제하지 않는다.
 
 ## 관찰 판정
 

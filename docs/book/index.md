@@ -23,6 +23,7 @@
 - [6장: 프롬프트를 통한 동작 제어](part2/ch06.md)
 - [6장 실제 Python SDK 관찰: 여섯 행동 패턴과 실패 복구](evidence/ch06-live.md)
 - [6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응](part2/ch06b.md)
+- [6b장 실제 Python SDK 관찰: 스트리밍, 중단, 저장, API 재시도](evidence/ch06b-live.md)
 - [7장: 모델별 튜닝과 A/B 테스트](part2/ch07.md)
 - [8장: 마이크로 하니스로서의 도구 프롬프트](part2/ch08.md)
 - [8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격](part2/ch08c.md)
