@@ -72,6 +72,7 @@ nav:
           - "8d장: 동적 프롬프트 레이어 - 세션, 메모리, 팀, MCP가 뒤에 붙는 법": book/part2/ch08d.md
           - "8d장 실제 Python SDK 관찰": book/evidence/ch08d-live.md
           - "8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나": book/part2/ch08e.md
+          - "8e장 실제 Python SDK 관찰": book/evidence/ch08e-live.md
           - "8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면": book/part2/ch08f.md
       - "제3부: 세션과 메시지 관측":
           - "9장: 자동 컴팩션 - 언제, 어떻게 컨텍스트가 압축되는가": book/part3/ch09.md

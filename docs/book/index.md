@@ -33,6 +33,7 @@
 - [8d장: 동적 프롬프트 레이어 - 세션, 메모리, 팀, MCP가 뒤에 붙는 법](part2/ch08d.md)
 - [8d장 실제 Python SDK 관찰: 동적 지침, 격리, skill과 MCP의 경계](evidence/ch08d-live.md)
 - [8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나](part2/ch08e.md)
+- [8e장 실제 Python SDK 관찰: built-in 도구 입력과 description 인과 경계](evidence/ch08e-live.md)
 - [8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면](part2/ch08f.md)
 
 ## 제3부: 세션과 메시지 관측
