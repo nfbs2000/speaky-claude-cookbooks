@@ -4,11 +4,11 @@
   "source": {
     "repository": "nfbs2000/vibe-with-claude-code-education",
     "path": "slide/book-sdk-ko/site",
-    "commit": "8e149e0826edf496637124a2c9bf2fb279907e56"
+    "commit": "3b237f0321665f8709fa8026bbbaa02702289491"
   },
   "build": {
-    "sha256": "9c9052b59a081eb3d014cb5590e8142a7a9a404e783e2bd3f161f883cb56e540",
-    "bytes": 6198559,
+    "sha256": "f53a7aa3f248b46156022f32e0653f6bd1b4c1a744b7021321dab987c0b14bfb",
+    "bytes": 6219659,
     "sceneCount": 227
   }
 }
