@@ -21,6 +21,7 @@
 - [5장: 시스템 프롬프트 아키텍처](part2/ch05.md)
 - [5장 실제 Python SDK 관찰: configured, observed, inferred 경계](evidence/ch05-live.md)
 - [6장: 프롬프트를 통한 동작 제어](part2/ch06.md)
+- [6장 실제 Python SDK 관찰: 여섯 행동 패턴과 실패 복구](evidence/ch06-live.md)
 - [6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응](part2/ch06b.md)
 - [7장: 모델별 튜닝과 A/B 테스트](part2/ch07.md)
 - [8장: 마이크로 하니스로서의 도구 프롬프트](part2/ch08.md)
