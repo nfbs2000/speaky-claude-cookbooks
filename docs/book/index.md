@@ -15,6 +15,7 @@
 - [4장: 도구 실행 오케스트레이션 - 권한, 동시성, 스트리밍, 인터럽트](part1/ch04.md)
 - [4장 실제 Python SDK 관찰: raw/OTel에서 공개 replay까지](evidence/ch04-live.md)
 - [4b장: 플랜 모드 - 뛰기 전에 살펴보기](part1/ch04b.md)
+- [4b장 실제 Python SDK 플랜 모드 관찰: 계획 artifact와 실행 승인 경계](evidence/ch04b-live.md)
 
 ## 제2부: 프롬프트 엔지니어링
 

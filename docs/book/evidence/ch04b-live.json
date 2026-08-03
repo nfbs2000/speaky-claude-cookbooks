@@ -1,0 +1,324 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T22:58:52.398Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch04b",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "4b장 플랜 모드: 계획 artifact와 실행 승인 경계",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch04b:book-sdk-live-20260803:2026-08-03T22:45:39.323983Z",
+    "traceSha256": "7c630a2423a6f9cb2fdcb1239707fe142758e5c0ee086e703779ed5d05b7b3aa",
+    "summarySha256": "51055d6f54cd297fcfedbfd4e3165e47b0887714da00391246923ad764cce4c4",
+    "sourceEventCount": 945,
+    "publicEventCount": 92,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "224407-d1e8d267",
+      "case_id": "host-managed-plan-approval-execution",
+      "projection_role": "replayed",
+      "raw_process_sha256": "20fd8294ae1f1c36136f200ebaf16e811039b6278a9567ec7c86799229d0df9f",
+      "raw_sdk_sha256": "0fe6b37508be5596e4cd8518ebeb26cde92e39edfcfa4fb5e5f834ba7ad45c21",
+      "source_chapter_id": "ch04b",
+      "source_event_count": 945
+    }
+  ],
+  "invalidAttempts": [
+    {
+      "attempt_id": "101040-25cace50",
+      "reason": "실제 Opus 5 메커니즘은 유효하지만 이전 recorder가 programmatic host approval을 actor=user로 잘못 기록했고 현재 chapter/probe source hash provenance가 없어 primary publication에서는 제외했다."
+    }
+  ],
+  "claims": [
+    {
+      "id": "attempt-integrity-and-source-provenance",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "integrity manifest의 증거 파일 SHA-256 7개와 실행 시 chapter/probe/case/capture source SHA-256 4개가 현재 실행 artifact와 일치했다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "actual-opus-and-serial-execution",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "init과 terminal capture는 actual primary model Opus 5를 기록했고 manifest는 provider concurrency 1을 기록했다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:6",
+        "attempt:224407-d1e8d267:process-event:944"
+      ]
+    },
+    {
+      "id": "same-session-two-permission-modes",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "같은 opaque SDK session의 plan init과 acceptEdits init이 각각 sequence 6과 906에 기록됐다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:6",
+        "attempt:224407-d1e8d267:sdk-message:906"
+      ]
+    },
+    {
+      "id": "read-investigation-in-plan",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "plan turn에서 Glob와 Read가 실행됐고 잘못된 첫 경로의 error와 수정한 경로의 success가 함께 보존됐다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:19",
+        "attempt:224407-d1e8d267:sdk-message:38",
+        "attempt:224407-d1e8d267:sdk-message:52",
+        "attempt:224407-d1e8d267:sdk-message:60"
+      ]
+    },
+    {
+      "id": "write-disabled-but-plan-edit-succeeds",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "init 목록에 없는 Write는 disabled error였지만 이어진 Edit는 격리된 plan artifact를 갱신했다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:6",
+        "attempt:224407-d1e8d267:sdk-message:761",
+        "attempt:224407-d1e8d267:sdk-message:762",
+        "attempt:224407-d1e8d267:sdk-message:817",
+        "attempt:224407-d1e8d267:sdk-message:823"
+      ]
+    },
+    {
+      "id": "target-workspace-unchanged-before-approval",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "plan artifact Edit와 별개로 baseline과 after-plan의 application app.py SHA-256은 같았다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:process-event:1",
+        "attempt:224407-d1e8d267:process-event:900"
+      ]
+    },
+    {
+      "id": "exit-plan-permission-gate-retried",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "ExitPlanMode 두 요청은 permission callback에서 외부 승인이 없다는 이유로 두 번 모두 deny됐고 terminal permission_denials에도 남았다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:841",
+        "attempt:224407-d1e8d267:permission-callback:847",
+        "attempt:224407-d1e8d267:permission-callback:848",
+        "attempt:224407-d1e8d267:sdk-message:866",
+        "attempt:224407-d1e8d267:permission-callback:872",
+        "attempt:224407-d1e8d267:permission-callback:873",
+        "attempt:224407-d1e8d267:sdk-message:898"
+      ]
+    },
+    {
+      "id": "host-program-approval-and-explicit-mode-restore",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "process timeline은 actor=host-program 승인 뒤 host가 plan에서 acceptEdits로 명시 전환했음을 기록했다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:process-event:901",
+        "attempt:224407-d1e8d267:process-event:902",
+        "attempt:224407-d1e8d267:process-event:903"
+      ]
+    },
+    {
+      "id": "application-edit-after-approval",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "승인과 mode 복원 뒤 application app.py Edit가 성공했고 최종 target hash가 달라졌다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:916",
+        "attempt:224407-d1e8d267:sdk-message:922",
+        "attempt:224407-d1e8d267:process-event:943"
+      ]
+    },
+    {
+      "id": "raw-otel-sequences-and-model-usage",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "raw SDK 911개와 OTel sdk.message 911개 sequence가 한 trace에서 일치하고 terminal model_usage는 Opus 5와 Haiku 4.5를 분리해 기록했다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:898",
+        "attempt:224407-d1e8d267:sdk-message:941"
+      ]
+    },
+    {
+      "id": "plan-mode-is-not-no-tools",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "plan mode에서도 읽기 조사 도구와 격리된 plan artifact Edit가 실행됐으므로 도구가 전혀 실행되지 않는 모드라고 쓰면 안 된다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:19",
+        "attempt:224407-d1e8d267:sdk-message:817"
+      ]
+    },
+    {
+      "id": "mutation-request-zero-is-false",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "승인 전 mutation tool request는 0이 아니었다. plan artifact Edit와 application source Edit를 path class로 구분해야 한다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:817",
+        "attempt:224407-d1e8d267:process-event:900"
+      ]
+    },
+    {
+      "id": "write-absence-is-not-plan-file-absence",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "Write가 disabled였다는 사실을 계획 파일이 존재하지 않았다는 결론으로 확대할 수 없다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:762",
+        "attempt:224407-d1e8d267:sdk-message:823"
+      ]
+    },
+    {
+      "id": "host-approval-is-not-human-click",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "이번 승인 actor는 host-program이며 실제 사용자의 버튼 클릭이나 permission.reply UX를 검증한 것이 아니다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:process-event:901"
+      ]
+    },
+    {
+      "id": "mode-restore-is-host-owned",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "acceptEdits 복원은 SDK 자동 기억이 아니라 host의 명시적 set_permission_mode 결과다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:process-event:902",
+        "attempt:224407-d1e8d267:process-event:903"
+      ]
+    },
+    {
+      "id": "five-stage-workflow-not-guaranteed",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "구조화된 plan은 관찰됐지만 Python SDK가 정확한 다섯 heading을 보장하는 option이나 event는 관찰되지 않았다.",
+      "sourceRefs": [
+        "spec:claims:five-stage-workflow-not-guaranteed"
+      ]
+    },
+    {
+      "id": "full-sparse-not-public-option",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "full/sparse 계획 선택을 현재 Python SDK의 검증된 공개 option으로 가르치지 않는다.",
+      "sourceRefs": [
+        "spec:claims:full-sparse-not-public-option"
+      ]
+    },
+    {
+      "id": "primary-opus-is-not-only-provider-usage",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "primary assistant model은 Opus 5지만 terminal model_usage에는 Haiku 4.5도 있어 전체 provider usage를 Opus 하나로 쓰면 안 된다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:898",
+        "attempt:224407-d1e8d267:sdk-message:941"
+      ]
+    },
+    {
+      "id": "permission-callback-alone-is-incomplete",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "permission callback만 읽으면 allowed 도구와 plan artifact Edit를 놓칠 수 있으므로 raw SDK, hook, callback, process snapshot을 함께 읽어야 한다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:hook-callback:819",
+        "attempt:224407-d1e8d267:permission-callback:847"
+      ]
+    },
+    {
+      "id": "captured-and-edit-success-are-not-test-pass",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "CAPTURED와 application Edit 성공은 raw 수집 및 변경 성공이며 테스트 통과가 아니다. 이번 execution에는 Bash가 없었다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:941",
+        "attempt:224407-d1e8d267:process-event:944"
+      ]
+    },
+    {
+      "id": "human-permission-ui-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "실제 사용자의 permission.requested/reply와 버튼 승인 actor는 live UI case가 필요하다.",
+      "sourceRefs": [
+        "spec:claims:human-permission-ui-not-observed"
+      ]
+    },
+    {
+      "id": "auto-plan-restore-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "auto에서 plan으로 갔다가 auto 정책 범위를 보존해 복원하는 별도 case가 필요하다.",
+      "sourceRefs": [
+        "spec:claims:auto-plan-restore-not-observed"
+      ]
+    },
+    {
+      "id": "teamlead-approval-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "상위 agent 또는 팀리드가 계획을 승인하는 팀 실행은 이번 단일 agent case 범위 밖이다.",
+      "sourceRefs": [
+        "spec:claims:teamlead-approval-not-observed"
+      ]
+    },
+    {
+      "id": "post-approval-test-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "승인 후 계획에 적힌 Bash test까지 실행해 결과를 연결하는 case가 필요하다.",
+      "sourceRefs": [
+        "spec:claims:post-approval-test-not-observed"
+      ]
+    },
+    {
+      "id": "plan-file-provisioner-and-lifecycle-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "Write deny 뒤 Edit가 성공할 수 있도록 계획 파일을 준비한 정확한 component와 cleanup lifecycle은 관찰하지 않았다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:762",
+        "attempt:224407-d1e8d267:sdk-message:823"
+      ]
+    },
+    {
+      "id": "deny-revise-product-ux-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "callback deny 뒤 모델 재요청은 관찰했지만 실제 사용자의 수정 요청과 수정된 plan 승인 UX는 별도 관측이 필요하다.",
+      "sourceRefs": [
+        "attempt:224407-d1e8d267:sdk-message:841",
+        "attempt:224407-d1e8d267:sdk-message:866"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch04b 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04b",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch04b 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch04b:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch04b 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch04b",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch04b",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}
