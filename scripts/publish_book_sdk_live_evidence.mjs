@@ -63,7 +63,7 @@ function renderMarkdown(evidence) {
     `| \`${attempt.attempt_id}\` | \`${attempt.case_id}\` | \`${attempt.actual_model}\` | ${attempt.source_event_count} | \`${attempt.raw_sdk_sha256}\` | \`${attempt.raw_process_sha256}\` |`,
   ).join('\n')
   const claimRows = evidence.claims.map((claim) => {
-    const status = claim.status === 'observed' ? '관찰됨' : '추가 관측 필요'
+    const status = claimStatusLabel(claim.status)
     return `| \`${claim.id}\` | **${status}** | ${claim.summary} | \`${claim.sourceRefs[0] || '-'}\` |`
   }).join('\n')
   const replayRows = evidence.replays.map((replay) =>
@@ -75,6 +75,9 @@ function renderMarkdown(evidence) {
 
   const chapterNumber = evidence.chapterSlug.replace(/^ch0*/, '')
   const observedCount = evidence.claims.filter((claim) => claim.status === 'observed').length
+  const correctionCount = evidence.claims.filter(
+    (claim) => claim.status === 'correction_required',
+  ).length
   const pendingCount = evidence.claims.filter(
     (claim) => claim.status === 'additional_observation_required',
   ).length
@@ -106,7 +109,7 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 | proof gate | \`${evidence.source.proofGate}\` |
 | secret scan | \`${evidence.source.secretScan}\` |
 | raw source / public | **${evidence.source.sourceEventCount} / ${evidence.source.publicEventCount}** |
-| observed / more evidence | **${observedCount} / ${pendingCount}** |
+| observed / correction / more evidence | **${observedCount} / ${correctionCount} / ${pendingCount}** |
 | trace SHA-256 | \`${evidence.source.traceSha256}\` |
 | summary SHA-256 | \`${evidence.source.summarySha256}\` |
 
@@ -185,11 +188,17 @@ async function verify(markdownPath, jsonPath) {
   const expectedPending = summary.claim_statuses.filter(
     (status) => status === 'additional_observation_required',
   ).length
+  const expectedCorrection = summary.claim_statuses.filter(
+    (status) => status === 'correction_required',
+  ).length
   if (value.claims.filter((claim) => claim.status === 'observed').length !== expectedObserved) {
     throw new Error('observed_claim_count_invalid')
   }
   if (value.claims.filter((claim) => claim.status === 'additional_observation_required').length !== expectedPending) {
     throw new Error('pending_claim_count_invalid')
+  }
+  if (value.claims.filter((claim) => claim.status === 'correction_required').length !== expectedCorrection) {
+    throw new Error('correction_claim_count_invalid')
   }
   for (const attempt of value.attempts) {
     if (!markdownText.includes(attempt.attempt_id) || !markdownText.includes(attempt.raw_sdk_sha256)) {
@@ -200,6 +209,13 @@ async function verify(markdownPath, jsonPath) {
     throw new Error('private_content_detected')
   }
   process.stdout.write(`Verified public Book SDK evidence page with ${value.claims.length} claims\n`)
+}
+
+function claimStatusLabel(status) {
+  if (status === 'observed') return '관찰됨'
+  if (status === 'correction_required') return '범위 수정 필요'
+  if (status === 'additional_observation_required') return '추가 관측 필요'
+  return status
 }
 
 function clean(value) {

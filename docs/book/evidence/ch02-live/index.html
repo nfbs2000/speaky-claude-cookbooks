@@ -10,31 +10,31 @@
 
 
 
-        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/">
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/evidence/ch02-live/">
 
 
-        <link rel="prev" href="..">
+        <link rel="prev" href="../../part1/ch02/">
 
 
-        <link rel="next" href="part1/ch01/">
+        <link rel="next" href="../../part1/ch03/">
 
 
 
 
 
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
 
 
 
-        <title>전체 목차 - Speaky Claude Cookbooks</title>
+        <title>2장 실제 Python SDK 관찰 - Speaky Claude Cookbooks</title>
 
 
 
-      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
 
 
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
 
 
 
@@ -53,9 +53,9 @@
 
 
 
-      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/extra.css">
 
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 
 
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
 
 
-        <a href="#_1" class="md-skip">
+        <a href="#2-python-sdk" class="md-skip">
           콘텐츠로 이동
         </a>
 
@@ -96,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href=".." title="Speaky Claude Cookbooks" class="md-header__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-header__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
 
 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
 
-              전체 목차
+              2장 실제 Python SDK 관찰
 
           </span>
         </div>
@@ -220,7 +220,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Speaky Claude Cookbooks" class="md-nav__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
+    <a href="../../.." title="Speaky Claude Cookbooks" class="md-nav__button md-logo" aria-label="Speaky Claude Cookbooks" data-md-component="logo">
 
 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -250,7 +250,7 @@
 
 
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
 
 
 
@@ -318,7 +318,7 @@
 
 
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../" class="md-nav__link ">
 
 
 
@@ -336,7 +336,7 @@
             </a>
 
 
-              <label class="md-nav__link md-nav__link--active" for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
 
@@ -386,11 +386,13 @@
 
 
 
-    <li class="md-nav__item md-nav__item--nested">
+
+
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 
 
 
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
 
 
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -411,7 +413,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
 
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
 
@@ -429,7 +431,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part1/ch01/" class="md-nav__link">
+      <a href="../../part1/ch01/" class="md-nav__link">
 
 
 
@@ -457,7 +459,7 @@
 
 
     <li class="md-nav__item">
-      <a href="evidence/ch01-live/" class="md-nav__link">
+      <a href="../ch01-live/" class="md-nav__link">
 
 
 
@@ -485,7 +487,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part1/ch02/" class="md-nav__link">
+      <a href="../../part1/ch02/" class="md-nav__link">
 
 
 
@@ -512,8 +514,35 @@
 
 
 
-    <li class="md-nav__item">
-      <a href="evidence/ch02-live/" class="md-nav__link">
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    2장 실제 Python SDK 관찰
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="./" class="md-nav__link md-nav__link--active">
 
 
 
@@ -529,6 +558,92 @@
 
 
       </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        실행 신원
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        유효한 실제 실행
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        관찰 판정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        무효 시도
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        같은 증거를 보는 공개 표면
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        공개 경계
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+
     </li>
 
 
@@ -541,7 +656,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part1/ch03/" class="md-nav__link">
+      <a href="../../part1/ch03/" class="md-nav__link">
 
 
 
@@ -569,7 +684,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part1/ch04/" class="md-nav__link">
+      <a href="../../part1/ch04/" class="md-nav__link">
 
 
 
@@ -597,7 +712,7 @@
 
 
     <li class="md-nav__item">
-      <a href="evidence/ch04-live/" class="md-nav__link">
+      <a href="../ch04-live/" class="md-nav__link">
 
 
 
@@ -625,7 +740,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part1/ch04b/" class="md-nav__link">
+      <a href="../../part1/ch04b/" class="md-nav__link">
 
 
 
@@ -730,7 +845,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch05/" class="md-nav__link">
+      <a href="../../part2/ch05/" class="md-nav__link">
 
 
 
@@ -758,7 +873,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch06/" class="md-nav__link">
+      <a href="../../part2/ch06/" class="md-nav__link">
 
 
 
@@ -786,7 +901,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch06b/" class="md-nav__link">
+      <a href="../../part2/ch06b/" class="md-nav__link">
 
 
 
@@ -814,7 +929,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch07/" class="md-nav__link">
+      <a href="../../part2/ch07/" class="md-nav__link">
 
 
 
@@ -842,7 +957,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch08/" class="md-nav__link">
+      <a href="../../part2/ch08/" class="md-nav__link">
 
 
 
@@ -870,7 +985,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch08c/" class="md-nav__link">
+      <a href="../../part2/ch08c/" class="md-nav__link">
 
 
 
@@ -898,7 +1013,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch08d/" class="md-nav__link">
+      <a href="../../part2/ch08d/" class="md-nav__link">
 
 
 
@@ -926,7 +1041,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch08e/" class="md-nav__link">
+      <a href="../../part2/ch08e/" class="md-nav__link">
 
 
 
@@ -954,7 +1069,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part2/ch08f/" class="md-nav__link">
+      <a href="../../part2/ch08f/" class="md-nav__link">
 
 
 
@@ -1049,7 +1164,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part3/ch09/" class="md-nav__link">
+      <a href="../../part3/ch09/" class="md-nav__link">
 
 
 
@@ -1077,7 +1192,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part3/ch10/" class="md-nav__link">
+      <a href="../../part3/ch10/" class="md-nav__link">
 
 
 
@@ -1105,7 +1220,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part3/ch11/" class="md-nav__link">
+      <a href="../../part3/ch11/" class="md-nav__link">
 
 
 
@@ -1133,7 +1248,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part3/ch12/" class="md-nav__link">
+      <a href="../../part3/ch12/" class="md-nav__link">
 
 
 
@@ -1226,7 +1341,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part4/ch13/" class="md-nav__link">
+      <a href="../../part4/ch13/" class="md-nav__link">
 
 
 
@@ -1254,7 +1369,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part4/ch14/" class="md-nav__link">
+      <a href="../../part4/ch14/" class="md-nav__link">
 
 
 
@@ -1282,7 +1397,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part4/ch15/" class="md-nav__link">
+      <a href="../../part4/ch15/" class="md-nav__link">
 
 
 
@@ -1381,7 +1496,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch16/" class="md-nav__link">
+      <a href="../../part5/ch16/" class="md-nav__link">
 
 
 
@@ -1409,7 +1524,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch17/" class="md-nav__link">
+      <a href="../../part5/ch17/" class="md-nav__link">
 
 
 
@@ -1437,7 +1552,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch17b/" class="md-nav__link">
+      <a href="../../part5/ch17b/" class="md-nav__link">
 
 
 
@@ -1465,7 +1580,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch18/" class="md-nav__link">
+      <a href="../../part5/ch18/" class="md-nav__link">
 
 
 
@@ -1493,7 +1608,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch18b/" class="md-nav__link">
+      <a href="../../part5/ch18b/" class="md-nav__link">
 
 
 
@@ -1521,7 +1636,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part5/ch19/" class="md-nav__link">
+      <a href="../../part5/ch19/" class="md-nav__link">
 
 
 
@@ -1626,7 +1741,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch20/" class="md-nav__link">
+      <a href="../../part6/ch20/" class="md-nav__link">
 
 
 
@@ -1654,7 +1769,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch20b/" class="md-nav__link">
+      <a href="../../part6/ch20b/" class="md-nav__link">
 
 
 
@@ -1682,7 +1797,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch20c/" class="md-nav__link">
+      <a href="../../part6/ch20c/" class="md-nav__link">
 
 
 
@@ -1710,7 +1825,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch21/" class="md-nav__link">
+      <a href="../../part6/ch21/" class="md-nav__link">
 
 
 
@@ -1738,7 +1853,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch22/" class="md-nav__link">
+      <a href="../../part6/ch22/" class="md-nav__link">
 
 
 
@@ -1766,7 +1881,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch22b/" class="md-nav__link">
+      <a href="../../part6/ch22b/" class="md-nav__link">
 
 
 
@@ -1794,7 +1909,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch23/" class="md-nav__link">
+      <a href="../../part6/ch23/" class="md-nav__link">
 
 
 
@@ -1822,7 +1937,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch23b/" class="md-nav__link">
+      <a href="../../part6/ch23b/" class="md-nav__link">
 
 
 
@@ -1850,7 +1965,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part6/ch24/" class="md-nav__link">
+      <a href="../../part6/ch24/" class="md-nav__link">
 
 
 
@@ -1951,7 +2066,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch25/" class="md-nav__link">
+      <a href="../../part7/ch25/" class="md-nav__link">
 
 
 
@@ -1979,7 +2094,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch26/" class="md-nav__link">
+      <a href="../../part7/ch26/" class="md-nav__link">
 
 
 
@@ -2007,7 +2122,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch27/" class="md-nav__link">
+      <a href="../../part7/ch27/" class="md-nav__link">
 
 
 
@@ -2035,7 +2150,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch28/" class="md-nav__link">
+      <a href="../../part7/ch28/" class="md-nav__link">
 
 
 
@@ -2063,7 +2178,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch29/" class="md-nav__link">
+      <a href="../../part7/ch29/" class="md-nav__link">
 
 
 
@@ -2091,7 +2206,7 @@
 
 
     <li class="md-nav__item">
-      <a href="part7/ch30/" class="md-nav__link">
+      <a href="../../part7/ch30/" class="md-nav__link">
 
 
 
@@ -2119,7 +2234,7 @@
 
 
     <li class="md-nav__item">
-      <a href="evidence/ch30-live/" class="md-nav__link">
+      <a href="../ch30-live/" class="md-nav__link">
 
 
 
@@ -2238,7 +2353,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-a/" class="md-nav__link">
+      <a href="../../appendix/appendix-a/" class="md-nav__link">
 
 
 
@@ -2266,7 +2381,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-b/" class="md-nav__link">
+      <a href="../../appendix/appendix-b/" class="md-nav__link">
 
 
 
@@ -2294,7 +2409,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-c/" class="md-nav__link">
+      <a href="../../appendix/appendix-c/" class="md-nav__link">
 
 
 
@@ -2322,7 +2437,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-d/" class="md-nav__link">
+      <a href="../../appendix/appendix-d/" class="md-nav__link">
 
 
 
@@ -2350,7 +2465,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-e/" class="md-nav__link">
+      <a href="../../appendix/appendix-e/" class="md-nav__link">
 
 
 
@@ -2378,7 +2493,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-f/" class="md-nav__link">
+      <a href="../../appendix/appendix-f/" class="md-nav__link">
 
 
 
@@ -2406,7 +2521,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-g/" class="md-nav__link">
+      <a href="../../appendix/appendix-g/" class="md-nav__link">
 
 
 
@@ -2434,7 +2549,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-h/" class="md-nav__link">
+      <a href="../../appendix/appendix-h/" class="md-nav__link">
 
 
 
@@ -2462,7 +2577,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-i/" class="md-nav__link">
+      <a href="../../appendix/appendix-i/" class="md-nav__link">
 
 
 
@@ -2490,7 +2605,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-j/" class="md-nav__link">
+      <a href="../../appendix/appendix-j/" class="md-nav__link">
 
 
 
@@ -2518,7 +2633,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-k/" class="md-nav__link">
+      <a href="../../appendix/appendix-k/" class="md-nav__link">
 
 
 
@@ -2546,7 +2661,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-l/" class="md-nav__link">
+      <a href="../../appendix/appendix-l/" class="md-nav__link">
 
 
 
@@ -2574,7 +2689,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-m/" class="md-nav__link">
+      <a href="../../appendix/appendix-m/" class="md-nav__link">
 
 
 
@@ -2602,7 +2717,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-n/" class="md-nav__link">
+      <a href="../../appendix/appendix-n/" class="md-nav__link">
 
 
 
@@ -2630,7 +2745,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-o/" class="md-nav__link">
+      <a href="../../appendix/appendix-o/" class="md-nav__link">
 
 
 
@@ -2658,7 +2773,7 @@
 
 
     <li class="md-nav__item">
-      <a href="appendix/appendix-p/" class="md-nav__link">
+      <a href="../../appendix/appendix-p/" class="md-nav__link">
 
 
 
@@ -2769,7 +2884,7 @@
 
 
           <div class="md-nav__link md-nav__container">
-            <a href="../projection/" class="md-nav__link ">
+            <a href="../../../projection/" class="md-nav__link ">
 
 
 
@@ -2813,7 +2928,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/chapter-map/" class="md-nav__link">
+      <a href="../../../projection/chapter-map/" class="md-nav__link">
 
 
 
@@ -2841,7 +2956,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part1/" class="md-nav__link">
+      <a href="../../../projection/part1/" class="md-nav__link">
 
 
 
@@ -2869,7 +2984,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part2/" class="md-nav__link">
+      <a href="../../../projection/part2/" class="md-nav__link">
 
 
 
@@ -2897,7 +3012,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part3/" class="md-nav__link">
+      <a href="../../../projection/part3/" class="md-nav__link">
 
 
 
@@ -2925,7 +3040,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part4/" class="md-nav__link">
+      <a href="../../../projection/part4/" class="md-nav__link">
 
 
 
@@ -2953,7 +3068,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part5/" class="md-nav__link">
+      <a href="../../../projection/part5/" class="md-nav__link">
 
 
 
@@ -2981,7 +3096,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part6/" class="md-nav__link">
+      <a href="../../../projection/part6/" class="md-nav__link">
 
 
 
@@ -3009,7 +3124,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/part7/" class="md-nav__link">
+      <a href="../../../projection/part7/" class="md-nav__link">
 
 
 
@@ -3037,7 +3152,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../projection/appendix/" class="md-nav__link">
+      <a href="../../../projection/appendix/" class="md-nav__link">
 
 
 
@@ -3099,7 +3214,7 @@
 
 
           <div class="md-nav__link md-nav__container">
-            <a href="../recipes/" class="md-nav__link ">
+            <a href="../../../recipes/" class="md-nav__link ">
 
 
 
@@ -3143,7 +3258,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../recipes/categories/" class="md-nav__link">
+      <a href="../../../recipes/categories/" class="md-nav__link">
 
 
 
@@ -3171,7 +3286,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../recipes/agent-sdk/" class="md-nav__link">
+      <a href="../../../recipes/agent-sdk/" class="md-nav__link">
 
 
 
@@ -3264,7 +3379,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../reference/public-boundary/" class="md-nav__link">
+      <a href="../../../reference/public-boundary/" class="md-nav__link">
 
 
 
@@ -3292,7 +3407,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../reference/source-policy/" class="md-nav__link">
+      <a href="../../../reference/source-policy/" class="md-nav__link">
 
 
 
@@ -3347,76 +3462,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
 
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
 
-        제1부: 아키텍처
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제2부: 프롬프트 엔지니어링
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제3부: 세션과 메시지 관측
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제4부: 프롬프트 캐싱
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제5부: 안전성과 권한
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제6부: 고급 서브시스템
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#7-ai" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        제7부: AI 에이전트 구축자를 위한 교훈
+        실행 신원
 
     </span>
   </a>
@@ -3427,7 +3476,51 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
 
-        부록
+        유효한 실제 실행
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        관찰 판정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        무효 시도
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        같은 증거를 보는 공개 표면
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        공개 경계
 
     </span>
   </a>
@@ -3454,94 +3547,223 @@
 
 
 
-<h1 id="_1">책 본문<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>이 섹션은 한국어 Claude Agent SDK 책의 장 구조를 유지하면서, 각 장을 공개 Python cookbook과 공식 SDK 문서에 맞춰 다시 쓴 공개판입니다.</p>
-<p>1장은 수동으로 상세 작성했고, 나머지 장은 <code>docs/data/book_projection.yml</code>의 근거와 원문 절 구조를 기반으로 생성했습니다. 각 장은 cookbook 링크, 공식 문서 링크, 공개 경계, 실습 방향을 함께 제공합니다.</p>
-<h2 id="1">제1부: 아키텍처<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<!-- Generated by scripts/publish_book_sdk_live_evidence.mjs. -->
+
+<h1 id="2-python-sdk">2장 실제 Python SDK 관찰<a class="headerlink" href="#2-python-sdk" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
+<code>claude-opus-5</code>로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">한 번 수집하고 여러 표면에서 재생</p>
+<p>원전은 208개 사건이고 공개 projection은 54개다.
+credential, private prompt, 비공개 추론 payload, 사용자 절대 경로는 공개하지 않았다. 공개 사건은
+source event ID와 SHA-256을 유지한다.</p>
+</div>
+<h2 id="_1">실행 신원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>campaign</td>
+<td><code>book-sdk-live-20260803</code></td>
+</tr>
+<tr>
+<td>model</td>
+<td><code>claude-opus-5</code></td>
+</tr>
+<tr>
+<td>proof gate</td>
+<td><code>accepted_with_notes</code></td>
+</tr>
+<tr>
+<td>secret scan</td>
+<td><code>passed</code></td>
+</tr>
+<tr>
+<td>raw source / public</td>
+<td><strong>208 / 54</strong></td>
+</tr>
+<tr>
+<td>observed / correction / more evidence</td>
+<td><strong>4 / 1 / 2</strong></td>
+</tr>
+<tr>
+<td>trace SHA-256</td>
+<td><code>30b89ce39ff33951c979797422f410c58875f752d02eccbf9fe4637cde01d519</code></td>
+</tr>
+<tr>
+<td>summary SHA-256</td>
+<td><code>c60ca786fd592f3d231b8afc2d04f0997db0c04a0e7f163a1d337fd46b1747b1</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">유효한 실제 실행<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>attempt</th>
+<th>case</th>
+<th>actual model</th>
+<th style="text-align: right;">source events</th>
+<th>raw SDK SHA-256</th>
+<th>host process SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>044555-3c0f4677</code></td>
+<td><code>surface-unapproved-callback-allow</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">43</td>
+<td><code>0f3249d1809da190195e75e390ce56d2a8332b0c0a4cebef1ac509719033e6b1</code></td>
+<td><code>fb2a2ca0c3d31b61c1c709120dc13aee6bf94e43a78ee927e75387d778387d1a</code></td>
+</tr>
+<tr>
+<td><code>044648-35a833a2</code></td>
+<td><code>allowed-auto-approval</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">36</td>
+<td><code>277651bc3c39676a007fcf2beb5289018d5e98734c2e98a5e6214f6b600b777f</code></td>
+<td><code>cd0a4d85be76de3d0fb7d266a8cb970d9892292395cf4ad11f7b6b747d321a04</code></td>
+</tr>
+<tr>
+<td><code>044804-d7f879b9</code></td>
+<td><code>disallowed-execution-gate</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">45</td>
+<td><code>309983df47cc9a9eeaa60b5a24cc214a108219707fe2198ede5735c912d5be57</code></td>
+<td><code>89fdf282a487d7ef623f961905f87b78979ce28a501d275f4d1484e504d7c7fb</code></td>
+</tr>
+<tr>
+<td><code>044856-5d71aa95</code></td>
+<td><code>pretool-deny-before-auto-approval</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">39</td>
+<td><code>2f11ffafd5a20c10292f4a1039c434c1d2554209fcbd06eb81fa7f21ae8391f1</code></td>
+<td><code>8fc0fd615907d38d2e2d81f6ce71bd0501aa29ace58c23d5b6bbf78b2ed7c95d</code></td>
+</tr>
+<tr>
+<td><code>044935-0d97290e</code></td>
+<td><code>dontask-unapproved-denial</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">45</td>
+<td><code>c6199f7bf4892c32748e997ac87b0cb8db695f4a78d6bc1c0ad6a9b3090b14f8</code></td>
+<td><code>e5cf00f60c626b24063535ed0f6bb668f0cb597b7fe925398910c27b7bcbe3a8</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">관찰 판정<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>claim</th>
+<th>판정</th>
+<th>실제 관찰 또는 경계</th>
+<th>첫 source ref</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unapproved-tool-callback-allow</code></td>
+<td><strong>관찰됨</strong></td>
+<td>미승인 custom MCP 요청에서 can_use_tool request와 allow decision 뒤 handler와 tool_result가 실행됐다.</td>
+<td><code>attempt:044555-3c0f4677:sdk-message:14</code></td>
+</tr>
+<tr>
+<td><code>allowed-tools-auto-approval</code></td>
+<td><strong>관찰됨</strong></td>
+<td>같은 custom MCP 도구를 allowed_tools에 넣자 can_use_tool callback 없이 handler와 tool_result가 실행됐다.</td>
+<td><code>attempt:044648-35a833a2:sdk-message:14</code></td>
+</tr>
+<tr>
+<td><code>deny-blocks-without-removing-init-name</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>custom MCP 도구 이름은 init.tools에 남았지만 explicit deny가 bypassPermissions에서도 handler 실행을 차단했다. init.tools를 실행 허가 목록으로 일반화하면 안 된다.</td>
+<td><code>attempt:044804-d7f879b9:sdk-message:1</code></td>
+</tr>
+<tr>
+<td><code>pretool-deny-precedes-auto-approval</code></td>
+<td><strong>관찰됨</strong></td>
+<td>allowed_tools에 포함된 도구도 PreToolUse deny decision 뒤 error tool_result로 닫혔고 handler는 실행되지 않았다.</td>
+<td><code>attempt:044856-5d71aa95:sdk-message:15</code></td>
+</tr>
+<tr>
+<td><code>dontask-denies-without-app-callback</code></td>
+<td><strong>관찰됨</strong></td>
+<td>dontAsk와 미승인 custom MCP 조합은 앱 callback을 구성하지 않은 채 error tool_result와 permission denial로 종료됐다.</td>
+<td><code>attempt:044935-0d97290e:sdk-message:14</code></td>
+</tr>
+<tr>
+<td><code>built-in-deny-init-surface</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>built-in tool의 disallowed_tools 규칙이 init.tools 표면에서 이름을 제거하는지는 이 custom MCP 실행으로 일반화하지 않는다.</td>
+<td><code>spec:claims:built-in-deny-init-surface</code></td>
+</tr>
+<tr>
+<td><code>large-result-progress-tool-search</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>large result persistence, SDKToolProgressMessage, ToolSearch와 cache 효과는 별도 실제 실행이 필요하다.</td>
+<td><code>spec:claims:large-result-progress-tool-search</code></td>
+</tr>
+</tbody>
+</table>
+<p>중요한 판정 규칙은 다음과 같다.</p>
 <ul>
-<li><a href="part1/ch01/">1장: AI 코딩 에이전트의 전체 기술 스택</a></li>
-<li><a href="evidence/ch01-live/">1장 실제 Python SDK 관찰: 첫 init부터 Result까지</a></li>
-<li><a href="part1/ch02/">2장: 도구 시스템 — 모델의 손이 되는 40개 이상의 도구</a></li>
-<li><a href="evidence/ch02-live/">2장 실제 Python SDK 관찰: 도구 표면과 권한 순서</a></li>
-<li><a href="part1/ch03/">3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기</a></li>
-<li><a href="part1/ch04/">4장: 도구 실행 오케스트레이션 - 권한, 동시성, 스트리밍, 인터럽트</a></li>
-<li><a href="evidence/ch04-live/">4장 실제 Python SDK 관찰: raw/OTel에서 공개 replay까지</a></li>
-<li><a href="part1/ch04b/">4b장: 플랜 모드 - 뛰기 전에 살펴보기</a></li>
+<li><strong>관찰됨</strong>: 기대 사건과 순서가 이번 raw evidence에 직접 존재한다.</li>
+<li><strong>수정 필요</strong>: 같은 버전·설정·도구 범위에서 책 문장과 직접 충돌할 때만 사용한다.</li>
+<li><strong>추가 관측 필요</strong>: 사건을 유도하지 않았거나 범위가 달라 이번 실행만으로 판단할 수 없다.</li>
+<li>따라서 <strong>관찰하지 못했다는 사실만으로 책이 틀렸다고 판정하지 않는다.</strong></li>
 </ul>
-<h2 id="2">제2부: 프롬프트 엔지니어링<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h2 id="_4">무효 시도<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="part2/ch05/">5장: 시스템 프롬프트 아키텍처</a></li>
-<li><a href="part2/ch06/">6장: 프롬프트를 통한 동작 제어</a></li>
-<li><a href="part2/ch06b/">6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응</a></li>
-<li><a href="part2/ch07/">7장: 모델별 튜닝과 A/B 테스트</a></li>
-<li><a href="part2/ch08/">8장: 마이크로 하니스로서의 도구 프롬프트</a></li>
-<li><a href="part2/ch08c/">8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격</a></li>
-<li><a href="part2/ch08d/">8d장: 동적 프롬프트 레이어 - 세션, 메모리, 팀, MCP가 뒤에 붙는 법</a></li>
-<li><a href="part2/ch08e/">8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나</a></li>
-<li><a href="part2/ch08f/">8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면</a></li>
+<li><code>044451-5f0f25a4</code>: provider 호출 전에 종료되어 actual_model과 SDK 실행 사건이 없다. 책의 주장 판정에 사용하지 않는다. 이 시도는 <strong>invalid attempt</strong>다.</li>
 </ul>
-<h2 id="3">제3부: 세션과 메시지 관측<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h2 id="_5">같은 증거를 보는 공개 표면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>표면</th>
+<th>시각화 관점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch02">Agent Flow · ch02 실행</a></td>
+<td>원인, tool use/result, permission, claim 경계</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch02:book-sdk-live-20260803">Runtime City · ch02 실행</a></td>
+<td>OTel 시간축, 실행 zone, Observed/Missing</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch02">Pixel Agents · ch02 증거</a></td>
+<td>actor와 tool lifecycle 상태</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch02">Hypnagonia · Observation Ordeal</a></td>
+<td>검증 주장, 선택, 관찰 consequence</td>
+</tr>
+</tbody>
+</table>
+<p>각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
+시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
+표현한다. 어느 renderer도 raw evidence의 판정을 바꿀 수 없다.</p>
+<h2 id="_6">공개 경계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="part3/ch09/">9장: 자동 컴팩션 - 언제, 어떻게 컨텍스트가 압축되는가</a></li>
-<li><a href="part3/ch10/">10장: 컴팩션 이후의 파일 상태 보존</a></li>
-<li><a href="part3/ch11/">11장: 마이크로 컴팩션 - 정밀한 컨텍스트 가지치기</a></li>
-<li><a href="part3/ch12/">12장: 토큰 예산 전략</a></li>
-</ul>
-<h2 id="4">제4부: 프롬프트 캐싱<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="part4/ch13/">13장: 캐시 아키텍처와 브레이크포인트 설계</a></li>
-<li><a href="part4/ch14/">14장: 캐시 브레이크 감지 시스템</a></li>
-<li><a href="part4/ch15/">15장: 캐시 최적화 패턴</a></li>
-</ul>
-<h2 id="5">제5부: 안전성과 권한<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="part5/ch16/">16장: 권한 시스템</a></li>
-<li><a href="part5/ch17/">17장: YOLO 분류기</a></li>
-<li><a href="part5/ch17b/">17b장: 프롬프트 인젝션 방어</a></li>
-<li><a href="part5/ch18/">18장: 훅 - 사용자 정의 가로채기 지점</a></li>
-<li><a href="part5/ch18b/">18b장: 샌드박스 시스템 - 격리된 실행 환경</a></li>
-<li><a href="part5/ch19/">19장: CLAUDE.md - 사용자 지침의 오버라이드 계층</a></li>
-</ul>
-<h2 id="6">제6부: 고급 서브시스템<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="part6/ch20/">20장: 에이전트 생성과 오케스트레이션</a></li>
-<li><a href="part6/ch20b/">20b장: 팀과 멀티프로세스 협업</a></li>
-<li><a href="part6/ch20c/">20c장: Ultraplan - 원격 멀티 에이전트 계획 수립</a></li>
-<li><a href="part6/ch21/">21장: Effort, Fast Mode, 그리고 Thinking</a></li>
-<li><a href="part6/ch22/">22장: Skills 시스템 - 기본 제공에서 사용자 정의까지</a></li>
-<li><a href="part6/ch22b/">22b장: 플러그인 시스템 - 패키징에서 마켓플레이스 확장 엔지니어링까지</a></li>
-<li><a href="part6/ch23/">23장: 비공개 기능 파이프라인 - 기능 플래그와 재현 조건</a></li>
-<li><a href="part6/ch23b/">23b장: 기능 플래그의 생명주기 - 실험에서 재현 조건까지</a></li>
-<li><a href="part6/ch24/">24장: 세션 간 메모리 - 망각에서 지속적 학습으로</a></li>
-</ul>
-<h2 id="7-ai">제7부: AI 에이전트 구축자를 위한 교훈<a class="headerlink" href="#7-ai" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="part7/ch25/">25장: 하니스 엔지니어링 원칙</a></li>
-<li><a href="part7/ch26/">26장: 핵심 역량으로서의 세션과 메시지 관측</a></li>
-<li><a href="part7/ch27/">27장: 프로덕션급 AI 코딩 패턴</a></li>
-<li><a href="part7/ch28/">28장: Claude Code의 한계</a></li>
-<li><a href="part7/ch29/">29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지</a></li>
-<li><a href="part7/ch30/">30장: 나만의 AI 에이전트 만들기 - Claude Code 패턴에서 실전까지</a></li>
-<li><a href="evidence/ch30-live/">30장 실제 Python SDK 관찰: 권한, 산출물, 재개, 메모리</a></li>
-</ul>
-<h2 id="_2">부록<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="appendix/appendix-a/">부록 A: 주요 파일 인덱스</a></li>
-<li><a href="appendix/appendix-b/">부록 B: 환경 변수 참조</a></li>
-<li><a href="appendix/appendix-c/">부록 C: 용어집</a></li>
-<li><a href="appendix/appendix-d/">부록 D: 기능 플래그 전체 목록</a></li>
-<li><a href="appendix/appendix-e/">부록 E: 버전 진화 로그</a></li>
-<li><a href="appendix/appendix-f/">부록 F: 엔드투엔드 사례 추적</a></li>
-<li><a href="appendix/appendix-g/">부록 G: 인증 및 구독 시스템</a></li>
-<li><a href="appendix/appendix-h/">부록 H: 프롬프트 표면 인덱스</a></li>
-<li><a href="appendix/appendix-i/">부록 I: 강좌 플러그인 배포 청사진</a></li>
-<li><a href="appendix/appendix-j/">부록 J: 비공식 프롬프트 자료 독해</a></li>
-<li><a href="appendix/appendix-k/">부록 K: Fable 5 하니스 독해</a></li>
-<li><a href="appendix/appendix-l/">부록 L: Fable 5와 Opus 5 비교</a></li>
-<li><a href="appendix/appendix-m/">부록 M: 프롬프트 버전 진화</a></li>
-<li><a href="appendix/appendix-n/">부록 N: 비공식 선택 연구 자료</a></li>
-<li><a href="appendix/appendix-o/">부록 O: TradingAgents 멀티에이전트 금융 워크플로 읽기</a></li>
-<li><a href="appendix/appendix-p/">부록 P: 공개 GitHub Pages 통합 목차</a></li>
+<li><code>deny-blocks-without-removing-init-name</code>: custom MCP 도구 이름은 init.tools에 남았지만 explicit deny가 bypassPermissions에서도 handler 실행을 차단했다. init.tools를 실행 허가 목록으로 일반화하면 안 된다.</li>
+<li><code>built-in-deny-init-surface</code>: built-in tool의 disallowed_tools 규칙이 init.tools 표면에서 이름을 제거하는지는 이 custom MCP 실행으로 일반화하지 않는다.</li>
+<li>
+<p><code>large-result-progress-tool-search</code>: large result persistence, SDKToolProgressMessage, ToolSearch와 cache 효과는 별도 실제 실행이 필요하다.</p>
+</li>
+<li>
+<p>공개 JSON: <a href="../ch02-live.json">ch02-live.json</a></p>
+</li>
 </ul>
 
 
@@ -3598,10 +3820,10 @@
 
 
 
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
 
 
-      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
 
 
   </body>
