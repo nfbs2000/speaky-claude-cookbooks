@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T17:56:11.037Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch05",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "5장 시스템 프롬프트: configured, observed, inferred의 경계",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch05:book-sdk-live-20260803:2026-08-03T17:44:32.300Z",
+    "traceSha256": "bdc90adf2f44b788ed1e6e013cfa6e6dbf8882fe93ef45cd1f9572ba2d4edeca",
+    "summarySha256": "bc3d8474a6b773dc38865b7d9f3b0e9cb1f8c4e26c5b4d70032739836fb0abd9",
+    "sourceEventCount": 151,
+    "publicEventCount": 48,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "102115-1592cc3c",
+      "case_id": "custom-system-prompt-read-policy",
+      "raw_process_sha256": "63d31b1618188c935cb5e9c954d1ceb65f2f802784afa79f28d1f5b60f94d069",
+      "raw_sdk_sha256": "df74c987904cf2d0395850b11c730ab8833bc5a295b37c942eddbe3ffbefa971",
+      "source_event_count": 63
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "102206-ff8fd397",
+      "case_id": "preset-append-read-policy",
+      "raw_process_sha256": "caa70c7fd7a893fbc7b9351df99b002ed3f7525e36eb4eaed8ab1032c974d258",
+      "raw_sdk_sha256": "83df27835f6ad3d9ff12572e8700a352d2127fbe878515f6307eb4473309eabe",
+      "source_event_count": 44
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "102245-348d28d3",
+      "case_id": "preset-exclude-dynamic-sections",
+      "raw_process_sha256": "d447a4b4d64d5fcebad955eea16fd46db771790d10168028d8960adf8634ed7f",
+      "raw_sdk_sha256": "9afa4e8bd469ca99b4defd87a8681a36fd0e41a6948765003f95fb94bf7df911",
+      "source_event_count": 44
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "custom-prompt-read-and-recovery-executed",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "custom string 설정 뒤 첫 Read 오류, 오류가 제공한 cwd를 이용한 재시도, marker tool result와 최종 설명이 실제 sequence로 연결됐다.",
+      "sourceRefs": [
+        "attempt:102115-1592cc3c:process-event:0",
+        "attempt:102115-1592cc3c:sdk-message:15",
+        "attempt:102115-1592cc3c:sdk-message:17",
+        "attempt:102115-1592cc3c:sdk-message:35",
+        "attempt:102115-1592cc3c:sdk-message:37",
+        "attempt:102115-1592cc3c:sdk-message:56",
+        "attempt:102115-1592cc3c:sdk-message:60"
+      ]
+    },
+    {
+      "id": "preset-append-read-executed",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Claude Code preset와 append policy가 configured로 남았고, Opus 5 init 뒤 Read, tool result, final text, 성공 Result가 순서대로 관찰됐다.",
+      "sourceRefs": [
+        "attempt:102206-ff8fd397:process-event:0",
+        "attempt:102206-ff8fd397:sdk-message:3",
+        "attempt:102206-ff8fd397:sdk-message:20",
+        "attempt:102206-ff8fd397:sdk-message:22",
+        "attempt:102206-ff8fd397:sdk-message:37",
+        "attempt:102206-ff8fd397:sdk-message:41"
+      ]
+    },
+    {
+      "id": "exclude-dynamic-option-executed-not-inspected",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Python exclude_dynamic_sections=True 설정과 성공 run은 관찰됐다. 이 claim은 내부 prompt 이동이 보였다는 뜻이 아니다.",
+      "sourceRefs": [
+        "attempt:102245-348d28d3:manifest:option_summary",
+        "attempt:102245-348d28d3:sdk-message:3",
+        "attempt:102245-348d28d3:sdk-message:17",
+        "attempt:102245-348d28d3:sdk-message:19",
+        "attempt:102245-348d28d3:sdk-message:41"
+      ]
+    },
+    {
+      "id": "init-exposes-runtime-surface-not-prompt-body",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "세 init은 cwd, model, permission mode, tools, skills, plugins, MCP와 agents를 노출했지만 조립된 system prompt 전문은 노출하지 않았다.",
+      "sourceRefs": [
+        "attempt:102115-1592cc3c:sdk-message:3",
+        "attempt:102206-ff8fd397:sdk-message:3",
+        "attempt:102245-348d28d3:sdk-message:3"
+      ]
+    },
+    {
+      "id": "read-result-precedes-final-claim",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "세 case 모두 성공 Read와 matching tool result가 marker를 인용한 assistant final text보다 먼저 발생했다.",
+      "sourceRefs": [
+        "attempt:102115-1592cc3c:sdk-message:35",
+        "attempt:102115-1592cc3c:sdk-message:37",
+        "attempt:102115-1592cc3c:sdk-message:56",
+        "attempt:102206-ff8fd397:sdk-message:20",
+        "attempt:102206-ff8fd397:sdk-message:22",
+        "attempt:102206-ff8fd397:sdk-message:37",
+        "attempt:102245-348d28d3:sdk-message:17",
+        "attempt:102245-348d28d3:sdk-message:19",
+        "attempt:102245-348d28d3:sdk-message:37"
+      ]
+    },
+    {
+      "id": "setting-sources-is-not-skills-off",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "setting_sources=[]인 세 run의 init에 16개 skill이 남았다. filesystem setting 격리와 skills=[] 비활성화는 별도 제어다.",
+      "sourceRefs": [
+        "attempt:102115-1592cc3c:manifest:option_summary",
+        "attempt:102115-1592cc3c:sdk-message:3",
+        "attempt:102206-ff8fd397:sdk-message:3",
+        "attempt:102245-348d28d3:sdk-message:3",
+        "python-sdk:0.2.128:types.py:ClaudeAgentOptions.skills:sha256:de495a6fa20136b0dd0528865e94c5f429eef5ad5ba197e214a2e597e4601e2a"
+      ]
+    },
+    {
+      "id": "prompt-contracts-are-language-version-specific",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "TypeScript 0.3.177은 string array와 dynamic boundary를 공개하지만 Python 0.2.128은 custom/preset/file과 snake_case option을 공개한다.",
+      "sourceRefs": [
+        "typescript-sdk:0.3.177:sdk.d.ts:Options.systemPrompt:sha256:3dcd0551702fc970c7dc78adc115f6083ebdd23cddba1bd087fec3713182cb18",
+        "python-sdk:0.2.128:types.py:ClaudeAgentOptions.system_prompt:sha256:de495a6fa20136b0dd0528865e94c5f429eef5ad5ba197e214a2e597e4601e2a"
+      ]
+    },
+    {
+      "id": "primary-model-is-not-only-provider-usage",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "세 primary assistant model은 Opus 5였지만 두 preset Result의 model_usage에는 Haiku 4.5 보조 사용도 있다. 모든 provider 사용이 Opus뿐이었다고 쓰면 안 된다.",
+      "sourceRefs": [
+        "attempt:102206-ff8fd397:sdk-message:41",
+        "attempt:102245-348d28d3:sdk-message:41"
+      ]
+    },
+    {
+      "id": "dynamic-section-relocation-and-cache-effect",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "option 계약은 확인했지만 조립 전후 prompt와 고정 반복 cache 비교가 없어 user-message 이동과 cache 개선은 아직 직접 관찰되지 않았다.",
+      "sourceRefs": [
+        "spec:claims:dynamic-section-relocation-and-cache-effect"
+      ]
+    },
+    {
+      "id": "typescript-array-boundary-live-run",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "TypeScript 0.3.177의 array와 boundary는 정적 타입으로 확인했지만 실제 SDK run의 evidence tape는 아직 없다.",
+      "sourceRefs": [
+        "spec:claims:typescript-array-boundary-live-run"
+      ]
+    },
+    {
+      "id": "prompt-causes-read-and-preset-improves-cwd",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "정책 제거 대조군과 반복 표본이 없으므로 prompt의 유일 인과와 preset의 일반적 cwd 우월성을 단정할 수 없다.",
+      "sourceRefs": [
+        "spec:claims:prompt-causes-read-and-preset-improves-cwd"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch05 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch05",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch05 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch05:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch05 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch05",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch05",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}

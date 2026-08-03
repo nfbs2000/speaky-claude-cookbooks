@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch05/">
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/evidence/ch05-live/">
       
       
-        <link rel="prev" href="../../part1/ch04b/">
+        <link rel="prev" href="../../part2/ch05/">
       
       
-        <link rel="next" href="../../evidence/ch05-live/">
+        <link rel="next" href="../../part2/ch06/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>5장: 시스템 프롬프트 아키텍처 - Speaky Claude Cookbooks</title>
+        <title>5장 실제 Python SDK 관찰 - Speaky Claude Cookbooks</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#5" class="md-skip">
+        <a href="#5-python-sdk" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5장: 시스템 프롬프트 아키텍처
+              5장 실제 Python SDK 관찰
             
           </span>
         </div>
@@ -459,7 +459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch01-live/" class="md-nav__link">
+      <a href="../ch01-live/" class="md-nav__link">
         
   
   
@@ -515,7 +515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch02-live/" class="md-nav__link">
+      <a href="../ch02-live/" class="md-nav__link">
         
   
   
@@ -571,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch03-live/" class="md-nav__link">
+      <a href="../ch03-live/" class="md-nav__link">
         
   
   
@@ -627,7 +627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch04-live/" class="md-nav__link">
+      <a href="../ch04-live/" class="md-nav__link">
         
   
   
@@ -761,6 +761,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장: 시스템 프롬프트 아키텍처
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -780,7 +808,7 @@
   <span class="md-ellipsis">
     
   
-    5장: 시스템 프롬프트 아키텍처
+    5장 실제 Python SDK 관찰
   
 
     
@@ -798,7 +826,7 @@
   <span class="md-ellipsis">
     
   
-    5장: 시스템 프롬프트 아키텍처
+    5장 실제 Python SDK 관찰
   
 
     
@@ -824,131 +852,65 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#51" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 시스템 프롬프트에 아키텍처가 필요한 이유
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#52-systempromptsection-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 원본의 systemPromptSection을 SDK로 번역하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#53-dangerous_uncachedsystempromptsection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 DANGEROUS_uncachedSystemPromptSection의 의미
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#54-optionssystemprompt-system_prompt_dynamic_boundary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Options.systemPrompt의 SYSTEM_PROMPT_DYNAMIC_BOUNDARY
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#55-systemprompt-prefix-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 systemPrompt prefix를 SDK 관점으로 읽기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#56-buildeffectivesystemprompt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 buildEffectiveSystemPrompt: 우선순위는 반드시 설명해야 한다
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#57" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.7 직접 보이는 것과 추론해야 하는 것
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#58" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.8 책 캔버스 요구사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#59-opus-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.9 실제 Opus 5 실행으로 확인한 경계
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#510" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.10 학생 실습
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Builder takeaway
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        관련 강의
+        실행 신원
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유효한 실제 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        관찰 판정
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        무효 시도
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        같은 증거를 보는 공개 표면
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공개 경계
       
     </span>
   </a>
@@ -971,35 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch05-live/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    5장 실제 Python SDK 관찰
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ch06/" class="md-nav__link">
+      <a href="../../part2/ch06/" class="md-nav__link">
         
   
   
@@ -1027,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch06b/" class="md-nav__link">
+      <a href="../../part2/ch06b/" class="md-nav__link">
         
   
   
@@ -1055,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch07/" class="md-nav__link">
+      <a href="../../part2/ch07/" class="md-nav__link">
         
   
   
@@ -1083,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08/" class="md-nav__link">
+      <a href="../../part2/ch08/" class="md-nav__link">
         
   
   
@@ -1111,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08c/" class="md-nav__link">
+      <a href="../../part2/ch08c/" class="md-nav__link">
         
   
   
@@ -1139,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08d/" class="md-nav__link">
+      <a href="../../part2/ch08d/" class="md-nav__link">
         
   
   
@@ -1167,7 +1101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08e/" class="md-nav__link">
+      <a href="../../part2/ch08e/" class="md-nav__link">
         
   
   
@@ -1195,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch08f/" class="md-nav__link">
+      <a href="../../part2/ch08f/" class="md-nav__link">
         
   
   
@@ -2360,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../evidence/ch30-live/" class="md-nav__link">
+      <a href="../ch30-live/" class="md-nav__link">
         
   
   
@@ -3588,131 +3522,65 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#51" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 시스템 프롬프트에 아키텍처가 필요한 이유
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#52-systempromptsection-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 원본의 systemPromptSection을 SDK로 번역하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#53-dangerous_uncachedsystempromptsection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 DANGEROUS_uncachedSystemPromptSection의 의미
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#54-optionssystemprompt-system_prompt_dynamic_boundary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Options.systemPrompt의 SYSTEM_PROMPT_DYNAMIC_BOUNDARY
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#55-systemprompt-prefix-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 systemPrompt prefix를 SDK 관점으로 읽기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#56-buildeffectivesystemprompt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 buildEffectiveSystemPrompt: 우선순위는 반드시 설명해야 한다
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#57" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.7 직접 보이는 것과 추론해야 하는 것
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#58" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.8 책 캔버스 요구사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#59-opus-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.9 실제 Opus 5 실행으로 확인한 경계
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#510" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.10 학생 실습
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Builder takeaway
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        관련 강의
+        실행 신원
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유효한 실제 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        관찰 판정
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        무효 시도
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        같은 증거를 보는 공개 표면
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공개 경계
       
     </span>
   </a>
@@ -3739,450 +3607,232 @@
   
 
 
-<h1 id="5">5장: 시스템 프롬프트 아키텍처<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>공개 GitHub Pages 투영판: <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch05/">5장: 시스템 프롬프트 아키텍처</a></p>
-<p>실제 실행 증거: <a href="../../evidence/ch05-live/">custom, preset+append, exclude dynamic 세 case</a></p>
-</blockquote>
-<p>1부에서는 실행 루프와 도구 실행을 함께 살펴봤어요. 이제 질문은 조금 더 안쪽으로 들어가 봅니다.</p>
-<p>같은 루프인데 왜 어떤 때는 바로 파일을 읽고, 어떤 때는 계획만 세우고, 어떤 때는 사용자 승인을 기다리고, 어떤 때는 MCP/스킬/프로젝트 메모리를 먼저 읽을까요? 그 답이 바로 시스템 프롬프트입니다. 다만 이 강의에서 다루는 시스템 프롬프트는 “숨겨진 마법 문장”이 아니라 <strong>SDK에서 설정하고, 이벤트로 검증하는 제어 평면</strong>이라고 생각하면 편해요.</p>
-<p>원본 Claude Code 관점에서 5장의 핵심은 <code>systemPromptSection</code>, <code>DANGEROUS_uncachedSystemPromptSection</code>, <code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code>, <code>splitSysPromptPrefix</code>, <code>buildEffectiveSystemPrompt</code>였습니다. SDK판에서는 그 내부 파일을 그대로 강의하지는 않아요. 대신 같은 설계를 TypeScript의 <code>Options.systemPrompt</code>/<code>settingSources</code>와 Python의 <code>ClaudeAgentOptions.system_prompt</code>/<code>setting_sources</code>, 그리고 <code>SDKSystemMessage.init</code>, <code>SDKMessage</code> 스트림으로 관찰합니다. 두 SDK의 표기와 지원 입력 형태는 같지 않습니다.</p>
-<h2 id="51">5.1 시스템 프롬프트에 아키텍처가 필요한 이유<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
-<p>단순한 에이전트라면 시스템 프롬프트를 하나의 문자열로 넣어도 괜찮습니다.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">systemPrompt</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;You are a helpful coding assistant.&quot;</span>
-</code></pre></div>
-<p>그런데 실제 코딩 에이전트는 그렇게 단순하지만은 않아요. 프롬프트에는 최소한 다음 성격의 정보가 섞여 들어갑니다.</p>
-<table>
-<thead>
-<tr>
-<th>계층</th>
-<th>예</th>
-<th>변경 빈도</th>
-<th>SDK에서 다루는 표면</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>정체성/행동 규칙</td>
-<td>“코딩 에이전트처럼 행동하라”, “검증하지 않은 성공을 주장하지 마라”</td>
-<td>낮음</td>
-<td><code>systemPrompt</code> preset 또는 custom static block</td>
-</tr>
-<tr>
-<td>도구 정책</td>
-<td>Read/Grep/Edit/Bash 사용 규칙</td>
-<td>중간</td>
-<td><code>tools</code>, <code>allowedTools</code>, <code>disallowedTools</code>, <code>canUseTool</code></td>
-</tr>
-<tr>
-<td>프로젝트 지침</td>
-<td>CLAUDE.md, 프로젝트 설정</td>
-<td>프로젝트별</td>
-<td><code>settingSources</code>, <code>cwd</code>, <code>SDKSystemMessage.init</code></td>
-</tr>
-<tr>
-<td>스킬/플러그인</td>
-<td>동적으로 로드된 작업 능력</td>
-<td>세션별</td>
-<td><code>skills</code>, <code>plugins</code>, <code>SDKSystemMessage.init.skills/plugins</code></td>
-</tr>
-<tr>
-<td>MCP 서버</td>
-<td>외부 도구/서버 설명</td>
-<td>세션 중 변할 수 있음</td>
-<td><code>mcpServers</code>, <code>SDKSystemMessage.init.mcp_servers</code></td>
-</tr>
-<tr>
-<td>사용자 질문</td>
-<td>이번 턴의 목적</td>
-<td>매 턴</td>
-<td><code>query({ prompt })</code></td>
-</tr>
-</tbody>
-</table>
-<p>원본 구현이 섹션 레지스트리와 캐시 경계를 둔 이유는 바로 이 변경 빈도 차이를 관리하기 위해서예요. SDK 강의에서는 같은 사실을 이렇게 정리해 볼 수 있습니다.</p>
-<blockquote>
-<p>프롬프트는 하나의 문장이 아니라, 정적 제어 규칙과 세션별 동적 컨텍스트가 합성된 실행 조건이다.</p>
-</blockquote>
-<p>이 장의 배열과 <code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code> 예제는 TypeScript Agent SDK 0.3.177
-기준입니다. Python Agent SDK 0.2.128의 <code>system_prompt</code>는 string 또는 preset/file 구조를
-받지만 TypeScript식 <code>string[]</code>와 공개 boundary 상수를 제공하지 않습니다. Python에서는
-<code>exclude_dynamic_sections</code>처럼 snake_case 이름을 사용해요.</p>
-<h2 id="52-systempromptsection-sdk">5.2 원본의 <code>systemPromptSection</code>을 SDK로 번역하기<a class="headerlink" href="#52-systempromptsection-sdk" title="Permanent link">&para;</a></h2>
-<p>원본의 <code>systemPromptSection(name, compute)</code>는 “이 섹션은 이름이 있고, 계산되고, 재사용될 수 있다”는 구조였습니다. SDK에는 같은 이름의 public API가 직접 노출되지는 않아요. 대신 소비자가 다음 표면으로 같은 구조를 만들어 갑니다.</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">query</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">SYSTEM_PROMPT_DYNAMIC_BOUNDARY</span><span class="p">,</span>
-<span class="w">  </span><span class="kr">type</span><span class="w"> </span><span class="nx">SDKMessage</span><span class="p">,</span>
-<span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@anthropic-ai/claude-agent-sdk&quot;</span><span class="p">;</span>
+<!-- Generated by scripts/publish_book_sdk_live_evidence.mjs. -->
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">staticPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;답하기 전에 근거 문서를 먼저 확인한다.&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;근거와 추론을 분리해서 보고한다.&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;검증하지 않은 성공을 성공이라고 말하지 않는다.&quot;</span><span class="p">,</span>
-<span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">);</span>
-
-<span class="kd">const</span><span class="w"> </span><span class="nx">sessionContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">  </span><span class="sb">`courseChapter=</span><span class="si">${</span><span class="nx">chapterId</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">  </span><span class="sb">`targetFile=</span><span class="si">${</span><span class="nx">chapterFile</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">  </span><span class="sb">`allowedEvidence=SDK messages, tool_use, tool_result`</span><span class="p">,</span>
-<span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">);</span>
-
-<span class="kd">const</span><span class="w"> </span><span class="nx">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">query</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">prompt</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">cwd</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">systemPrompt</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="nx">staticPolicy</span><span class="p">,</span>
-<span class="w">      </span><span class="nx">SYSTEM_PROMPT_DYNAMIC_BOUNDARY</span><span class="p">,</span>
-<span class="w">      </span><span class="nx">sessionContext</span><span class="p">,</span>
-<span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nx">settingSources</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">],</span>
-<span class="w">    </span><span class="nx">skills</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;book-evidence&quot;</span><span class="p">],</span>
-<span class="w">    </span><span class="nx">tools</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;preset&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">preset</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;claude_code&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">includeHookEvents</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">includePartialMessages</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>이 예제에서 눈여겨볼 핵심은 <code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code>예요. SDK 타입은 <code>systemPrompt</code>를 <code>string[]</code>로 받을 수 있고, 그 배열 안에 boundary를 독립 원소로 넣으면 정적 prefix와 세션 suffix를 구분할 수 있다고 설명합니다. 이 장의 강의 포인트는 “프롬프트를 잘 쓰자”가 아니라 “프롬프트를 캐시 가능한 정적 부분과 세션별 동적 부분으로 설계하자”에 있어요.</p>
-<h2 id="53-dangerous_uncachedsystempromptsection">5.3 <code>DANGEROUS_uncachedSystemPromptSection</code>의 의미<a class="headerlink" href="#53-dangerous_uncachedsystempromptsection" title="Permanent link">&para;</a></h2>
-<p>원본에서 <code>DANGEROUS_uncachedSystemPromptSection</code>은 매번 다시 계산해야 하는 섹션이었어요. 대표적인 이유는 MCP 서버 지침처럼 세션 중 연결 상태가 바뀔 수 있는 내용이기 때문입니다.</p>
-<p>SDK에서는 그 함수가 직접 보이지는 않아요. 하지만 같은 위험은 그대로 남아 있습니다.</p>
+<h1 id="5-python-sdk">5장 실제 Python SDK 관찰<a class="headerlink" href="#5-python-sdk" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
+<code>claude-opus-5</code>로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">한 번 수집하고 여러 표면에서 재생</p>
+<p>원전은 151개 사건이고 공개 projection은 48개다.
+credential, private prompt, 비공개 추론 payload, 사용자 절대 경로는 공개하지 않았다. 공개 사건은
+source event ID와 SHA-256을 유지한다.</p>
+</div>
+<h2 id="_1">실행 신원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>원본 개념</th>
-<th>SDK에서 대응되는 위험</th>
-<th>관찰/검증 방법</th>
+<th>항목</th>
+<th>값</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>메모이즈 가능한 정적 섹션</td>
-<td>모든 세션에 같은 <code>systemPrompt</code> prefix 사용</td>
-<td>prompt assembly log 또는 실행 config</td>
+<td>campaign</td>
+<td><code>book-sdk-live-20260803</code></td>
 </tr>
 <tr>
-<td>휘발성 섹션</td>
-<td>매 턴 바뀌는 MCP/스킬/현재 파일 상태를 static prompt에 섞음</td>
-<td>같은 prompt인데 cache/latency/행동이 흔들림</td>
+<td>model</td>
+<td><code>claude-opus-5</code></td>
 </tr>
 <tr>
-<td>DANGEROUS 이유 기입</td>
-<td>왜 매번 주입해야 하는지 문서화</td>
-<td>runner config, chapter metadata에 <code>dynamicReason</code> 저장</td>
+<td>proof gate</td>
+<td><code>accepted_with_notes</code></td>
+</tr>
+<tr>
+<td>secret scan</td>
+<td><code>passed</code></td>
+</tr>
+<tr>
+<td>raw source / public</td>
+<td><strong>151 / 48</strong></td>
+</tr>
+<tr>
+<td>observed / correction / more evidence</td>
+<td><strong>7 / 1 / 3</strong></td>
+</tr>
+<tr>
+<td>trace SHA-256</td>
+<td><code>bdc90adf2f44b788ed1e6e013cfa6e6dbf8882fe93ef45cd1f9572ba2d4edeca</code></td>
+</tr>
+<tr>
+<td>summary SHA-256</td>
+<td><code>bc3d8474a6b773dc38865b7d9f3b0e9cb1f8c4e26c5b4d70032739836fb0abd9</code></td>
 </tr>
 </tbody>
 </table>
-<p>강의용 책 프로젝트에서는 “동적 내용을 어디에 넣었는가”를 꼭 기록해 두는 게 좋아요. 예를 들어 책 캔버스의 한 노드는 이렇게 표현해 볼 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prompt_section&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chapter_runtime_context&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;stability&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dynamic&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;현재 보고 있는 장, 선택한 문단, 실습 프롬프트가 매 실행마다 달라진다&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;observable&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;SDKSystemMessage.init.cwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user prompt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tool_use inputs&quot;</span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>이렇게 기록해 두면 “프롬프트가 왜 바뀌었는지”를 나중에 다시 재현할 수 있어요.</p>
-<h2 id="54-optionssystemprompt-system_prompt_dynamic_boundary">5.4 <code>Options.systemPrompt</code>의 <code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code><a class="headerlink" href="#54-optionssystemprompt-system_prompt_dynamic_boundary" title="Permanent link">&para;</a></h2>
-<p><code>SYSTEM_PROMPT_DYNAMIC_BOUNDARY</code>는 TypeScript Agent SDK 0.3.177의 <code>Options.systemPrompt</code> 배열에서 정적 영역과 동적 영역을 나누는 공개 입력 마커예요. Python SDK 0.2.128의 공개 입력은 같은 형태가 아닙니다. 그래서 TypeScript 실행에서 관측할 것은 내부 분리 함수가 아니라 Configured <code>systemPrompt</code> 배열, Observed <code>SDKSystemMessage.init</code>, 그리고 이후 <code>tool_use</code>/<code>tool_result</code> 행동 변화입니다.</p>
-<div class="highlight"><pre><span></span><code>정적 영역
-  - 기본 정체성
-  - 행동 규칙
-  - 도구 사용 원칙
-  - 출력 스타일 원칙
-
-SYSTEM_PROMPT_DYNAMIC_BOUNDARY
-
-동적 영역
-  - 현재 cwd
-  - 프로젝트 지침
-  - 메모리/CLAUDE.md
-  - MCP/스킬 상태
-  - 현재 장/실습 문맥
-</code></pre></div>
-<p>SDK판 책에서는 이 구조를 두 가지 의미로 사용해요.</p>
-<p>첫째, 실행 비용과 캐시의 문제입니다. 정적 영역에 세션별 변수가 들어가면 같은 강좌 실습을 여러 번 돌려도 prefix가 계속 달라져요. 그러면 캐시 적중률이 떨어지고, 같은 프롬프트 실험의 비교 가능성도 흔들립니다.</p>
-<p>둘째, 강의 시각화의 문제예요. 사용자가 프롬프트를 넣었을 때 캔버스가 “모델이 그냥 답했다”만 보여주면 곤란합니다. 최소한 아래 네 층을 분리해서 보여주는 게 좋아요.</p>
-<div class="highlight"><pre><span></span><code>flowchart TD
-    A[&quot;정적 정책\n행동 규칙, 안전 규칙, 근거 요구&quot;] --&gt; B[&quot;동적 컨텍스트\n현재 장, 문단, 실습 목표&quot;]
-    B --&gt; C[&quot;실행 이벤트\nRead/Grep/ToolUse/Hook&quot;]
-    C --&gt; D[&quot;응답 주장\n근거 있음 / 추론 / 미검증&quot;]
-</code></pre></div>
-<h2 id="55-systemprompt-prefix-sdk">5.5 <code>systemPrompt</code> prefix를 SDK 관점으로 읽기<a class="headerlink" href="#55-systemprompt-prefix-sdk" title="Permanent link">&para;</a></h2>
-<p>원본의 <code>splitSysPromptPrefix</code>는 시스템 프롬프트 배열을 API 요청 블록으로 나누고, 각 블록에 캐시 범위를 붙였다는 역사적 설명이에요. SDK 소비자는 내부 <code>cache_control</code> 블록을 직접 만지지 않아요. 대신 Configured <code>Options.systemPrompt</code> 입력 형태를 결정하고, Observed <code>SDKResultMessage.usage</code>와 실행 행동을 통해 캐시/동적 분리의 효과를 추론합니다.</p>
+<h2 id="_2">유효한 실제 실행<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>설계 선택</th>
-<th>SDK 입력</th>
-<th>기대 효과</th>
+<th>attempt</th>
+<th>case</th>
+<th>actual model</th>
+<th style="text-align: right;">source events</th>
+<th>raw SDK SHA-256</th>
+<th>host process SHA-256</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>완전 custom prompt</td>
-<td><code>systemPrompt: "..."</code></td>
-<td>단순하지만 캐시/동적 분리가 어렵다</td>
+<td><code>102115-1592cc3c</code></td>
+<td><code>custom-system-prompt-read-policy</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">63</td>
+<td><code>df74c987904cf2d0395850b11c730ab8833bc5a295b37c942eddbe3ffbefa971</code></td>
+<td><code>63d31b1618188c935cb5e9c954d1ceb65f2f802784afa79f28d1f5b60f94d069</code></td>
 </tr>
 <tr>
-<td>custom block prompt</td>
-<td><code>systemPrompt: [static, boundary, dynamic]</code></td>
-<td>정적/동적 분리가 명확하다</td>
+<td><code>102206-ff8fd397</code></td>
+<td><code>preset-append-read-policy</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">44</td>
+<td><code>83df27835f6ad3d9ff12572e8700a352d2127fbe878515f6307eb4473309eabe</code></td>
+<td><code>caa70c7fd7a893fbc7b9351df99b002ed3f7525e36eb4eaed8ab1032c974d258</code></td>
 </tr>
 <tr>
-<td>기본 Claude Code prompt 사용</td>
-<td><code>systemPrompt: { type: "preset", preset: "claude_code" }</code></td>
-<td>제품 기본 하니스에 올라탄다</td>
-</tr>
-<tr>
-<td>기본 prompt에 강의 규칙 추가</td>
-<td><code>systemPrompt: { type: "preset", preset: "claude_code", append }</code></td>
-<td>원래 도구/안전 지침을 유지하면서 강의 목표를 덧붙인다</td>
-</tr>
-<tr>
-<td>다중 사용자 캐시 최적화 요청</td>
-<td>TS <code>excludeDynamicSections: true</code>, Python <code>exclude_dynamic_sections=True</code></td>
-<td>이동 동작은 공개 option 계약이며, 실제 조립 결과가 raw event에 보이는지는 별도 문제</td>
-</tr>
-</tbody>
-</table>
-<p>책 실습에서는 대체로 <code>preset + append</code>가 무난해요. 학생에게 Claude Code의 기본 도구/권한/안전 하니스를 유지한 채, 강의용 근거 추적 규칙만 더해 줄 수 있기 때문입니다. 반대로 TypeScript 기반 강사용 시각화 실험에서는 <code>string[] + boundary</code>를 사용할 수 있어요. Python에서 같은 배열 API를 그대로 복사하면 안 됩니다.</p>
-<h2 id="56-buildeffectivesystemprompt">5.6 <code>buildEffectiveSystemPrompt</code>: 우선순위는 반드시 설명해야 한다<a class="headerlink" href="#56-buildeffectivesystemprompt" title="Permanent link">&para;</a></h2>
-<p>원본 구현의 우선순위 체인은 대략 다음과 같았어요.</p>
-<div class="highlight"><pre><span></span><code>override
-  &gt; coordinator
-  &gt; agent
-  &gt; custom
-  &gt; default
-  + append
-</code></pre></div>
-<p>SDK판에서도 같은 충돌이 생길 수 있어요.</p>
-<table>
-<thead>
-<tr>
-<th>입력</th>
-<th>의미</th>
-<th>충돌 위험</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>agent</code> + <code>agents</code></td>
-<td>main thread에 특정 agent prompt 적용</td>
-<td>기본 prompt와 역할 충돌</td>
-</tr>
-<tr>
-<td><code>systemPrompt</code> custom</td>
-<td>전체 시스템 prompt 대체</td>
-<td>Claude Code 기본 안전/도구 지침 약화</td>
-</tr>
-<tr>
-<td><code>systemPrompt.preset.append</code></td>
-<td>기본 prompt 뒤에 추가</td>
-<td>비교적 안전하지만 뒤쪽 지침이라 약할 수 있음</td>
-</tr>
-<tr>
-<td><code>settings</code>, <code>managedSettings</code>, <code>settingSources</code></td>
-<td>파일/정책 계층에서 지침 로드</td>
-<td>사용자가 모르는 지침이 섞일 수 있음</td>
-</tr>
-<tr>
-<td><code>skills</code>, <code>plugins</code></td>
-<td>동적 능력/명령 로드</td>
-<td>어떤 스킬이 행동을 바꿨는지 추적 필요</td>
+<td><code>102245-348d28d3</code></td>
+<td><code>preset-exclude-dynamic-sections</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">44</td>
+<td><code>9afa4e8bd469ca99b4defd87a8681a36fd0e41a6948765003f95fb94bf7df911</code></td>
+<td><code>d447a4b4d64d5fcebad955eea16fd46db771790d10168028d8960adf8634ed7f</code></td>
 </tr>
 </tbody>
 </table>
-<p>그래서 강의 화면은 최소한 <code>SDKSystemMessage.init</code>에서 다음 항목을 기록해 두는 게 좋아요.</p>
-<ul>
-<li><code>cwd</code></li>
-<li><code>model</code></li>
-<li><code>permissionMode</code></li>
-<li><code>tools</code></li>
-<li><code>mcp_servers</code></li>
-<li><code>skills</code></li>
-<li><code>plugins</code></li>
-<li><code>agents</code></li>
-<li><code>slash_commands</code></li>
-<li><code>output_style</code></li>
-</ul>
-<p>이 값들이 “모델의 완전한 마음”을 보여주는 건 아니에요. 하지만 이번 세션이 어떤 하니스 위에서 실행됐는지 알려주는 합법적이고 공개적인 관측값입니다.</p>
-<h2 id="57">5.7 직접 보이는 것과 추론해야 하는 것<a class="headerlink" href="#57" title="Permanent link">&para;</a></h2>
-<p>이 장에서 가장 중요한 강의 규칙은 evidence label이에요.</p>
+<h2 id="_3">관찰 판정<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>분류</th>
-<th>예</th>
-<th>책/캔버스 표시</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Configured</td>
-<td><code>Options.systemPrompt</code>, <code>skills</code>, <code>plugins</code>, <code>mcpServers</code>, <code>permissionMode</code></td>
-<td>“실행 전 설정”</td>
-</tr>
-<tr>
-<td>Observed</td>
-<td><code>SDKSystemMessage.init</code>, <code>tool_use</code>, <code>tool_result</code>, hook events</td>
-<td>“실제 이벤트”</td>
-</tr>
-<tr>
-<td>Inferred</td>
-<td>특정 지침이 특정 행동을 유도했다는 해석</td>
-<td>“추론”</td>
-</tr>
-<tr>
-<td>Not observable</td>
-<td>내부 비공개 prompt 전문, 모델의 chain-of-thought</td>
-<td>“표시하지 않음”</td>
-</tr>
-</tbody>
-</table>
-<p>예를 들어 “모델이 근거를 먼저 읽으라는 지침을 따랐다”는 주장은 이렇게 나눠 볼 수 있어요.</p>
-<div class="highlight"><pre><span></span><code>Configured: append prompt에 &quot;관련 문서를 먼저 읽어라&quot;가 있었다.
-Observed: assistant가 답변 전에 Grep/Read를 호출했다.
-Observed: 응답에 문서명과 핵심 단어가 포함됐다.
-Inferred: 해당 지침이 문서 탐색 행동을 강화했다.
-Not observable: 모델 내부 사고 과정 전문.
-</code></pre></div>
-<p>이 구분이 없으면 강좌가 “SDK로 관찰한 것”과 “강사가 해석한 것”을 자칫 섞어 버리게 돼요.</p>
-<h2 id="58">5.8 책 캔버스 요구사항<a class="headerlink" href="#58" title="Permanent link">&para;</a></h2>
-<p>5장 캔버스는 기존의 팀/스웜 그림만 보여주면 조금 아쉬워요. 프롬프트 조립 구조까지 보여주는 게 좋습니다.</p>
-<div class="highlight"><pre><span></span><code>Prompt Assembly
-  Static Policy
-    - 행동 규칙
-    - 근거 요구
-    - 안전 규칙
-  Dynamic Context
-    - 현재 장
-    - 선택 문단
-    - 실습 질문
-  Runtime Surface
-    - tools
-    - skills
-    - plugins
-    - mcp servers
-  Evidence Tape
-    - system:init
-    - tool_use
-    - tool_result
-    - assistant text
-</code></pre></div>
-<p>아래 표는 이 장에서 꼭 보여야 하는 최소 테이블이에요.</p>
-<table>
-<thead>
-<tr>
-<th>프롬프트 문장/섹션</th>
-<th>안정성</th>
-<th>SDK 근거</th>
-<th>이후 행동</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“문서를 먼저 읽어라”</td>
-<td>static</td>
-<td>configured prompt block</td>
-<td>Read/Grep 발생 여부</td>
-</tr>
-<tr>
-<td>현재 장 파일 경로</td>
-<td>dynamic</td>
-<td>user prompt 또는 dynamic block</td>
-<td>해당 파일 Read 여부</td>
-</tr>
-<tr>
-<td>스킬 활성화</td>
-<td>dynamic</td>
-<td><code>SDKSystemMessage.init.skills</code></td>
-<td>Skill/Read/ToolUse 변화</td>
-</tr>
-<tr>
-<td>MCP 서버</td>
-<td>dynamic</td>
-<td><code>SDKSystemMessage.init.mcp_servers</code></td>
-<td>MCP tool 호출 여부</td>
-</tr>
-</tbody>
-</table>
-<h2 id="59-opus-5">5.9 실제 Opus 5 실행으로 확인한 경계<a class="headerlink" href="#59-opus-5" title="Permanent link">&para;</a></h2>
-<p>2026-08-03에 Python SDK 0.2.128과 Claude Code 2.1.220으로 세 case를 순차 실행했습니다.
-세 세션의 init과 assistant primary model은 실제 <code>claude-opus-5</code>였으며 model mock은 사용하지
-않았어요. 다만 두 preset case의 최종 <code>ResultMessage.model_usage</code>에는 보조
-<code>claude-haiku-4-5-20251001</code> 사용도 함께 기록됐습니다. 따라서 이 표의 모델 표기는 primary
-assistant model을 뜻하며, provider 사용 전체가 Opus 하나뿐이었다는 뜻은 아닙니다.</p>
-<table>
-<thead>
-<tr>
-<th>case / attempt</th>
-<th>Configured</th>
-<th>Observed</th>
+<th>claim</th>
 <th>판정</th>
+<th>실제 관찰 또는 경계</th>
+<th>첫 source ref</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>custom / <code>102115-1592cc3c</code></td>
-<td>custom string, Read</td>
-<td>첫 Read 실패 15~17, 복구 Read 35~37, 답변 56</td>
-<td>custom 실행과 행동은 관찰, 유일 인과는 추론</td>
+<td><code>custom-prompt-read-and-recovery-executed</code></td>
+<td><strong>관찰됨</strong></td>
+<td>custom string 설정 뒤 첫 Read 오류, 오류가 제공한 cwd를 이용한 재시도, marker tool result와 최종 설명이 실제 sequence로 연결됐다.</td>
+<td><code>attempt:102115-1592cc3c:process-event:0</code></td>
 </tr>
 <tr>
-<td>preset+append / <code>102206-ff8fd397</code></td>
-<td>preset, append, Read</td>
-<td>Read 20, result 22, 답변 37</td>
-<td>preset+append 실행과 행동 관찰</td>
+<td><code>preset-append-read-executed</code></td>
+<td><strong>관찰됨</strong></td>
+<td>Claude Code preset와 append policy가 configured로 남았고, Opus 5 init 뒤 Read, tool result, final text, 성공 Result가 순서대로 관찰됐다.</td>
+<td><code>attempt:102206-ff8fd397:process-event:0</code></td>
 </tr>
 <tr>
-<td>exclude dynamic / <code>102245-348d28d3</code></td>
-<td><code>exclude_dynamic_sections=True</code></td>
-<td>Read 17, result 19, 답변 37</td>
-<td>option은 configured, 내부 prompt 이동은 비관찰</td>
+<td><code>exclude-dynamic-option-executed-not-inspected</code></td>
+<td><strong>관찰됨</strong></td>
+<td>Python exclude_dynamic_sections=True 설정과 성공 run은 관찰됐다. 이 claim은 내부 prompt 이동이 보였다는 뜻이 아니다.</td>
+<td><code>attempt:102245-348d28d3:manifest:option_summary</code></td>
+</tr>
+<tr>
+<td><code>init-exposes-runtime-surface-not-prompt-body</code></td>
+<td><strong>관찰됨</strong></td>
+<td>세 init은 cwd, model, permission mode, tools, skills, plugins, MCP와 agents를 노출했지만 조립된 system prompt 전문은 노출하지 않았다.</td>
+<td><code>attempt:102115-1592cc3c:sdk-message:3</code></td>
+</tr>
+<tr>
+<td><code>read-result-precedes-final-claim</code></td>
+<td><strong>관찰됨</strong></td>
+<td>세 case 모두 성공 Read와 matching tool result가 marker를 인용한 assistant final text보다 먼저 발생했다.</td>
+<td><code>attempt:102115-1592cc3c:sdk-message:35</code></td>
+</tr>
+<tr>
+<td><code>setting-sources-is-not-skills-off</code></td>
+<td><strong>관찰됨</strong></td>
+<td>setting_sources=[]인 세 run의 init에 16개 skill이 남았다. filesystem setting 격리와 skills=[] 비활성화는 별도 제어다.</td>
+<td><code>attempt:102115-1592cc3c:manifest:option_summary</code></td>
+</tr>
+<tr>
+<td><code>prompt-contracts-are-language-version-specific</code></td>
+<td><strong>관찰됨</strong></td>
+<td>TypeScript 0.3.177은 string array와 dynamic boundary를 공개하지만 Python 0.2.128은 custom/preset/file과 snake_case option을 공개한다.</td>
+<td><code>typescript-sdk:0.3.177:sdk.d.ts:Options.systemPrompt:sha256:3dcd0551702fc970c7dc78adc115f6083ebdd23cddba1bd087fec3713182cb18</code></td>
+</tr>
+<tr>
+<td><code>primary-model-is-not-only-provider-usage</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>세 primary assistant model은 Opus 5였지만 두 preset Result의 model_usage에는 Haiku 4.5 보조 사용도 있다. 모든 provider 사용이 Opus뿐이었다고 쓰면 안 된다.</td>
+<td><code>attempt:102206-ff8fd397:sdk-message:41</code></td>
+</tr>
+<tr>
+<td><code>dynamic-section-relocation-and-cache-effect</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>option 계약은 확인했지만 조립 전후 prompt와 고정 반복 cache 비교가 없어 user-message 이동과 cache 개선은 아직 직접 관찰되지 않았다.</td>
+<td><code>spec:claims:dynamic-section-relocation-and-cache-effect</code></td>
+</tr>
+<tr>
+<td><code>typescript-array-boundary-live-run</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>TypeScript 0.3.177의 array와 boundary는 정적 타입으로 확인했지만 실제 SDK run의 evidence tape는 아직 없다.</td>
+<td><code>spec:claims:typescript-array-boundary-live-run</code></td>
+</tr>
+<tr>
+<td><code>prompt-causes-read-and-preset-improves-cwd</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>정책 제거 대조군과 반복 표본이 없으므로 prompt의 유일 인과와 preset의 일반적 cwd 우월성을 단정할 수 없다.</td>
+<td><code>spec:claims:prompt-causes-read-and-preset-improves-cwd</code></td>
 </tr>
 </tbody>
 </table>
-<p>custom case의 첫 경로 오류도 증거입니다. 모델은 <code>/workspace/evidence.md</code>를 먼저 읽다가
-실패했고, tool result가 알려 준 실제 cwd로 경로를 고쳐 marker를 찾았습니다. 반면 두 preset
-case는 첫 Read부터 실제 cwd를 사용했어요. 이 차이는 흥미롭지만 각 case 한 번뿐이므로 preset의
-일반적 우월성으로 단정하지 않습니다.</p>
-<p>세 Result에는 cache token과 비용도 들어 있지만 session과 marker가 서로 다릅니다. 이 숫자만
-비교해 <code>exclude_dynamic_sections</code>의 cache 개선 효과를 증명하지 않습니다. 반복·고정 입력을
-사용하는 cache 전용 장에서 다시 관찰해야 해요.</p>
-<p>세 probe는 <code>setting_sources=[]</code>였지만 <code>skills</code> 옵션을 따로 지정하지 않았고, 세 init 모두
-16개 skill 이름을 노출했습니다. Python SDK 0.2.128의 공개 계약도 <code>skills=None</code>은 SDK가
-스킬을 자동 설정하지 않는다는 뜻일 뿐 CLI 기본값까지 끄는 값은 아니라고 명시합니다. 모든
-skill을 목록에서 제외하려면 <code>skills=[]</code>를 별도로 전달해야 합니다. 즉 filesystem settings
-격리와 skill 비활성화는 같은 스위치가 아닙니다.</p>
-<h2 id="510">5.10 학생 실습<a class="headerlink" href="#510" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>현재 장의 핵심을 설명해 줘.
-
-규칙:
-1. 답하기 전에 관련 장 파일을 먼저 확인해라.
-2. 네가 사용한 핵심 단어를 먼저 적어라.
-3. 근거가 있는 내용과 추론한 내용을 분리해라.
-4. 내부 시스템 프롬프트를 복원하려고 하지 말고, SDK에서 보이는 이벤트만 근거로 삼아라.
-</code></pre></div>
-<p>강사용 SDK 화면에서는 다음을 함께 확인해 봅니다.</p>
+<p>중요한 판정 규칙은 다음과 같다.</p>
 <ul>
-<li><code>system:init</code>에 어떤 tools/skills/plugins가 있었는가</li>
-<li>Read/Grep가 assistant claim보다 앞섰는가</li>
-<li>응답이 “근거/추론”을 분리했는가</li>
-<li>프롬프트 계층 중 어느 문장이 어떤 행동과 연결됐는가</li>
+<li><strong>관찰됨</strong>: 기대 사건과 순서가 이번 raw evidence에 직접 존재한다.</li>
+<li><strong>수정 필요</strong>: 같은 버전·설정·도구 범위에서 책 문장과 직접 충돌할 때만 사용한다.</li>
+<li><strong>추가 관측 필요</strong>: 사건을 유도하지 않았거나 범위가 달라 이번 실행만으로 판단할 수 없다.</li>
+<li>따라서 <strong>관찰하지 못했다는 사실만으로 책이 틀렸다고 판정하지 않는다.</strong></li>
 </ul>
-<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
-<p>시스템 프롬프트 아키텍처의 핵심은 “긴 지침을 잘 쓰는 것”이 아니에요. 정적 정책, 동적 컨텍스트, 도구 정책, 프로젝트 지침을 분리하고, 실행 뒤에는 그 효과를 SDK 이벤트로 검증하는 것입니다.</p>
-<p>다음 장에서는 이 프롬프트 계층 안에 들어가는 실제 행동 조종 패턴을 함께 살펴봅니다.</p>
-<h2 id="_1">관련 강의<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_4">무효 시도<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../ch08c/">8c장: 정적 시스템 프롬프트</a></li>
-<li><a href="../ch08d/">8d장: 동적 프롬프트 계층</a></li>
-<li><a href="../ch08f/">8f장: 권한 분류기 프롬프트</a></li>
-<li><a href="../../appendix/appendix-j/">부록 J: 비공식 시스템 프롬프트 자료를 읽는 법</a></li>
-<li><a href="../../appendix/appendix-m/">부록 M: Claude 시스템 프롬프트 버전 진화 지도</a></li>
+<li>없음</li>
+</ul>
+<h2 id="_5">같은 증거를 보는 공개 표면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>표면</th>
+<th>시각화 관점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch05">Agent Flow · ch05 실행</a></td>
+<td>원인, tool use/result, permission, claim 경계</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch05:book-sdk-live-20260803">Runtime City · ch05 실행</a></td>
+<td>OTel 시간축, 실행 zone, Observed/Missing</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch05">Pixel Agents · ch05 증거</a></td>
+<td>actor와 tool lifecycle 상태</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch05">Hypnagonia · Observation Ordeal</a></td>
+<td>검증 주장, 선택, 관찰 consequence</td>
+</tr>
+</tbody>
+</table>
+<p>각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
+시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
+표현한다. 어느 renderer도 raw evidence의 판정을 바꿀 수 없다.</p>
+<h2 id="_6">공개 경계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>primary-model-is-not-only-provider-usage</code>: 세 primary assistant model은 Opus 5였지만 두 preset Result의 model_usage에는 Haiku 4.5 보조 사용도 있다. 모든 provider 사용이 Opus뿐이었다고 쓰면 안 된다.</li>
+<li><code>dynamic-section-relocation-and-cache-effect</code>: option 계약은 확인했지만 조립 전후 prompt와 고정 반복 cache 비교가 없어 user-message 이동과 cache 개선은 아직 직접 관찰되지 않았다.</li>
+<li><code>typescript-array-boundary-live-run</code>: TypeScript 0.3.177의 array와 boundary는 정적 타입으로 확인했지만 실제 SDK run의 evidence tape는 아직 없다.</li>
+<li>
+<p><code>prompt-causes-read-and-preset-improves-cwd</code>: 정책 제거 대조군과 반복 표본이 없으므로 prompt의 유일 인과와 preset의 일반적 cwd 우월성을 단정할 수 없다.</p>
+</li>
+<li>
+<p>공개 JSON: <a href="../ch05-live.json">ch05-live.json</a></p>
+</li>
 </ul>
 
 

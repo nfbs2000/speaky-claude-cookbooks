@@ -58,6 +58,7 @@ nav:
           - "4b장: 플랜 모드 - 뛰기 전에 살펴보기": book/part1/ch04b.md
       - "제2부: 프롬프트 엔지니어링":
           - "5장: 시스템 프롬프트 아키텍처": book/part2/ch05.md
+          - "5장 실제 Python SDK 관찰": book/evidence/ch05-live.md
           - "6장: 프롬프트를 통한 동작 제어": book/part2/ch06.md
           - "6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응": book/part2/ch06b.md
           - "7장: 모델별 튜닝과 A/B 테스트": book/part2/ch07.md
