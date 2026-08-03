@@ -46,6 +46,7 @@
 - [11장: 마이크로 컴팩션 - 정밀한 컨텍스트 가지치기](part3/ch11.md)
 - [11장 실제 Python SDK large-result 관찰: raw archive와 active context 분리](evidence/ch11-live.md)
 - [12장: 토큰 예산 전략](part3/ch12.md)
+- [12장 실제 Python SDK 토큰 예산 관찰: runtime overflow와 host preview 분리](evidence/ch12-live.md)
 
 ## 제4부: 프롬프트 캐싱
 
