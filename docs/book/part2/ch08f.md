@@ -1,90 +1,158 @@
-# 8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면
+# 8f장: 권한/분류기 프롬프트 — 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면
 
-이 페이지는 한국어 SDK 책의 `8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면`을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.
+> 공개 GitHub Pages 투영판: [8f장: 권한/분류기 프롬프트 — 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면](https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch08f/)
 
-**분류:** 제2부: 프롬프트 엔지니어링<br>
-**공개 상태:** `public-rewrite`<br>
-**근거 신뢰도:** `medium`<br>
-**원문 위치:** `docs/book-sdk-ko/src/part2/ch08f.md`
+권한 시스템은 단순한 버튼 UI가 아니에요. 모델이 어떤 행동을 원했고, host가 그것을 허용할지, 사용자에게 물을지, 거절할지를 결정하는 별도의 제어 평면이랍니다.
 
-## 이 장의 공개판 요지
+원본 구현 관점에서는 auto mode classifier, permission template, `CLAUDE.md` prefix, allow/deny/environment rules, Bash prompt rule이 이 레이어를 이룹니다. SDK판에서는 `permissionMode`, `allowedTools`, `disallowedTools`, `canUseTool`, permission hooks, `permission_denials`로 함께 관찰해 봐요.
 
-이 장은 원문의 내부 구현 표현을 공개 SDK 옵션, 메시지, 도구, 세션, notebook 실행 증거로 바꿔 읽어야 한다.
+## 8f.1 핵심 질문
 
-공개판에서는 숨은 권한 prompt를 다루지 않는다. 대신 권한 결정의 공개 표면인 `allowed_tools`, `disallowed_tools`, `permission_mode`, `can_use_tool`, hooks, managed policies, auto mode configuration으로 설명한다. 자동 승인은 안전성이 아니라 정책의 결과다. 따라서 cookbook 예제에서는 write-capable tools를 허용할 때 pre/post hooks, audit logs, human-in-the-loop gate가 함께 있어야 한다는 원칙을 강조한다.
+> 도구 실행 승인/거절은 단순 UI 선택인가, 아니면 별도의 모델/규칙 기반 하니스인가?
 
-[Hooks, plan mode, subagents](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb)를 근거로 삼는다. [Human-in-the-loop gate](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/CMA_gate_human_in_the_loop.ipynb)를 근거로 삼는다.
+규칙, callback, mode 전환, 실행 또는 거절이 별도 사건으로 이어진다는 의미에서는 후자예요. 다만 이번 실제 실행이 `auto` 내부 classifier의 prompt나 판단 이유까지 공개한 것은 아닙니다. 또한 whole-tool allow rule과 일부 permission mode는 `canUseTool`보다 먼저 승인되어 callback을 건너뛸 수 있습니다.
 
-!!! evidence "주요 cookbook 근거"
-    - [Hooks, plan mode, subagents](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb)
-    - [Human-in-the-loop gate](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/CMA_gate_human_in_the_loop.ipynb)
-    - [Permission mode parameter](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/agent.py)
+## 8f.2 SDK 권한 표면
 
-!!! evidence "공식 문서 근거"
-    - [Configure permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md)
-    - [Configure auto mode](https://code.claude.com/docs/en/auto-mode-config.md)
-    - [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/user-input.md)
+| SDK 계약 | 의미 |
+| --- | --- |
+| `permissionMode: "default"` | 표준 permission behavior |
+| `permissionMode: "acceptEdits"` | 이번 격리 실행에서는 `Edit`를 callback 없이 허용 |
+| `permissionMode: "plan"` | 계획 단계와 host 승인 뒤 실행 단계를 분리 |
+| `permissionMode: "dontAsk"` | 사전 승인 없으면 묻지 않고 거절 |
+| `permissionMode: "auto"` | 자동 판단 mode. 이번 요청은 허용됐지만 이유는 미관측 |
+| `permissionMode: "bypassPermissions"` | 일반 prompt를 우회하지만 명시적 deny는 여전히 우선할 수 있음 |
+| `allowedTools` | 자동 허용 도구 목록 |
+| `disallowedTools` | 도구 종류와 경로에 따라 init에서 제거되거나 실행 시 차단 |
+| `canUseTool` | 사전 규칙이 `ask`로 판정한 요청을 앱이 판단 |
+| `permissionPromptToolName` | permission 요청을 특정 MCP tool로 라우팅 |
 
-## 원문 절 구조를 공개 SDK로 다시 읽기
+이 표면은 시스템 프롬프트보다 제품 안전성에 좀 더 직접적으로 닿아 있어요.
 
-### 8f.1 핵심 질문
+## 8f.3 `canUseTool`은 중요한 관측 지점이지만 보편적이지 않다
 
-이 절은 `권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면`의 질문을 공개 SDK에서 관측 가능한 사건으로 좁힌다. 답은 내부 구현명이 아니라 `ClaudeAgentOptions`, message stream, tool call, session record, cookbook 실행 결과에서 찾아야 한다.
+SDK의 `can_use_tool` callback은 permission 규칙이 `ask`로 판정한 tool 실행을 host가 판단할 때 호출될 수 있어요. 이 callback은 tool name과 input뿐 아니라 `title`, `display_name`, `description`, `blocked_path`, `decision_reason`, `tool_use_id`, `agent_id` 같은 정보를 함께 받을 수 있답니다. 실제 request에서는 이 필드 중 일부가 null일 수 있습니다.
 
-### 8f.2 SDK 권한 표면
+중요한 예외가 있습니다. `allowedTools`/`allowed_tools`가 도구 전체를 허용하면 그 규칙이 callback보다 먼저 적용될 수 있습니다. 이 경우 callback은 호출되지 않습니다. 모든 호출을 gate하려면 PreToolUse hook을 사용하거나, allow rule을 좁혀 callback까지 흘러오게 설계해야 합니다.
 
-이 절은 `allowed_tools`, `disallowed_tools`, `permission_mode`, user approval, hooks의 공개 권한 표면으로 재작성한다.
+이런 정보 덕분에 제품은 “왜 물어보는지”를 사용자에게 친절하게 설명할 수 있어요.
 
-### 8f.3 `canUseTool`은 가장 중요한 관측 지점이다
+아래는 UI 설계를 위한 **예시**이며, 이번 run에서 관찰한 실제 callback payload는 아닙니다.
 
-이 절은 built-in tools, custom tools, MCP tools, tool result schema의 문제로 재작성한다. 도구는 모델의 능력이 아니라 외부 세계와 만나는 계약이다.
+```text
+toolName: Bash
+input.command: "git push --force"
+decisionReason: "destructive git operation"
+title: "Claude wants to run a git command"
+action: ask user / deny
+```
 
-### 8f.4 AskUserQuestion과 PermissionRequest는 다르다
+이것이 없으면 UI는 “승인할까요?”만 보여주게 돼요. 그러면 사용자는 자기가 무엇을 승인하는지 알기 어렵겠죠.
 
-이 절은 원문의 `8f.4 AskUserQuestion과 PermissionRequest는 다르다` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 숨은 권한 prompt를 다루지 않는다. 대신 권한 결정의 공개 표면인 `allowed_tools`, `disallowed_tools`, `permission_mode`, `can_use_tool`, hooks, managed policies, auto mode configuration으로 ... 이며, 먼저 `Hooks, plan mode, subagents`를 기준 예제로 읽는다.
+## 8f.4 AskUserQuestion과 PermissionRequest는 다르다
 
-### 8f.5 `CLAUDE.md`와 권한 판단
+이 사건을 섞어 버리면 제품이 불안정해지기 쉬워요. 아래는 제품 UI lane 구분이지, 네 가지가 모두 동급 top-level `SDKMessage` class라는 뜻은 아닙니다.
 
-이 절은 `allowed_tools`, `disallowed_tools`, `permission_mode`, user approval, hooks의 공개 권한 표면으로 재작성한다.
+| 이벤트 | 의미 | UI |
+| --- | --- | --- |
+| AskUserQuestion tool use | 작업 방향, 요구사항, 선택지를 사용자에게 질문 | 대화 카드 |
+| PermissionRequest hook/control request | 도구 실행을 host가 승인/거절해야 함 | 권한 카드 |
+| MCP elicitation callback/protocol | MCP 서버가 form/url 입력을 요구 | 외부 연결/인증 카드 |
+| denial evidence | callback decision, error tool result, terminal `permission_denials` | 원인/대체 경로 |
 
-### 8f.6 권한 캔버스
+책 캔버스와 강의 앱에서는 이 네 lane을 나눠서 다루는 게 좋아요. “모델이 질문했다”와 “host가 위험 작업 승인을 요구했다”는 완전히 다른 사건이거든요.
 
-이 절은 화면 구성의 문제가 아니라 evidence projection 문제로 읽는다. prompt, tool use, tool result, final result, usage를 한 화면에서 분리해 보여주는 구조가 필요하다.
+## 8f.5 `CLAUDE.md`와 권한 판단
 
-### 8f.7 학생 실습
+프로젝트 지침이 본 실행 루프뿐 아니라 permission/classifier 판단에도 영향을 줄 가능성은 있지만, 이번 실행에서는 그 인과를 관찰하지 못했어요. 따라서 SDK판에서는 이를 사실로 복원하지 않고 다음 자료를 함께 기록합니다.
 
-이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.
+- 어떤 instruction source가 로드됐는가
+- permission decision 직전 tool input은 무엇이었는가
+- user/project rule이 allow/deny에 영향을 줬다고 볼 증거가 있는가
+- 직접 증거가 없으면 `Inferred`로 표시한다
 
-### Takeaway
+예:
 
-이 절의 결론은 공개 근거로 다시 닫는다. 내부 설명을 암기하는 대신 어떤 SDK 표면과 cookbook 파일로 같은 주장을 확인할 수 있는지 남긴다.
+```text
+Configured: project instruction says "never push without explicit approval"
+Observed: Bash("git push") triggered permission request
+Observed: user denied
+Inferred: project rule likely contributed to conservative handling
+```
 
-## 공개판 본문
+## 8f.6 권한 캔버스
 
-원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.
+권한 판단은 별도 lane으로 표시해 봐요.
 
-첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.
+```text
+Tool Intent
+  -> Permission Policy
+  -> User/System Decision
+  -> Tool Execution or Denial
+  -> Agent Recovery
+```
 
-둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.
+각 노드에는 다음을 붙여 주면 좋아요.
 
-셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.
+| 필드 | 이유 |
+| --- | --- |
+| `tool_use_id` | 요청과 결과 연결 |
+| `toolName` | 어떤 도구인가 |
+| `input summary` | 무엇을 하려 했는가 |
+| `risk reason` | 왜 물었는가 |
+| `decision` | allow/deny/ask |
+| `agentID` | subagent가 요청했는가 |
+| `recovery` | 거절 후 모델이 어떻게 복구했는가 |
 
-이 장을 읽을 때는 아래 순서가 좋다.
+## 8f.7 실제 Opus 5 권한 제어 실행
 
-1. 먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.
-2. `ClaudeAgentOptions`, `query()`, `ClaudeSDKClient`, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.
-3. 원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.
-4. 마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.
+2026-08-03에 외부 효과가 없는 같은 in-process MCP tool을 destructive/open-world로 표시하고, Python SDK 0.2.128과 실제 `claude-opus-5`로 다섯 권한 조건을 순차 실행했습니다. 다섯 prompt는 모두 같은 tool과 input을 정확히 한 번 호출하라고 명시했으므로, 여기서 검증한 것은 **tool 선택 능력**이 아니라 **선택된 요청이 permission 경로를 어떻게 통과하는가**입니다.
 
-## 공개 경계
+| case | 실제 결과 |
+| --- | --- |
+| callback allow `110308-ea475cf9` | request/allow가 같은 tool use ID로 연결, handler 1회, marker result |
+| callback deny `110349-dac28e5d` | request/deny 연결, handler 0회, error tool result와 terminal denial |
+| allowed rule `110426-25b7a9d7` | callback 0회, handler 1회, `CanUseToolShadowedWarning` |
+| dontAsk `110508-45847b17` | callback 0회, handler 0회, denial |
+| auto `110547-47d54887` | callback 0회, handler 1회, marker result |
 
-- 권한 classifier prompt 원문이나 deny rule 내부 로직은 공개하지 않는다.
-- 정책 결정은 공개 callback/hook/option으로만 표현한다.
+allow와 deny를 반환한 주체는 실험 host program입니다. 사람이 버튼을 누르지는 않았지만, 실제 SDK callback과 native tool request에 결정이 돌아가 handler 실행 여부가 바뀌었으므로 permission mechanism은 실제로 검증됐습니다. UI click을 검증했다고는 쓰지 않습니다.
 
-## 실습 방향
+가장 중요한 반례는 allowed rule입니다. whole-tool allow가 있자 `can_use_tool`은 한 번도 호출되지 않았고 SDK 자체가 shadow warning을 냈습니다. 따라서 callback 하나만 기록해서 모든 실행의 permission audit log라고 부르면 누락이 생깁니다.
 
-- 같은 task에 `default`, `plan`, `acceptEdits`를 적용해 tool approval 흐름을 비교한다.
+`auto`는 이번 controlled request를 허용했습니다. raw에서 확인되는 것은 mode, tool request, handler 실행, marker result뿐입니다. host `can_use_tool` callback은 호출되지 않았으므로 모델 final의 "permission handler가 호출됐다"는 설명은 증거보다 강합니다. 이 관찰로 auto가 항상 허용한다고 말할 수 없고, classifier의 비공개 이유도 관찰되지 않았습니다. `dontAsk`는 같은 요청을 사전 allow 없이 거절했습니다.
 
-## Builder takeaway
+다른 장의 실제 실행을 보조 증거로 연결하면 우선순위가 더 선명해집니다.
 
-이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
+| permission 표면 | 연결한 실제 실행 | 관찰 범위 |
+| --- | --- | --- |
+| `plan` | 4b장 `101040-25cace50` | plan 중 workspace SHA 불변, `ExitPlanMode` callback 거절, host 승인 기록과 `acceptEdits` mode 전환 뒤 `Edit`로 SHA 변경 |
+| `disallowed_tools` | 8장 `104523-e1aa0451` | Read와 Bash를 구성했지만 init에는 Read만 노출되고 실제 path도 Read뿐 |
+| `acceptEdits` | 16장 `122337-5c9ba78a` | 거절 callback을 구성했지만 callback 0회, 실제 `Edit` 성공, 파일 SHA 변경 |
+| `bypassPermissions` | 16장 `122418-70f4ebd5` | 격리 MCP 요청이 거절 callback 없이 handler까지 실행 |
+| bypass + explicit deny | 16장 `122506-9120507f` | 같은 mode여도 명시적 deny가 handler를 막고 terminal denial을 남김 |
+
+4b장의 `actor=user` 승인 record도 host program이 남긴 사건입니다. 실제 인간이 UI 버튼을 누른 증거로 승격하지 않습니다. `permission_prompt_tool_name`과 외부 permission tool의 왕복 routing, 실제 사용자 UI 승인, 프로젝트 instruction이 auto classifier에 미친 인과는 아직 `additional observation required`입니다.
+
+SDK 0.2.128 source에서는 `can_use_tool`과 `permission_prompt_tool_name`을 동시에 지정하면 `ValueError`를 내고, `can_use_tool`을 쓸 때 내부 control protocol용 이름을 `stdio`로 설정합니다. 이는 설치된 SDK source 계약을 확인한 것이며 외부 permission tool routing의 실제 실행 증거는 아닙니다.
+
+전체 raw/OTel 판독과 교정 목록은 [8f장 실제 권한 제어 관찰](../evidence/ch08f-live.md)에 보존합니다.
+
+## 8f.8 학생 실습
+
+```text
+AI 코딩 에이전트의 permission policy를 설계해 줘.
+
+조건:
+1. Read/Grep/Glob은 자동 허용
+2. Edit/Write는 사용자 승인 필요
+3. Bash test/build는 허용
+4. Bash git push, rm, deploy는 승인 또는 거절
+5. AskUserQuestion과 PermissionRequest를 UI에서 분리
+
+각 결정이 SDK에서 어떤 옵션, callback, hook, result 필드로 관찰되는지 적어 줘.
+```
+
+## Takeaway
+
+권한/분류기 프롬프트는 그저 보안 부속품이 아니에요. 사용자가 모델을 통제할 수 있게 만들어 주는 핵심 제어 평면이랍니다. 좋은 제품은 “승인/거절” 버튼만 보여주는 데 그치지 않고, 모델이 무엇을 하려 했고 왜 멈췄는지까지 함께 보여준답니다.

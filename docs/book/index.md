@@ -35,6 +35,7 @@
 - [8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나](part2/ch08e.md)
 - [8e장 실제 Python SDK 관찰: built-in 도구 입력과 description 인과 경계](evidence/ch08e-live.md)
 - [8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면](part2/ch08f.md)
+- [8f장 실제 Python SDK 권한 관찰: callback, mode, 명시적 deny의 실제 우선순위](evidence/ch08f-live.md)
 
 ## 제3부: 세션과 메시지 관측
 
