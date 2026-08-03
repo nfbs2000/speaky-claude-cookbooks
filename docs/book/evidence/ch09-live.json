@@ -1,0 +1,300 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T21:18:52.756Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch09",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "9장 컴팩션: summary 보존과 fresh evidence의 분리",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch09:book-sdk-live-20260803:2026-08-03T21:35:00.000Z",
+    "traceSha256": "55db37e6a90cfa57761d176af26bcd350b7ccbd058d2dd5b73b40e5e0ef067c2",
+    "summarySha256": "0aaf92a3530e1544a8783bfa646b52a145ae2da0a21d8c7e1b5ac2869ae5cb2d",
+    "sourceEventCount": 170,
+    "publicEventCount": 67,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "110843-ff84b440",
+      "case_id": "manual-boundary-reread",
+      "projection_role": "replayed",
+      "raw_process_sha256": "4361ffc25e4996f6de90469eed4efadd84634370e3b7ccb6ef6a7a3f007cc5ce",
+      "raw_sdk_sha256": "4bd1f15003bf67d0922a6b138d3ef1cc8ab2855a60c208b54fc8f8a0f3195192",
+      "source_chapter_id": "ch09",
+      "source_event_count": 74
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "111119-271bcafe",
+      "case_id": "manual-boundary-memory-only",
+      "projection_role": "replayed",
+      "raw_process_sha256": "84688db532704413cf19f3b29d49fc8f39ff7939f959d7f5e9be6ffe94767eb2",
+      "raw_sdk_sha256": "05f326740babff7d47abfcdb75c4cf0d7ffffc2f9fc03c81d3767cc62a72b16d",
+      "source_chapter_id": "ch09",
+      "source_event_count": 96
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "both-attempt-integrity-files-match",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 attempt의 integrity manifest에 기록된 14개 evidence file SHA-256을 현재 파일에서 다시 계산해 모두 일치했다.",
+      "sourceRefs": [
+        "spec:claims:both-attempt-integrity-files-match"
+      ]
+    },
+    {
+      "id": "manual-compact-boundary-is-observed-twice",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 persistent session은 각각 manual trigger의 generic compact_boundary와 token/duration metadata를 한 번 남겼다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:111119-271bcafe:sdk-message:59"
+      ]
+    },
+    {
+      "id": "same-session-is-kept-across-three-phases",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "각 case는 before, compact, after phase에서 하나의 session ID를 유지했고 같은 ID의 init을 세 번 방출했다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:2",
+        "attempt:110843-ff84b440:sdk-message:49",
+        "attempt:110843-ff84b440:sdk-message:56",
+        "attempt:111119-271bcafe:sdk-message:2",
+        "attempt:111119-271bcafe:sdk-message:58",
+        "attempt:111119-271bcafe:sdk-message:65"
+      ]
+    },
+    {
+      "id": "post-token-count-increases-in-both-short-runs",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "reread case는 2134에서 2352로, memory-only case는 2267에서 2381로 post token이 증가했다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:111119-271bcafe:sdk-message:59"
+      ]
+    },
+    {
+      "id": "continuation-summary-preserves-all-five-fields",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 경계 직후 continuation summary에는 목표, 마커, 가역 결정, 다음 검증, 폐기 가능 숫자가 모두 포함됐다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:51",
+        "attempt:111119-271bcafe:sdk-message:60"
+      ]
+    },
+    {
+      "id": "reread-request-has-no-post-boundary-tool-block",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "재조회 요구 case는 boundary 뒤 Read ToolUse와 연결 ToolResult가 0건인데 final은 fresh Read가 있었다고 주장했다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:110843-ff84b440:sdk-message:51",
+        "attempt:110843-ff84b440:sdk-message:71"
+      ]
+    },
+    {
+      "id": "memory-only-answer-comes-from-summary-not-new-read",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "memory-only case는 새 tool block 없이 summary의 세 값을 재현했지만 final은 존재하지 않는 현재-turn Read result를 자기보고했다.",
+      "sourceRefs": [
+        "attempt:111119-271bcafe:sdk-message:59",
+        "attempt:111119-271bcafe:sdk-message:60",
+        "attempt:111119-271bcafe:sdk-message:93"
+      ]
+    },
+    {
+      "id": "compact-phase-success-has-zero-turns-and-empty-result",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 compact phase의 terminal Result는 success지만 num_turns 0과 빈 result여서 실제 성공 근거는 status와 boundary 사건이다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:53",
+        "attempt:111119-271bcafe:sdk-message:62"
+      ]
+    },
+    {
+      "id": "primary-opus-is-not-only-provider-usage",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "init과 primary assistant는 Opus 5지만 모든 terminal Result model_usage에는 Haiku 4.5 보조 사용도 있다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:44",
+        "attempt:110843-ff84b440:sdk-message:53",
+        "attempt:110843-ff84b440:sdk-message:71",
+        "attempt:111119-271bcafe:sdk-message:53",
+        "attempt:111119-271bcafe:sdk-message:62",
+        "attempt:111119-271bcafe:sdk-message:93"
+      ]
+    },
+    {
+      "id": "compact-boundary-is-generic-system-message-in-python-sdk",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "Python SDK 0.2.128은 SDKCompactBoundaryMessage를 export하지 않고 이 subtype을 generic SystemMessage로 제공한다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:111119-271bcafe:sdk-message:59"
+      ]
+    },
+    {
+      "id": "token-decrease-is-not-a-compaction-invariant",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "두 실제 수동 압축에서 post token이 증가했으므로 pre-post를 항상 절감량으로 계산할 수 없다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:111119-271bcafe:sdk-message:59"
+      ]
+    },
+    {
+      "id": "model-self-report-is-not-tool-evidence",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "모델 final의 fresh Read 자기보고는 boundary 뒤 ToolUse/ToolResult 부재와 모순되므로 raw tool event를 우선해야 한다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:71",
+        "attempt:111119-271bcafe:sdk-message:93"
+      ]
+    },
+    {
+      "id": "accurate-values-do-not-prove-fresh-evidence",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "정확한 값은 continuation summary에도 있었으므로 답의 정확성만으로 파일을 다시 읽었다고 판정할 수 없다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:sdk-message:51",
+        "attempt:110843-ff84b440:sdk-message:71",
+        "attempt:111119-271bcafe:sdk-message:60",
+        "attempt:111119-271bcafe:sdk-message:93"
+      ]
+    },
+    {
+      "id": "manual-trigger-does-not-prove-auto-compaction",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "이번 두 실행은 host가 직접 /compact를 보낸 manual trigger이므로 자동 threshold 동작의 증거가 아니다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:process-event:46",
+        "attempt:110843-ff84b440:sdk-message:50",
+        "attempt:111119-271bcafe:process-event:55",
+        "attempt:111119-271bcafe:sdk-message:59"
+      ]
+    },
+    {
+      "id": "captured-is-not-claim-pass",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "CAPTURED와 assertion count 0은 raw 수집 완료 표식이며 컴팩션 주장의 합격 판정이 아니다.",
+      "sourceRefs": [
+        "spec:claims:captured-is-not-claim-pass"
+      ]
+    },
+    {
+      "id": "otel-is-a-projection-not-independent-provider-proof",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "이 OTel은 raw SDK와 host event를 투영하며 별도 tool.execution가 없으므로 built-in Read 판정은 raw tool block을 사용해야 한다.",
+      "sourceRefs": [
+        "spec:claims:otel-is-a-projection-not-independent-provider-proof"
+      ]
+    },
+    {
+      "id": "probe-runtime-source-is-not-fully-provenance-bound",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "manifest는 장 source와 fixture/prompt hash를 보존하지만 exact probe, case, runtime source hash를 묶지 않았다.",
+      "sourceRefs": [
+        "attempt:110843-ff84b440:manifest:option_summary",
+        "attempt:111119-271bcafe:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "automatic-threshold-boundary-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "실제 context pressure에서 trigger auto인 boundary와 threshold 근처 사용량은 아직 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:automatic-threshold-boundary-not-observed"
+      ]
+    },
+    {
+      "id": "successful-post-boundary-reread-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "boundary 뒤 새 Read ToolUse와 연결된 성공 ToolResult를 모두 가진 실행은 아직 없다.",
+      "sourceRefs": [
+        "spec:claims:successful-post-boundary-reread-not-observed"
+      ]
+    },
+    {
+      "id": "circuit-breaker-and-rapid-refill-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "circuit breaker와 rapid refill 보호를 식별할 Agent SDK 사건은 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:circuit-breaker-and-rapid-refill-not-observed"
+      ]
+    },
+    {
+      "id": "ptl-retry-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "긴 summary를 다시 압축하는 PTL retry를 식별할 raw payload는 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:ptl-retry-not-observed"
+      ]
+    },
+    {
+      "id": "long-session-loss-rate-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "짧은 두 manual run으로 장기 세션 summary의 정보 손실 또는 왜곡 비율을 일반화할 수 없다.",
+      "sourceRefs": [
+        "spec:claims:long-session-loss-rate-not-observed"
+      ]
+    },
+    {
+      "id": "full-source-provenance-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "chapter, probe, case, runtime source hash를 모두 attempt에 묶는 provenance가 필요하다.",
+      "sourceRefs": [
+        "spec:claims:full-source-provenance-not-observed"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch09 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch09",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch09 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch09:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch09 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch09",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch09",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}
