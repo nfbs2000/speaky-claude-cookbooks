@@ -42,6 +42,7 @@
 - [9장: 자동 컴팩션 - 언제, 어떻게 컨텍스트가 압축되는가](part3/ch09.md)
 - [9장 실제 Python SDK 컴팩션 관찰: summary 보존과 fresh evidence의 분리](evidence/ch09-live.md)
 - [10장: 컴팩션 이후의 파일 상태 보존](part3/ch10.md)
+- [10장 실제 Python SDK 파일 상태 관찰: summary의 V1과 디스크 V2 충돌](evidence/ch10-live.md)
 - [11장: 마이크로 컴팩션 - 정밀한 컨텍스트 가지치기](part3/ch11.md)
 - [12장: 토큰 예산 전략](part3/ch12.md)
 
