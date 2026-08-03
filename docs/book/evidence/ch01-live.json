@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T16:16:35.924Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch01",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "1장 AI 코딩 에이전트의 전체 기술 스택: 실제 SDK 첫 실행",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch01:book-sdk-live-20260803:2026-08-03T15:46:26.009Z",
+    "traceSha256": "ae16d90ae2a48972a16d4a9091b5b98965738e1f21f6866173bd1c1843c44f42",
+    "summarySha256": "cb56e38a0eee890160077d478eb6d476beed0da1065428a8df6df07f3c69d708",
+    "sourceEventCount": 58,
+    "publicEventCount": 18,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "154613-e5697396",
+      "case_id": "read-fixture-runtime-contract",
+      "raw_process_sha256": "61f3bace6cac89ddb22a9e656398e6c9dd5a18ac69c0e2b10418853b2d2fc288",
+      "raw_sdk_sha256": "d470a22b4f882b6c928e23ae5d3c8c7a1e289545f1ef71969f5d7b49ca15f479",
+      "source_event_count": 58
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "configured-init-surface",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "요청한 Opus 5와 built-in Read가 실제 init 표면에 나타났다.",
+      "sourceRefs": [
+        "attempt:154613-e5697396:sdk-message:1",
+        "attempt:154613-e5697396:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "read-error-retry-success",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 번의 Read 오류 뒤 수정한 세 번째 Read가 실제 fixture 결과를 반환했다.",
+      "sourceRefs": [
+        "attempt:154613-e5697396:sdk-message:14",
+        "attempt:154613-e5697396:sdk-message:18",
+        "attempt:154613-e5697396:sdk-message:21",
+        "attempt:154613-e5697396:sdk-message:25",
+        "attempt:154613-e5697396:sdk-message:42",
+        "attempt:154613-e5697396:sdk-message:44"
+      ]
+    },
+    {
+      "id": "terminal-result-after-tool-result",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "성공 ToolResult 뒤 같은 run이 success/completed Result로 종료됐다.",
+      "sourceRefs": [
+        "attempt:154613-e5697396:sdk-message:42",
+        "attempt:154613-e5697396:sdk-message:44",
+        "attempt:154613-e5697396:sdk-message:56"
+      ]
+    },
+    {
+      "id": "ui-and-permission-projection",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "권한 UI, custom MCP handler, Book Canvas는 이 Read run에서 실행하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:ui-and-permission-projection"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch01 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch01",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch01 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch01:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch01 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch01",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch01",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}

@@ -4,7 +4,8 @@
 
 이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
 `claude-opus-5`로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
-projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message와 host process timing에서 나왔다.
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.
 
 !!! evidence "한 번 수집하고 여러 표면에서 재생"
     원전은 95개 사건이고 공개 projection은 32개다.
@@ -20,6 +21,7 @@ projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message와
 | proof gate | `accepted_with_notes` |
 | secret scan | `passed` |
 | raw source / public | **95 / 32** |
+| observed / more evidence | **4 / 2** |
 | trace SHA-256 | `658158830a8f0a8742b1bed330341f1688f1f76a9f5f72985a558333df98ef76` |
 | summary SHA-256 | `f3881873569e211a16bde952f8b92230fae95ce0ec0dd3d4d45116c1de571d4b` |
 
@@ -57,10 +59,10 @@ projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message와
 
 | 표면 | 시각화 관점 |
 | --- | --- |
-| [Agent Flow · 4장 실행](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04) | 원인, tool use/result, interrupt, unmapped claim |
-| [Runtime City · 4장 실행](https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-live-20260803) | OTel 시간축, 실행 zone, Observed/Missing |
-| [Pixel Agents · 4장 증거](https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/) | actor와 tool lifecycle 상태 |
-| [Hypnagonia · Observation Ordeal](https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/) | 검증 주장, 선택, 관찰 consequence |
+| [Agent Flow · ch04 실행](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04) | 원인, tool use/result, permission, claim 경계 |
+| [Runtime City · ch04 실행](https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch04:book-sdk-live-20260803) | OTel 시간축, 실행 zone, Observed/Missing |
+| [Pixel Agents · ch04 증거](https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch04) | actor와 tool lifecycle 상태 |
+| [Hypnagonia · Observation Ordeal](https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch04) | 검증 주장, 선택, 관찰 consequence |
 
 각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
 시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
@@ -68,8 +70,7 @@ projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message와
 
 ## 공개 경계
 
-- 이번 실행은 annotation이 있는 custom MCP 도구에 한정된다.
-- built-in Read/Edit/Bash와 annotation 없는 custom MCP scheduling은 아직 일반화하지 않는다.
-- `SDKToolProgressMessage`, `SDKFilesPersistedEvent`, large-result persistence는 별도 live run이 필요하다.
-- read-only overlap과 mutating serialization은 “모든 도구가 항상 병렬/직렬”이라는 일반 법칙이 아니다.
+- `built-in-and-unannotated-tools`: built-in Read/Edit/Bash와 annotation 없는 custom MCP의 scheduling은 이 세 실행으로 일반화하지 않는다.
+- `progress-persistence-large-result`: SDKToolProgressMessage, SDKFilesPersistedEvent, large-result persistence 경로는 별도 실제 실행이 필요하다.
+
 - 공개 JSON: [ch04-live.json](./ch04-live.json)

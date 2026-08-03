@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T16:16:36.027Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch30",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "30장 나만의 AI 에이전트: 권한, 산출물, 재개, 메모리",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch30:book-sdk-live-20260803:2026-08-03T15:36:02.207Z",
+    "traceSha256": "9b5f9e852e1e83a431c7ef54818fbb12cffdfff356d59912493ba2755e3bbbba",
+    "summarySha256": "e702d4c1c8ae736628767f115c66c0ca4a305afb2b4a9259f831ea982f908670",
+    "sourceEventCount": 119,
+    "publicEventCount": 45,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "153528-a47425f8",
+      "case_id": "permission-artifact-resumed-memory",
+      "raw_process_sha256": "96a5168778d044605633402cf4df499bb33030c374ff670cb6f0e6f5aac78d05",
+      "raw_sdk_sha256": "7b54b0194260145b2f4089a369a17cc94fb02d46c63347ccce4a866f3183787b",
+      "source_event_count": 119
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "local-report-host-allow",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "로컬 보고서는 host permission allow 뒤 handler와 ToolResult를 거쳐 생성됐다.",
+      "sourceRefs": [
+        "attempt:153528-a47425f8:permission-callback:35",
+        "attempt:153528-a47425f8:permission-callback:36",
+        "attempt:153528-a47425f8:process-event:40",
+        "attempt:153528-a47425f8:sdk-message:41"
+      ]
+    },
+    {
+      "id": "external-publish-denied-before-handler",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "외부 게시는 host deny와 오류 ToolResult까지만 진행됐고 handler 실행과 publish count는 0이었다.",
+      "sourceRefs": [
+        "attempt:153528-a47425f8:sdk-message:53",
+        "attempt:153528-a47425f8:permission-callback:54",
+        "attempt:153528-a47425f8:permission-callback:55",
+        "attempt:153528-a47425f8:sdk-message:59",
+        "attempt:153528-a47425f8:process-event:90"
+      ]
+    },
+    {
+      "id": "memory-saved-after-denial",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "거부된 게시 뒤 허용된 memory handler가 외부 memory artifact를 저장했다.",
+      "sourceRefs": [
+        "attempt:153528-a47425f8:sdk-message:59",
+        "attempt:153528-a47425f8:sdk-message:72",
+        "attempt:153528-a47425f8:permission-callback:74",
+        "attempt:153528-a47425f8:process-event:76",
+        "attempt:153528-a47425f8:sdk-message:77",
+        "attempt:153528-a47425f8:process-event:90"
+      ]
+    },
+    {
+      "id": "new-client-resumed-and-loaded-memory",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "새 client가 같은 session을 재개하고 실제 load_memory handler와 ToolResult 뒤 두 번째 Result를 냈다.",
+      "sourceRefs": [
+        "attempt:153528-a47425f8:sdk-message:89",
+        "attempt:153528-a47425f8:process-event:91",
+        "attempt:153528-a47425f8:sdk-message:92",
+        "attempt:153528-a47425f8:sdk-message:99",
+        "attempt:153528-a47425f8:process-event:100",
+        "attempt:153528-a47425f8:sdk-message:105",
+        "attempt:153528-a47425f8:sdk-message:115"
+      ]
+    },
+    {
+      "id": "artifact-state-stable",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 턴 뒤 report와 memory hash는 같았고 external publish count는 계속 0이었다.",
+      "sourceRefs": [
+        "attempt:153528-a47425f8:process-event:90",
+        "attempt:153528-a47425f8:process-event:116"
+      ]
+    },
+    {
+      "id": "hosting-remote-eval-automatic-learning",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "호스팅, 원격 평가, 자동 장기학습은 이 로컬 run에서 실행하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:hosting-remote-eval-automatic-learning"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch30 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch30",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch30 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch30:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch30 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch30",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch30",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}
