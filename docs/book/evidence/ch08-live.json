@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T19:35:18.620Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch08",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "8장 도구 프롬프트: description/schema, disallowed Bash, Agent 전역 표면",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch08:book-sdk-live-20260803:2026-08-03T19:30:00.000Z",
+    "traceSha256": "b6a6fc0ae3b1a137728e142c2d2521217952ea367daa65f01429ada40e34f817",
+    "summarySha256": "1710f38573c77f7fe9b70bedd22ec051e20897b5f46c3c736daa977cf076df34",
+    "sourceEventCount": 664,
+    "publicEventCount": 130,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "104326-a2a8922b",
+      "case_id": "vague-search-description",
+      "projection_role": "replayed",
+      "raw_process_sha256": "22c52179a3611f4774b7958d1bb7c478d0669846025022616ab12eed34fc0376",
+      "raw_sdk_sha256": "107538b79c7aa8ee5d612c4102e5865b9feb6bb165ee6ed9133504e0ba60bbf3",
+      "source_chapter_id": "ch08",
+      "source_event_count": 204
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "104443-c119bcec",
+      "case_id": "rich-search-description",
+      "projection_role": "replayed",
+      "raw_process_sha256": "b2e809549dd334414d703cfc98ef250e103da3d419318a65bf33585f1b19f667",
+      "raw_sdk_sha256": "09122ea308371f56160f246a2a78625d63a928dd51b371a8c05dba4eb899e46c",
+      "source_chapter_id": "ch08",
+      "source_event_count": 97
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "104523-e1aa0451",
+      "case_id": "disallowed-bash-visibility",
+      "projection_role": "replayed",
+      "raw_process_sha256": "fd5b368c29ea690e907e202a044d55575e9f02a4c499ddaa4386250ff704f1b2",
+      "raw_sdk_sha256": "8aa76894924971d017e55ca0b1a05af46c126c10c016be23721b22370c802814",
+      "source_chapter_id": "ch08",
+      "source_event_count": 50
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "104600-de788e47",
+      "case_id": "agent-global-surface-failure",
+      "projection_role": "replayed",
+      "raw_process_sha256": "0a3330bc05317e355c26c7e438670a201f8d163af3f7ea1cae2b8f943243412d",
+      "raw_sdk_sha256": "c342b57df92000a6bca7c9c620470c1de0675af6ec02b225f8fe4264819e61f8",
+      "source_chapter_id": "ch08",
+      "source_event_count": 157
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "104843-e6d50d01",
+      "case_id": "agent-global-surface-repair",
+      "projection_role": "replayed",
+      "raw_process_sha256": "2053d49e8eca110d74cd79cc2bef0809c7fdf5b2970795028c1804e3db8dc3d0",
+      "raw_sdk_sha256": "c596797b11eab81c0225621f4ca6fb2827a13f258b6b9d749969aae9ad678f39",
+      "source_chapter_id": "ch08",
+      "source_event_count": 156
+    }
+  ],
+  "invalidAttempts": [
+    {
+      "attempt_id": "104600-de788e47",
+      "reason": "worker Read가 전역 tool surface에서 해석되지 않아 intended specialist task가 실패했다. 성공 routing 표본은 아니지만 실패와 수정의 실제 경계를 보존한다."
+    }
+  ],
+  "claims": [
+    {
+      "id": "fixed-input-description-schema-pair",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "vague와 rich attempt는 fixture, user prompt, chapter source, requested/actual model이 같고 host source에서 tool description과 input schema 설명을 다르게 구성했다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:manifest:option_summary",
+        "attempt:104443-c119bcec:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "vague-fallback-control-and-ten-calls",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "vague run은 10회 호출했고 의미 없는 control query에도 같은 marker를 주는 fallback을 발견해 최종 근거에서 제외했다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:sdk-message:89",
+        "attempt:104326-a2a8922b:sdk-message:95",
+        "attempt:104326-a2a8922b:sdk-message:198",
+        "attempt:104326-a2a8922b:sdk-message:202"
+      ]
+    },
+    {
+      "id": "rich-keyword-recovery-and-four-calls",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "rich run은 첫 NO_MATCH 뒤 approval과 permission으로 query를 바꾸고 structured search 네 번만 사용해 성공했다.",
+      "sourceRefs": [
+        "attempt:104443-c119bcec:sdk-message:14",
+        "attempt:104443-c119bcec:sdk-message:17",
+        "attempt:104443-c119bcec:sdk-message:22",
+        "attempt:104443-c119bcec:sdk-message:25",
+        "attempt:104443-c119bcec:sdk-message:56",
+        "attempt:104443-c119bcec:sdk-message:59",
+        "attempt:104443-c119bcec:sdk-message:95"
+      ]
+    },
+    {
+      "id": "both-runs-recovered-after-empty",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "두 run 모두 첫 빈 결과를 결론으로 삼지 않고 query를 바꿨으며 최종 답에서 관찰과 추론을 분리했다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:sdk-message:19",
+        "attempt:104326-a2a8922b:sdk-message:198",
+        "attempt:104443-c119bcec:sdk-message:17",
+        "attempt:104443-c119bcec:sdk-message:91"
+      ]
+    },
+    {
+      "id": "disallowed-bash-removed-from-built-in-init",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Read와 Bash를 tools/allowed에 함께 넣고 Bash를 disallowed로 둔 실행의 init에는 Read만 있었고 Bash use는 0이었다.",
+      "sourceRefs": [
+        "attempt:104523-e1aa0451:manifest:option_summary",
+        "attempt:104523-e1aa0451:sdk-message:1",
+        "attempt:104523-e1aa0451:sdk-message:14",
+        "attempt:104523-e1aa0451:sdk-message:30",
+        "attempt:104523-e1aa0451:sdk-message:48"
+      ]
+    },
+    {
+      "id": "role-selected-and-nested-read-executed",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "agent 이름을 말하지 않은 prompt에서 parent가 evidence-reviewer를 선택했고 수정 run의 같은 parent tool ID 아래 nested Read가 review와 policy 파일을 읽었다.",
+      "sourceRefs": [
+        "attempt:104843-e6d50d01:sdk-message:21",
+        "attempt:104843-e6d50d01:sdk-message:28",
+        "attempt:104843-e6d50d01:sdk-message:29",
+        "attempt:104843-e6d50d01:sdk-message:31",
+        "attempt:104843-e6d50d01:sdk-message:32"
+      ]
+    },
+    {
+      "id": "global-surface-failure-and-repair-sequence",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "첫 init의 Task-only 표면에서는 worker Read가 거부됐고 수정 init의 Task+Read 표면에서는 nested Read와 specialist 결과가 실행됐다.",
+      "sourceRefs": [
+        "attempt:104600-de788e47:sdk-message:1",
+        "attempt:104600-de788e47:sdk-message:22",
+        "attempt:104600-de788e47:sdk-message:26",
+        "attempt:104843-e6d50d01:sdk-message:1",
+        "attempt:104843-e6d50d01:sdk-message:120",
+        "attempt:104843-e6d50d01:sdk-message:124",
+        "attempt:104843-e6d50d01:sdk-message:127"
+      ]
+    },
+    {
+      "id": "result-success-is-not-subtask-success",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "실패 attempt의 specialist task와 ToolResult는 failed/error였지만 terminal SDK Result는 success/completed였으므로 run-level success만으로 내부 task 성공을 선언하면 안 된다.",
+      "sourceRefs": [
+        "attempt:104600-de788e47:sdk-message:22",
+        "attempt:104600-de788e47:sdk-message:26",
+        "attempt:104600-de788e47:sdk-message:155"
+      ]
+    },
+    {
+      "id": "agent-option-and-init-task-name-boundary",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "Python option과 완성 ToolUseBlock은 Agent 이름을 사용했지만 init은 Task로 노출했으므로 둘을 서로 다른 위임 도구로 중복 집계하지 않는다.",
+      "sourceRefs": [
+        "attempt:104843-e6d50d01:sdk-message:1",
+        "attempt:104843-e6d50d01:sdk-message:21"
+      ]
+    },
+    {
+      "id": "primary-opus-is-not-only-provider-usage",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "다섯 init과 primary assistant는 Opus 5지만 모든 Result model_usage에는 Haiku 4.5 보조 사용도 기록됐다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:sdk-message:202",
+        "attempt:104443-c119bcec:sdk-message:95",
+        "attempt:104523-e1aa0451:sdk-message:48",
+        "attempt:104600-de788e47:sdk-message:155",
+        "attempt:104843-e6d50d01:sdk-message:154"
+      ]
+    },
+    {
+      "id": "single-pair-does-not-prove-description-causality",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "한 번씩 fixed-order로 실행한 10회 대 4회, 비용과 시간 차이는 관찰값이지 description/schema 효과의 일반 인과나 승자가 아니다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:sdk-message:202",
+        "attempt:104443-c119bcec:sdk-message:95"
+      ]
+    },
+    {
+      "id": "probe-source-not-bound-in-attempt-provenance",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "당시 manifest provenance는 장 원문과 option summary를 묶었지만 probe source와 완전한 tools option hash를 묶지 않아 artifact만으로 수정의 유일 변수를 증명할 수 없다.",
+      "sourceRefs": [
+        "attempt:104600-de788e47:manifest:option_summary",
+        "attempt:104843-e6d50d01:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "exact-description-provider-receipt-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "host code의 description/schema 구성은 확인했지만 raw init에는 도구 이름만 있어 provider가 받은 exact 직렬화 text는 관찰하지 못했다.",
+      "sourceRefs": [
+        "spec:claims:exact-description-provider-receipt-not-observed"
+      ]
+    },
+    {
+      "id": "read-vs-bash-visible-choice-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "disallowed case는 Bash를 표면에서 제거했으므로 Read와 Bash가 함께 보일 때 모델이 설명만으로 Read를 우선하는지는 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:read-vs-bash-visible-choice-not-observed"
+      ]
+    },
+    {
+      "id": "permission-decision-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "다섯 attempt의 permission callback과 hook callback은 0개여서 tool description과 사용자 승인 결정의 연결은 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:permission-decision-not-observed"
+      ]
+    },
+    {
+      "id": "efficient-single-delegation-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "수정 run에서도 첫 specialist output이 불완전해 parent 직접 Read와 두 번째 위임이 필요했으므로 최적의 단일 위임은 관찰하지 않았다.",
+      "sourceRefs": [
+        "attempt:104843-e6d50d01:sdk-message:37",
+        "attempt:104843-e6d50d01:sdk-message:56",
+        "attempt:104843-e6d50d01:sdk-message:113",
+        "attempt:104843-e6d50d01:sdk-message:127"
+      ]
+    },
+    {
+      "id": "typescript-agent-surfaces-not-observed-in-python",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "toolConfig, forwardSubagentText, agentProgressSummaries는 이 Python 0.2.128 실행에서 option으로 사용하거나 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:typescript-agent-surfaces-not-observed-in-python"
+      ]
+    },
+    {
+      "id": "rate-limit-event-influence-not-observed",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "다섯 실행에 allowed_warning과 utilization 0.76이 있었지만 호출 수, 비용, task 결과에 미친 인과 영향은 관찰하지 않았다.",
+      "sourceRefs": [
+        "attempt:104326-a2a8922b:sdk-message:3",
+        "attempt:104443-c119bcec:sdk-message:3",
+        "attempt:104523-e1aa0451:sdk-message:3",
+        "attempt:104600-de788e47:sdk-message:6",
+        "attempt:104843-e6d50d01:sdk-message:3"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch08 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch08 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch08:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch08 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch08",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch08",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}
