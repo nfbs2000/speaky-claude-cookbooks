@@ -10,13 +10,13 @@
 
 
 
-        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part1/ch03/">
+        <link rel="canonical" href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/evidence/ch03-live/">
 
 
-        <link rel="prev" href="../../evidence/ch02-live/">
+        <link rel="prev" href="../../part1/ch03/">
 
 
-        <link rel="next" href="../../evidence/ch03-live/">
+        <link rel="next" href="../../part1/ch04/">
 
 
 
@@ -27,7 +27,7 @@
 
 
 
-        <title>3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기 - Speaky Claude Cookbooks</title>
+        <title>3장 실제 Python SDK 관찰 - Speaky Claude Cookbooks</title>
 
 
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
 
 
-        <a href="#3" class="md-skip">
+        <a href="#3-python-sdk" class="md-skip">
           콘텐츠로 이동
         </a>
 
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
 
-              3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기
+              3장 실제 Python SDK 관찰
 
           </span>
         </div>
@@ -433,7 +433,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../ch01/" class="md-nav__link">
+      <a href="../../part1/ch01/" class="md-nav__link">
 
 
 
@@ -461,7 +461,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../../evidence/ch01-live/" class="md-nav__link">
+      <a href="../ch01-live/" class="md-nav__link">
 
 
 
@@ -489,7 +489,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../ch02/" class="md-nav__link">
+      <a href="../../part1/ch02/" class="md-nav__link">
 
 
 
@@ -517,7 +517,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../../evidence/ch02-live/" class="md-nav__link">
+      <a href="../ch02-live/" class="md-nav__link">
 
 
 
@@ -525,6 +525,34 @@
 
 
     2장 실제 Python SDK 관찰
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../part1/ch03/" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기
 
 
 
@@ -561,7 +589,7 @@
   <span class="md-ellipsis">
 
 
-    3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기
+    3장 실제 Python SDK 관찰
 
 
 
@@ -579,7 +607,7 @@
   <span class="md-ellipsis">
 
 
-    3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기
+    3장 실제 Python SDK 관찰
 
 
 
@@ -608,117 +636,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
 
-        핵심 질문
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#2026-08-03" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        실제 실행 관찰 상태 (2026-08-03)
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#31-repl-agent-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.1 REPL이 아니라 agent loop다
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#32-state-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.2 원본 State 타입을 SDK 메시지로 번역하기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.3 이 장에서 추적할 다섯 핵심 메시지 역할
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#34-continue-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.4 Continue 전환을 SDK로 읽기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#35-terminal-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.5 Terminal 종료를 SDK로 읽기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#36" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.6 컨텍스트 전처리와 압축
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#37-hook-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.7 Hook과 loop 개입 지점
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#38-resume" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.8 세션 지속과 resume
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#39" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.9 캔버스 표현
+        실행 신원
 
     </span>
   </a>
@@ -729,7 +647,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
 
-        학생 실습
+        유효한 실제 실행
 
     </span>
   </a>
@@ -737,10 +655,43 @@
 </li>
 
         <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
 
-        Builder takeaway
+        관찰 판정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        무효 시도
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        같은 증거를 보는 공개 표면
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        공개 경계
 
     </span>
   </a>
@@ -763,35 +714,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../../evidence/ch03-live/" class="md-nav__link">
-
-
-
-  <span class="md-ellipsis">
-
-
-    3장 실제 Python SDK 관찰
-
-
-
-  </span>
-
-
-
-      </a>
-    </li>
-
-
-
-
-
-
-
-
-
-
-    <li class="md-nav__item">
-      <a href="../ch04/" class="md-nav__link">
+      <a href="../../part1/ch04/" class="md-nav__link">
 
 
 
@@ -819,7 +742,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../../evidence/ch04-live/" class="md-nav__link">
+      <a href="../ch04-live/" class="md-nav__link">
 
 
 
@@ -847,7 +770,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../ch04b/" class="md-nav__link">
+      <a href="../../part1/ch04b/" class="md-nav__link">
 
 
 
@@ -2341,7 +2264,7 @@
 
 
     <li class="md-nav__item">
-      <a href="../../evidence/ch30-live/" class="md-nav__link">
+      <a href="../ch30-live/" class="md-nav__link">
 
 
 
@@ -3572,117 +3495,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
 
-        핵심 질문
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#2026-08-03" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        실제 실행 관찰 상태 (2026-08-03)
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#31-repl-agent-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.1 REPL이 아니라 agent loop다
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#32-state-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.2 원본 State 타입을 SDK 메시지로 번역하기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.3 이 장에서 추적할 다섯 핵심 메시지 역할
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#34-continue-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.4 Continue 전환을 SDK로 읽기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#35-terminal-sdk" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.5 Terminal 종료를 SDK로 읽기
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#36" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.6 컨텍스트 전처리와 압축
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#37-hook-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.7 Hook과 loop 개입 지점
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#38-resume" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.8 세션 지속과 resume
-
-    </span>
-  </a>
-
-</li>
-
-        <li class="md-nav__item">
-  <a href="#39" class="md-nav__link">
-    <span class="md-ellipsis">
-
-        3.9 캔버스 표현
+        실행 신원
 
     </span>
   </a>
@@ -3693,7 +3506,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
 
-        학생 실습
+        유효한 실제 실행
 
     </span>
   </a>
@@ -3701,10 +3514,43 @@
 </li>
 
         <li class="md-nav__item">
-  <a href="#builder-takeaway" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
 
-        Builder takeaway
+        관찰 판정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        무효 시도
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        같은 증거를 보는 공개 표면
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        공개 경계
 
     </span>
   </a>
@@ -3731,318 +3577,214 @@
 
 
 
-<h1 id="3">3장: 에이전트 루프 — 사용자 입력에서 모델 응답까지의 전체 생명주기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>공개 GitHub Pages 투영판: <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part1/ch03/">3장: 에이전트 루프 — 사용자 입력에서 모델 응답까지의 전체 생명주기</a></p>
-</blockquote>
-<p>원본 3장은 책 전체의 닻 같은 장이에요. 그 핵심 주장은 이렇게 정리할 수 있어요. Claude Code의 루프는 전통적인 REPL이 아니라, 메시지, 도구, 압축, 복구, 중지 훅, 권한, 토큰 예산을 매 반복마다 다시 조립하는 <strong>self-modifying state machine</strong>(자기 수정 상태 머신)이라는 거예요.</p>
-<p>SDK 책에서도 이 깊이는 그대로 가져가려 해요. 다만 <code>queryLoop()</code> 내부 코드를 줄 단위로 파고드는 대신, 공식 Agent SDK가 내보내는 <code>SDKMessage</code> lifecycle을 함께 관찰하면서 같은 상태 머신 성격을 추론해 볼게요.</p>
-<h2 id="_1">핵심 질문<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>SDK의 <code>query()</code> stream만 보고도 원본 <code>queryLoop()</code>의 상태 머신적 성격을 관측/추론으로 분리해 설명할 수 있는가?</p>
-</blockquote>
-<h2 id="2026-08-03">실제 실행 관찰 상태 (2026-08-03)<a class="headerlink" href="#2026-08-03" title="Permanent link">&para;</a></h2>
-<p>Python SDK <code>0.2.128</code>, Claude Code CLI <code>2.1.220</code>, 실제 <code>claude-opus-5</code> 호출로 열린 <code>ClaudeSDKClient</code>의 두 turn과 독립 <code>query()</code> 두 번을 순차 비교했다. 원시 message sequence와 SHA-256은 <a href="../../evidence/ch03-live/">3장 실제 실행 증거</a>에 기록했다.</p>
-<ul>
-<li><strong>관찰됨:</strong> 동일 client의 두 turn은 같은 session ID를 사용했고 두 번째 turn이 첫 turn의 controlled nonce를 반환했다.</li>
-<li><strong>관찰됨:</strong> 독립 <code>query()</code> 두 번은 서로 다른 session ID였고 두 번째 결과에 첫 nonce가 없었다.</li>
-<li><strong>관찰됨:</strong> <code>max_turns=1</code>에서 실제 MCP handler와 tool result 이후 <code>ResultMessage(error_max_turns, terminal_reason=max_turns, num_turns=2)</code>가 종료했다.</li>
-<li><strong>설명 보강:</strong> 동일 client에서도 각 질의마다 <code>SystemMessage.init</code>이 다시 방출될 수 있었다. init을 세션 전체에서 단 한 번만 오는 이벤트로 가정하지 않는다.</li>
-<li><strong>추가 관측 필요:</strong> compact boundary, max output 복구, Stop hook continuation, resume, 나머지 terminal error subtype은 아직 판정하지 않았다.</li>
-<li><strong>타입 대조 완료:</strong> Python SDK <code>0.2.128</code>의 <code>HookEvent</code>는 10종이고, TypeScript SDK <code>0.3.177</code>의 <code>HookEvent</code>는 더 넓다. 두 버전의 합집합을 공통 지원 목록처럼 쓰지 않는다.</li>
-</ul>
-<h2 id="31-repl-agent-loop">3.1 REPL이 아니라 agent loop다<a class="headerlink" href="#31-repl-agent-loop" title="Permanent link">&para;</a></h2>
-<p>단순 REPL은 이런 모습이에요.</p>
-<div class="highlight"><pre><span></span><code>read input
-  -&gt; evaluate
-  -&gt; print output
-</code></pre></div>
-<p>반면 Agent SDK 공식 문서의 루프는 조금 달라요.</p>
-<div class="highlight"><pre><span></span><code>prompt
-  -&gt; SystemMessage(init)
-  -&gt; AssistantMessage(text/tool_use)
-  -&gt; SDK executes tools
-  -&gt; UserMessage(tool_result)
-  -&gt; repeat
-  -&gt; AssistantMessage(final text)
-  -&gt; ResultMessage(cost/usage/session)
-</code></pre></div>
-<p>여기서 눈여겨볼 차이는 “도구 결과가 다음 판단의 입력이 된다”는 점이에요. 모델은 한 번에 답을 써 내려가는 게 아니라, 세계를 관찰하고 다시 판단하는 거죠.</p>
-<h2 id="32-state-sdk">3.2 원본 State 타입을 SDK 메시지로 번역하기<a class="headerlink" href="#32-state-sdk" title="Permanent link">&para;</a></h2>
-<p>원본 <code>queryLoop</code>의 State에는 messages, toolUseContext, autoCompactTracking, maxOutputTokensRecoveryCount, pendingToolUseSummary, stopHookActive, turnCount, transition 같은 필드가 있었어요. SDK판에서는 이 목록을 직접 관측했다고 말하기보다는, 아래 표처럼 공식 메시지에서 보이는 외부 신호로 번역해 볼게요.</p>
-<p>SDK 관점에서 보면 이 상태가 다음 메시지와 옵션으로 드러나요.</p>
-<table>
-<thead>
-<tr>
-<th>원본 상태 개념</th>
-<th>SDK 관측 증거</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>messages</code></td>
-<td><code>SDKAssistantMessage</code>, <code>SDKUserMessage</code>, replay/session history</td>
-</tr>
-<tr>
-<td><code>toolUseContext</code></td>
-<td><code>SDKSystemMessage.init.tools</code>, <code>Options.allowedTools</code>, <code>permissionMode</code></td>
-</tr>
-<tr>
-<td>auto compact tracking</td>
-<td>TypeScript <code>SDKCompactBoundaryMessage</code>; Python <code>0.2.128</code>에서는 별도 공개 class와 live event를 이번 장에서 확인하지 못함</td>
-</tr>
-<tr>
-<td>max output token recovery</td>
-<td><code>SDKAssistantMessage.error: "max_output_tokens"</code>, result error subtype</td>
-</tr>
-<tr>
-<td>pending tool summary</td>
-<td>TypeScript <code>SDKToolUseSummaryMessage</code>; Python은 실제 message shape 추가 관측 필요</td>
-</tr>
-<tr>
-<td>stop hook active</td>
-<td><code>StopHookInput</code>, <code>SDKHook*</code> events</td>
-</tr>
-<tr>
-<td>turn count</td>
-<td><code>SDKResultMessage.num_turns</code>, <code>Options.maxTurns</code></td>
-</tr>
-<tr>
-<td>transition reason</td>
-<td>message order + result subtype + terminal reason</td>
-</tr>
-</tbody>
-</table>
-<p>이 표가 3장의 핵심이에요. SDK는 내부 state object를 직접 보여 주지는 않지만, state의 외부 증거는 충분히 건네줘요.</p>
-<h2 id="33">3.3 이 장에서 추적할 다섯 핵심 메시지 역할<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
-<p>이 장의 기본 루프를 읽을 때 먼저 추적할 역할은 다섯 개예요. 이것은 현재 SDK가 내보내는 전체 메시지 union이 아니에요. 실제 Python <code>0.2.128</code> run에도 아래 표 밖의 <code>RateLimitEvent</code>가 방출됐고, TypeScript <code>0.3.177</code>의 <code>SDKMessage</code> union에는 compact, hook, task, permission 등 더 많은 메시지가 있어요.</p>
-<table>
-<thead>
-<tr>
-<th>메시지</th>
-<th>역할</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SystemMessage</code> / <code>SDKSystemMessage</code></td>
-<td>세션 시작과 metadata. <code>subtype: "init"</code></td>
-</tr>
-<tr>
-<td><code>AssistantMessage</code> / <code>SDKAssistantMessage</code></td>
-<td>모델 응답. text와 <code>tool_use</code> block 포함</td>
-</tr>
-<tr>
-<td><code>UserMessage</code> / <code>SDKUserMessage</code></td>
-<td>도구 결과 또는 mid-loop user input</td>
-</tr>
-<tr>
-<td><code>StreamEvent</code> / <code>SDKPartialAssistantMessage</code></td>
-<td>partial message를 켰을 때 raw stream delta</td>
-</tr>
-<tr>
-<td><code>ResultMessage</code> / <code>SDKResultMessage</code></td>
-<td>루프 종료. result, usage, cost, session_id, subtype</td>
-</tr>
-</tbody>
-</table>
-<p>원본에서 말한 “반복마다 상태를 재구성한다”는 구조는, SDK에서는 이런 메시지 순서로 모습을 드러내요.</p>
-<div class="highlight"><pre><span></span><code>init
-  -&gt; assistant(tool_use)
-  -&gt; user(tool_result)
-  -&gt; assistant(tool_use)
-  -&gt; user(tool_result)
-  -&gt; assistant(text only)
-  -&gt; result(success)
-</code></pre></div>
-<h2 id="34-continue-sdk">3.4 Continue 전환을 SDK로 읽기<a class="headerlink" href="#34-continue-sdk" title="Permanent link">&para;</a></h2>
-<p>원본은 여러 Continue reason을 가지고 있어요. SDK에서 같은 이름이 그대로 보이지 않더라도, 메시지 패턴으로 번역해 볼 수 있어요.</p>
-<table>
-<thead>
-<tr>
-<th>원본 Continue reason</th>
-<th>SDK에서 보이는 패턴</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>next_turn</code></td>
-<td>assistant가 <code>tool_use</code>를 내고, SDK가 tool_result를 돌려준 뒤 다음 assistant message</td>
-</tr>
-<tr>
-<td><code>max_output_tokens_escalate</code></td>
-<td>assistant error <code>max_output_tokens</code>, 이후 재시도성 메시지</td>
-</tr>
-<tr>
-<td><code>max_output_tokens_recovery</code></td>
-<td>output limit 이후 continuation prompt 또는 final error</td>
-</tr>
-<tr>
-<td><code>reactive_compact_retry</code></td>
-<td>prompt too long/error 이후 <code>compact_boundary</code> 또는 error result</td>
-</tr>
-<tr>
-<td><code>collapse_drain_retry</code></td>
-<td>압축/정리 후 재시도 흐름</td>
-</tr>
-<tr>
-<td><code>stop_hook_blocking</code></td>
-<td>Stop hook이 추가 context나 blocking response를 만든 뒤 계속</td>
-</tr>
-<tr>
-<td><code>token_budget_continuation</code></td>
-<td>budget 남은 상태에서 추가 assistant turn</td>
-</tr>
-</tbody>
-</table>
-<p>강의에서는 이 표에서 <code>Observed</code>와 <code>Inferred</code>를 구분하는 게 좋아요. <code>SDKCompactBoundaryMessage</code>처럼 직접 보이는 것은 Observed예요. 내부 transition reason 이름을 그대로 안다고 말하기보다는, 메시지 순서로 추론한다고 표시해 주는 거죠.</p>
-<h2 id="35-terminal-sdk">3.5 Terminal 종료를 SDK로 읽기<a class="headerlink" href="#35-terminal-sdk" title="Permanent link">&para;</a></h2>
-<p>SDK에서 종료는 <code>SDKResultMessage</code>가 담당해요. 특히 <code>subtype</code>을 잘 봐 두면 좋아요. 아래 목록은 TypeScript SDK <code>0.3.177</code>의 공개 <code>SDKResultMessage</code> union과 일치해요. Python SDK <code>0.2.128</code>의 <code>ResultMessage.subtype</code> annotation은 제한된 <code>Literal</code>이 아니라 <code>str</code>이고, 이번 Python live run에서 직접 관찰한 값은 <code>success</code>와 <code>error_max_turns</code>뿐이에요.</p>
-<table>
-<thead>
-<tr>
-<th>SDK result subtype</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>success</code></td>
-<td>정상 종료. <code>result</code> field 사용 가능</td>
-</tr>
-<tr>
-<td><code>error_max_turns</code></td>
-<td><code>Options.maxTurns</code> 제한 도달</td>
-</tr>
-<tr>
-<td><code>error_max_budget_usd</code></td>
-<td><code>Options.maxBudgetUsd</code> 제한 도달</td>
-</tr>
-<tr>
-<td><code>error_during_execution</code></td>
-<td>API 실패, 취소, 실행 오류 등</td>
-</tr>
-<tr>
-<td><code>error_max_structured_output_retries</code></td>
-<td>structured output 검증 재시도 실패</td>
-</tr>
-</tbody>
-</table>
-<p>원본의 Terminal reason은 이보다 더 세밀해요. SDK 책에서는 <code>ResultMessage.subtype</code>, <code>stop_reason</code>, <code>terminal_reason</code>, <code>errors</code>, <code>permission_denials</code>를 함께 읽어 종료 원인을 복원해 볼게요.</p>
-<h2 id="36">3.6 컨텍스트 전처리와 압축<a class="headerlink" href="#36" title="Permanent link">&para;</a></h2>
-<p>원본 루프는 API 호출 전에 context preprocessing을 수행했어요.</p>
-<ul>
-<li>tool result budget trimming</li>
-<li>snip compact</li>
-<li>microcompact 같은 내부 전략 추론</li>
-<li>context collapse</li>
-<li>autocompact</li>
-</ul>
-<p>context window에는 system prompt, tool definitions, conversation history, tool inputs, tool outputs가 누적돼요. TypeScript SDK <code>0.3.177</code> 공개 타입에는 <code>SDKCompactBoundaryMessage</code>가 정의되어 있어요. 그러나 이번 Python <code>0.2.128</code> live run에서는 compact를 유도하지 않았고 dedicated compact message도 관찰하지 못했어요. 실제 Python wire shape와 compact 전후 보존 내용은 9~12장의 별도 실험으로 남겨요.</p>
-<p>강의 화면에서는 다음을 보여 주면 좋아요.</p>
-<div class="highlight"><pre><span></span><code>conversation grows
-  -&gt; tool outputs accumulate
-  -&gt; compact boundary
-  -&gt; preserved recent messages
-  -&gt; summarized older context
-</code></pre></div>
-<p>이 장은 9~12장의 컨텍스트 관리로 자연스럽게 이어져요.</p>
-<h2 id="37-hook-loop">3.7 Hook과 loop 개입 지점<a class="headerlink" href="#37-hook-loop" title="Permanent link">&para;</a></h2>
-<p>원본 루프에는 Stop hook, tool hook, blocking error injection 같은 개입 지점이 있어요. 다만 hook 이름은 언어와 SDK 버전에 따라 달라요. 아래 목록은 2026-08-03에 설치된 공개 타입을 직접 읽은 결과예요.</p>
-<p>Python SDK <code>0.2.128</code>의 <code>HookEvent</code>는 다음 10종이에요.</p>
-<ul>
-<li><code>PreToolUse</code></li>
-<li><code>PostToolUse</code></li>
-<li><code>PostToolUseFailure</code></li>
-<li><code>UserPromptSubmit</code></li>
-<li><code>Stop</code></li>
-<li><code>SubagentStart</code></li>
-<li><code>SubagentStop</code></li>
-<li><code>PreCompact</code></li>
-<li><code>Notification</code></li>
-<li><code>PermissionRequest</code></li>
-</ul>
-<p>TypeScript SDK <code>0.3.177</code>은 이보다 넓고, Python 목록에 없는 <code>SessionStart</code>, <code>SessionEnd</code>, <code>PostCompact</code>, <code>PermissionDenied</code> 등도 <code>HookEvent</code>에 포함해요. 그러므로 “Agent SDK의 공통 hook 목록” 하나를 외워서는 안 돼요. 사용하는 언어와 설치 버전의 공개 타입을 기준으로 등록해야 해요.</p>
-<p>Python의 <code>ClaudeAgentOptions.include_hook_events</code>와 TypeScript의 <code>includeHookEvents</code> 옵션은 공개 타입에서 확인됐어요. 이 옵션은 hook lifecycle event를 output stream으로 내보내도록 구성하는 스위치예요. 다만 이번 3장 실제 실행에서는 hook을 등록하지 않아 hook callback과 lifecycle event가 발생하지 않았어요. 따라서 옵션과 타입의 존재는 <code>Configured</code>, 실제 hook 순서와 payload는 <code>추가 관측 필요</code>로 구분해요.</p>
-<h2 id="38-resume">3.8 세션 지속과 resume<a class="headerlink" href="#38-resume" title="Permanent link">&para;</a></h2>
-<p>원본에서는 messages와 state가 반복 사이에 그대로 유지돼요. SDK에서는 <code>session_id</code>, <code>resume</code>, <code>continue</code>, <code>sessionStore</code>, <code>persistSession</code>이 그 역할을 맡아요.</p>
-<div class="highlight"><pre><span></span><code>first query
-  -&gt; SDKSystemMessage.init.session_id
-  -&gt; SDKResultMessage.session_id
-  -&gt; later query with resume
-  -&gt; previous context restored
-</code></pre></div>
-<p>강의에서는 “모델이 기억한다”가 아니라 “세션 기록이 복원된다”라고 말해 주는 게 좋아요. 이 구분을 짚고 가면 이해가 한결 쉬워져요.</p>
-<h2 id="39">3.9 캔버스 표현<a class="headerlink" href="#39" title="Permanent link">&para;</a></h2>
-<p>3장의 캔버스는 상태 머신의 모습을 담는 게 좋아요.</p>
-<div class="highlight"><pre><span></span><code>flowchart LR
-    A[&quot;Prompt&quot;] --&gt; B[&quot;System init&quot;]
-    B --&gt; C[&quot;Assistant message&quot;]
-    C --&gt; D{&quot;tool_use?&quot;}
-    D --&gt;|yes| E[&quot;SDK executes tools&quot;]
-    E --&gt; F[&quot;UserMessage tool_result&quot;]
-    F --&gt; C
-    D --&gt;|no| G[&quot;Final assistant text&quot;]
-    G --&gt; H[&quot;ResultMessage&quot;]
-    C --&gt; I[&quot;Hook / permission / compact events&quot;]
-    I --&gt; C
-</code></pre></div>
-<p>하단 테이블에는 다음 열을 담아 주세요.</p>
-<table>
-<thead>
-<tr>
-<th>Seq</th>
-<th>SDK message</th>
-<th>Loop meaning</th>
-<th>Evidence level</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>system:init</code></td>
-<td>session opened</td>
-<td>Observed</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>assistant:tool_use</code></td>
-<td>next turn required</td>
-<td>Observed</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>user:tool_result</code></td>
-<td>world result returned</td>
-<td>Observed</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>system:compact_boundary</code></td>
-<td>context rewritten</td>
-<td>Additional observation required</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>result:error_max_turns</code></td>
-<td>terminal by turn cap</td>
-<td>Observed</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_2">학생 실습<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>Agent SDK의 한 세션을 이벤트 테이프로 설명해 줘.
+<!-- Generated by scripts/publish_book_sdk_live_evidence.mjs. -->
 
-반드시 다음을 포함해 줘.
-1. SystemMessage init에서 확인할 metadata
-2. AssistantMessage 안의 text와 tool_use 차이
-3. UserMessage tool_result가 다음 턴에 미치는 영향
-4. compact_boundary가 의미하는 것
-5. ResultMessage subtype으로 종료 상태를 읽는 법
-</code></pre></div>
-<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
-<p>에이전트 루프는 “모델에게 묻고 답을 받는 함수”가 아니에요. 상태, 도구, 권한, 압축, hook, 세션 복원이 함께 얽혀 돌아가는 실행 기계에 가깝죠.</p>
-<p>원본 <code>queryLoop()</code>의 깊이는 SDK에서도 사라지지 않는다고 추론할 수 있어요. 다만 읽는 위치가 내부 state object가 아니라 공식 <code>SDKMessage</code> stream일 뿐이에요. 이번 장에서 학생에게 실제로 보여 줄 수 있는 증거는 session/init, partial stream, <code>tool_use</code>, <code>tool_result</code>, <code>success</code>, <code>error_max_turns</code>예요. hook과 compact는 별도 live run이 확보된 뒤에만 같은 증거 테이프에 올려야 해요.</p>
+<h1 id="3-python-sdk">3장 실제 Python SDK 관찰<a class="headerlink" href="#3-python-sdk" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 cookbook 예제를 설명하는 정적 해설이 아니라, Python Claude Agent SDK를 실제
+<code>claude-opus-5</code>로 순차 호출해 저장한 공개 증거다. 테스트 assertion은 recorder와
+projection 코드의 계약만 검증하며, 아래 판정은 raw SDK message, permission callback, host process
+event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 나왔다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">한 번 수집하고 여러 표면에서 재생</p>
+<p>원전은 104개 사건이고 공개 projection은 43개다.
+credential, private prompt, 비공개 추론 payload, 사용자 절대 경로는 공개하지 않았다. 공개 사건은
+source event ID와 SHA-256을 유지한다.</p>
+</div>
+<h2 id="_1">실행 신원<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>campaign</td>
+<td><code>book-sdk-live-20260803</code></td>
+</tr>
+<tr>
+<td>model</td>
+<td><code>claude-opus-5</code></td>
+</tr>
+<tr>
+<td>proof gate</td>
+<td><code>accepted_with_notes</code></td>
+</tr>
+<tr>
+<td>secret scan</td>
+<td><code>passed</code></td>
+</tr>
+<tr>
+<td>raw source / public</td>
+<td><strong>104 / 43</strong></td>
+</tr>
+<tr>
+<td>observed / correction / more evidence</td>
+<td><strong>5 / 2 / 1</strong></td>
+</tr>
+<tr>
+<td>trace SHA-256</td>
+<td><code>ed77e98e832b054b323636352881f9e960025e9ba3447a81c1c31dace33ea16d</code></td>
+</tr>
+<tr>
+<td>summary SHA-256</td>
+<td><code>561a781410208e263a18f538fea74f5c63e30ca9da293e0ed6743ef2256c5484</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">유효한 실제 실행<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>attempt</th>
+<th>case</th>
+<th>actual model</th>
+<th style="text-align: right;">source events</th>
+<th>raw SDK SHA-256</th>
+<th>host process SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>045357-39114649</code></td>
+<td><code>persistent-client-two-turns</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">29</td>
+<td><code>ce0fe5dee65d20fe5a3e235b3dc3295f5ca04dba1aedd593640c459ae26d3d6b</code></td>
+<td><code>438c10dede5f1ea8d7b29aa4e8d08d8a7260e1301ebbd0654073ec67485547c4</code></td>
+</tr>
+<tr>
+<td><code>045504-b1bb05a0</code></td>
+<td><code>stateless-query-two-sessions</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">50</td>
+<td><code>1e9453006fa1b4cac04728b00cdd26b2a19f8ba1acb8cfe19847ae9c2d9f45cd</code></td>
+<td><code>82d6b0995a4668f86ba7cd7963645bc45bf76799dad38c3d73d4e99bd4d7b5f6</code></td>
+</tr>
+<tr>
+<td><code>050250-58c61dd6</code></td>
+<td><code>max-turns-after-tool-result</code></td>
+<td><code>claude-opus-5</code></td>
+<td style="text-align: right;">25</td>
+<td><code>5e25ea706837dadf4bcf40ac638bdfdc5c2be8d9523fc67793aa37ea8a6bcaf7</code></td>
+<td><code>9c62f6f95c3cf1bcb38ad52c93e6bc8dadb1015775c82a4b147e627e4aeb9c75</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">관찰 판정<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>claim</th>
+<th>판정</th>
+<th>실제 관찰 또는 경계</th>
+<th>첫 source ref</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>persistent-client-preserves-session-context</code></td>
+<td><strong>관찰됨</strong></td>
+<td>동일 ClaudeSDKClient의 두 turn은 같은 session ID를 유지했고, 두 번째 결과가 첫 turn에만 주입한 controlled nonce를 반환했다.</td>
+<td><code>attempt:045357-39114649:sdk-message:2</code></td>
+</tr>
+<tr>
+<td><code>init-reemits-per-client-turn</code></td>
+<td><strong>관찰됨</strong></td>
+<td>현재 Python SDK와 CLI 조합에서는 같은 client의 다음 질의에도 SystemMessage.init이 다시 방출됐다. init은 session 전체에서 한 번뿐인 사건이 아니다.</td>
+<td><code>attempt:045357-39114649:sdk-message:2</code></td>
+</tr>
+<tr>
+<td><code>stateless-query-opens-independent-sessions</code></td>
+<td><strong>관찰됨</strong></td>
+<td>독립 query 두 번은 서로 다른 session ID를 만들었고, 두 번째 결과에는 첫 query의 controlled nonce가 없었다.</td>
+<td><code>attempt:045504-b1bb05a0:sdk-message:2</code></td>
+</tr>
+<tr>
+<td><code>tool-result-precedes-max-turn-terminal</code></td>
+<td><strong>관찰됨</strong></td>
+<td>max_turns=1에서도 Assistant tool_use, Python handler 실행, UserMessage tool_result가 끝난 뒤 error_max_turns와 num_turns=2인 ResultMessage가 종료했다.</td>
+<td><code>attempt:050250-58c61dd6:sdk-message:16</code></td>
+</tr>
+<tr>
+<td><code>five-core-loop-roles-appear-in-tape</code></td>
+<td><strong>관찰됨</strong></td>
+<td>한 max-turn run에서 SystemMessage, StreamEvent, AssistantMessage, UserMessage, ResultMessage가 같은 session의 순차 evidence tape로 나타났다.</td>
+<td><code>attempt:050250-58c61dd6:sdk-message:2</code></td>
+</tr>
+<tr>
+<td><code>five-core-roles-are-not-complete-message-union</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>세 Python run에는 RateLimitEvent도 실제 방출됐다. 다섯 메시지는 강의의 핵심 역할이지 SDK 전체 Message union이 아니다.</td>
+<td><code>attempt:045357-39114649:sdk-message:4</code></td>
+</tr>
+<tr>
+<td><code>hook-surface-is-language-and-version-specific</code></td>
+<td><strong>범위 수정 필요</strong></td>
+<td>Python SDK 0.2.128 HookEvent는 10종이고 TypeScript SDK 0.3.177 표면은 더 넓다. SessionStart, PostCompact, PermissionDenied 등을 공통 Python 목록으로 쓰면 안 된다.</td>
+<td><code>python-sdk:0.2.128:types.py:HookEvent:sha256:de495a6fa20136b0dd0528865e94c5f429eef5ad5ba197e214a2e597e4601e2a</code></td>
+</tr>
+<tr>
+<td><code>compact-resume-recovery-and-hook-runtime</code></td>
+<td><strong>추가 관측 필요</strong></td>
+<td>resume, compact boundary, max output/budget/structured-output terminal 경로와 실제 hook lifecycle 순서는 별도 순차 live run이 필요하다.</td>
+<td><code>spec:claims:compact-resume-recovery-and-hook-runtime</code></td>
+</tr>
+</tbody>
+</table>
+<p>중요한 판정 규칙은 다음과 같다.</p>
+<ul>
+<li><strong>관찰됨</strong>: 기대 사건과 순서가 이번 raw evidence에 직접 존재한다.</li>
+<li><strong>수정 필요</strong>: 같은 버전·설정·도구 범위에서 책 문장과 직접 충돌할 때만 사용한다.</li>
+<li><strong>추가 관측 필요</strong>: 사건을 유도하지 않았거나 범위가 달라 이번 실행만으로 판단할 수 없다.</li>
+<li>따라서 <strong>관찰하지 못했다는 사실만으로 책이 틀렸다고 판정하지 않는다.</strong></li>
+</ul>
+<h2 id="_4">무효 시도<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>없음</li>
+</ul>
+<h2 id="_5">같은 증거를 보는 공개 표면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>표면</th>
+<th>시각화 관점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch03">Agent Flow · ch03 실행</a></td>
+<td>원인, tool use/result, permission, claim 경계</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch03:book-sdk-live-20260803">Runtime City · ch03 실행</a></td>
+<td>OTel 시간축, 실행 zone, Observed/Missing</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch03">Pixel Agents · ch03 증거</a></td>
+<td>actor와 tool lifecycle 상태</td>
+</tr>
+<tr>
+<td><a href="https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch03">Hypnagonia · Observation Ordeal</a></td>
+<td>검증 주장, 선택, 관찰 consequence</td>
+</tr>
+</tbody>
+</table>
+<p>각 표면은 같은 JSON을 무작정 복제한 것이 아니다. Agent Flow는 원인·도구·결과를, Runtime City는
+시간축과 실행 구역을, Pixel Agents는 actor 상태를, Observation Ordeal은 주장·선택·결과를
+표현한다. 어느 renderer도 raw evidence의 판정을 바꿀 수 없다.</p>
+<h2 id="_6">공개 경계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>five-core-roles-are-not-complete-message-union</code>: 세 Python run에는 RateLimitEvent도 실제 방출됐다. 다섯 메시지는 강의의 핵심 역할이지 SDK 전체 Message union이 아니다.</li>
+<li><code>hook-surface-is-language-and-version-specific</code>: Python SDK 0.2.128 HookEvent는 10종이고 TypeScript SDK 0.3.177 표면은 더 넓다. SessionStart, PostCompact, PermissionDenied 등을 공통 Python 목록으로 쓰면 안 된다.</li>
+<li>
+<p><code>compact-resume-recovery-and-hook-runtime</code>: resume, compact boundary, max output/budget/structured-output terminal 경로와 실제 hook lifecycle 순서는 별도 순차 live run이 필요하다.</p>
+</li>
+<li>
+<p>공개 JSON: <a href="../ch03-live.json">ch03-live.json</a></p>
+</li>
+</ul>
 
 
 

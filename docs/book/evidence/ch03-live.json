@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-03T17:27:31.658Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch03",
+  "campaignId": "book-sdk-live-20260803",
+  "title": "3장 에이전트 루프: session, turn, tool result, terminal result",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch03:book-sdk-live-20260803:2026-08-03T05:02:55.525Z",
+    "traceSha256": "ed77e98e832b054b323636352881f9e960025e9ba3447a81c1c31dace33ea16d",
+    "summarySha256": "561a781410208e263a18f538fea74f5c63e30ca9da293e0ed6743ef2256c5484",
+    "sourceEventCount": 104,
+    "publicEventCount": 43,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "045357-39114649",
+      "case_id": "persistent-client-two-turns",
+      "raw_process_sha256": "438c10dede5f1ea8d7b29aa4e8d08d8a7260e1301ebbd0654073ec67485547c4",
+      "raw_sdk_sha256": "ce0fe5dee65d20fe5a3e235b3dc3295f5ca04dba1aedd593640c459ae26d3d6b",
+      "source_event_count": 29
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "045504-b1bb05a0",
+      "case_id": "stateless-query-two-sessions",
+      "raw_process_sha256": "82d6b0995a4668f86ba7cd7963645bc45bf76799dad38c3d73d4e99bd4d7b5f6",
+      "raw_sdk_sha256": "1e9453006fa1b4cac04728b00cdd26b2a19f8ba1acb8cfe19847ae9c2d9f45cd",
+      "source_event_count": 50
+    },
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "050250-58c61dd6",
+      "case_id": "max-turns-after-tool-result",
+      "raw_process_sha256": "9c62f6f95c3cf1bcb38ad52c93e6bc8dadb1015775c82a4b147e627e4aeb9c75",
+      "raw_sdk_sha256": "5e25ea706837dadf4bcf40ac638bdfdc5c2be8d9523fc67793aa37ea8a6bcaf7",
+      "source_event_count": 25
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "persistent-client-preserves-session-context",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "동일 ClaudeSDKClient의 두 turn은 같은 session ID를 유지했고, 두 번째 결과가 첫 turn에만 주입한 controlled nonce를 반환했다.",
+      "sourceRefs": [
+        "attempt:045357-39114649:sdk-message:2",
+        "attempt:045357-39114649:sdk-message:13",
+        "attempt:045357-39114649:sdk-message:16",
+        "attempt:045357-39114649:sdk-message:26"
+      ]
+    },
+    {
+      "id": "init-reemits-per-client-turn",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "현재 Python SDK와 CLI 조합에서는 같은 client의 다음 질의에도 SystemMessage.init이 다시 방출됐다. init은 session 전체에서 한 번뿐인 사건이 아니다.",
+      "sourceRefs": [
+        "attempt:045357-39114649:sdk-message:2",
+        "attempt:045357-39114649:sdk-message:16"
+      ]
+    },
+    {
+      "id": "stateless-query-opens-independent-sessions",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "독립 query 두 번은 서로 다른 session ID를 만들었고, 두 번째 결과에는 첫 query의 controlled nonce가 없었다.",
+      "sourceRefs": [
+        "attempt:045504-b1bb05a0:sdk-message:2",
+        "attempt:045504-b1bb05a0:sdk-message:24",
+        "attempt:045504-b1bb05a0:sdk-message:27",
+        "attempt:045504-b1bb05a0:sdk-message:47"
+      ]
+    },
+    {
+      "id": "tool-result-precedes-max-turn-terminal",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "max_turns=1에서도 Assistant tool_use, Python handler 실행, UserMessage tool_result가 끝난 뒤 error_max_turns와 num_turns=2인 ResultMessage가 종료했다.",
+      "sourceRefs": [
+        "attempt:050250-58c61dd6:sdk-message:16",
+        "attempt:050250-58c61dd6:process-event:17",
+        "attempt:050250-58c61dd6:sdk-message:21",
+        "attempt:050250-58c61dd6:sdk-message:22",
+        "attempt:050250-58c61dd6:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "five-core-loop-roles-appear-in-tape",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "한 max-turn run에서 SystemMessage, StreamEvent, AssistantMessage, UserMessage, ResultMessage가 같은 session의 순차 evidence tape로 나타났다.",
+      "sourceRefs": [
+        "attempt:050250-58c61dd6:sdk-message:2",
+        "attempt:050250-58c61dd6:sdk-message:5",
+        "attempt:050250-58c61dd6:sdk-message:16",
+        "attempt:050250-58c61dd6:sdk-message:21",
+        "attempt:050250-58c61dd6:sdk-message:22"
+      ]
+    },
+    {
+      "id": "five-core-roles-are-not-complete-message-union",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "세 Python run에는 RateLimitEvent도 실제 방출됐다. 다섯 메시지는 강의의 핵심 역할이지 SDK 전체 Message union이 아니다.",
+      "sourceRefs": [
+        "attempt:045357-39114649:sdk-message:4",
+        "attempt:045504-b1bb05a0:sdk-message:4",
+        "attempt:050250-58c61dd6:sdk-message:4"
+      ]
+    },
+    {
+      "id": "hook-surface-is-language-and-version-specific",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "Python SDK 0.2.128 HookEvent는 10종이고 TypeScript SDK 0.3.177 표면은 더 넓다. SessionStart, PostCompact, PermissionDenied 등을 공통 Python 목록으로 쓰면 안 된다.",
+      "sourceRefs": [
+        "python-sdk:0.2.128:types.py:HookEvent:sha256:de495a6fa20136b0dd0528865e94c5f429eef5ad5ba197e214a2e597e4601e2a",
+        "typescript-sdk:0.3.177:sdk.d.ts:HookEvent:sha256:3dcd0551702fc970c7dc78adc115f6083ebdd23cddba1bd087fec3713182cb18"
+      ]
+    },
+    {
+      "id": "compact-resume-recovery-and-hook-runtime",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "resume, compact boundary, max output/budget/structured-output terminal 경로와 실제 hook lifecycle 순서는 별도 순차 live run이 필요하다.",
+      "sourceRefs": [
+        "spec:claims:compact-resume-recovery-and-hook-runtime"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch03 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch03",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch03 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch03:book-sdk-live-20260803",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch03 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch03",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch03",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}

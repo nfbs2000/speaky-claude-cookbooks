@@ -11,6 +11,7 @@
 - [2장: 도구 시스템 — 모델의 손이 되는 40개 이상의 도구](part1/ch02.md)
 - [2장 실제 Python SDK 관찰: 도구 표면과 권한 순서](evidence/ch02-live.md)
 - [3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기](part1/ch03.md)
+- [3장 실제 Python SDK 관찰: session, turn, tool result, terminal result](evidence/ch03-live.md)
 - [4장: 도구 실행 오케스트레이션 - 권한, 동시성, 스트리밍, 인터럽트](part1/ch04.md)
 - [4장 실제 Python SDK 관찰: raw/OTel에서 공개 replay까지](evidence/ch04-live.md)
 - [4b장: 플랜 모드 - 뛰기 전에 살펴보기](part1/ch04b.md)
