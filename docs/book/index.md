@@ -52,6 +52,7 @@
 ## 제4부: 프롬프트 캐싱
 
 - [13장: 캐시 아키텍처와 브레이크포인트 설계](part4/ch13.md)
+- [13장 실제 Python SDK 캐시 관찰: 안정 prefix와 동적 suffix 분리](evidence/ch13-live.md)
 - [14장: 캐시 브레이크 감지 시스템](part4/ch14.md)
 - [15장: 캐시 최적화 패턴](part4/ch15.md)
 
