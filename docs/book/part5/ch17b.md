@@ -1,17 +1,19 @@
 # 17b장: 프롬프트 인젝션 방어
 
-이 페이지는 한국어 SDK 책의 `17b장: 프롬프트 인젝션 방어`을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.
+이 페이지는 한국어 SDK 책의 `17b장: 프롬프트 인젝션 방어`을 공개 Python cookbook, 공식 Agent SDK 문서와 실제 Python SDK 실행 증거에 맞춰 다시 쓴 공개판이다. 정적 예제가 말하는 설계 가능성과 이번 실행에서 실제로 관찰한 사건을 구분한다.
+
+> 실제 실행 증거: [raw 문서, Opus 5 ToolUse, explicit deny와 과거 4.8 fallback 교정](../evidence/ch17b-live.md)
 
 **분류:** 제5부: 안전성과 권한<br>
 **공개 상태:** `public`<br>
-**근거 신뢰도:** `high`<br>
+**근거 신뢰도:** `medium` — 실제 두 Opus 5 표본은 있으나 일반 방어율과 sanitizer 효과는 미관찰<br>
 **원문 위치:** `docs/book-sdk-ko/src/part5/ch17b.md`
 
 ## 이 장의 공개판 요지
 
-이 장은 공개 SDK와 cookbook 예제로 대부분 직접 설명할 수 있다.
+이 장에서 직접 관찰한 핵심은 세 층이다. Custom MCP text와 U+202E는 raw ToolResultBlock에 보존됐고, 한 통제 표본에서는 위험 ToolUse가 없었으며, 다른 표본에서는 Opus 5가 marker ToolUse를 만들었지만 explicit deny가 handler 실행을 막았다.
 
-프롬프트 인젝션 방어는 공개판에서 신뢰 경계, tool result sanitization, retrieval source labeling, user approval, structured output validation으로 다룬다. threat intelligence, RAG, citations, vulnerability detection examples가 근거를 제공한다. 핵심은 외부 문서와 tool result를 instruction으로 취급하지 않는 것이다. agent가 읽은 내용, 사용자 지침, 시스템 지침, tool result를 UI와 로그에서 분리해 표시해야 한다.
+SDK가 tool result를 자동 sanitize한 증거는 없다. Citation, structured output validation, 별도 sanitizer와 독립 classifier의 방어 효과도 이번 실행에서는 관찰하지 않았다. 아래 cookbook은 그 기능을 설계하고 후속 corpus를 만드는 참고 자료이지, 이번 17b 실행의 observed 판정을 대신하지 않는다.
 
 [Threat intelligence enrichment agent](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/tool_use/threat_intel_enrichment_agent.ipynb)를 근거로 삼는다. [Citations](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/misc/using_citations.ipynb)를 근거로 삼는다.
 
@@ -34,11 +36,11 @@
 
 ### 17b.2 신뢰 경계
 
-이 절은 원문의 `17b.2 신뢰 경계` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 프롬프트 인젝션 방어는 공개판에서 신뢰 경계, tool result sanitization, retrieval source labeling, user approval, structured output validation으로 다룬다. threat intelligence, RAG, citations, vul... 이며, 먼저 `Threat intelligence enrichment agent`를 기준 예제로 읽는다.
+이 절은 원문의 `17b.2 신뢰 경계`를 raw transport, model action, host enforcement로 나눈다. Source labeling과 별도 sanitizer는 host가 구현하고 검증해야 할 제품 정책이며 SDK의 자동 보장으로 쓰지 않는다.
 
 ### 17b.3 주입 후보 신호
 
-이 절은 원문의 `17b.3 주입 후보 신호` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 프롬프트 인젝션 방어는 공개판에서 신뢰 경계, tool result sanitization, retrieval source labeling, user approval, structured output validation으로 다룬다. threat intelligence, RAG, citations, vul... 이며, 먼저 `Threat intelligence enrichment agent`를 기준 예제로 읽는다.
+이 절은 role override, marker 행동, destructive 문장과 U+202E를 후보 신호로 사용한다. Transport에서 codepoint가 보존된 사실과 모델 내부에서 그 신호가 어떤 인과 효과를 냈는지는 서로 다른 주장이다.
 
 ### 17b.4 방어 캔버스
 
@@ -72,11 +74,12 @@
 ## 공개 경계
 
 - 비공개 방어 classifier는 다루지 않는다.
-- 방어는 공개 입력 분리, validation, permission, citation 패턴으로 설명한다.
+- 방어는 공개 입력 분리와 permission을 이번 observed 층으로 설명한다.
+- Validation, citation, structured output와 sanitizer 효과는 후속 관찰 대상으로 분리한다.
 
 ## 실습 방향
 
-- RAG 문서 안에 악성 instruction을 넣고 citation/permission/logging으로 분리되는지 테스트한다.
+- 웹, RAG, 파일, MCP source를 각각 독립 session에서 순차 실행하고 raw 원문, 정제본, ToolUse, handler와 denial을 함께 저장한다.
 
 ## Builder takeaway
 

@@ -13,6 +13,12 @@ const traceText = await fs.readFile(tracePath, 'utf8')
 const summaryText = await fs.readFile(summaryPath, 'utf8')
 const trace = JSON.parse(traceText)
 const summary = JSON.parse(summaryText)
+const citedModels = uniqueStrings(summary.actual_models)
+const replayModels = uniqueStrings(
+  summary.source_attempts
+    ?.filter((attempt) => attempt?.projection_role === 'replayed')
+    .map((attempt) => attempt.actual_model),
+)
 
 if (trace.chapterSlug !== summary.chapter_id) {
   throw new Error(`chapter_identity_mismatch: ${trace.chapterSlug} != ${summary.chapter_id}`)
@@ -41,7 +47,9 @@ const publicEvidence = {
     summarySha256: sha256(summaryText),
     sourceEventCount: summary.source_event_count,
     publicEventCount: trace.events.length,
-    model: summary.actual_models?.[0],
+    model: replayModels[0] || citedModels[0],
+    replayModels,
+    citedModels,
     proofGate: summary.proof_gate,
     secretScan: summary.secret_scan,
   },
@@ -108,7 +116,8 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 | 항목 | 값 |
 | --- | --- |
 | campaign | \`${evidence.campaignId}\` |
-| model | \`${evidence.source.model}\` |
+| replay model | \`${evidence.source.replayModels.join(', ') || evidence.source.model}\` |
+| supporting 포함 cited model | \`${evidence.source.citedModels.join(', ')}\` |
 | proof gate | \`${evidence.source.proofGate}\` |
 | secret scan | \`${evidence.source.secretScan}\` |
 | raw source / public | **${evidence.source.sourceEventCount} / ${evidence.source.publicEventCount}** |
@@ -222,6 +231,10 @@ function claimStatusLabel(status) {
 
 function clean(value) {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : ''
+}
+
+function uniqueStrings(value) {
+  return [...new Set(Array.isArray(value) ? value.filter((item) => typeof item === 'string' && item) : [])]
 }
 
 function sha256(value) {

@@ -2,7 +2,7 @@
 
 # 17b장: 프롬프트 인젝션 방어
 
-<span class="projection-status status-public">public</span> **신뢰도:** `high`
+<span class="projection-status status-public">public</span> **신뢰도:** `medium`
 
 ## 공개 SDK 기준 재작성
 
