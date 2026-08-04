@@ -106,6 +106,7 @@ nav:
           - "19장 실제 Python SDK project 지침 로드 관찰": book/evidence/ch19-live.md
       - "제6부: 고급 서브시스템":
           - "20장: 에이전트 생성과 오케스트레이션": book/part6/ch20.md
+          - "20장 실제 Python SDK worker 위임 관찰": book/evidence/ch20-live.md
           - "20b장: 팀과 멀티프로세스 협업": book/part6/ch20b.md
           - "20c장: Ultraplan - 원격 멀티 에이전트 계획 수립": book/part6/ch20c.md
           - "21장: Effort, Fast Mode, 그리고 Thinking": book/part6/ch21.md
