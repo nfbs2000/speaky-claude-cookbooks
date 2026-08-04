@@ -169,7 +169,7 @@ ${replayRows}
 
 ${boundaryRows || '- 이 projection에 Missing claim은 없지만, 원문에 기록된 실행 범위 밖 기능까지 일반화하지 않는다.'}
 
-- 공개 JSON: [${evidence.chapterSlug}-live.json](./${evidence.chapterSlug}-live.json)
+- 공개 JSON: [${evidence.chapterSlug}-live.json](../${evidence.chapterSlug}-live.json)
 `
 }
 
