@@ -1,83 +1,163 @@
 # 18b장: 샌드박스 시스템 - 격리된 실행 환경
 
-이 페이지는 한국어 SDK 책의 `18b장: 샌드박스 시스템 - 격리된 실행 환경`을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.
+> 공개 GitHub Pages 투영판: [18b장: 샌드박스 시스템](https://nfbs2000.github.io/speaky-claude-cookbooks/book/part5/ch18b/)
+>
+> 원시 SDK/host/OTel 판독표: [18b장 실제 SDK 관찰](../evidence/ch18b-live.md)
 
-**분류:** 제5부: 안전성과 권한<br>
-**공개 상태:** `public-rewrite`<br>
-**근거 신뢰도:** `medium`<br>
-**원문 위치:** `docs/book-sdk-ko/src/part5/ch18b.md`
+권한 시스템이 “실행을 허용할 것인가”를 다룬다면, sandbox는 허용된 Bash process가
+접근할 수 있는 범위를 제한합니다. 이 둘은 같은 것이 아닙니다. sandbox 설정,
+permission rule, 실제 command result, touched files를 함께 봐야 합니다.
 
-## 이 장의 공개판 요지
+## 18b.1 핵심 질문
 
-이 장은 원문의 내부 구현 표현을 공개 SDK 옵션, 메시지, 도구, 세션, notebook 실행 증거로 바꿔 읽어야 한다.
+> 동일한 명령이 sandbox off/on에서 어느 경로에 실제로 파일을 만들었는가?
 
-공개판에서는 Seatbelt/Bubblewrap 같은 내부 구현 중심 설명을 줄이고 Docker, Kubernetes, Modal, managed sandbox, self-hosted sandbox pattern으로 설명한다. hosting notebook과 managed agents sandbox docs가 실제 실행 환경 격리의 근거다. 샌드박스는 Bash 하나의 문제가 아니라 파일 시스템, 네트워크, credential, package install, persistent state, audit boundary의 조합이다.
+## 18b.2 현재 Python SandboxSettings
 
-[Hosting your agent](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/07_Hosting_the_agent.ipynb)를 근거로 삼는다. [Docker hosting](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/hosting/docker/README.md)를 근거로 삼는다.
+Python Agent SDK 0.2.128의 `SandboxSettings` 필드는 다음과 같습니다.
 
-!!! evidence "주요 cookbook 근거"
-    - [Hosting your agent](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/07_Hosting_the_agent.ipynb)
-    - [Docker hosting](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/hosting/docker/README.md)
-    - [Kubernetes hosting](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/hosting/kubernetes/README.md)
-    - [Self-hosted sandboxes](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/self_hosted_sandboxes/README.md)
+- `enabled`
+- `autoAllowBashIfSandboxed`
+- `excludedCommands`
+- `allowUnsandboxedCommands`
+- `network`
+- `ignoreViolations`
+- `enableWeakerNestedSandbox`
 
-!!! evidence "공식 문서 근거"
-    - [Hosting the Agent SDK](https://code.claude.com/docs/en/agent-sdk/hosting.md)
-    - [Securely deploying AI agents](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md)
-    - [Choose a sandbox environment](https://code.claude.com/docs/en/sandbox-environments.md)
+`network`에는 `allowedDomains`, `deniedDomains`, `allowManagedDomainsOnly`,
+`allowUnixSockets`, `allowAllUnixSockets`, `allowLocalBinding`, `allowMachLookup`,
+proxy port 등이 있습니다.
 
-## 원문 절 구조를 공개 SDK로 다시 읽기
+이 타입에는 `failIfUnavailable`이 없고 `managedSettings`도 sandbox field가 아닙니다.
+책에서 current Python option처럼 쓰면 안 됩니다. SDK docstring도 filesystem/network
+restriction은 sandbox setting만이 아니라 Read/Edit/WebFetch permission rule로
+구성한다고 명시합니다.
 
-### 18b.1 핵심 질문
+## 18b.3 실제 off/on 통제 비교
 
-이 절은 `샌드박스 시스템 - 격리된 실행 환경`의 질문을 공개 SDK에서 관측 가능한 사건으로 좁힌다. 답은 내부 구현명이 아니라 `ClaudeAgentOptions`, message stream, tool call, session record, cookbook 실행 결과에서 찾아야 한다.
+두 run의 모든 `AssistantMessage.model`은 실제 `claude-opus-5`였습니다. 요청 옵션이나
+init 설정값만 보고 실제 모델을 판정하지 않았습니다. 각 run의 임시 root에
+`workspace/`와 sibling output path를 만들고, 같은 형태의 command가 두 경로에 marker를
+쓰도록 했습니다. 실제 시스템 파일과 network는 건드리지 않았습니다.
 
-### 18b.2 SDK 샌드박스 표면
+두 terminal Result의 `model_usage`에는 보조 사용량으로 `claude-haiku-4-5-20251001`도
+기록됐습니다. 따라서 “사용자에게 응답한 AssistantMessage는 모두 Opus 5였다”는
+관찰과 “provider run 전체에서 Opus만 사용됐다”는 주장을 구분해야 합니다. 후자는
+이번 증거가 지지하지 않습니다.
 
-이 절은 OS 내부 구현보다 Docker, Kubernetes, managed/self-hosted sandbox, credential boundary, network/file isolation으로 재작성한다.
+### sandbox disabled control
 
-### 18b.3 관찰해야 할 경계
+- attempt `125947-4ccb1c9c`
+- OTel trace `95a77a594a208b2b89d5b3a8af09df01`
+- `sandbox.enabled=false`
 
-이 절은 원문의 `18b.3 관찰해야 할 경계` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 Seatbelt/Bubblewrap 같은 내부 구현 중심 설명을 줄이고 Docker, Kubernetes, Modal, managed sandbox, self-hosted sandbox pattern으로 설명한다. hosting notebook과 managed agents sandbox do... 이며, 먼저 `Hosting your agent`를 기준 예제로 읽는다.
+| path | before | after |
+| --- | --- | --- |
+| cwd 내부 | 없음 | `CH18B_INSIDE_WRITE`, SHA 기록 |
+| workspace sibling | 없음 | `CH18B_OUTSIDE_WRITE`, SHA 기록 |
 
-### 18b.4 캔버스 표현
+Bash ToolResult는 `CH18B_COMMAND_FINISHED`였고 host readback이 두 파일의 존재와 정확한
+내용을 확인했습니다.
 
-이 절은 화면 구성의 문제가 아니라 evidence projection 문제로 읽는다. prompt, tool use, tool result, final result, usage를 한 화면에서 분리해 보여주는 구조가 필요하다.
+### sandbox enabled
 
-### 18b.5 학생 실습
+- attempt `130028-cc834055`
+- OTel trace `9477403be667e4b66458ba1a0f5eebdb`
+- `enabled=true`
+- `autoAllowBashIfSandboxed=true`
+- `allowUnsandboxedCommands=false`
+- `excludedCommands=[]`
 
-이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.
+| path | Bash result | host readback |
+| --- | --- | --- |
+| cwd 내부 | 별도 오류 없음 | marker 파일 존재, SHA 일치 |
+| workspace sibling | `operation not permitted` | 파일 없음 |
 
-### Takeaway
+이 통제 pair에서 sandbox enabled 설정과 workspace 밖 write 차단이 함께 관찰됐습니다.
+내부 OS adapter 이름이나 생성된 profile 원문은 stream에 없으므로 macOS Seatbelt의
+세부 rule을 확인했다고 쓰지 않습니다.
 
-이 절의 결론은 공개 근거로 다시 닫는다. 내부 설명을 암기하는 대신 어떤 SDK 표면과 cookbook 파일로 같은 주장을 확인할 수 있는지 남긴다.
+## 18b.4 성공 envelope의 함정
 
-## 공개판 본문
+command는 세 문장을 `;`로 연결했습니다. sibling redirect가 실패해도 마지막 marker
+printf가 성공했기 때문에 SDK ToolResult는 `is_error=false`였고 terminal Result도
+success였습니다.
 
-원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.
+```text
+inside write success
+  ; outside write operation not permitted
+  ; final printf success
+  -> shell exit 0
+  -> ToolResult.is_error false
+```
 
-첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.
+따라서 `is_error=false`는 모든 subcommand 성공을 뜻하지 않습니다. stderr 원문과 host
+file state를 함께 검증해야 합니다. 반대로 모델은 file을 readback하지 않았다고
+정직하게 말했지만, probe host는 process 종료 후 직접 내용을 읽어 확정했습니다.
 
-둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.
+## 18b.5 관찰하지 않은 경계
 
-셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.
+- network domain/socket 정책은 실행하지 않았습니다.
+- `excludedCommands`와 `dangerouslyDisableSandbox` 우회는 실행하지 않았습니다.
+- `blocked_path` callback은 호출되지 않아 관찰하지 못했습니다.
+- sandbox unavailable fallback 동작은 current Python field로 구성하지 않았습니다.
+- enterprise/managed policy hierarchy와 exact OS adapter는 관찰하지 않았습니다.
+- temp directory는 host context가 정리하지만 post-cleanup file scan은 evidence에 없습니다.
 
-이 장을 읽을 때는 아래 순서가 좋다.
+## 18b.6 안전한 검증 프롬프트
 
-1. 먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.
-2. `ClaudeAgentOptions`, `query()`, `ClaudeSDKClient`, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.
-3. 원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.
-4. 마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.
+이 장의 프롬프트는 보안 판정을 피하려고 위험한 의도를 숨기지 않습니다. 실험 목적,
+허용 도구, 임시 경로, 금지된 부작용을 처음부터 좁게 선언합니다.
 
-## 공개 경계
+```text
+제공된 printf command를 Bash로 정확히 한 번만 실행한다.
+경로는 probe가 만든 임시 workspace와 그 임시 root의 sibling으로 제한한다.
+네트워크, 사용자 파일, 자격증명, 권한 상승, 지속 프로세스는 사용하지 않는다.
+실행 후 관찰한 출력만 짧게 보고하고 파일 성공 여부를 추측하지 않는다.
+```
 
-- OS별 내부 sandbox implementation은 공개 문서 범위 밖이면 단정하지 않는다.
-- 격리는 cookbook hosting examples와 공식 secure deployment 기준으로 설명한다.
+모델이 보안 사유로 거부하거나 더 낮은 모델로 fallback되면 프롬프트를 우회형으로
+바꾸지 않습니다. 해당 attempt를 `model_refusal_fallback`으로 보존하고 더 낮은 위험도의
+관찰 단계로 내립니다. 이번 두 공개 attempt에는 그 fallback이 없었으며, 실제 응답
+모델은 raw `AssistantMessage.model`로 확인했습니다.
 
-## 실습 방향
+## 18b.7 캔버스 표현
 
-- read-only research agent와 write-capable remediation agent의 sandbox 요구사항을 비교한다.
+```text
+Bash ToolUse
+  -> sandbox option snapshot
+  -> exact command
+  -> stdout/stderr + shell exit
+  -> host inside/outside file state
+  -> cleanup evidence
+```
 
-## Builder takeaway
+표시할 정보:
 
-이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
+| 필드 | 이유 |
+| --- | --- |
+| configured sandbox | host 실행 계약 |
+| cwd and target paths | boundary 비교 |
+| command separators/exit semantics | partial failure 해석 |
+| raw ToolResult | model-visible 실행 결과 |
+| touched file SHA/content | 실제 side effect |
+| not-observed fields | OS/network/policy 과장 방지 |
+
+## 18b.8 학생 실습
+
+```text
+실제 시스템 파일을 건드리지 않는 sandbox 통제 실험을 설계해라.
+
+1. temp cwd 내부와 sibling path를 준비한다.
+2. sandbox off/on에서 같은 command를 실행한다.
+3. ToolResult와 shell exit를 보존한다.
+4. host가 두 경로를 직접 readback한다.
+5. network, blockedPath, cleanup처럼 미검증 항목을 따로 남긴다.
+```
+
+## Takeaway
+
+Sandbox evidence는 옵션 배지나 모델 설명이 아니라 동일 명령의 경계 차이로 보여 줘야
+합니다. 이번 실제 pair에서 disabled는 두 파일을 만들었고 enabled는 cwd 내부만
+만들었습니다. 중간 차단이 있어도 마지막 shell command 때문에 success envelope가
+나올 수 있으므로 raw stderr와 touched-files 검증이 필수입니다.
