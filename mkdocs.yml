@@ -94,6 +94,7 @@ nav:
           - "15장 실제 Python SDK stable prefix 관찰": book/evidence/ch15-live.md
       - "제5부: 안전성과 권한":
           - "16장: 권한 시스템": book/part5/ch16.md
+          - "16장 실제 Python SDK 권한 우선순위 관찰": book/evidence/ch16-live.md
           - "17장: YOLO 분류기": book/part5/ch17.md
           - "17b장: 프롬프트 인젝션 방어": book/part5/ch17b.md
           - "18장: 훅 - 사용자 정의 가로채기 지점": book/part5/ch18.md
