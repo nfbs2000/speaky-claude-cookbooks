@@ -56,6 +56,7 @@
 - [14장: 캐시 브레이크 감지 시스템](part4/ch14.md)
 - [14장 실제 Python SDK 관찰: 동일 tool surface control과 변경 surface 비교](evidence/ch14-live.md)
 - [15장: 캐시 최적화 패턴](part4/ch15.md)
+- [15장 실제 Python SDK 관찰: stable prefix와 timestamp 한 글자 변경](evidence/ch15-live.md)
 
 ## 제5부: 안전성과 권한
 

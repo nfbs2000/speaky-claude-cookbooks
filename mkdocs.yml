@@ -91,6 +91,7 @@ nav:
           - "14장: 캐시 브레이크 감지 시스템": book/part4/ch14.md
           - "14장 실제 Python SDK cache-break 후보 관찰": book/evidence/ch14-live.md
           - "15장: 캐시 최적화 패턴": book/part4/ch15.md
+          - "15장 실제 Python SDK stable prefix 관찰": book/evidence/ch15-live.md
       - "제5부: 안전성과 권한":
           - "16장: 권한 시스템": book/part5/ch16.md
           - "17장: YOLO 분류기": book/part5/ch17.md

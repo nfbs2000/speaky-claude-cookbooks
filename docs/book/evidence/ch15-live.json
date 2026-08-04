@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "book-sdk-public-evidence-page.v1",
+  "generatedAt": "2026-08-04T00:47:55.726Z",
+  "courseId": "book-sdk-ko",
+  "chapterSlug": "ch15",
+  "campaignId": "book-sdk-live-20260804",
+  "title": "15장 캐시 최적화: 동일 stable prefix와 앞쪽 timestamp 변경 비교",
+  "source": {
+    "traceId": "recorded:book-sdk-ko:ch15:book-sdk-live-20260804:2026-08-04T00:29:50.558468Z",
+    "traceSha256": "7264443f4a7983d84ea35e256978212111386b07ee77c78a67291c3652538598",
+    "summarySha256": "2c600fc072aa606064ba3a3d6b363d7bb0e2bdd858d6888eafc6c94e64f59f0b",
+    "sourceEventCount": 60,
+    "publicEventCount": 47,
+    "model": "claude-opus-5",
+    "proofGate": "accepted_with_notes",
+    "secretScan": "passed"
+  },
+  "attempts": [
+    {
+      "actual_model": "claude-opus-5",
+      "attempt_id": "002934-a0095d45",
+      "case_id": "volatile-timestamp-prefix",
+      "projection_role": "replayed",
+      "raw_process_sha256": "f06228539cdb81a2271681c83d8b8400177be7c618362063f14747ec7c3feeeb",
+      "raw_sdk_sha256": "2a941b0f2ef9dd786bc094b764e4f6a1d213f37a869fd64809f23543b6b66ae0",
+      "source_chapter_id": "ch15",
+      "source_event_count": 60
+    }
+  ],
+  "invalidAttempts": [],
+  "claims": [
+    {
+      "id": "v2-prefix-triple-configured",
+      "status": "configured",
+      "evidenceLevel": "Configured",
+      "summary": "Host는 fresh attempt nonce를 공유하는 8,190-character system prompt 세 개를 만들고 stable-a/control은 byte-identical, volatile-b는 index 41 timestamp 한 글자만 다르게 설정했다. 새 SDK client/config directory 세 개를 concurrency 1로 실행했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:manifest:option_summary"
+      ]
+    },
+    {
+      "id": "four-execution-source-hashes-match",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Manifest가 실행 당시 chapter, probe, cases, runtime source SHA-256 네 개를 묶었고 실행 직후 현재 실행 파일과 4/4 일치했다.",
+      "sourceRefs": [
+        "spec:claims:four-execution-source-hashes-match"
+      ]
+    },
+    {
+      "id": "actual-opus-and-serial-boundaries",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "세 init model은 Opus 5이고 stable-a finish 20 뒤 control start 21, control finish 40 뒤 volatile-b start 41이 이어져 provider 실행이 병렬이 아님을 보였다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:2",
+        "attempt:002934-a0095d45:process-event:20",
+        "attempt:002934-a0095d45:process-event:21",
+        "attempt:002934-a0095d45:process-event:40",
+        "attempt:002934-a0095d45:process-event:41",
+        "attempt:002934-a0095d45:sdk-message:42"
+      ]
+    },
+    {
+      "id": "three-independent-sdk-sessions",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Init sequence 2, 22, 42가 서로 다른 runtime session ID를 보고해 세 run이 독립 SDK session임을 보였다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:2",
+        "attempt:002934-a0095d45:sdk-message:22",
+        "attempt:002934-a0095d45:sdk-message:42"
+      ]
+    },
+    {
+      "id": "host-system-hash-relations",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Process markers의 stable-a/control system SHA-256은 같고 volatile-b만 달라 내부 통제군과 변경군의 입력 관계가 기록됐다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:process-event:1",
+        "attempt:002934-a0095d45:process-event:21",
+        "attempt:002934-a0095d45:process-event:41"
+      ]
+    },
+    {
+      "id": "stable-baseline-created-cache",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Stable-a Result sequence 19는 cache creation 2,755, cache read 0, exact marker와 terminal success를 기록했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:19"
+      ]
+    },
+    {
+      "id": "byte-identical-control-read-cache",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Byte-identical stable-control Result sequence 39는 cache creation 130, cache read 2,629, exact marker와 terminal success를 기록했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:39"
+      ]
+    },
+    {
+      "id": "volatile-prefix-created-cache",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "앞쪽 timestamp 한 글자를 바꾼 volatile-b Result sequence 57은 cache creation 2,757, cache read 0, exact marker와 terminal success를 기록했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:57"
+      ]
+    },
+    {
+      "id": "all-markers-and-boundaries-complete",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "세 Result는 subtype success, is_error false, 요청 marker를 기록했고 finish marker는 18, 18, 16 SDK messages와 outcome completed를 보존했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:19",
+        "attempt:002934-a0095d45:process-event:20",
+        "attempt:002934-a0095d45:sdk-message:39",
+        "attempt:002934-a0095d45:process-event:40",
+        "attempt:002934-a0095d45:sdk-message:57",
+        "attempt:002934-a0095d45:process-event:58"
+      ]
+    },
+    {
+      "id": "init-runtime-surfaces-preserved",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "세 init은 tools/MCP/plugins 0개와 동시에 같은 built-in agents 5개, skills 16개, slash commands 43개를 보고했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:2",
+        "attempt:002934-a0095d45:sdk-message:22",
+        "attempt:002934-a0095d45:sdk-message:42"
+      ]
+    },
+    {
+      "id": "primary-opus-with-secondary-model-usage",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Primary init model은 Opus 5지만 세 terminal model_usage에는 Haiku 4.5 사용량도 함께 기록됐다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:19",
+        "attempt:002934-a0095d45:sdk-message:39",
+        "attempt:002934-a0095d45:sdk-message:57"
+      ]
+    },
+    {
+      "id": "raw-and-otel-sequences-align",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Raw SDK 52개와 OTel sdk.message 52개, raw process 8개와 OTel process.event 8개의 sequence가 각각 순서까지 일치하고 총 62 span은 한 trace에 속한다.",
+      "sourceRefs": [
+        "spec:claims:raw-and-otel-sequences-align"
+      ]
+    },
+    {
+      "id": "attempt-integrity-files-match",
+      "status": "observed",
+      "evidenceLevel": "Observed",
+      "summary": "Integrity manifest가 열거한 manifest, verdict, raw 4종, OTel SHA-256 7개를 현재 파일에서 다시 계산해 모두 일치했다.",
+      "sourceRefs": [
+        "spec:claims:attempt-integrity-files-match"
+      ]
+    },
+    {
+      "id": "timestamp-change-is-strong-miss-candidate",
+      "status": "inferred",
+      "evidenceLevel": "Inferred",
+      "summary": "같은 시도 안에서 byte-identical control은 2,629 read를 기록하고 index 41 한 글자 변경군은 read 0을 기록했으므로 앞쪽 timestamp 변경이 이 표본의 miss를 설명하는 가장 강한 통제 후보다. Server cause event는 없어 인과 확정은 아니다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:manifest:option_summary",
+        "attempt:002934-a0095d45:sdk-message:19",
+        "attempt:002934-a0095d45:sdk-message:39",
+        "attempt:002934-a0095d45:sdk-message:57"
+      ]
+    },
+    {
+      "id": "control-read-mostly-maps-to-stable-prefix",
+      "status": "inferred",
+      "evidenceLevel": "Inferred",
+      "summary": "Control의 read 2,629와 create 130은 baseline create 2,755와 비슷한 총량이고 host 차이는 latest user marker뿐이어서 안정 prefix 대부분의 재사용을 지지한다. Provider token-to-byte map은 없어 attribution은 추론이다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:19",
+        "attempt:002934-a0095d45:sdk-message:39"
+      ]
+    },
+    {
+      "id": "messages-cache-control-and-ttft-are-not-agent-options",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "Messages API cookbook의 cache_control과 stream TTFT를 ClaudeAgentOptions 기능으로 설명하면 안 된다. 이 Agent SDK probe는 Result usage를 수집했지만 provider cache-attributed TTFT를 수집하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:messages-cache-control-and-ttft-are-not-agent-options"
+      ]
+    },
+    {
+      "id": "empty-settings-do-not-remove-builtins",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "setting_sources와 tools를 비웠다는 사실을 built-in agent, skill, slash command도 없다는 뜻으로 설명하면 안 된다. 실제 init에는 세 표면이 존재했다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:2",
+        "attempt:002934-a0095d45:sdk-message:22",
+        "attempt:002934-a0095d45:sdk-message:42"
+      ]
+    },
+    {
+      "id": "captured-is-not-cache-pass",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "OTel CAPTURED, assertion count 0, verdict TODO, passed null은 raw 수집 완료와 수동 판독 대기 상태이지 cache 주장의 자동 pass가 아니다.",
+      "sourceRefs": [
+        "spec:claims:captured-is-not-cache-pass"
+      ]
+    },
+    {
+      "id": "primary-model-is-not-only-provider-usage",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "세 init의 primary model이 Opus 5여도 terminal model_usage에 Haiku 4.5가 있으므로 전체 provider usage를 Opus 하나로 표현하면 안 된다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:19",
+        "attempt:002934-a0095d45:sdk-message:39",
+        "attempt:002934-a0095d45:sdk-message:57"
+      ]
+    },
+    {
+      "id": "otel-is-not-independent-provider-proof",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "같은 recorder가 raw SDK와 process event를 OTel로 투영했으므로 sequence 일치는 recorder 무손실 확인이지 독립 provider 관측 증거가 아니다.",
+      "sourceRefs": [
+        "spec:claims:otel-is-not-independent-provider-proof"
+      ]
+    },
+    {
+      "id": "one-triple-is-not-general-cost-speed-quality-proof",
+      "status": "correction_required",
+      "evidenceLevel": "Observed",
+      "summary": "한 controlled triple의 실제 usage와 cost 차이만으로 일반 비용 절감률, 속도 향상, 결과 품질 변화를 증명했다고 쓰면 안 된다.",
+      "sourceRefs": [
+        "spec:claims:one-triple-is-not-general-cost-speed-quality-proof"
+      ]
+    },
+    {
+      "id": "provider-cache-key-and-breakpoint-not-observed",
+      "status": "not_observed",
+      "evidenceLevel": "Missing",
+      "summary": "Provider cache key, breakpoint, eviction reason과 system byte가 cache token segment에 대응하는 방식은 SDK event에서 관찰되지 않았다.",
+      "sourceRefs": [
+        "spec:claims:provider-cache-key-and-breakpoint-not-observed"
+      ]
+    },
+    {
+      "id": "provider-ttft-and-ttl-not-observed",
+      "status": "not_observed",
+      "evidenceLevel": "Missing",
+      "summary": "이 Agent SDK probe는 provider cache-attributed TTFT와 실제 TTL 만료 경계를 관찰하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:provider-ttft-and-ttl-not-observed"
+      ]
+    },
+    {
+      "id": "dynamic-list-cache-effect-not-observed",
+      "status": "not_observed",
+      "evidenceLevel": "Missing",
+      "summary": "Init에서 agent, skill, slash command 목록을 보았지만 세 run 사이에서 위치나 크기를 바꾸지 않았으므로 해당 목록의 cache 효과는 관찰하지 않았다.",
+      "sourceRefs": [
+        "attempt:002934-a0095d45:sdk-message:2",
+        "attempt:002934-a0095d45:sdk-message:22",
+        "attempt:002934-a0095d45:sdk-message:42"
+      ]
+    },
+    {
+      "id": "path-skill-budget-conditional-relocation-not-observed",
+      "status": "not_observed",
+      "evidenceLevel": "Missing",
+      "summary": "Absolute path placeholder, skill/document budget, conditional paragraph prefix/suffix 위치의 효과는 이번 timestamp case에서 실행하지 않았다.",
+      "sourceRefs": [
+        "spec:claims:path-skill-budget-conditional-relocation-not-observed"
+      ]
+    },
+    {
+      "id": "quality-and-repeat-distribution-not-observed",
+      "status": "not_observed",
+      "evidenceLevel": "Missing",
+      "summary": "Exact marker 과제는 일반 결과 품질 비교가 아니며 한 triple은 latency, cost, hit-rate의 반복 분포를 만들기에 부족하다.",
+      "sourceRefs": [
+        "spec:claims:quality-and-repeat-distribution-not-observed"
+      ]
+    },
+    {
+      "id": "candidate-pattern-pairs-required",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "Path raw/placeholder, skill budget, conditional paragraph prefix/suffix를 각각 한 변수만 바꾸는 별도 sequential pair가 필요하다.",
+      "sourceRefs": [
+        "spec:claims:candidate-pattern-pairs-required"
+      ]
+    },
+    {
+      "id": "repeated-sequential-samples-required",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "Cache 패턴의 안정성을 말하려면 fresh nonce를 사용하는 같은 triple을 더 반복하되 provider concurrency 1을 유지해야 한다.",
+      "sourceRefs": [
+        "spec:claims:repeated-sequential-samples-required"
+      ]
+    },
+    {
+      "id": "messages-api-ttft-and-ttl-case-required",
+      "status": "additional_observation_required",
+      "evidenceLevel": "Missing",
+      "summary": "Explicit cache_control, streaming TTFT, 실제 TTL을 가르치려면 Agent SDK 실험과 섞지 않고 Messages API cookbook 계열의 별도 실제 실행이 필요하다.",
+      "sourceRefs": [
+        "spec:claims:messages-api-ttft-and-ttl-case-required"
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "label": "Agent Flow · ch15 실행",
+      "url": "https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch15",
+      "lens": "원인, tool use/result, permission, claim 경계"
+    },
+    {
+      "label": "Runtime City · ch15 실행",
+      "url": "https://nfbs2000.github.io/speaky-PGSimCity/education/claude-sdk-runtime-city/?run=book-sdk-ko-ch15:book-sdk-live-20260804",
+      "lens": "OTel 시간축, 실행 zone, Observed/Missing"
+    },
+    {
+      "label": "Pixel Agents · ch15 증거",
+      "url": "https://nfbs2000.github.io/speaky-pixel-agents/book-sdk-evidence/?chapter=ch15",
+      "lens": "actor와 tool lifecycle 상태"
+    },
+    {
+      "label": "Hypnagonia · Observation Ordeal",
+      "url": "https://nfbs2000.github.io/speaky-hypnagonia/book-sdk-ordeal/?chapter=ch15",
+      "lens": "검증 주장, 선택, 관찰 consequence"
+    }
+  ]
+}
