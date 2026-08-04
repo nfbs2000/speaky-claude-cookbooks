@@ -1,13 +1,13 @@
 {
   "schemaVersion": "book-sdk-public-evidence-page.v1",
-  "generatedAt": "2026-08-04T09:29:26.624Z",
+  "generatedAt": "2026-08-04T09:33:57.377Z",
   "courseId": "book-sdk-ko",
   "chapterSlug": "ch29",
   "campaignId": "book-sdk-live-20260803",
   "title": "29장 raw SDK에서 bounded OTel까지: redaction과 lineage 감사",
   "source": {
     "traceId": "recorded:book-sdk-ko:ch29:book-sdk-live-20260803:2026-08-04T09:14:24Z",
-    "traceSha256": "ed3f72ad59e8832be9d88eeb1625f0ceb21d02471eef92fc667af73bcb0c6fbe",
+    "traceSha256": "4ca4e07fd1723cbe917ac0f2725d2b0e785bdc08683fb64bbe01d328fca4cbeb",
     "summarySha256": "448264c266a1c988eeacae676bcf7b0fe945a361a291fc58871e6520195151ec",
     "sourceEventCount": 36,
     "publicEventCount": 67,
@@ -389,7 +389,7 @@
       "id": "canary-redaction-is-not-general-pii-proof",
       "status": "correction_required",
       "evidenceLevel": "Observed",
-      "summary": "sk-ant 형태 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다.",
+      "summary": "Anthropic 형식의 합성 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다.",
       "sourceRefs": [
         "attempt:152259-0e968386:process-event:35"
       ]

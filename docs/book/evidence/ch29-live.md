@@ -24,7 +24,7 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 | raw source / public | **36 / 67** |
 | configured / observed / inferred | **4 / 22 / 2** |
 | not observed / correction / more evidence | **8 / 14 / 5** |
-| trace SHA-256 | `ed3f72ad59e8832be9d88eeb1625f0ceb21d02471eef92fc667af73bcb0c6fbe` |
+| trace SHA-256 | `4ca4e07fd1723cbe917ac0f2725d2b0e785bdc08683fb64bbe01d328fca4cbeb` |
 | summary SHA-256 | `448264c266a1c988eeacae676bcf7b0fe945a361a291fc58871e6520195151ec` |
 
 ## 무결성 검증된 실제 실행과 보조 출처
@@ -78,7 +78,7 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 | `fsync-code-path-is-not-syscall-trace` | **범위 수정 필요** | writer와 exporter 구현이 os.fsync를 호출하고 최종 artifact가 남은 것은 구현·정상 경로 증거다. 이번 raw/OTel에는 fsync syscall receipt가 없으므로 fsync 자체를 runtime event로 직접 관찰했다고 표현하면 안 된다. | `spec:claims:fsync-code-path-is-not-syscall-trace` |
 | `normal-flush-does-not-prove-failure-recovery` | **범위 수정 필요** | proof_trace finally가 force_flush와 shutdown을 호출하고 최종 span 파일이 완성됐지만 exporter failure, disk full, process kill 뒤 retry나 recovery를 증명하지 않는다. | `spec:claims:normal-flush-does-not-prove-failure-recovery` |
 | `historical-source-hash-did-not-bind-probe-code` | **범위 수정 필요** | historical manifest source_hash는 당시 ch29.md bytes만 묶었고 chapter29.py, runtime, audit, redaction implementation hash를 option_summary에 보존하지 않았다. 현재 코드를 당시 실행 인과로 소급 확정하면 안 된다. | `attempt:152259-0e968386:process-event:0` |
-| `canary-redaction-is-not-general-pii-proof` | **범위 수정 필요** | sk-ant 형태 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다. | `attempt:152259-0e968386:process-event:35` |
+| `canary-redaction-is-not-general-pii-proof` | **범위 수정 필요** | Anthropic 형식의 합성 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다. | `attempt:152259-0e968386:process-event:35` |
 | `billing-labels-do-not-reveal-auxiliary-role` | **범위 수정 필요** | Haiku와 Opus token/cost 합계는 raw Result에 있지만 Haiku가 어떤 내부 작업을 맡았는지는 event에 없다. 비용 label을 내부 역할 설명으로 바꾸면 안 된다. | `attempt:152259-0e968386:sdk-message:33` |
 | `empty-callback-file-is-not-global-policy-absence` | **범위 수정 필요** | 이번 attempt에 hook/permission callback row가 없었다는 사실은 Claude runtime 전체에 권한 정책이나 내부 gate가 없었다는 뜻이 아니다. 이 case에 등록·발생한 callback이 없었다는 범위만 말해야 한다. | `spec:claims:empty-callback-file-is-not-global-policy-absence` |
 | `eight-pass-audit-is-not-complete-observability-proof` | **범위 수정 필요** | 8개 audit check PASS는 이 장이 선언한 frozen scope와 schema에 대한 판정이다. 누락된 event family, 외부 exporter, access control, 장애 복구까지 프로덕션 옵저버빌리티 전체가 완성됐다는 인증은 아니다. | `spec:claims:eight-pass-audit-is-not-complete-observability-proof` |
@@ -141,7 +141,7 @@ event와 artifact snapshot 중 이 장이 실제로 발생시킨 사건에서 �
 - `fsync-code-path-is-not-syscall-trace`: writer와 exporter 구현이 os.fsync를 호출하고 최종 artifact가 남은 것은 구현·정상 경로 증거다. 이번 raw/OTel에는 fsync syscall receipt가 없으므로 fsync 자체를 runtime event로 직접 관찰했다고 표현하면 안 된다.
 - `normal-flush-does-not-prove-failure-recovery`: proof_trace finally가 force_flush와 shutdown을 호출하고 최종 span 파일이 완성됐지만 exporter failure, disk full, process kill 뒤 retry나 recovery를 증명하지 않는다.
 - `historical-source-hash-did-not-bind-probe-code`: historical manifest source_hash는 당시 ch29.md bytes만 묶었고 chapter29.py, runtime, audit, redaction implementation hash를 option_summary에 보존하지 않았다. 현재 코드를 당시 실행 인과로 소급 확정하면 안 된다.
-- `canary-redaction-is-not-general-pii-proof`: sk-ant 형태 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다.
+- `canary-redaction-is-not-general-pii-proof`: Anthropic 형식의 합성 canary와 api_key 민감 key의 네 경로 제거는 관찰됐지만 모든 credential 형식, 자유문 PII, nested binary attachment까지 탐지한다고 일반화하면 안 된다.
 - `billing-labels-do-not-reveal-auxiliary-role`: Haiku와 Opus token/cost 합계는 raw Result에 있지만 Haiku가 어떤 내부 작업을 맡았는지는 event에 없다. 비용 label을 내부 역할 설명으로 바꾸면 안 된다.
 - `empty-callback-file-is-not-global-policy-absence`: 이번 attempt에 hook/permission callback row가 없었다는 사실은 Claude runtime 전체에 권한 정책이나 내부 gate가 없었다는 뜻이 아니다. 이 case에 등록·발생한 callback이 없었다는 범위만 말해야 한다.
 - `eight-pass-audit-is-not-complete-observability-proof`: 8개 audit check PASS는 이 장이 선언한 frozen scope와 schema에 대한 판정이다. 누락된 event family, 외부 exporter, access control, 장애 복구까지 프로덕션 옵저버빌리티 전체가 완성됐다는 인증은 아니다.
