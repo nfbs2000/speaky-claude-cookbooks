@@ -103,6 +103,7 @@ nav:
           - "18b장: 샌드박스 시스템 - 격리된 실행 환경": book/part5/ch18b.md
           - "18b장 실제 Python SDK 샌드박스 경계 관찰": book/evidence/ch18b-live.md
           - "19장: CLAUDE.md - 사용자 지침의 오버라이드 계층": book/part5/ch19.md
+          - "19장 실제 Python SDK project 지침 로드 관찰": book/evidence/ch19-live.md
       - "제6부: 고급 서브시스템":
           - "20장: 에이전트 생성과 오케스트레이션": book/part6/ch20.md
           - "20b장: 팀과 멀티프로세스 협업": book/part6/ch20b.md
