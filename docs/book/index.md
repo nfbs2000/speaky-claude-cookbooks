@@ -85,7 +85,8 @@
 - [26장: 핵심 역량으로서의 세션과 메시지 관측](part7/ch26.md)
 - [27장: 프로덕션급 AI 코딩 패턴](part7/ch27.md)
 - [28장: Claude Code의 한계](part7/ch28.md)
-- [29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지](part7/ch29.md)
+- [29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지](part7/ch29.md)
+- [29장 실제 Python SDK 옵저버빌리티 관찰](evidence/ch29-live.md)
 - [30장: 나만의 AI 에이전트 만들기 - Claude Code 패턴에서 실전까지](part7/ch30.md)
 - [30장 실제 Python SDK 관찰: 권한, 산출물, 재개, 메모리](evidence/ch30-live.md)
 
