@@ -101,6 +101,7 @@ nav:
           - "17b장 실제 Python SDK 프롬프트 인젝션 경계 관찰": book/evidence/ch17b-live.md
           - "18장: 훅 - 사용자 정의 가로채기 지점": book/part5/ch18.md
           - "18b장: 샌드박스 시스템 - 격리된 실행 환경": book/part5/ch18b.md
+          - "18b장 실제 Python SDK 샌드박스 경계 관찰": book/evidence/ch18b-live.md
           - "19장: CLAUDE.md - 사용자 지침의 오버라이드 계층": book/part5/ch19.md
       - "제6부: 고급 서브시스템":
           - "20장: 에이전트 생성과 오케스트레이션": book/part6/ch20.md
