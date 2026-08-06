@@ -24,7 +24,7 @@
     
     
       
-        <title>29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지 - Speaky Claude Cookbooks</title>
+        <title>29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지 - Speaky Claude Cookbooks</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#29-raw-sdk-otel" class="md-skip">
+        <a href="#29-logevent" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지
+              29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지
             
           </span>
         </div>
@@ -2036,7 +2036,7 @@
   
   
   <span class="md-ellipsis">
-    20b장: 두 worker 순차 handoff와 native Team 경계
+    20b장: 팀과 멀티프로세스 협업
     
   </span>
   
@@ -2412,7 +2412,7 @@
   
   
   <span class="md-ellipsis">
-    29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지
+    29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지
     
   </span>
   
@@ -2425,7 +2425,7 @@
   
   
   <span class="md-ellipsis">
-    29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지
+    29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지
     
   </span>
   
@@ -2448,55 +2448,91 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#291" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      29.1 실제 실행 계약
+      이 장의 공개판 요지
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#292-raw-otel-span-11" class="md-nav__link">
+  <a href="#sdk" class="md-nav__link">
     <span class="md-ellipsis">
-      29.2 raw 사건과 OTel span은 항상 1:1이 아니다
+      원문 절 구조를 공개 SDK로 다시 읽기
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#293" class="md-nav__link">
-    <span class="md-ellipsis">
-      29.3 직접 관찰한 사건 사슬
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#294-raw-otel" class="md-nav__link">
-    <span class="md-ellipsis">
-      29.4 비밀값은 raw와 OTel에서 다르게 다룬다
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="29.4 비밀값은 raw와 OTel에서 다르게 다룬다">
+    <nav class="md-nav" aria-label="원문 절 구조를 공개 SDK로 다시 읽기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#redacted-raw-archive" class="md-nav__link">
+  <a href="#291" class="md-nav__link">
     <span class="md-ellipsis">
-      redacted raw archive
+      29.1 핵심 질문
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#otel-projection" class="md-nav__link">
+  <a href="#292" class="md-nav__link">
     <span class="md-ellipsis">
-      OTel projection
+      29.2 텔레메트리 파이프
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#293-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.3 최소 schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#294" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.4 계층별 책임
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#295-genkitopik" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.5 Genkit/Opik을 프롬프트에 쓰는 안전한 방법
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#296-pii" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.6 PII와 교육 데이터
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#297" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.7 학생 실습
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
     </span>
   </a>
   
@@ -2508,56 +2544,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#295-python-sdk-projection-schema" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      29.5 Python SDK 타입과 projection schema를 구분한다
+      공개판 본문
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#296-otel" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      29.6 로컬 OTel과 외부 제품을 구분한다
+      공개 경계
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#297" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      29.7 무결성과 독립 감사
+      실습 방향
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#298" class="md-nav__link">
+  <a href="#builder-takeaway" class="md-nav__link">
     <span class="md-ellipsis">
-      29.8 학생 실습
+      Builder takeaway
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#sdk_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Takeaway
+      부록: 이 장을 실제 SDK 실행으로 확인한 결과
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="부록: 이 장을 실제 SDK 실행으로 확인한 결과">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      본문을 이렇게 읽으면 안 되는 곳
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      관련 강의
+      이번 실행으로는 확인하지 못한 것
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3660,55 +3711,91 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#291" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      29.1 실제 실행 계약
+      이 장의 공개판 요지
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#292-raw-otel-span-11" class="md-nav__link">
+  <a href="#sdk" class="md-nav__link">
     <span class="md-ellipsis">
-      29.2 raw 사건과 OTel span은 항상 1:1이 아니다
+      원문 절 구조를 공개 SDK로 다시 읽기
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#293" class="md-nav__link">
-    <span class="md-ellipsis">
-      29.3 직접 관찰한 사건 사슬
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#294-raw-otel" class="md-nav__link">
-    <span class="md-ellipsis">
-      29.4 비밀값은 raw와 OTel에서 다르게 다룬다
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="29.4 비밀값은 raw와 OTel에서 다르게 다룬다">
+    <nav class="md-nav" aria-label="원문 절 구조를 공개 SDK로 다시 읽기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#redacted-raw-archive" class="md-nav__link">
+  <a href="#291" class="md-nav__link">
     <span class="md-ellipsis">
-      redacted raw archive
+      29.1 핵심 질문
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#otel-projection" class="md-nav__link">
+  <a href="#292" class="md-nav__link">
     <span class="md-ellipsis">
-      OTel projection
+      29.2 텔레메트리 파이프
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#293-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.3 최소 schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#294" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.4 계층별 책임
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#295-genkitopik" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.5 Genkit/Opik을 프롬프트에 쓰는 안전한 방법
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#296-pii" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.6 PII와 교육 데이터
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#297" class="md-nav__link">
+    <span class="md-ellipsis">
+      29.7 학생 실습
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Takeaway
     </span>
   </a>
   
@@ -3720,56 +3807,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#295-python-sdk-projection-schema" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      29.5 Python SDK 타입과 projection schema를 구분한다
+      공개판 본문
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#296-otel" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      29.6 로컬 OTel과 외부 제품을 구분한다
+      공개 경계
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#297" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      29.7 무결성과 독립 감사
+      실습 방향
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#298" class="md-nav__link">
+  <a href="#builder-takeaway" class="md-nav__link">
     <span class="md-ellipsis">
-      29.8 학생 실습
+      Builder takeaway
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#sdk_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Takeaway
+      부록: 이 장을 실제 SDK 실행으로 확인한 결과
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="부록: 이 장을 실제 SDK 실행으로 확인한 결과">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      본문을 이렇게 읽으면 안 되는 곳
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      관련 강의
+      이번 실행으로는 확인하지 못한 것
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3792,352 +3894,115 @@
   
 
 
-<h1 id="29-raw-sdk-otel">29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지<a class="headerlink" href="#29-raw-sdk-otel" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>공개 GitHub Pages 투영판: <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/book/part7/ch29/">29장: 옵저버빌리티 엔지니어링</a></p>
-<p>실제 실행 판독: <a href="../../evidence/ch29-live/">29장 실제 Python SDK 관찰</a></p>
-</blockquote>
-<p>옵저버빌리티의 출발점은 대시보드가 아니라 실제 실행 사건입니다. 모델 응답, 도구 입력·결과,
-hook·permission callback, 호스트 상태를 먼저 내구성 있는 <strong>저장 전 redaction raw envelope</strong>로
-보존하고, 그 다음에
-OpenTelemetry(OTel)·Genkit·Opik·Book Canvas로 필요한 정보만 투영합니다.</p>
-<p>이 장은 실제 <code>claude-opus-5</code> 호출로 다음 질문을 검증합니다.</p>
-<blockquote>
-<p>raw 사건을 잃지 않고 하나의 OTel trace로 연결하면서, 비밀값 본문은 제거하고 비용·캐시·도구
-연결 정보는 남길 수 있는가?</p>
-</blockquote>
-<h2 id="291">29.1 실제 실행 계약<a class="headerlink" href="#291" title="Permanent link">&para;</a></h2>
-<p>실험은 읽기 전용 MCP 도구를 한 번 호출했습니다. 입력에는 실제 자격 증명이 아닌
-<code>sk-ant-...</code> 형태의 <strong>합성 redaction canary</strong>를 넣었습니다. 목적은 provider 비밀을 쓰는 것이
-아니라, prompt·stream delta·확정 ToolUse·handler input의 서로 다른 저장 경로가 모두 같은
-값을 제거하는지 확인하는 것입니다.</p>
-<div class="highlight"><pre><span></span><code>actual Claude Agent SDK run
-  -&gt; MCP ToolUse with synthetic canary
-  -&gt; actual host handler
-  -&gt; ToolResult
-  -&gt; terminal Result
-  -&gt; durable redacted raw JSONL
-  -&gt; bounded OTel JSONL
-  -&gt; independent raw-to-OTel audit
-  -&gt; integrity snapshot
-</code></pre></div>
+<h1 id="29-logevent">29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지<a class="headerlink" href="#29-logevent" title="Permanent link">&para;</a></h1>
+<p>이 페이지는 한국어 SDK 책의 <code>29장: 옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지</code>을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.</p>
+<p><strong>분류:</strong> 제7부: AI 에이전트 구축자를 위한 교훈<br>
+<strong>공개 상태:</strong> <code>public</code><br>
+<strong>근거 신뢰도:</strong> <code>high</code><br>
+<strong>원문 위치:</strong> <code>docs/book-sdk-ko/src/part7/ch29.md</code></p>
+<h2 id="_1">이 장의 공개판 요지<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>이 장은 공개 SDK와 cookbook 예제로 대부분 직접 설명할 수 있다.</p>
+<p>공개판에서는 observability를 SDK message stream, OpenTelemetry, usage/cost API, audit logs, session storage로 구성한다. observability agent notebook은 MCP를 통해 외부 시스템을 읽는 agent를 보여주고, usage/cost cookbook은 운영 비용 관측을 제공한다. 좋은 telemetry는 agent가 성공했는지만이 아니라 왜 그 결론에 도달했는지, 어떤 도구를 썼는지, 어떤 근거가 부족했는지를 보여줘야 한다.</p>
+<p><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/02_The_observability_agent.ipynb">Observability agent</a>를 근거로 삼는다. <a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/observability/usage_cost_api.ipynb">Usage and cost Admin API cookbook</a>를 근거로 삼는다.</p>
+<div class="admonition evidence">
+<p class="admonition-title">주요 cookbook 근거</p>
 <ul>
-<li>accepted attempt: <code>152259-0e968386</code></li>
-<li>OTel trace: <code>364f6cd5afd822b09f164eea2911752e</code></li>
-<li>session: <code>b58ac89c-9fb6-47fd-abd6-bd997dc1b64a</code></li>
-<li>SDK: Python <code>claude-agent-sdk==0.2.128</code></li>
-<li>CLI: <code>2.1.220</code></li>
-<li>actual response model: <code>claude-opus-5</code> (raw <code>AssistantMessage.model</code> 3건)</li>
-<li>provider concurrency: 1</li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/02_The_observability_agent.ipynb">Observability agent</a></li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/observability/usage_cost_api.ipynb">Usage and cost Admin API cookbook</a></li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/observability_agent/agent.py">Observability agent implementation</a></li>
+<li><a href="https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/audit/script_usage_log.json">Audit log example</a></li>
 </ul>
-<h2 id="292-raw-otel-span-11">29.2 raw 사건과 OTel span은 항상 1:1이 아니다<a class="headerlink" href="#292-raw-otel-span-11" title="Permanent link">&para;</a></h2>
-<p>frozen actor scope에는 raw event 35개와 OTel span 36개가 있었습니다. 모든 raw sequence
-<code>0..34</code>에는 carrier span이 하나 이상 있었고 missing sequence는 0개였습니다. span이 하나 더
-많은 이유는 host <code>tool.execution</code> raw process event 하나가 다음 두 관점을 만들었기 때문입니다.</p>
-<div class="highlight"><pre><span></span><code>raw process event seq 19
-  -&gt; process.event span
-  -&gt; tool.execution span
-</code></pre></div>
-<p>따라서 완전성 판정은 <code>raw count == span count</code>가 아닙니다. 각 raw 사건이 어떤 carrier span으로
-투영됐는지 확인하고, 한 사건에서 여러 관측 관점이 생길 수 있음을 schema에 선언해야 합니다.</p>
-<p>사후 <code>sdk.capture.finished</code>, verdict, root attempt span까지 기록한 최종 파일은 raw 36개,
-OTel 39개였습니다. actor scope audit와 사후 bookkeeping을 같은 분모로 섞지 않습니다.</p>
-<h2 id="293">29.3 직접 관찰한 사건 사슬<a class="headerlink" href="#293" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">raw sequence</th>
-<th>사건</th>
-<th>OTel 연결</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">0</td>
-<td>capture 시작</td>
-<td><code>process.event.sequence=0</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">1</td>
-<td>합성 canary가 들어간 host prompt</td>
-<td>raw redacted, <code>process.event.sequence=1</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">2</td>
-<td>init, Opus 5, MCP connected</td>
-<td><code>sdk.event.sequence=2</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">18</td>
-<td>MCP <code>ToolUseBlock</code></td>
-<td><code>sdk.tool_use.id</code> 보존, input redacted</td>
-</tr>
-<tr>
-<td style="text-align: right;">19</td>
-<td>실제 host handler 실행</td>
-<td><code>process.event</code> + <code>tool.execution</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">23</td>
-<td>같은 ID의 <code>ToolResultBlock</code></td>
-<td><code>sdk.tool_use.id</code> 보존</td>
-</tr>
-<tr>
-<td style="text-align: right;">33</td>
-<td>성공 <code>ResultMessage</code></td>
-<td>비용·turn·token·cache bounded metrics</td>
-</tr>
-<tr>
-<td style="text-align: right;">34</td>
-<td>observation scope freeze</td>
-<td><code>process.event.sequence=34</code></td>
-</tr>
-</tbody>
-</table>
-<p>ToolUse와 ToolResult의 ID는
-<code>toolu_019A8PTzENKthALmz3BGsnFH</code>로 같았습니다. OTel에서도 같은 ID와 raw sequence가
-보존됐습니다. 이 연결은 모델의 최종 문구가 아니라 raw block과 OTel attribute를 직접 비교해
-판정했습니다.</p>
-<h2 id="294-raw-otel">29.4 비밀값은 raw와 OTel에서 다르게 다룬다<a class="headerlink" href="#294-raw-otel" title="Permanent link">&para;</a></h2>
-<h3 id="redacted-raw-archive">redacted raw archive<a class="headerlink" href="#redacted-raw-archive" title="Permanent link">&para;</a></h3>
-<p>합성 canary는 다음 네 frozen-scope 사건에서 제거됐습니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">sequence</th>
-<th>redaction 위치</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">1</td>
-<td>host prompt</td>
-</tr>
-<tr>
-<td style="text-align: right;">15</td>
-<td>streaming <code>partial_json</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">18</td>
-<td>확정 ToolUse input의 <code>api_key</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">19</td>
-<td>handler가 기록한 tool input</td>
-</tr>
-</tbody>
-</table>
-<p>committed evidence 전체에서 합성 문자열을 다시 검색한 결과 0건이었고, 각 위치에는
-<code>[REDACTED]</code>와 <code>redacted_paths</code>가 남았습니다. 이 실험은 해당 패턴과 민감 key의 redaction을
-증명합니다. 모든 종류의 PII 탐지를 증명하지는 않습니다.</p>
-<p>여기서 <code>raw</code>는 <strong>provider wire bytes를 그대로 보존했다는 뜻이 아닙니다.</strong> 공개 SDK message
-shape, source sequence와 연결 ID를 유지하되 credential은 파일에 쓰기 전에 제거한 durable
-envelope라는 뜻입니다. 무가공 provider payload가 필요하다는 이유로 비밀값을 디스크에 먼저
-쓴 뒤 사후 삭제하는 구조와 구분합니다.</p>
-<h3 id="otel-projection">OTel projection<a class="headerlink" href="#otel-projection" title="Permanent link">&para;</a></h3>
-<p>OTel에는 prompt, content, tool input, result 본문을 넣지 않았습니다. 대신 다음처럼 연결과
-운영 수치만 보존했습니다.</p>
-<div class="highlight"><pre><span></span><code>sdk.event.sequence
-sdk.message.type
-sdk.session.id
-sdk.tool_use.id
-sdk.event.redacted_path_count
-sdk.result.total_cost_usd
-sdk.result.duration_ms
-sdk.result.num_turns
-sdk.result.input_tokens / output_tokens
-sdk.result.cache_read_input_tokens
-sdk.result.cache_creation_input_tokens
-</code></pre></div>
-<p>이 실행의 terminal raw Result와 OTel Result span은 다음 값이 정확히 같았습니다.</p>
-<table>
-<thead>
-<tr>
-<th>metric</th>
-<th style="text-align: right;">값</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cost</td>
-<td style="text-align: right;"><code>$0.016301</code></td>
-</tr>
-<tr>
-<td>duration</td>
-<td style="text-align: right;"><code>7,443ms</code></td>
-</tr>
-<tr>
-<td>turns</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr>
-<td>billing model count</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr>
-<td>input / output tokens</td>
-<td style="text-align: right;">714 / 202</td>
-</tr>
-<tr>
-<td>cache read / creation input tokens</td>
-<td style="text-align: right;">842 / 1,038</td>
-</tr>
-</tbody>
-</table>
-<p>init에는 요청한 Opus 5가 있었고 billing에는 Opus 5와 보조 Haiku label이 있었습니다. 이 표는
-두 모델의 합계입니다. 보조 모델이 어떤 내부 역할을 수행했는지는 event에 없어 추정하지
-않습니다.</p>
-<h2 id="295-python-sdk-projection-schema">29.5 Python SDK 타입과 projection schema를 구분한다<a class="headerlink" href="#295-python-sdk-projection-schema" title="Permanent link">&para;</a></h2>
-<p>Python 0.2.128은 <code>SDKMessage</code>라는 export를 제공하지 않습니다. 실제 공개 타입은
-<code>Message</code> union이며 <code>UserMessage</code>, <code>AssistantMessage</code>, <code>SystemMessage</code>, <code>ResultMessage</code>,
-<code>StreamEvent</code>, <code>RateLimitEvent</code>를 포함합니다.</p>
-<p><code>input_focus</code>, <code>linked_claim</code>, <code>evidence_level</code>, <code>evaluation</code> 같은 필드는 공식 SDK message의
-공통 필드가 아닙니다. raw 사건을 읽은 projector가 만드는 <strong>파생 schema</strong>입니다.</p>
-<table>
-<thead>
-<tr>
-<th>계층</th>
-<th>원본 또는 파생</th>
-<th>책임</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Agent SDK <code>Message</code></td>
-<td>원본</td>
-<td>실제 세션과 tool/message stream</td>
-</tr>
-<tr>
-<td>redacted raw envelope</td>
-<td>저장 원전</td>
-<td>public SDK shape, callback, host event, redaction path</td>
-</tr>
-<tr>
-<td>OTel span</td>
-<td>bounded projection</td>
-<td>trace/span ID, sequence, tool link, 운영 수치</td>
-</tr>
-<tr>
-<td>evidence graph</td>
-<td>파생 projection</td>
-<td>질문·문서·도구·주장·결과 edge</td>
-</tr>
-<tr>
-<td>evaluation</td>
-<td>파생 judge</td>
-<td>claim별 판정과 근거 sequence</td>
-</tr>
-</tbody>
-</table>
-<p>파생 필드를 raw에 있었던 것처럼 설명하면 안 됩니다. 반대로 OTel에서 payload를 뺐다는 이유로
-원문이 사라진 것도 아닙니다. 필요할 때는 OTel sequence로 권한이 통제된 raw archive를 찾아갑니다.</p>
-<h2 id="296-otel">29.6 로컬 OTel과 외부 제품을 구분한다<a class="headerlink" href="#296-otel" title="Permanent link">&para;</a></h2>
-<p>이번 실행의 OTel은 <code>book_sdk_proof</code>가 구성한 로컬 <code>JsonlSpanExporter</code>와 <code>ProofTrace</code>의
-<strong>application projection</strong>입니다. cookbook이 설명하는 <code>CLAUDE_CODE_ENABLE_TELEMETRY=1</code>과
-<code>OTEL_*</code> 환경 변수를 이용한 Claude runtime native OTLP export는 실행하지 않았습니다. 두
-표면 모두 OTel을 사용하지만 동일한 관측원이라고 설명하면 안 됩니다.</p>
-<p>직접 관찰한 것은 같은 trace ID, bounded attribute, 정상 종료 뒤 완성된 span 파일과 최종 파일
-무결성입니다. writer/exporter 소스에는 <code>os.fsync</code>, <code>force_flush</code>, <code>shutdown</code> 호출이 있지만
-이번 trace에는 syscall receipt가 없습니다. 따라서 구현 경로와 runtime 사건을 구분합니다.</p>
-<table>
-<thead>
-<tr>
-<th>기능</th>
-<th>이번 판정</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>로컬 redacted raw JSONL 파일 완성</td>
-<td>observed</td>
-</tr>
-<tr>
-<td>writer/exporter의 <code>fsync</code> 호출</td>
-<td>configured / implementation evidence</td>
-</tr>
-<tr>
-<td>로컬 OTel JSONL + 단일 trace</td>
-<td>observed</td>
-</tr>
-<tr>
-<td>정상 종료 시 verdict/root span 기록</td>
-<td>observed</td>
-</tr>
-<tr>
-<td>Claude runtime native OTLP export</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>exporter 실패 후 disk retry</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>Datadog exporter와 allowlist</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>Perfetto trace</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>Genkit projection 실행</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>Opik remote evaluation 저장</td>
-<td>not observed / TODO</td>
-</tr>
-<tr>
-<td>비정상 종료의 graceful shutdown</td>
-<td>not observed / TODO</td>
-</tr>
-</tbody>
-</table>
-<p>Genkit 화면이 열렸거나 Opik 컨테이너가 떴다는 사실만으로 lineage가 완성되지는 않습니다. 외부
-도구를 붙일 때도 <code>raw sequence -&gt; OTel span -&gt; graph node -&gt; claim -&gt; evaluation</code> 연결을 다시
-검사해야 합니다.</p>
-<h2 id="297">29.7 무결성과 독립 감사<a class="headerlink" href="#297" title="Permanent link">&para;</a></h2>
-<p>감사기는 actor 답변을 채점하지 않았습니다. frozen 뒤 디스크에 기록된 redacted raw JSONL과
-OTel JSONL을 각각 다시 읽어 다음을 검사했습니다.</p>
-<ol>
-<li>raw sequence가 중복 없이 정렬됐는가.</li>
-<li>모든 raw sequence에 OTel carrier가 있는가.</li>
-<li>모든 scoped span이 같은 trace ID를 공유하는가.</li>
-<li>ToolUse/ToolResult ID가 raw와 OTel에서 이어지는가.</li>
-<li>Result의 비용·token·cache 값이 raw와 OTel에서 같은가.</li>
-<li>합성 secret이 raw·OTel 어디에도 남지 않았는가.</li>
-<li>OTel attribute에 payload·prompt·content key가 없는가.</li>
-<li>terminal Result가 실제 성공했는가.</li>
-</ol>
-<p>8개 check가 모두 PASS였습니다. 최종 <code>integrity.json</code> 대상 8개를 직접 재계산했고 모두
-일치했습니다. 이 PASS는 선언한 frozen scope와 local projection schema의 정합성을 뜻합니다.
-외부 exporter, 접근 제어, 장애 복구와 모든 PII 탐지까지 프로덕션 옵저버빌리티 전체가
-완성됐다는 인증은 아닙니다.</p>
-<p>역사적 attempt의 <code>source_hash</code>는 당시 <code>ch29.md</code> bytes만 묶었고 probe/runtime/audit/redaction
-소스 전체 hash는 보존하지 않았습니다. 그래서 현재 재판독은 raw와 integrity에 근거하지만,
-현재 코드를 당시 실행 인과로 소급 확정하지 않습니다. 다음 재실행에서는 해당 소스 hash와
-public prompt hash까지 manifest에 묶어야 합니다.</p>
-<h2 id="298">29.8 학생 실습<a class="headerlink" href="#298" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>실제 Claude Agent SDK 도구 실행 하나를 만든다.
-
-1. 실제 자격 증명이 아닌 합성 redaction canary를 tool input에 넣는다.
-2. SDK Message, callback, host execution을 raw JSONL로 저장한다.
-3. raw payload 본문을 복제하지 않는 OTel span schema를 만든다.
-4. sequence, session ID, tool use ID, terminal cost/cache만 OTel에 투영한다.
-5. frozen scope의 모든 raw event에 carrier span이 있는지 독립 감사한다.
-6. raw count와 span count가 달라질 수 있는 이유를 기록한다.
-7. 실행하지 않은 Genkit/Opik/exporter retry는 TODO로 남긴다.
-</code></pre></div>
-<h2 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h2>
-<p>옵저버빌리티는 로그를 많이 쌓는 일이 아닙니다. 사건의 shape와 순서를 추적 가능한 저장 원전으로
-남기고, 민감 본문은 디스크 기록 전에 redaction하며, 외부 화면에는 필요한 연결과 수치만
-투영하고, 그 투영의 누락을 다시 검사하는 일입니다. 대시보드는 증거의 출발점이 아니라 검증
-가능한 source chain의 소비자입니다.</p>
-<h2 id="_1">관련 강의<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+</div>
+<div class="admonition evidence">
+<p class="admonition-title">공식 문서 근거</p>
 <ul>
-<li><a href="../ch26/">26장: 세션 메시지 관측</a></li>
-<li><a href="../ch28/">28장: Claude Code의 한계</a></li>
-<li><a href="../../../book-superpowers-ko/src/part3/ch05.md">Superpowers 5장: 런타임 옵저버빌리티</a></li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/observability.md">Observability with OpenTelemetry</a></li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/cost-tracking.md">Track cost and usage</a></li>
+<li><a href="https://code.claude.com/docs/en/monitoring-usage.md">Monitoring</a></li>
+</ul>
+</div>
+<h2 id="sdk">원문 절 구조를 공개 SDK로 다시 읽기<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
+<h3 id="291">29.1 핵심 질문<a class="headerlink" href="#291" title="Permanent link">&para;</a></h3>
+<p>이 절은 <code>옵저버빌리티 엔지니어링 - logEvent에서 프로덕션급 텔레메트리까지</code>의 질문을 공개 SDK에서 관측 가능한 사건으로 좁힌다. 답은 내부 구현명이 아니라 <code>ClaudeAgentOptions</code>, message stream, tool call, session record, cookbook 실행 결과에서 찾아야 한다.</p>
+<h3 id="292">29.2 텔레메트리 파이프<a class="headerlink" href="#292" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>29.2 텔레메트리 파이프</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 observability를 SDK message stream, OpenTelemetry, usage/cost API, audit logs, session storage로 구성한다. observability agent notebook은 MCP를 통해 외부 시스템을 읽는 agent를 보여주고, ... 이며, 먼저 <code>Observability agent</code>를 기준 예제로 읽는다.</p>
+<h3 id="293-schema">29.3 최소 schema<a class="headerlink" href="#293-schema" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>29.3 최소 schema</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 observability를 SDK message stream, OpenTelemetry, usage/cost API, audit logs, session storage로 구성한다. observability agent notebook은 MCP를 통해 외부 시스템을 읽는 agent를 보여주고, ... 이며, 먼저 <code>Observability agent</code>를 기준 예제로 읽는다.</p>
+<h3 id="294">29.4 계층별 책임<a class="headerlink" href="#294" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>29.4 계층별 책임</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 observability를 SDK message stream, OpenTelemetry, usage/cost API, audit logs, session storage로 구성한다. observability agent notebook은 MCP를 통해 외부 시스템을 읽는 agent를 보여주고, ... 이며, 먼저 <code>Observability agent</code>를 기준 예제로 읽는다.</p>
+<h3 id="295-genkitopik">29.5 Genkit/Opik을 프롬프트에 쓰는 안전한 방법<a class="headerlink" href="#295-genkitopik" title="Permanent link">&para;</a></h3>
+<p>이 절은 숨은 prompt 원문이 아니라 <code>system_prompt</code>, <code>CLAUDE.md</code>, tool description, skill instruction, output style처럼 공개적으로 조정 가능한 표면으로 바꿔 설명한다.</p>
+<h3 id="296-pii">29.6 PII와 교육 데이터<a class="headerlink" href="#296-pii" title="Permanent link">&para;</a></h3>
+<p>이 절은 원문의 <code>29.6 PII와 교육 데이터</code> 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 observability를 SDK message stream, OpenTelemetry, usage/cost API, audit logs, session storage로 구성한다. observability agent notebook은 MCP를 통해 외부 시스템을 읽는 agent를 보여주고, ... 이며, 먼저 <code>Observability agent</code>를 기준 예제로 읽는다.</p>
+<h3 id="297">29.7 학생 실습<a class="headerlink" href="#297" title="Permanent link">&para;</a></h3>
+<p>이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>이 절의 결론은 공개 근거로 다시 닫는다. 내부 설명을 암기하는 대신 어떤 SDK 표면과 cookbook 파일로 같은 주장을 확인할 수 있는지 남긴다.</p>
+<h2 id="_2">공개판 본문<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.</p>
+<p>첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.</p>
+<p>둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.</p>
+<p>셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.</p>
+<p>이 장을 읽을 때는 아래 순서가 좋다.</p>
+<ol>
+<li>먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.</li>
+<li><code>ClaudeAgentOptions</code>, <code>query()</code>, <code>ClaudeSDKClient</code>, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.</li>
+<li>원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.</li>
+<li>마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.</li>
+</ol>
+<h2 id="_3">공개 경계<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>민감한 prompt/tool data는 telemetry에 그대로 남기지 않는다.</li>
+<li>trace와 audit log는 retention policy가 필요하다.</li>
+</ul>
+<h2 id="_4">실습 방향<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>agent run마다 prompt id, tool calls, errors, cost, final artifact link를 남기는 schema를 만든다.</li>
+</ul>
+<h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
+<p>이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.</p>
+<h2 id="sdk_1">부록: 이 장을 실제 SDK 실행으로 확인한 결과<a class="headerlink" href="#sdk_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>위 공개판 본문은 이 저장소의 notebook과 공식 문서에 근거해 다시 쓴 것이다. 아래는 같은
+장의 주장을 실제 Claude Agent SDK로 실행해 관찰한 기록이며, <strong>실측 결과로 위 본문을 고쳐
+쓰지 않았다.</strong> 본문 설명과 실제 동작이 어긋나는 곳도 본문을 남기고 아래에 근거와 함께 적는다.
+사건 단위 원본 판독: <a href="../../evidence/ch29-live/">29장 실제 Python SDK 옵저버빌리티 관찰</a></p>
+</blockquote>
+<p><strong>실행 조건</strong> — 실제 모델 <code>claude-opus-5</code>, Claude Agent SDK <code>0.2.128</code>, Claude Code CLI
+<code>2.1.220</code>, 시도 <code>152259-0e968386</code>. 합성 표식을 심은 실제 MCP 왕복 한 건을 수집한 뒤,
+원본에서 OTel까지의 투영과 가림 처리를 감사했다. 원본 사건 36건, 공개 정리 67건이다.</p>
+<h3 id="_5">본문을 이렇게 읽으면 안 되는 곳<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>이 장은 <strong>용어를 정확히 쓰는 것 자체가 내용</strong>인 장이다. 실측 결과 다음 이름들이 사실과
+어긋났다.</p>
+<ul>
+<li><strong>"원본(raw) 보관소"는 provider 바이트를 무가공 보존한 파일이 아니다.</strong> 공개 SDK 모양과
+  순서는 유지하지만 <strong>저장 전에 자격증명을 제거한 내구성 있는 가림 처리 봉투</strong>라고 불러야 한다.</li>
+<li><strong>이 OTel은 네이티브 Claude 런타임 OTel이 아니다.</strong> 이 저장소의 내보내기 도구가 기록기 사건을
+  투영한 <strong>애플리케이션 계측</strong>이다. 런타임 텔레메트리 환경 변수와 OTLP 내보내기를 사용한 실행의
+  증거로 이름 바꾸면 안 된다.</li>
+<li><strong>원본 수와 span 수가 같다는 것만 완전성 조건으로 쓰면 안 된다.</strong> 그렇게 하면 한 사건을 여러
+  관점으로 정당하게 투영한 경우(사건 19)를 실패로 오판한다. <strong>각 원본 사건에 대응 span이 있는지와
+  투영 배수 규칙을 함께</strong> 검사해야 한다.</li>
+<li><strong>모든 원본 사건에 대응 span이 있다는 사실은 "누락이 없다"는 조건일 뿐</strong>, 각 span이 충분한
+  의미를 담았다거나 provider 동작 전체를 포착했다는 증명이 아니다.</li>
+<li><strong>OTel과 원본의 순서가 맞는 것은 독립 관측 두 개가 일치한 것이 아니다.</strong> 같은 기록기가 가림
+  처리된 원본을 받은 직후 만든 투영이다.</li>
+<li><strong>디스크 동기화(<code>fsync</code>)를 런타임 사건으로 관찰했다고 쓰면 안 된다.</strong> 구현이 그 호출을 하고
+  최종 산출물이 남은 것은 정상 경로의 증거지만, 이번 기록에 시스템 호출 영수증은 없다.</li>
+<li><strong>강제 플러시와 종료가 호출되고 span 파일이 완성된 것이, 내보내기 실패·디스크 가득·프로세스
+  강제 종료 뒤의 재시도나 복구를 증명하지는 않는다.</strong></li>
+<li><strong>실제 응답 모델은 어시스턴트 메시지(사건 9·18·29)의 모델 값으로 판정해야 한다.</strong> 과거 코드는
+  시작 기록의 모델로 계산했다.</li>
+<li><strong>"세 어시스턴트 메시지가 Opus 5"를 "실행 전체가 Opus만 썼다"로 확대하면 안 된다.</strong> 종료
+  기록에 보조 Haiku가 있다.</li>
+<li>당시 기록의 소스 해시는 장 원문 바이트만 묶었고 probe·런타임·감사·가림 처리 구현의 해시를
+  보존하지 않았다. <strong>현재 코드를 당시 실행의 원인으로 소급 확정하면 안 된다.</strong></li>
+</ul>
+<h3 id="_6">이번 실행으로는 확인하지 못한 것<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>네이티브 런타임 텔레메트리 경로의 실제 실행</li>
+<li>내보내기 실패·디스크 가득·프로세스 종료 뒤의 재시도와 복구</li>
+<li>시스템 호출 수준의 지속성 영수증</li>
 </ul>
 
 
