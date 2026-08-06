@@ -1,189 +1,163 @@
-# 20b장: 두 worker의 순차 handoff와 native Team 경계
+# 20b장: 팀과 멀티프로세스 협업
 
-> 공개 GitHub Pages 투영판: [20b장: 두 worker 순차 handoff와 native Team 경계](https://nfbs2000.github.io/speaky-claude-cookbooks/book/part6/ch20b/)
->
-> 실제 SDK 증거 판독: [20b장 실제 SDK 관찰: leader-mediated handoff와 provenance 한계](../evidence/ch20b-live.md)
+이 페이지는 한국어 SDK 책의 `20b장: 팀과 멀티프로세스 협업`을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.
 
-여러 worker를 실행했다고 곧바로 Claude Code의 native Team, mailbox, task claim이
-작동했다고 말할 수는 없습니다. 이 장은 실제로 관찰한 leader 중심 handoff와 아직
-실행하지 않은 native Team 기능을 분리합니다.
+**분류:** 제6부: 고급 서브시스템<br>
+**공개 상태:** `public`<br>
+**근거 신뢰도:** `medium`<br>
+**원문 위치:** `docs/book-sdk-ko/src/part6/ch20b.md`
 
-## 20b.1 핵심 질문
+## 이 장의 공개판 요지
 
-> 첫 worker가 실행 중에 얻은 결과가 leader를 거쳐 두 번째 worker의 실제 입력이 되었는가?
+이 장은 공개 SDK와 cookbook 예제로 대부분 직접 설명할 수 있다.
 
-## 20b.2 검증 설계
+공개판에서는 팀 협업을 parallel sessions, managed agents, agent teams, worktrees, shared state로 설명한다. cookbook의 async multi-agent orchestration과 managed agents notebooks가 각각 로컬 패턴과 hosted pattern을 제공한다. 팀 실행의 핵심은 "동시에 많이 돌리기"보다 공유 상태, 충돌 방지, escalation, merge policy를 분명히 하는 것이다.
 
-이번 probe host는 실행 직전에 무작위 marker를 만들어 파일에 기록했습니다. 첫 worker의
-실제 delegated prompt에 marker 값이 없고 `Read` 뒤에 처음 나타난 것은 raw stream에서
-관찰됐습니다. 다만 역사적 attempt는 당시 initial leader/system prompt와 probe 소스
-hash를 묶지 않았으므로 **leader도 처음 marker를 몰랐다**는 더 강한 인과 주장은
-추론으로 낮춥니다.
+[Async multi-agent orchestration](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/patterns/agents/async_multi_agent_orchestration.ipynb)를 근거로 삼는다. [Orchestrate issue to PR](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/CMA_orchestrate_issue_to_pr.ipynb)를 근거로 삼는다.
 
-```text
-team/research.txt = CH20B_RUNTIME_69f13d30acdb420f
-team/review.txt   = CH20B_REVIEW_FILE_CONFIRMED
-```
+!!! evidence "주요 cookbook 근거"
+    - [Async multi-agent orchestration](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/patterns/agents/async_multi_agent_orchestration.ipynb)
+    - [Orchestrate issue to PR](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/CMA_orchestrate_issue_to_pr.ipynb)
+    - [Coordinate specialist team](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/managed_agents/CMA_coordinate_specialist_team.ipynb)
 
-두 worker는 모두 foreground, `model="inherit"`, `tools=["Read"]`이고 `Agent`,
-`Bash`, `Edit`, `Write`를 사용할 수 없습니다.
+!!! evidence "공식 문서 근거"
+    - [Orchestrate teams of Claude Code sessions](https://code.claude.com/docs/en/agent-teams.md)
+    - [Run parallel sessions with worktrees](https://code.claude.com/docs/en/worktrees.md)
+    - [Manage multiple agents with agent view](https://code.claude.com/docs/en/agent-view.md)
 
-```text
-Leader
-  -> research-reader
-       -> Read research.txt
-       -> RESEARCH_RESULT:<runtime-only marker>
-  -> handoff-reviewer
-       input includes exact research result
-       -> Read review.txt
-       -> REVIEW_RESULT:<marker>|REVIEW_FILE:<review marker>
-  -> LEADER_TEAM_SYNTHESIS:<review result>
-```
+## 원문 절 구조를 공개 SDK로 다시 읽기
 
-Leader에게 두 Agent를 동시에 실행하지 말고 첫 worker의 complete result를 받은 뒤에만
-두 번째를 호출하라고 지시했습니다.
+### 20b.1 핵심 질문
 
-## 20b.3 실제 Opus 5 실행
+이 절은 `팀과 멀티프로세스 협업`의 질문을 공개 SDK에서 관측 가능한 사건으로 좁힌다. 답은 내부 구현명이 아니라 `ClaudeAgentOptions`, message stream, tool call, session record, cookbook 실행 결과에서 찾아야 한다.
 
-- attempt: `132134-ef857460`
-- OTel trace: `1c64771cff603eaf8728f772e537ce90`
-- actual response model: 여덟 `AssistantMessage.model` 모두 `claude-opus-5`
-- 두 worker `resolvedModel`: `claude-opus-5`
-- provider usage boundary: terminal `model_usage`에는 Opus 5와 보조 Haiku 4.5가 함께 기록
-- terminal status: success
+### 20b.2 팀 협업의 최소 증거
 
-### 첫 worker
+이 절은 원문의 `20b.2 팀 협업의 최소 증거` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 팀 협업을 parallel sessions, managed agents, agent teams, worktrees, shared state로 설명한다. cookbook의 async multi-agent orchestration과 managed agents notebooks가 각각 로컬 패턴과... 이며, 먼저 `Async multi-agent orchestration`를 기준 예제로 읽는다.
 
-| sequence | evidence |
-| ---: | --- |
-| 21 | `research-reader` Agent ToolUse |
-| 22 | first `TaskStartedMessage` |
-| 28 | worker `Read(team/research.txt)`, parent=first Agent ID |
-| 29 | ToolResult에 runtime-only marker |
-| 31 | Task notification completed + research result |
-| 32 | parent Agent ToolResult + worker resolved model |
+### 20b.3 메시지와 공유 상태
 
-### 실제 handoff
+이 절은 원문의 `20b.3 메시지와 공유 상태` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 팀 협업을 parallel sessions, managed agents, agent teams, worktrees, shared state로 설명한다. cookbook의 async multi-agent orchestration과 managed agents notebooks가 각각 로컬 패턴과... 이며, 먼저 `Async multi-agent orchestration`를 기준 예제로 읽는다.
 
-Sequence 58의 두 번째 Agent input에는 다음 문장이 원문으로 들어갔습니다.
+### 20b.4 사용자 통제 지점
 
-```text
-RESEARCH_RESULT:CH20B_RUNTIME_69f13d30acdb420f
-```
+이 절은 원문의 `20b.4 사용자 통제 지점` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 팀 협업을 parallel sessions, managed agents, agent teams, worktrees, shared state로 설명한다. cookbook의 async multi-agent orchestration과 managed agents notebooks가 각각 로컬 패턴과... 이며, 먼저 `Async multi-agent orchestration`를 기준 예제로 읽는다.
 
-첫 worker의 sequence 24 prompt에는 이 값이 없었고 sequence 29 `Read` result와 sequence
-32 첫 `Agent` result 뒤 sequence 58의 두 번째 `Agent` input에 나타났습니다. Sequence
-31/32에서 첫 task가 완료된 다음 sequence 58에서 두 번째 Agent가 시작됐으므로, **첫
-result 문자열이 leader lane을 거쳐 두 번째 input에 실린 순차 relay**는 관찰됐습니다.
-그러나 initial leader context까지 값이 없었다는 인과는 과거 artifact의 source binding
-부족 때문에 `accepted_with_notes`입니다.
+### 20b.5 캔버스 표현
 
-### 두 번째 worker와 leader
+이 절은 화면 구성의 문제가 아니라 evidence projection 문제로 읽는다. prompt, tool use, tool result, final result, usage를 한 화면에서 분리해 보여주는 구조가 필요하다.
 
-| sequence | evidence |
-| ---: | --- |
-| 58 | `handoff-reviewer` Agent ToolUse, first result 포함 |
-| 59 | second `TaskStartedMessage` |
-| 65 | worker `Read(team/review.txt)`, parent=second Agent ID |
-| 66 | review file ToolResult |
-| 68 | Task notification completed + combined review result |
-| 69 | parent Agent ToolResult + worker resolved model |
-| 76/80 | leader synthesis와 successful Result |
+### 20b.6 학생 실습
 
-최종 result에도 runtime marker와 review marker가 모두 남았습니다.
+이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.
 
-## 20b.4 무엇이 증명됐고 무엇이 아닌가
+### Takeaway
 
-| 항목 | 분류 | 근거 |
-| --- | --- | --- |
-| 두 개의 서로 다른 worker 실행 | observed | 두 Agent ID와 task ID |
-| 첫 결과의 두 번째 prompt 전달 | observed | sequence 32 대 58 원문 일치 |
-| 두 worker의 순차 실행 | observed | first terminal 뒤 second Agent 시작 |
-| 각 worker의 독립 Read | observed | 서로 다른 parent ID의 Read/ToolResult |
-| leader의 최종 종합 | observed | sequence 76/80 |
-| initial leader도 marker를 몰랐음 | inferred | 당시 initial prompt/probe hash 미보존 |
-| worker 간 직접 메시지 | 미관찰 | worker-to-worker event 없음 |
-| native `SendMessage` 실행 | 미관찰 | continuation 안내 문자열만 있고 ToolUse 없음 |
-| `TeamCreate`/mailbox/UDS inbox | 미관찰 | 해당 ToolUse/event 없음 |
-| shared TaskList claim loop | 미관찰 | claim/owner event 없음 |
-| worktree isolation | 미관찰 | 별도 worktree 생성 없음 |
-| team memory | 미관찰 | memory write/read 없음 |
+이 절의 결론은 공개 근거로 다시 닫는다. 내부 설명을 암기하는 대신 어떤 SDK 표면과 cookbook 파일로 같은 주장을 확인할 수 있는지 남긴다.
 
-따라서 이번 사례는 **leader-mediated multi-worker handoff**입니다. 교육적인 의미에서
-팀 작업으로 보여 줄 수 있지만, Claude Code native Team/multiprocess 기능의 실행
-증거로 이름을 바꾸면 안 됩니다.
+## 공개판 본문
 
-또한 `provider_run_concurrency=1`과 foreground 설정은 실행 의도일 뿐입니다. 순차 실행
-판정은 첫 terminal/result sequence 30~32가 두 번째 `Agent` sequence 58보다 앞선 실제
-stream 순서에서 나옵니다.
+원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.
 
-## 20b.5 `SendMessage` 문자열을 실행으로 오판하지 않기
+첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.
 
-Agent ToolResult에는 worker를 계속할 때 사용할 수 있는 `SendMessage` 안내 문자열이
-포함됐습니다. 그러나 이번 run에는 `SendMessage` ToolUse가 없습니다. UI는 다음을
-구분해야 합니다.
+둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.
 
-```text
-capability hint in ToolResult != observed SendMessage execution
-```
+셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.
 
-문서에 도구명이 등장하거나 모델이 기능을 설명한 것만으로 실행된 edge를 만들지
-않습니다.
+이 장을 읽을 때는 아래 순서가 좋다.
 
-## 20b.6 Python SDK 메시지 경계
+1. 먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.
+2. `ClaudeAgentOptions`, `query()`, `ClaudeSDKClient`, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.
+3. 원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.
+4. 마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.
 
-이번 run에서 수신한 lifecycle class는 `TaskStartedMessage`,
-`TaskProgressMessage`, `TaskUpdatedMessage`, `TaskNotificationMessage`입니다.
-`SDKTask*Message`라는 Python class는 없습니다. 또한 current Python
-`ClaudeAgentOptions`에는 `forwardSubagentText`와 `agentProgressSummaries` option이
-없지만 nested worker 메시지는 `parent_tool_use_id`와 함께 전달됐습니다.
+## 공개 경계
 
-과거 probe manifest의 `actual_model`은 결과적으로 Opus 5였지만 당시 코드는
-`SystemMessage.init.model`을 사용했습니다. 이번 판독은 sequence 9, 21, 28, 40, 45,
-58, 65, 76의 `AssistantMessage.model`을 기준으로 다시 확정했습니다. 다만 sequence 80
-`Result.model_usage`에는 `claude-haiku-4-5-20251001`도 있으므로 provider run 전체를
-Opus-only라고 표현하지 않습니다.
+- 비공개 팀 실행 서비스 내부는 다루지 않는다.
+- 협업은 observable messages, work artifacts, PR/output으로 검증한다.
 
-## 20b.7 캔버스 표현
+## 실습 방향
 
-```text
-Leader lane
-  Agent A -> Agent A result
-             |
-             | exact runtime marker
-             v
-  Agent B prompt -> Agent B result
-  -> Leader synthesis
+- parallel agents가 같은 파일을 수정하지 않도록 worktree 또는 task split 정책을 작성한다.
 
-Worker A lane: Read -> ToolResult
-Worker B lane: handed-off prompt -> Read -> ToolResult
-```
+## Builder takeaway
 
-두 worker 사이에 직접 화살표를 그리면 안 됩니다. 실제 edge는 worker A result에서
-leader로, leader의 두 번째 Agent input에서 worker B로 이어집니다.
+이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
 
-OTel span도 raw SDK와 독립적인 두 번째 provider 증거가 아닙니다. 같은
-`AttemptRecorder`가 SDK message 79개와 host process event 3개를 84개 span으로 투영한
-것이므로, source sequence 정합성과 projector 무결성을 검증하는 관점으로 사용합니다.
+## 부록: 이 장을 실제 SDK 실행으로 확인한 결과
 
-## 20b.8 학생 실습
+> 위 공개판 본문은 이 저장소의 notebook과 공식 문서에 근거해 다시 쓴 것이다. 아래는 같은
+> 장의 주장을 실제 Claude Agent SDK로 실행해 관찰한 기록이며, **실측 결과로 위 본문을 고쳐
+> 쓰지 않았다.** 본문 설명과 실제 동작이 어긋나는 곳도 본문을 남기고 아래에 근거와 함께 적는다.
+> 사건 단위 원본 판독: [20b장 실제 Python SDK 순차 handoff 관찰](../evidence/ch20b-live.md)
 
-```text
-두 read-only worker의 순차 handoff를 실행한다.
+**실행 조건** — 실제 모델 `claude-opus-5`, Claude Agent SDK `0.2.128`, Claude Code CLI
+`2.1.220`, 시도 `132134-ef857460`. 읽기 전용 작업자 두 명을 **리더가 중개해 순차로** 넘기는
+한 건을 관찰했다. 원본 사건 82건 중 69건을 정리했다.
 
-1. initial user/system/worker prompt와 probe source hash를 manifest에 묶고, 첫 worker가
-   실행 중에만 알 수 있는 marker를 읽게 한다.
-2. 첫 task terminal 이후 두 번째 Agent를 호출한다.
-3. 두 번째 Agent input에 첫 결과 원문이 있는지 확인한다.
-4. 각 nested tool의 parent_tool_use_id를 연결한다.
-5. SendMessage나 native Team을 실제로 호출하지 않았다면 미관찰로 표시한다.
-```
+### 실제로 확인된 것
 
-## Takeaway
+- 시작 기록(사건 2)이 두 에이전트를 노출하고, 도구 목록에는 `Task`와 `Read`가 있었다.
+- **첫 작업자** — 리더가 `Agent` 호출(21) → 작업 시작(22) → 작업자 프롬프트(24, 표식 값 없음) →
+  중첩 `Read`(28) → 결과에 실행 시점 표식(29) → 작업 갱신·알림 완료(30·31) → `Agent` 도구 결과(32).
+- **두 번째 작업자** — 사건 58에서 시작했고, **그 입력과 중첩 프롬프트(61)에 사건 32의 결과 원문이
+  그대로 들어 있었다.** 이어서 작업 시작(59) → 중첩 `Read`(65) → 결과(66) → 완료(67·68) →
+  두 표식을 합친 `Agent` 도구 결과(69).
+- 리더가 합친 결과를 최종 답변(76)과 종료 기록(80)에 보존하고 성공으로 끝났다.
+- **순차 실행이 스트림 순서로 증명된다.** 첫 작업 종료와 결과가 30~32에서 끝난 **뒤** 사건 58에서
+  두 번째가 시작됐다.
+- 두 `Agent` 호출 ID, 두 작업 ID, 두 에이전트 ID가 모두 달랐고 각 중첩 `Read`와 종료 사건이 해당
+  부모에 분리 연결됐다.
+- **원본 79건의 도구 호출은 `Agent` 2회와 `Read` 2회뿐**이었다. `Bash`·`Edit`·`Write`·
+  `SendMessage`·`TeamCreate` 호출은 없다.
+- 여덟 개 어시스턴트 메시지(9·21·28·40·45·58·65·76) 모두 모델이 `claude-opus-5`였다.
+- 무결성 해시 7개가 일치하고, OTel span 84개가 단일 trace에 속하며 원본 순서를 보존했다.
 
-이번 실제 run은 leader가 두 Opus 5 worker를 순차 실행하고, 첫 worker가 읽은 동적
-결과 문자열을 두 번째 worker의 input에 넣은 사실을 증명했습니다. 다만 historical
-artifact가 initial leader prompt와 probe source hash를 보존하지 않아 runtime-only
-causality 전체는 추가 재실행이 필요합니다. worker 간 직접 통신, mailbox, claim loop,
-worktree도 증명하지 않았습니다. 팀 시각화는 멋진 이름보다 실제 message edge의 방향을
-따라야 합니다.
+### 본문을 이렇게 읽으면 안 되는 곳
+
+- **작업자끼리 직접 메시지를 주고받은 것처럼 그리면 안 된다.** 첫 `Agent` 결과와 두 번째
+  `Agent` 입력은 **모두 부모가 없는 리더 통로**에 있다. 화살표는 작업자 A → 리더 → 작업자 B로
+  그려야 한다.
+- **`SendMessage` 문자열을 실행 증거로 쓰면 안 된다.** 사건 32와 69의 안내문에 그 이름이
+  있지만 **`SendMessage` 호출은 단 한 건도 없다.** 기능 안내와 실행 증거는 다릅니다.
+- **에이전트 정의 두 개와 작업 두 건을 실행한 것을 네이티브 Team·메일박스·공유 작업 확보
+  루프의 실행으로 이름 바꾸면 안 된다.**
+- **최종 결과가 성공이고 표식이 합쳐졌다는 것만으로 인계를 증명할 수 없다.** 첫 결과,
+  두 번째 입력, 각 부모 ID, 종료 순서를 함께 연결해야 한다.
+- **동시 실행 1과 전경 설정은 의도일 뿐 순차 실행의 증거가 아니다.** 실제 순차 판정은 위의
+  스트림 순서(30~32 → 58)에서 나온다.
+- **`SDKTask*Message`로 가르치면 안 된다.** 현재 클래스는 `TaskStartedMessage`,
+  `TaskProgressMessage`, `TaskUpdatedMessage`, `TaskNotificationMessage`이다.
+- 옵션과 실제 호출은 `Agent`인데 시작 목록에는 `Task`가 기록됐다. 하나의 고정 이름으로
+  합치면 안 된다.
+- **"모든 어시스턴트 메시지가 Opus 5"를 "실행 전체가 Opus만 썼다"로 확대하면 안 된다.**
+- 과거 probe는 시작 기록의 모델로 실제 모델을 계산했다. 이번 정리는 여덟 어시스턴트 메시지를
+  다시 읽어 판정했다.
+- OTel 순서 정합성은 수집 파이프라인 검증이지 독립 관측이 아니다.
+- 당시 기록의 소스 해시는 장 원문만 묶었고 probe·case·프롬프트 해시를 보존하지 않았다.
+
+### 주의해야 할 인과 한계
+
+첫 작업자 프롬프트에는 표식 값이 없고, `Read` 뒤 두 번째 `Agent` 입력에 나타난 것은 관찰됐다.
+그런데 **당시 리더·시스템 프롬프트의 해시가 보존되지 않았다.** 그래서 "표식이 오직 첫 작업자의
+결과 때문에 전달됐다"고 완전한 인과로 단정할 수는 없다.
+
+### 이번 실행에서 관찰되지 않은 것
+
+- 작업자 A가 B에게 직접 보낸 메시지 사건이나 부모 연결
+- `SendMessage` 호출·결과, `TeamCreate`·메일박스·수신함·동료 전달
+- 공유 작업 목록에서 담당을 확보·해제하는 협업 루프
+- 작업자별 git worktree 생성·격리·병합, 공유 팀 메모리 읽기/쓰기
+- **두 작업자가 실제로 겹쳐 돌아가는 병렬 실행** — 이 실행은 순차 전경이다.
+- 배경 실행 작업자와 그 수명 경계
+- 작업자 실패·취소·turn 소진·재시도와 리더의 복구
+
+### 앞으로 필요한 관측
+
+- 프롬프트 해시와 probe 소스 해시를 기록에 묶은 새 순차 실행 (인과 확정용)
+- 네이티브 Team을 가르치려면 팀 생애주기·메일박스 전달·동료 신원·공유 작업 확보를 원본 사건으로
+  보존하는 별도 실행
+- `SendMessage`의 실제 의미를 가르치려면 기존 에이전트 ID에 실제로 호출해 후속 사건을 연결하는 실행
+- 병렬과 순차 인계의 차이를 가르치려면 두 경우의 사건 겹침과 문맥 경계를 대조
+- 작업자 실패·취소·재시도 때 리더 결과로 무엇이 돌아오는지

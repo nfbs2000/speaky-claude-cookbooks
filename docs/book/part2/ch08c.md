@@ -1,134 +1,132 @@
-# 8c장: 정적 시스템 프롬프트 — SDK에서 보이는 기본 성격
+# 8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격
 
-> 공개 GitHub Pages 투영판: [8c장: 정적 시스템 프롬프트 — SDK에서 보이는 기본 성격](https://nfbs2000.github.io/speaky-claude-cookbooks/book/part2/ch08c/)
->
-> 실제 실행 증거: [preset과 explicit policy의 실제 행동, 파일시스템과 terminal 경계](../evidence/ch08c-live.md)
+이 페이지는 한국어 SDK 책의 `8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격`을 공개 Python cookbook과 공식 Agent SDK 문서에 맞춰 다시 쓴 공개판이다. 원래 장의 문제의식은 유지하되, 내부 TypeScript 구현명이나 비공개 기능을 그대로 옮기지 않는다. 대신 실행 가능한 notebook, Python 파일, README, 공식 문서를 근거로 사용한다.
 
-8장에서는 도구 프롬프트를 함께 살펴봤어요. 8c부터 8f까지는 프롬프트 표면을 조금 더 잘게 나눠 들여다볼 거예요. 그 첫걸음이 바로 정적 시스템 프롬프트입니다.
+**분류:** 제2부: 프롬프트 엔지니어링<br>
+**공개 상태:** `partial`<br>
+**근거 신뢰도:** `medium`<br>
+**원문 위치:** `docs/book-sdk-ko/src/part2/ch08c.md`
 
-정적 시스템 프롬프트는 클로드(Claude) 코드(Code)의 기본 성격이라고 할 수 있어요. 여기서 말하는 성격은 말투를 뜻하는 게 아니랍니다. 기본 작업 규율, 도구 사용 태도, 안전 원칙, 출력 밀도, 사용자와의 협업 방식이 여기서 정해져요.
+## 이 장의 공개판 요지
 
-원본 구현을 보면 `getSimpleIntroSection`, `getSimpleSystemSection`, `getSimpleDoingTasksSection`, `getActionsSection`, `getUsingYourToolsSection`, `getSimpleToneAndStyleSection`, `getOutputEfficiencySection` 같은 섹션들이 정적 영역을 이루고 있어요. SDK판에서는 이 내부 파일을 그대로 노출하지 않고, `systemPrompt` 설정과 실행 이벤트를 통해 같은 성격을 관찰합니다.
+이 장은 일부만 공개 SDK로 확인된다. 확인 가능한 부분은 cookbook 근거로 설명하고, 내부 세부는 추론 또는 경계로 분리한다.
 
-## 8c.1 핵심 질문
+공개판에서는 "기본 성격"을 숨은 프롬프트 원문이 아니라 SDK preset과 observable behavior로 다룬다. `claude_code` preset을 유지한 채 append prompt를 붙이는 방식, 또는 custom prompt를 사용하는 방식이 공개 API의 경계다. 따라서 이 장은 정적 프롬프트 원문 분석 대신 "기본 preset을 유지할 때 cookbook agent가 보이는 행동"과 "project instructions를 덧붙였을 때 달라지는 행동"을 비교한다.
 
-> 정적 시스템 프롬프트 전문을 보지 않고도, 기본 성격이 모델 행동에 반영됐는지 증명할 수 있을까요?
+[Project settings and output styles](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb)를 근거로 삼는다. [Project CLAUDE.md](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/CLAUDE.md)를 근거로 삼는다.
 
-답은 "가능하지만 제한적"이에요. 우리는 프롬프트 전문을 복원하지는 않아요. 대신 다음 세 가지 증거를 연결해 봅니다.
+!!! evidence "주요 cookbook 근거"
+    - [Project settings and output styles](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/01_The_chief_of_staff_agent.ipynb)
+    - [Project CLAUDE.md](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/chief_of_staff_agent/CLAUDE.md)
+    - [Migrating prompt primitives](https://github.com/nfbs2000/speaky-claude-cookbooks/blob/main/claude_agent_sdk/04_migrating_from_openai_agents_sdk.ipynb)
 
-| 증거 | 설명 |
-| --- | --- |
-| Configured | SDK 실행 전에 설정한 `systemPrompt`, `tools`, `permissionMode` |
-| Observed | `SDKSystemMessage.init`, `tool_use`, `tool_result`, assistant text |
-| Inferred | 반복 행동이 특정 기본 규율의 영향을 받았다는 해석 |
+!!! evidence "공식 문서 근거"
+    - [Modifying system prompts](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md)
+    - [Use Claude Code features in the SDK](https://code.claude.com/docs/en/agent-sdk/claude-code-features.md)
 
-## 8c.2 정적 섹션을 SDK에서 다시 설계하기
+## 원문 절 구조를 공개 SDK로 다시 읽기
 
-SDK 소비자는 두 가지 방식으로 정적 성격을 다룰 수 있어요.
+### 8c.1 핵심 질문
 
-첫째, 기본 Claude Code preset을 사용하는 방법이에요.
+이 절은 `정적 시스템 프롬프트 - SDK에서 보이는 기본 성격`의 질문을 공개 SDK에서 관측 가능한 사건으로 좁힌다. 답은 내부 구현명이 아니라 `ClaudeAgentOptions`, message stream, tool call, session record, cookbook 실행 결과에서 찾아야 한다.
 
-```typescript
-systemPrompt: { type: "preset", preset: "claude_code" }
-```
+### 8c.2 정적 섹션을 SDK에서 다시 설계하기
 
-이 방식은 제품 기본 하니스를 그대로 유지해 줘요. 도구/권한/안전 지침을 직접 재작성하지 않아도 되니 편하답니다. 학생 실습에는 이 방식이 안전하게 시작하기 좋아요.
+이 절은 원문의 `8c.2 정적 섹션을 SDK에서 다시 설계하기` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 "기본 성격"을 숨은 프롬프트 원문이 아니라 SDK preset과 observable behavior로 다룬다. `claude_code` preset을 유지한 채 append prompt를 붙이는 방식, 또는 custom prompt를 사용하는 방식이 공개 API의 경계다. 따라서 이 장은 ... 이며, 먼저 `Project settings and output styles`를 기준 예제로 읽는다.
 
-둘째, 강사용 실험에서는 정적 정책을 명시적으로 구성해 볼 수 있어요. 다만 custom string은 Claude Code preset에 몇 줄을 덧붙이는 것이 아니라 preset 전체를 대체하는 형태가 될 수 있습니다. 아래 짧은 정책을 preset과 동등한 기본 하니스라고 생각하면 안 됩니다.
+### 8c.3 정적 성격의 주요 축
 
-```typescript
-systemPrompt: [
-  [
-    "문서를 먼저 읽고 근거를 확인한다.",
-    "근거가 있는 주장과 추론을 분리한다.",
-    "파일 수정은 요청받은 경우에만 한다.",
-    "검증하지 않은 성공을 성공이라고 말하지 않는다.",
-  ].join("\n"),
-  SYSTEM_PROMPT_DYNAMIC_BOUNDARY,
-  runtimeContext,
-]
-```
+이 절은 원문의 `8c.3 정적 성격의 주요 축` 논지를 공개 Python cookbook의 실행 가능한 근거로 옮긴다. 핵심은 공개판에서는 "기본 성격"을 숨은 프롬프트 원문이 아니라 SDK preset과 observable behavior로 다룬다. `claude_code` preset을 유지한 채 append prompt를 붙이는 방식, 또는 custom prompt를 사용하는 방식이 공개 API의 경계다. 따라서 이 장은 ... 이며, 먼저 `Project settings and output styles`를 기준 예제로 읽는다.
 
-이 방식은 캔버스에서 정적 정책과 동적 문맥을 분리해 보여주기에 좋아요. 위 배열과 `SYSTEM_PROMPT_DYNAMIC_BOUNDARY`는 TypeScript 표면입니다. Python 0.2.128 실제 실험에서는 preset object 또는 하나의 custom string을 사용했으며, 이 배열을 실행했다고 주장하지 않습니다.
+### 8c.4 캔버스 표현
 
-## 8c.3 정적 성격의 주요 축
+이 절은 화면 구성의 문제가 아니라 evidence projection 문제로 읽는다. prompt, tool use, tool result, final result, usage를 한 화면에서 분리해 보여주는 구조가 필요하다.
 
-| 정적 축 | 원본 관점 | SDK 관측 |
-| --- | --- | --- |
-| 정체성 | interactive coding agent | `SDKSystemMessage.init.tools`, assistant가 코드 작업자로 행동 |
-| 작업 규율 | 범위 밖 변경 금지, 과잉 추상화 억제 | Edit/FileWrite path 수, diff scope |
-| 도구 사용 | 전용 도구 우선, Bash 남용 억제 | tool_use name 분포 |
-| 안전 | 위험 작업 확인, permission 존중 | `PermissionRequest`, `permission_denials` |
-| 출력 스타일 | 짧고 직접적, 근거/검증 명시 | final text 구조와 길이 |
-| 검증 | 실행한 것과 안 한 것 구분 | Bash/test 결과와 final report 연결 |
+### 8c.5 학생 실습
 
-이 표가 8c장의 중심이에요. 정적 프롬프트는 “어떤 문장으로 되어 있는가”보다 “어떤 반복 행동으로 나타나는가”가 더 중요하답니다.
+이 절은 강의용 실습으로 바꾼다. 실습은 관련 notebook을 실행하고, 입력 옵션과 tool call, 중간 결과, 최종 artifact를 함께 기록하는 방식이어야 한다.
 
-## 8c.4 캔버스 표현
+### Takeaway
 
-정적 프롬프트를 캔버스에 표현할 때는 원문을 길게 보여주지 않아요. 대신 정책 카드와 행동 증거를 서로 연결해 줍니다.
+이 절의 결론은 공개 근거로 다시 닫는다. 내부 설명을 암기하는 대신 어떤 SDK 표면과 cookbook 파일로 같은 주장을 확인할 수 있는지 남긴다.
 
-```text
-Static Policy
-  "근거를 먼저 확인"
-    -> Grep/Read before claim
-  "범위 밖 수정 금지"
-    -> no Edit outside target
-  "검증하지 않은 성공 금지"
-    -> final text says not run / failed
-```
+## 공개판 본문
 
-각 edge에는 label을 붙여 줘요.
+원래 책은 이 장을 내부 구현과 강의 화면의 대응 관계로 설명한다. 공개판에서는 같은 내용을 "무엇을 설정했는가", "무엇이 메시지로 관측됐는가", "어떤 파일과 notebook으로 재현 가능한가"라는 세 질문으로 바꾼다.
 
-- `configured`: 우리가 prompt/options로 설정한 것이에요
-- `observed`: 이벤트에서 직접 보인 것이에요
-- `inferred`: 정책이 행동에 영향을 준 것으로 해석한 부분이에요
+첫째, 설정된 것은 실행 전 계약이다. Agent SDK에서는 model, system prompt, working directory, allowed/disallowed tools, MCP servers, skills/plugins, permission mode 같은 값이 agent가 볼 수 있는 세계를 정한다. 이 값은 말로 설명하는 정책이 아니라 실제 Python 코드와 notebook cell에서 확인되어야 한다.
 
-이 구분이 없으면 강의가 자칫 내부 프롬프트 복원처럼 보일 수 있답니다.
+둘째, 관측된 것은 message stream과 artifact다. assistant text, tool use, tool result, result message, usage/cost, audit log, generated file은 모두 나중에 검증 가능한 증거다. 그래서 이 책의 공개판은 "모델이 그렇게 했을 것이다"라고 쓰지 않고, 어떤 cookbook 파일에서 어떤 실행 표면을 볼 수 있는지 연결한다.
 
-## 8c.5 실제 Opus 5 preset/explicit 실행
+셋째, 추론한 것은 반드시 경계와 함께 둔다. 내부 기능 플래그, 숨은 프롬프트, classifier, cache key, sandbox implementation처럼 공개 SDK나 cookbook으로 확인할 수 없는 항목은 원문을 그대로 게시하지 않는다. 대신 공개 API에서 사용자가 설계할 수 있는 대응 표면으로 바꾸거나, "공개 대응 없음"으로 명시한다.
 
-2026-08-03에 같은 fixture, user prompt, Bash/Edit/Read 표면으로 Python SDK 0.2.128과 실제 `claude-opus-5`를 순차 실행했습니다. system prompt form만 Claude Code preset과 짧은 explicit policy로 달랐습니다.
+이 장을 읽을 때는 아래 순서가 좋다.
 
-두 attempt의 raw SDK/process event는 preset `100/2`, explicit `145/2`개였고 OTel span은 각각 `104`, `149`개였습니다. 각 integrity manifest의 manifest, verdict, raw SDK/process/hook/permission, OTel SHA-256을 현재 파일과 대조해 모두 일치했습니다. OTel의 `CAPTURED`는 raw 수집 완료 상태이지 아래 행동 주장의 자동 합격 판정이 아닙니다.
+1. 먼저 주요 cookbook 근거를 열어 실제 notebook이나 Python 파일을 확인한다.
+2. `ClaudeAgentOptions`, `query()`, `ClaudeSDKClient`, tool list, MCP config, hooks, session 관련 코드가 어디 있는지 찾는다.
+3. 원문 절 제목을 따라가며 내부 설명을 공개 SDK 표면으로 바꿔 적는다.
+4. 마지막으로 실습 방향에 맞춰 같은 task를 실행하고 message stream 또는 artifact를 남긴다.
 
-| 관찰 | preset `105231-08cba367` | explicit `105308-beb0e51a` |
-| --- | --- | --- |
-| 변경 | `calculator.py` 한 줄 | `calculator.py` 한 줄 |
-| 수정 금지 파일 | `unrelated.md` hash 유지 | `unrelated.md` hash 유지 |
-| 실제 검증 | `python3 check.py` -> PASS | `python3 check.py` -> PASS |
-| 경로 탐색 | 디렉터리를 Bash로 나열한 뒤 calculator/check Read | 잘못된 홈 디렉터리 절대경로 Read 3회 뒤 오류가 알려 준 cwd로 복구 |
-| terminal | success | `error_max_turns` |
-| 최종 보고 | 실행/미실행 검증을 분리 | 최종 보고 전에 턴 소진 |
+## 공개 경계
 
-이 결과는 두 가지를 동시에 보여 줍니다. 첫째, 두 form 모두 이번 task에서 최소 수정과 실제 테스트를 수행했습니다. 둘째, 테스트가 PASS했다고 run 전체가 성공한 것은 아닙니다. explicit run은 추가 상태 확인 뒤 max turns로 끝나 최종 보고를 완성하지 못했습니다.
+- 정적 기본 프롬프트 원문은 공개 사이트에 게시하지 않는다.
+- 관찰 가능한 차이만 비교한다.
 
-`changed_paths=["calculator.py"]`는 `__pycache__`를 제외하도록 작성된 host snapshot의 결과입니다. explicit run의 마지막 `ls`에는 테스트 실행으로 생긴 `__pycache__` 디렉터리가 실제로 나타났습니다. 따라서 “수정 대상 source는 calculator 하나”는 관찰됐지만, 이를 “파일시스템에 새 파일이 전혀 생기지 않았다”로 확대하면 안 됩니다. preset final text의 “no new files”도 이 filtered snapshot만으로는 증명되지 않습니다.
+## 실습 방향
 
-또 하나의 중요한 인과 경계가 있습니다. 공통 user prompt 자체가 최소 수정, `unrelated.md` 보존, `python3 check.py` 실행, 실행·미실행 검증 분리 보고를 직접 요구했습니다. 두 run이 그 행동을 보였다는 사실은 observed지만, 그 원인이 static system prompt였다고 분리해서 증명하지는 못했습니다.
+- preset 유지/append/custom 세 가지 옵션을 같은 task에 적용해 tool behavior를 비교한다.
 
-이번 한 쌍에서는 preset만 최종 보고까지 완결했지만 이를 모든 task의 일반 법칙으로 만들지는 않습니다. preset은 5 tool use, 24,900ms, USD 0.0804685였고 explicit은 11 tool use, 18,735ms, USD 0.065153 뒤 `error_max_turns`로 끝났습니다. 즉 완결성, 도구 수, 시간, 비용은 한 줄의 승패로 합칠 수 없습니다. 더 중요한 교정은 “짧은 custom policy가 Claude Code preset 전체를 그대로 재현한다”는 가정을 버리는 것입니다. preset 내부 전문과 provider가 받은 exact prompt payload는 관찰하지 않았고, 공개 SDK option과 행동 event만 비교했습니다.
+## Builder takeaway
 
-두 Result 모두 primary assistant는 Opus 5였지만 `model_usage`에는 Haiku 4.5 보조 사용도 함께 기록됐습니다. explicit option의 `max_turns=6`과 Result의 `num_turns=7`도 함께 남아 있습니다. 이 차이를 SDK 내부 카운팅 규칙으로 추측하지 않고 관찰값 그대로 둡니다. permission/hook callback은 두 실행 모두 0개였으므로 정적 프롬프트의 안전·승인 행동은 이 한 쌍으로 증명하지 않았습니다.
+이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
 
-## 8c.6 학생 실습
+## 부록: 이 장을 실제 SDK 실행으로 확인한 결과
 
-```text
-AI 코딩 에이전트의 기본 성격을 정하는 정적 시스템 프롬프트 섹션을 설계해 줘.
+> 위 공개판 본문은 이 저장소의 notebook과 공식 문서에 근거해 다시 쓴 것이다. 아래는 같은
+> 장의 주장을 실제 Claude Agent SDK로 실행해 관찰한 기록이며, **실측 결과로 위 본문을 고쳐
+> 쓰지 않았다.** 본문 설명과 실제 동작이 어긋나는 곳도 본문을 남기고 아래에 근거와 함께 적는다.
+> 사건 단위 원본 판독: [8c장 실제 Python SDK 관찰](../evidence/ch08c-live.md)
 
-각 섹션마다 다음을 적어라.
-1. 섹션 이름
-2. 모델에게 요구하는 행동
-3. SDK 이벤트에서 확인할 수 있는 증거
-4. 확인할 수 없어서 추론으로만 남는 부분
-```
+**실행 조건** — 실제 모델 `claude-opus-5`, Claude Agent SDK `0.2.128`. 같은 작업을 preset
+시스템 프롬프트(`105231-08cba367`)와 직접 작성한 정책(`105308-beb0e51a`)으로 각각 한 번
+실행했다. 원본 사건 249건 중 72건을 정리했다.
 
-## Takeaway
+### 실제로 확인된 것
 
-정적 시스템 프롬프트는 그저 보이지 않는 배경음악이 아니에요. 반복되는 도구 선택, 수정 범위, 검증 보고, 출력 밀도로 관찰되는 기본 제어 평면이랍니다.
+- **조건은 한 변수만 달랐다.** 장 원문·사용자 프롬프트 해시, 실행 전 파일 스냅숏,
+  시작 기록의 도구(`Bash`/`Edit`/`Read`)·기본 권한 모드·Opus 5가 모두 같고 프롬프트 종류만
+  preset과 explicit으로 갈렸다.
+- preset 실행은 작업 공간을 나열하고 대상 파일을 읽은 뒤 한 줄만 `Edit`하고, 실제 검사 PASS를
+  받고, 무엇을 실행했고 무엇을 하지 않았는지 구분한 최종 보고까지 마쳤다.
+- explicit 실행은 상대 경로를 이미 찾았는데도 잘못된 홈 절대경로 `Read`를 세 번 실패하고,
+  오류가 알려 준 작업 디렉터리로 복구해 세 파일을 읽었다.
+- 두 실행 모두 대상 파일 하나만 바뀌고 나머지 파일 해시는 유지됐다.
+- 도구 호출 수는 preset 5회 / explicit 11회였다.
 
-## 관련 읽기
+### 본문을 이렇게 읽으면 안 되는 곳
 
-- [부록 J: 비공식 시스템 프롬프트 자료를 읽는 법](../appendix/appendix-j.md)
-- [부록 K: Claude Fable 5 프롬프트 구조 분석](../appendix/appendix-k.md)
-- [부록 L: Claude Opus 5와 Fable 5 프롬프트 비교](../appendix/appendix-l.md)
+- **"검사가 PASS했으니 실행이 성공했다"** — 아니다. explicit 실행은 검사 PASS를 받고도 최종
+  보고 없이 `error_max_turns`로 끝났다. 종료 기록은 `is_error=true`이다. 변경 검증의
+  성공과 실행의 성공은 다릅니다.
+- **"preset은 곧바로 대상 파일을 읽는다"** — 아니다. preset도 먼저 `Bash`로 작업 공간을
+  나열했다.
+- **변경 파일 목록을 "새 파일이 생기지 않았다"의 증거로 쓰면 안 된다.** 이 목록은
+  `__pycache__`를 제외한 소스 스냅숏이다. 실제로 explicit 실행의 사후 `ls`에는 새
+  `__pycache__` 디렉터리가 나타났다.
+- **관찰된 행동을 시스템 프롬프트만의 효과로 귀속하면 안 된다.** 공통 사용자 프롬프트가 이미
+  최소 수정, 무관 파일 보존, 검사 실행, 실행·미실행 보고를 직접 요구했다.
+- **turn 수 불일치를 임의로 해석하지 않았다.** 호스트 옵션의 `max_turns`는 6인데 explicit
+  종료 기록의 `num_turns`는 7이다. 내부 계산 방식을 추측하지 않고 두 값을 함께 남긴다.
+- **"preset이 더 낫다"고 쓰면 안 된다.** preset만 최종 보고까지 완료했지만 더 오래 걸리고
+  비용도 컸다. 고정 순서로 한 번씩 돌린 한 쌍으로 승자를 정할 수 없다.
+- 두 주 어시스턴트는 Opus 5였지만 두 종료 기록에 Haiku 4.5 보조 사용이 함께 있었다.
+- 당시 기록은 장 원문과 프롬프트 종류만 묶었고, 정확한 정책 문구·preset 객체·probe 소스·fixture
+  해시는 묶지 않았다.
+
+### 이번 실행으로는 확인하지 못한 것
+
+- 실제 시스템 프롬프트 전문. 시작 기록에는 조립된 프롬프트 텍스트가 없어서 provider가 받은
+  직렬화 payload를 직접 볼 수 없다. Claude Code preset 내부 문장도 관찰하지 않았다.
+- 순서를 바꿔 반복했을 때의 분포(preset → explicit 고정 순서로 한 번씩만 실행)
+- 정적 정책의 안전·승인 행동 — 두 실행 모두 권한 콜백과 훅 콜백이 0건이다.
+- TypeScript의 배열형 시스템 프롬프트와 동적 경계 상수는 이 Python 실행에서 쓰지 않았다.
