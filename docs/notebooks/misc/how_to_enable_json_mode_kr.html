@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>how_to_make_sql_queries_kr</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7511,175 +7511,101 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=20de56a8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Claude%EB%A1%9C-SQL-%EC%BF%BC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0">Claude로 SQL 쿼리 만들기<a class="anchor-link" href="#Claude%EB%A1%9C-SQL-%EC%BF%BC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0">¶</a></h1><p>이 노트북에서는 Claude를 사용해 자연어 질문으로부터 SQL 쿼리를 생성하는 방법을 살펴봅니다. 테스트 데이터베이스를 만들고, Claude에 스키마를 전달한 뒤, Claude가 사람의 말을 이해해 SQL 쿼리로 옮기는 과정을 확인합니다.</p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Claude%EC%97%90%EC%84%9C-%22JSON-%EB%AA%A8%EB%93%9C%22-%EB%81%8C%EC%96%B4%EB%82%B4%EA%B8%B0">Claude에서 "JSON 모드" 끌어내기<a class="anchor-link" href="#Claude%EC%97%90%EC%84%9C-%22JSON-%EB%AA%A8%EB%93%9C%22-%EB%81%8C%EC%96%B4%EB%82%B4%EA%B8%B0">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e7fe136">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="%EC%A4%80%EB%B9%84">준비<a class="anchor-link" href="#%EC%A4%80%EB%B9%84">¶</a></h2><p>먼저 필요한 라이브러리를 설치하고, API 키로 Anthropic 클라이언트를 설정합니다.</p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Claude에는 제약 샘플링(constrained sampling)을 사용하는 공식적인 "JSON 모드"가 없습니다. 하지만 걱정하지 마세요. 그래도 Claude에게서 안정적으로 JSON을 받아낼 수 있습니다. 이 레시피에서 그 방법을 알아봅니다.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5e1a230">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>먼저 Claude의 기본 동작을 살펴보겠습니다.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0c07a2c1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Install the necessary libraries</span>
-<span class="o">%</span><span class="k">pip</span> install anthropic
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pip</span> install anthropic
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc39114b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Import the required libraries</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">anthropic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anthropic</span>
-
-<span class="c1"># Set up the Claude API client</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1b991340">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">()</span>
 <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">"claude-opus-4-1"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%A7%8C%EB%93%A4%EA%B8%B0">테스트 데이터베이스 만들기<a class="anchor-link" href="#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%A7%8C%EB%93%A4%EA%B8%B0">¶</a></h2><p>SQLite로 테스트 데이터베이스를 만들고 샘플 데이터를 채워 넣습니다:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c28ca1ad">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Connect to the test database (or create it if it doesn't exist)</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"test_db.db"</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-
-<span class="c1"># Create a sample table</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
-<span class="s2">    CREATE TABLE IF NOT EXISTS employees (</span>
-<span class="s2">        id INTEGER PRIMARY KEY,</span>
-<span class="s2">        name TEXT,</span>
-<span class="s2">        department TEXT,</span>
-<span class="s2">        salary INTEGER</span>
-<span class="s2">    )</span>
-<span class="s2">"""</span><span class="p">)</span>
-
-<span class="c1"># Insert sample data</span>
-<span class="n">sample_data</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"John Doe"</span><span class="p">,</span> <span class="s2">"Sales"</span><span class="p">,</span> <span class="mi">50000</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Jane Smith"</span><span class="p">,</span> <span class="s2">"Engineering"</span><span class="p">,</span> <span class="mi">75000</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Mike Johnson"</span><span class="p">,</span> <span class="s2">"Sales"</span><span class="p">,</span> <span class="mi">60000</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"Emily Brown"</span><span class="p">,</span> <span class="s2">"Engineering"</span><span class="p">,</span> <span class="mi">80000</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"David Lee"</span><span class="p">,</span> <span class="s2">"Marketing"</span><span class="p">,</span> <span class="mi">55000</span><span class="p">),</span>
-<span class="p">]</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">"INSERT INTO employees VALUES (?, ?, ?, ?)"</span><span class="p">,</span> <span class="n">sample_data</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Claude%EB%A1%9C-SQL-%EC%BF%BC%EB%A6%AC-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">Claude로 SQL 쿼리 생성하기<a class="anchor-link" href="#Claude%EB%A1%9C-SQL-%EC%BF%BC%EB%A6%AC-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0">¶</a></h2><p>이제 자연어 질문을 Claude에 보내 생성된 SQL 쿼리를 돌려받는 함수를 정의합니다:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Define a function to send a query to Claude and get the response</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ask_claude</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
-    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""Here is the schema for a database:</span>
-
-<span class="si">{</span><span class="n">schema</span><span class="si">}</span>
-
-<span class="s2">Given this schema, can you output a SQL query to answer the following question? Only output the SQL query and nothing else.</span>
-
-<span class="s2">Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span>
-<span class="s2">"""</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+                <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Give me a JSON dict with names of famous athletes &amp; their sports."</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">],</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>데이터베이스 스키마를 조회해 문자열 형태로 만듭니다:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Get the database schema</span>
-<span class="n">schema</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"PRAGMA table_info(employees)"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">schema_str</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">"CREATE TABLE EMPLOYEES (</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">])</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">)"</span>
+    <span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">text</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">schema_str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7690,87 +7616,150 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>CREATE TABLE EMPLOYEES (
-id INTEGER
-name TEXT
-department TEXT
-salary INTEGER
-)
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>이제 예시 자연어 질문을 만들어 Claude에 보내 봅니다:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Example natural language question</span>
-<span class="n">question</span> <span class="o">=</span> <span class="s2">"What are the names and salaries of employees in the Engineering department?"</span>
-<span class="c1"># Send the question to Claude and get the SQL query</span>
-<span class="n">sql_query</span> <span class="o">=</span> <span class="n">ask_claude</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">schema_str</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sql_query</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>SELECT name, salary
-FROM EMPLOYEES
-WHERE department = 'Engineering';
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="%EC%83%9D%EC%84%B1%EB%90%9C-SQL-%EC%BF%BC%EB%A6%AC-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0">생성된 SQL 쿼리 실행하기<a class="anchor-link" href="#%EC%83%9D%EC%84%B1%EB%90%9C-SQL-%EC%BF%BC%EB%A6%AC-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0">¶</a></h2><p>마지막으로 생성된 SQL 쿼리를 테스트 데이터베이스에서 실행하고 결과를 출력합니다:</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Execute the SQL query and print the results</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_query</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<pre>Here is a JSON dictionary with names of famous athletes and their respective sports:
 
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+{
+  "athletes": [
+    {
+      "name": "Usain Bolt",
+      "sport": "Track and Field"
+    },
+    {
+      "name": "Michael Phelps",
+      "sport": "Swimming"
+    },
+    {
+      "name": "Serena Williams",
+      "sport": "Tennis"
+    },
+    {
+      "name": "LeBron James",
+      "sport": "Basketball"
+    },
+    {
+      "name": "Lionel Messi",
+      "sport": "Soccer"
+    },
+    {
+      "name": "Simone Biles",
+      "sport": "Gymnastics"
+    },
+    {
+      "name": "Tom Brady",
+      "sport": "American Football"
+    },
+    {
+      "name": "Muhammad Ali",
+      "sport": "Boxing"
+    },
+    {
+      "name": "Nadia Comaneci",
+      "sport": "Gymnastics"
+    },
+    {
+      "name": "Michael Jordan",
+      "sport": "Basketball"
+    },
+    {
+      "name": "Pelé",
+      "sport": "Soccer"
+    },
+    {
+      "name": "Roger Federer",
+      "sport": "Tennis"
+    }
+  ]
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a63ad7e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Claude가 지시를 따라 깔끔한 딕셔너리를 출력했습니다. 이제 코드로 추출할 수 있습니다:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=08626553">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract_json</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">json_start</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"{"</span><span class="p">)</span>
+    <span class="n">json_end</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">"}"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="n">json_start</span> <span class="p">:</span> <span class="n">json_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+
+<span class="n">extract_json</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'athletes': [{'name': 'Usain Bolt', 'sport': 'Track and Field'},
+  {'name': 'Michael Phelps', 'sport': 'Swimming'},
+  {'name': 'Serena Williams', 'sport': 'Tennis'},
+  {'name': 'LeBron James', 'sport': 'Basketball'},
+  {'name': 'Lionel Messi', 'sport': 'Soccer'},
+  {'name': 'Simone Biles', 'sport': 'Gymnastics'},
+  {'name': 'Tom Brady', 'sport': 'American Football'},
+  {'name': 'Muhammad Ali', 'sport': 'Boxing'},
+  {'name': 'Nadia Comaneci', 'sport': 'Gymnastics'},
+  {'name': 'Michael Jordan', 'sport': 'Basketball'},
+  {'name': 'Pelé', 'sport': 'Soccer'},
+  {'name': 'Roger Federer', 'sport': 'Tennis'}]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=39275885">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>그런데 앞머리 설명 없이 곧바로 JSON부터 출력하게 하려면 어떻게 해야 할까요? 간단한 방법은 Claude의 응답을 미리 채워(prefill) "{" 문자를 넣어 주는 것입니다.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=155e088a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+                <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Give me a JSON dict with names of famous athletes &amp; their sports."</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Here is the JSON requested:</span><span class="se">\n</span><span class="s2">{"</span><span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">text</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7781,38 +7770,331 @@ WHERE department = 'Engineering';
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>('Jane Smith', 75000)
-('Emily Brown', 80000)
+<pre>
+   "athletes":[
+      {
+         "name":"Michael Jordan",
+         "sport":"Basketball"
+      },
+      {
+         "name":"Babe Ruth",
+         "sport":"Baseball"
+      },
+      {
+         "name":"Muhammad Ali",
+         "sport":"Boxing"
+      },
+      {
+         "name":"Serena Williams",
+         "sport":"Tennis"
+      },
+      {
+         "name":"Wayne Gretzky",
+         "sport":"Hockey"
+      },
+      {
+         "name":"Michael Phelps",
+         "sport":"Swimming"
+      },
+      {
+         "name":"Usain Bolt",
+         "sport":"Track and Field"
+      },
+      {
+         "name":"Mia Hamm",
+         "sport":"Soccer"
+      },
+      {
+         "name":"Michael Schumacher",
+         "sport":"Formula 1 Racing"
+      },
+      {
+         "name":"Simone Biles",
+         "sport":"Gymnastics"
+      }
+   ]
+}
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=64e94c65">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>작업이 끝나면 데이터베이스 연결을 닫는 것을 잊지 마세요:</p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>이제 프리필로 넣었던 "{"만 다시 붙여 주면 JSON을 추출할 수 있습니다.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6c066ac6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Close the database connection</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">output_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">"{"</span> <span class="o">+</span> <span class="n">message</span><span class="p">[:</span> <span class="n">message</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">"}"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">output_json</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'athletes': [{'name': 'Michael Jordan', 'sport': 'Basketball'},
+  {'name': 'Babe Ruth', 'sport': 'Baseball'},
+  {'name': 'Muhammad Ali', 'sport': 'Boxing'},
+  {'name': 'Serena Williams', 'sport': 'Tennis'},
+  {'name': 'Wayne Gretzky', 'sport': 'Hockey'},
+  {'name': 'Michael Phelps', 'sport': 'Swimming'},
+  {'name': 'Usain Bolt', 'sport': 'Track and Field'},
+  {'name': 'Mia Hamm', 'sport': 'Soccer'},
+  {'name': 'Michael Schumacher', 'sport': 'Formula 1 Racing'},
+  {'name': 'Simone Biles', 'sport': 'Gymnastics'}]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd4492fd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>JSON 출력이 여러 개 들어 있어 "{"와 "}" 문자열 검색만으로는 처리되지 않는 아주 길고 복잡한 프롬프트라면, 나중에 추출하기 쉽도록 각 JSON 항목을 지정한 태그로 감싸서 출력하게 할 수도 있습니다.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=443ad932">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+                <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"""Give me a JSON dict with the names of 5 famous athletes &amp; their sports.</span>
+<span class="s2">Put this dictionary in &lt;athlete_sports&gt; tags.</span>
+
+<span class="s2">Then, for each athlete, output an additional JSON dictionary. In each of these additional dictionaries:</span>
+<span class="s2">- Include two keys: the athlete's first name and last name.</span>
+<span class="s2">- For the values, list three words that start with the same letter as that name.</span>
+<span class="s2">Put each of these additional dictionaries in separate &lt;athlete_name&gt; tags."""</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Here is the JSON requested:"</span><span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">text</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre> 
+
+&lt;athlete_sports&gt;
+{
+  "Michael Jordan": "Basketball",
+  "Serena Williams": "Tennis",
+  "Lionel Messi": "Soccer", 
+  "Usain Bolt": "Track and Field",
+  "Michael Phelps": "Swimming"
+}
+&lt;/athlete_sports&gt;
+
+&lt;athlete_name&gt;
+{
+  "first": ["Magnificent", "Motivating", "Memorable"],
+  "last": ["Joyful", "Jumping", "Jocular"]
+}
+&lt;/athlete_name&gt;
+
+&lt;athlete_name&gt;
+{
+  "first": ["Skillful", "Strong", "Superstar"],
+  "last": ["Winning", "Willful", "Wise"]
+}
+&lt;/athlete_name&gt;
+
+&lt;athlete_name&gt;
+{
+  "first": ["Legendary", "Lively", "Leaping"],
+  "last": ["Magical", "Marvelous", "Masterful"]  
+}
+&lt;/athlete_name&gt;
+
+&lt;athlete_name&gt;
+{
+  "first": ["Unbeatable", "Unbelievable", "Unstoppable"],
+  "last": ["Brave", "Bold", "Brilliant"]
+}
+&lt;/athlete_name&gt;
+
+&lt;athlete_name&gt;
+{
+  "first": ["Marvelous", "Methodical", "Medalist"],
+  "last": ["Powerful", "Persevering", "Precise"]
+}
+&lt;/athlete_name&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=74043369">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>이제 정규식으로 딕셔너리를 모두 추출할 수 있습니다.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bd847a70">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_between_tags</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">strip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">ext_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&gt;(.+?)&lt;/</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&gt;"</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strip</span><span class="p">:</span>
+        <span class="n">ext_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ext_list</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ext_list</span>
+
+
+<span class="n">athlete_sports_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">extract_between_tags</span><span class="p">(</span><span class="s2">"athlete_sports"</span><span class="p">,</span> <span class="n">message</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">athlete_name_dicts</span> <span class="o">=</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">extract_between_tags</span><span class="p">(</span><span class="s2">"athlete_name"</span><span class="p">,</span> <span class="n">message</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eb61ee06">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">athlete_sports_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>{'Lionel Messi': 'Soccer',
+ 'Michael Jordan': 'Basketball',
+ 'Michael Phelps': 'Swimming',
+ 'Serena Williams': 'Tennis',
+ 'Usain Bolt': 'Track and Field'}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=57dade0f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">athlete_name_dicts</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>[{'first': ['Magnificent',
+            'Motivating',
+            'Memorable'],
+  'last': ['Joyful',
+           'Jumping',
+           'Jocular']},
+ {'first': ['Skillful',
+            'Strong',
+            'Superstar'],
+  'last': ['Winning',
+           'Willful',
+           'Wise']},
+ {'first': ['Legendary',
+            'Lively',
+            'Leaping'],
+  'last': ['Magical',
+           'Marvelous',
+           'Masterful']},
+ {'first': ['Unbeatable',
+            'Unbelievable',
+            'Unstoppable'],
+  'last': ['Brave',
+           'Bold',
+           'Brilliant']},
+ {'first': ['Marvelous',
+            'Methodical',
+            'Medalist'],
+  'last': ['Powerful',
+           'Persevering',
+           'Precise']}]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e5854c0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>정리하면 다음과 같습니다.</p>
+<ul>
+<li>문자열 파싱으로 "<code>json"과 "</code>" 사이의 텍스트를 추출해 JSON을 얻을 수 있습니다.</li>
+<li>Assistant 메시지를 일부 채워 넣어 JSON <em>앞</em>에 붙는 앞머리 설명을 없앨 수 있습니다. (다만 이렇게 하면 JSON 출력을 시작하기 전에 Claude가 "생각의 사슬(Chain of Thought)"로 사고력을 높일 여지는 사라집니다.)</li>
+<li>정지 시퀀스(stop sequence)를 사용해 JSON <em>뒤</em>에 오는 텍스트를 제거할 수 있습니다.</li>
+<li>더 복잡한 프롬프트에서는 Claude가 JSON을 XML 태그로 감싸 출력하도록 지시해 나중에 모으기 쉽게 만들 수 있습니다.</li>
+</ul>
 </div>
 </div>
 </div>

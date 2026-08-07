@@ -6,52 +6,57 @@
 <title>한국어 쿡북 노트북</title>
 <style>
   :root {
-    --bg: #ffffff;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --line: #e5e5e5;
-    --accent: #c15f3c;
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b6b6b;
+    --line: #e6e6e6; --accent: #c15f3c; --chip: #f4f0ed;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1a1a;
-      --fg: #ececec;
-      --muted: #9a9a9a;
-      --line: #333333;
-      --accent: #e08d6d;
+      --bg: #191919; --fg: #ececec; --muted: #999999;
+      --line: #303030; --accent: #e08d6d; --chip: #262220;
     }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    padding: 3rem 1.5rem;
-    background: var(--bg);
-    color: var(--fg);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-          "Pretendard", "Noto Sans KR", sans-serif;
+    margin: 0; padding: 3.5rem 1.5rem 5rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          Pretendard, "Noto Sans KR", sans-serif;
   }
-  main { max-width: 46rem; margin: 0 auto; }
-  h1 { font-size: 1.7rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
-  .lede { color: var(--muted); margin: 0 0 2.5rem; }
+  main { max-width: 52rem; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin: 0 0 .4rem; letter-spacing: -.02em; }
+  .lede { color: var(--muted); margin: 0 0 .6rem; }
+  .total { color: var(--muted); font-size: .88rem; margin: 0 0 3rem; }
+  section { margin: 0 0 2.75rem; }
+  h2 {
+    font-size: 1.05rem; margin: 0 0 .1rem;
+    display: flex; align-items: baseline; gap: .5rem;
+  }
+  .count {
+    font-size: .75rem; font-weight: 500; color: var(--muted);
+    background: var(--chip); padding: .1rem .45rem; border-radius: 999px;
+  }
+  .dir {
+    color: var(--muted); font-size: .78rem; margin: 0 0 .7rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
   ul { list-style: none; padding: 0; margin: 0; }
   li { border-top: 1px solid var(--line); }
   li:last-child { border-bottom: 1px solid var(--line); }
   a.item {
-    display: block;
-    padding: 1.1rem .25rem;
-    color: inherit;
-    text-decoration: none;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1rem;
+    padding: .8rem .3rem; color: inherit; text-decoration: none;
   }
-  a.item:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
-  .title { font-weight: 600; }
-  .path { color: var(--muted); font-size: .85rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  a.item:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  .title { font-weight: 600; flex: 1 1 22rem; }
+  .path {
+    color: var(--muted); font-size: .78rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
   .note {
-    margin-top: 2.5rem;
-    padding: 1rem 1.1rem;
+    margin-top: 3rem; padding: 1rem 1.1rem;
     border-left: 3px solid var(--accent);
     background: color-mix(in srgb, var(--accent) 6%, transparent);
-    color: var(--muted);
-    font-size: .9rem;
+    color: var(--muted); font-size: .88rem;
   }
   .note strong { color: var(--fg); }
   a { color: var(--accent); }
@@ -61,21 +66,465 @@
 <main>
   <h1>한국어 쿡북 노트북</h1>
   <p class="lede">원본 노트북의 마크다운 셀만 한국어로 옮긴 판본입니다. 코드와 실행 결과는 원본 그대로입니다.</p>
+  <p class="total">전체 87편 · 분류는 저장소의 디렉터리를 따릅니다</p>
 
-  <ul>
-    <li>
-      <a class="item" href="how_to_make_sql_queries_kr.html">
-        <div class="title">Claude로 SQL 쿼리 만들기</div>
-        <div class="path">misc/how_to_make_sql_queries_kr.ipynb</div>
-      </a>
-    </li>
-  </ul>
+  <section>
+    <h2>기타 <span class="count">14</span></h2>
+    <div class="dir">misc/</div>
+    <ul>
+      <li><a class="item" href="misc/pdf_upload_summarization_kr.html">
+        <span class="title">API로 Claude에 PDF &quot;업로드&quot;하기</span>
+        <span class="path">misc/pdf_upload_summarization_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/read_web_pages_with_haiku_kr.html">
+        <span class="title">Claude 3 Haiku로 웹 페이지 내용 요약하기</span>
+        <span class="path">misc/read_web_pages_with_haiku_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/prompt_caching_kr.html">
+        <span class="title">Claude API의 프롬프트 캐싱</span>
+        <span class="path">misc/prompt_caching_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/how_to_make_sql_queries_kr.html">
+        <span class="title">Claude로 SQL 쿼리 만들기</span>
+        <span class="path">misc/how_to_make_sql_queries_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/building_moderation_filter_kr.html">
+        <span class="title">Claude로 콘텐츠 모더레이션 필터 만들기</span>
+        <span class="path">misc/building_moderation_filter_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/how_to_enable_json_mode_kr.html">
+        <span class="title">Claude에서 &quot;JSON 모드&quot; 끌어내기</span>
+        <span class="path">misc/how_to_enable_json_mode_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/batch_processing_kr.html">
+        <span class="title">Message Batches API로 배치 처리하기</span>
+        <span class="path">misc/batch_processing_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/sampling_past_max_tokens_kr.html">
+        <span class="title">max_tokens 한도를 넘겨 Claude 응답 이어받기</span>
+        <span class="path">misc/sampling_past_max_tokens_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/metaprompt_kr.html">
+        <span class="title">메타프롬프트(Metaprompt)</span>
+        <span class="path">misc/metaprompt_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/session_memory_compaction_kr.html">
+        <span class="title">세션 메모리 컴팩션(Session Memory Compaction)</span>
+        <span class="path">misc/session_memory_compaction_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/speculative_prompt_caching_kr.html">
+        <span class="title">예측적 프롬프트 캐싱(Speculative Prompt Caching)</span>
+        <span class="path">misc/speculative_prompt_caching_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/using_citations_kr.html">
+        <span class="title">인용(Citations)</span>
+        <span class="path">misc/using_citations_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/building_evals_kr.html">
+        <span class="title">평가(Eval) 만들기</span>
+        <span class="path">misc/building_evals_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="misc/generate_test_cases_kr.html">
+        <span class="title">프롬프트 템플릿용 합성 테스트 데이터 만들기</span>
+        <span class="path">misc/generate_test_cases_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>도구 사용 <span class="count">14</span></h2>
+    <div class="dir">tool_use/</div>
+    <ul>
+      <li><a class="item" href="tool_use/context_engineering/context_engineering_tools_kr.html">
+        <span class="title">AI 에이전트를 위한 컨텍스트 엔지니어링: 메모리 vs. 컴팩션 vs. 도구 결과 정리</span>
+        <span class="path">tool_use/context_engineering/context_engineering_tools_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/parallel_tools_kr.html">
+        <span class="title">Claude 3.7 Sonnet의 병렬 도구 호출</span>
+        <span class="path">tool_use/parallel_tools_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/programmatic_tool_calling_ptc_kr.html">
+        <span class="title">Claude API의 프로그래매틱 도구 호출(PTC)</span>
+        <span class="path">tool_use/programmatic_tool_calling_ptc_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/calculator_tool_kr.html">
+        <span class="title">Claude와 계산기 도구 사용하기</span>
+        <span class="path">tool_use/calculator_tool_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/extracting_structured_json_kr.html">
+        <span class="title">Claude와 도구 사용으로 구조화된 JSON 추출하기</span>
+        <span class="path">tool_use/extracting_structured_json_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/tool_use_with_pydantic_kr.html">
+        <span class="title">Pydantic과 Anthropic 도구 사용으로 만드는 노트 저장 도구</span>
+        <span class="path">tool_use/tool_use_with_pydantic_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/tool_search_alternate_approaches_kr.html">
+        <span class="title">도구 검색: 대안적 접근법</span>
+        <span class="path">tool_use/tool_search_alternate_approaches_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/tool_choice_kr.html">
+        <span class="title">도구 선택(tool_choice)</span>
+        <span class="path">tool_use/tool_choice_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/vision_with_tools_kr.html">
+        <span class="title">비전과 도구 함께 사용하기</span>
+        <span class="path">tool_use/vision_with_tools_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/threat_intel_enrichment_agent_kr.html">
+        <span class="title">위협 인텔리전스 보강 에이전트</span>
+        <span class="path">tool_use/threat_intel_enrichment_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/tool_search_with_embeddings_kr.html">
+        <span class="title">임베딩 기반 도구 검색: Claude를 수천 개의 도구로 확장하기</span>
+        <span class="path">tool_use/tool_search_with_embeddings_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/automatic-context-compaction_kr.html">
+        <span class="title">자동 컨텍스트 컴팩션</span>
+        <span class="path">tool_use/automatic-context-compaction_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/memory_cookbook_kr.html">
+        <span class="title">장시간 실행 에이전트를 위한 컨텍스트 편집과 메모리</span>
+        <span class="path">tool_use/memory_cookbook_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="tool_use/customer_service_agent_kr.html">
+        <span class="title">클라이언트 측 도구로 고객 상담 에이전트 만들기</span>
+        <span class="path">tool_use/customer_service_agent_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>핵심 기능 <span class="count">6</span></h2>
+    <div class="dir">capabilities/</div>
+    <ul>
+      <li><a class="item" href="capabilities/knowledge_graph/guide_kr.html">
+        <span class="title">Claude로 지식 그래프 만들기</span>
+        <span class="path">capabilities/knowledge_graph/guide_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="capabilities/text_to_sql/guide_kr.html">
+        <span class="title">Claude로 하는 Text to SQL</span>
+        <span class="path">capabilities/text_to_sql/guide_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="capabilities/classification/guide_kr.html">
+        <span class="title">Claude로 하는 분류: 보험 지원 티켓 분류기</span>
+        <span class="path">capabilities/classification/guide_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="capabilities/summarization/guide_kr.html">
+        <span class="title">Claude로 하는 요약</span>
+        <span class="path">capabilities/summarization/guide_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="capabilities/retrieval_augmented_generation/guide_kr.html">
+        <span class="title">검색 증강 생성(RAG)</span>
+        <span class="path">capabilities/retrieval_augmented_generation/guide_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="capabilities/contextual-embeddings/guide_kr.html">
+        <span class="title">맥락 기반 검색으로 RAG 강화하기</span>
+        <span class="path">capabilities/contextual-embeddings/guide_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>멀티모달 <span class="count">6</span></h2>
+    <div class="dir">multimodal/</div>
+    <ul>
+      <li><a class="item" href="multimodal/how_to_transcribe_text_kr.html">
+        <span class="title">Claude로 문서 전사하기</span>
+        <span class="path">multimodal/how_to_transcribe_text_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="multimodal/best_practices_for_vision_kr.html">
+        <span class="title">Claude에서 비전을 사용하는 모범 사례</span>
+        <span class="path">multimodal/best_practices_for_vision_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="multimodal/using_sub_agents_kr.html">
+        <span class="title">Haiku를 서브에이전트로 사용하기</span>
+        <span class="path">multimodal/using_sub_agents_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="multimodal/crop_tool_kr.html">
+        <span class="title">더 나은 이미지 분석을 위해 Claude에 크롭 도구 주기</span>
+        <span class="path">multimodal/crop_tool_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="multimodal/getting_started_with_vision_kr.html">
+        <span class="title">시작하기 — Claude에 이미지 전달하는 방법</span>
+        <span class="path">multimodal/getting_started_with_vision_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="multimodal/reading_charts_graphs_powerpoints_kr.html">
+        <span class="title">차트, 그래프, 슬라이드 덱 다루기</span>
+        <span class="path">multimodal/reading_charts_graphs_powerpoints_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>에이전트 패턴 <span class="count">4</span></h2>
+    <div class="dir">patterns/</div>
+    <ul>
+      <li><a class="item" href="patterns/agents/async_multi_agent_orchestration_kr.html">
+        <span class="title">Claude로 구현하는 비동기 멀티에이전트 오케스트레이션</span>
+        <span class="path">patterns/agents/async_multi_agent_orchestration_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="patterns/agents/basic_workflows_kr.html">
+        <span class="title">basic workflows</span>
+        <span class="path">patterns/agents/basic_workflows_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="patterns/agents/evaluator_optimizer_kr.html">
+        <span class="title">evaluator optimizer</span>
+        <span class="path">patterns/agents/evaluator_optimizer_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="patterns/agents/orchestrator_workers_kr.html">
+        <span class="title">오케스트레이터-워커(Orchestrator-Workers) 워크플로</span>
+        <span class="path">patterns/agents/orchestrator_workers_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Agent SDK <span class="count">8</span></h2>
+    <div class="dir">claude_agent_sdk/</div>
+    <ul>
+      <li><a class="item" href="claude_agent_sdk/01_The_chief_of_staff_agent_kr.html">
+        <span class="title">01 - Chief of Staff 에이전트</span>
+        <span class="path">claude_agent_sdk/01_The_chief_of_staff_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/02_The_observability_agent_kr.html">
+        <span class="title">02 - 관측 가능성(Observability) 에이전트</span>
+        <span class="path">claude_agent_sdk/02_The_observability_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/04_migrating_from_openai_agents_sdk_kr.html">
+        <span class="title">OpenAI Agents SDK에서 이전하기</span>
+        <span class="path">claude_agent_sdk/04_migrating_from_openai_agents_sdk_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/03_The_site_reliability_agent_kr.html">
+        <span class="title">SRE 장애 대응 에이전트</span>
+        <span class="path">claude_agent_sdk/03_The_site_reliability_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/05_Building_a_session_browser_kr.html">
+        <span class="title">세션 브라우저 만들기</span>
+        <span class="path">claude_agent_sdk/05_Building_a_session_browser_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/07_Hosting_the_agent_kr.html">
+        <span class="title">에이전트 호스팅하기</span>
+        <span class="path">claude_agent_sdk/07_Hosting_the_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/06_The_vulnerability_detection_agent_kr.html">
+        <span class="title">취약점 탐지 에이전트</span>
+        <span class="path">claude_agent_sdk/06_The_vulnerability_detection_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="claude_agent_sdk/00_The_one_liner_research_agent_kr.html">
+        <span class="title">한 줄짜리 리서치 에이전트 만들기</span>
+        <span class="path">claude_agent_sdk/00_The_one_liner_research_agent_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Managed Agents <span class="count">12</span></h2>
+    <div class="dir">managed_agents/</div>
+    <ul>
+      <li><a class="item" href="managed_agents/sre_incident_responder_kr.html">
+        <span class="title">Claude Managed Agents로 SRE 장애 대응 에이전트 만들기</span>
+        <span class="path">managed_agents/sre_incident_responder_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/slack_data_bot_kr.html">
+        <span class="title">Claude Managed Agents로 Slack 데이터 분석 봇 만들기</span>
+        <span class="path">managed_agents/slack_data_bot_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/data_analyst_agent_kr.html">
+        <span class="title">Claude Managed Agents로 데이터 분석 에이전트 만들기</span>
+        <span class="path">managed_agents/data_analyst_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_explore_unfamiliar_codebase_kr.html">
+        <span class="title">Explore: 낯선 코드베이스에서 근거 확보하기</span>
+        <span class="path">managed_agents/CMA_explore_unfamiliar_codebase_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_gate_human_in_the_loop_kr.html">
+        <span class="title">Gate: 커스텀 도구로 구현하는 사람 개입 루프</span>
+        <span class="path">managed_agents/CMA_gate_human_in_the_loop_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_iterate_fix_failing_tests_kr.html">
+        <span class="title">Iterate: 실행 → 관찰 → 수정</span>
+        <span class="path">managed_agents/CMA_iterate_fix_failing_tests_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_operate_in_production_kr.html">
+        <span class="title">Operate: 프로덕션에서 Managed Agents 운영하기</span>
+        <span class="path">managed_agents/CMA_operate_in_production_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_orchestrate_issue_to_pr_kr.html">
+        <span class="title">Orchestrate: 이슈에서 병합된 PR까지</span>
+        <span class="path">managed_agents/CMA_orchestrate_issue_to_pr_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_verify_with_outcome_grader_kr.html">
+        <span class="title">Outcomes: 자기 결과물을 스스로 검증하는 에이전트</span>
+        <span class="path">managed_agents/CMA_verify_with_outcome_grader_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_coordinate_specialist_team_kr.html">
+        <span class="title">멀티에이전트: 전문가 팀 조율하기</span>
+        <span class="path">managed_agents/CMA_coordinate_specialist_team_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_remember_user_preferences_kr.html">
+        <span class="title">사용자를 기억하는 에이전트 만들기</span>
+        <span class="path">managed_agents/CMA_remember_user_preferences_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="managed_agents/CMA_prompt_versioning_and_rollback_kr.html">
+        <span class="title">프롬프트 버전 관리와 롤백</span>
+        <span class="path">managed_agents/CMA_prompt_versioning_and_rollback_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>스킬 <span class="count">3</span></h2>
+    <div class="dir">skills/</div>
+    <ul>
+      <li><a class="item" href="skills/notebooks/01_skills_introduction_kr.html">
+        <span class="title">Claude 스킬 소개</span>
+        <span class="path">skills/notebooks/01_skills_introduction_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="skills/notebooks/03_skills_custom_development_kr.html">
+        <span class="title">Claude를 위한 커스텀 스킬 만들기</span>
+        <span class="path">skills/notebooks/03_skills_custom_development_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="skills/notebooks/02_skills_financial_applications_kr.html">
+        <span class="title">금융 업무를 위한 Claude 스킬</span>
+        <span class="path">skills/notebooks/02_skills_financial_applications_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>확장 사고 <span class="count">2</span></h2>
+    <div class="dir">extended_thinking/</div>
+    <ul>
+      <li><a class="item" href="extended_thinking/extended_thinking_with_tool_use_kr.html">
+        <span class="title">도구 사용과 함께하는 확장 사고</span>
+        <span class="path">extended_thinking/extended_thinking_with_tool_use_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="extended_thinking/extended_thinking_kr.html">
+        <span class="title">확장 사고(Extended Thinking)</span>
+        <span class="path">extended_thinking/extended_thinking_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>서드파티 연동 <span class="count">13</span></h2>
+    <div class="dir">third_party/</div>
+    <ul>
+      <li><a class="item" href="third_party/MongoDB/rag_using_mongodb_kr.html">
+        <span class="title">Claude 3와 MongoDB로 RAG 시스템 만들기</span>
+        <span class="path">third_party/MongoDB/rag_using_mongodb_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/Wikipedia/wikipedia-search-cookbook_kr.html">
+        <span class="title">Claude로 위키백과 반복 검색하기</span>
+        <span class="path">third_party/Wikipedia/wikipedia-search-cookbook_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/Deepgram/prerecorded_audio_kr.html">
+        <span class="title">Deepgram으로 오디오 파일을 전사하고 Anthropic으로 인터뷰 질문 만들기!</span>
+        <span class="path">third_party/Deepgram/prerecorded_audio_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/ElevenLabs/low_latency_stt_claude_tts_kr.html">
+        <span class="title">ElevenLabs와 Claude로 만드는 저지연 음성 어시스턴트</span>
+        <span class="path">third_party/ElevenLabs/low_latency_stt_claude_tts_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/Pinecone/claude_3_rag_agent_kr.html">
+        <span class="title">LangChain v1으로 만드는 Claude 3 RAG 에이전트</span>
+        <span class="path">third_party/Pinecone/claude_3_rag_agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/Basic_RAG_With_LlamaIndex_kr.html">
+        <span class="title">LlamaIndex로 만드는 RAG 파이프라인</span>
+        <span class="path">third_party/LlamaIndex/Basic_RAG_With_LlamaIndex_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/Pinecone/rag_using_pinecone_kr.html">
+        <span class="title">Pinecone을 활용한 검색 증강 생성(RAG)</span>
+        <span class="path">third_party/Pinecone/rag_using_pinecone_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/ReAct_Agent_kr.html">
+        <span class="title">ReAct 에이전트</span>
+        <span class="path">third_party/LlamaIndex/ReAct_Agent_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/Router_Query_Engine_kr.html">
+        <span class="title">RouterQueryEngine</span>
+        <span class="path">third_party/LlamaIndex/Router_Query_Engine_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/SubQuestion_Query_Engine_kr.html">
+        <span class="title">SubQuestionQueryEngine</span>
+        <span class="path">third_party/LlamaIndex/SubQuestion_Query_Engine_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/WolframAlpha/using_llm_api_kr.html">
+        <span class="title">Wolfram Alpha LLM API를 Claude의 도구로 사용하기</span>
+        <span class="path">third_party/WolframAlpha/using_llm_api_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/Multi_Document_Agents_kr.html">
+        <span class="title">다중 문서 에이전트(Multi-Document Agents)</span>
+        <span class="path">third_party/LlamaIndex/Multi_Document_Agents_kr.ipynb</span>
+      </a></li>
+      <li><a class="item" href="third_party/LlamaIndex/Multi_Modal_kr.html">
+        <span class="title">멀티모달</span>
+        <span class="path">third_party/LlamaIndex/Multi_Modal_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>코딩 <span class="count">1</span></h2>
+    <div class="dir">coding/</div>
+    <ul>
+      <li><a class="item" href="coding/prompting_for_frontend_aesthetics_kr.html">
+        <span class="title">프런트엔드 미학: 프롬프팅 가이드</span>
+        <span class="path">coding/prompting_for_frontend_aesthetics_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>관측 가능성 <span class="count">1</span></h2>
+    <div class="dir">observability/</div>
+    <ul>
+      <li><a class="item" href="observability/usage_cost_api_kr.html">
+        <span class="title">사용량·비용 관리 API 쿡북</span>
+        <span class="path">observability/usage_cost_api_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>파인튜닝 <span class="count">1</span></h2>
+    <div class="dir">finetuning/</div>
+    <ul>
+      <li><a class="item" href="finetuning/finetuning_on_bedrock_kr.html">
+        <span class="title">Bedrock에서 Claude 3 Haiku 파인튜닝하기</span>
+        <span class="path">finetuning/finetuning_on_bedrock_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>도구 평가 <span class="count">1</span></h2>
+    <div class="dir">tool_evaluation/</div>
+    <ul>
+      <li><a class="item" href="tool_evaluation/tool_evaluation_kr.html">
+        <span class="title">도구 평가</span>
+        <span class="path">tool_evaluation/tool_evaluation_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Fable 5 폴백·과금 <span class="count">1</span></h2>
+    <div class="dir">fable_5_fallback_billing/</div>
+    <ul>
+      <li><a class="item" href="fable_5_fallback_billing/guide_kr.html">
+        <span class="title">분류기 폴백과 과금</span>
+        <span class="path">fable_5_fallback_billing/guide_kr.ipynb</span>
+      </a></li>
+    </ul>
+  </section>
 
   <p class="note">
-    <strong>시험판입니다.</strong> 번역된 노트북 87개 중 한 편만 페이지로 만들어 두었습니다.
-    나머지는 저장소에서 바로 볼 수 있습니다 —
-    <a href="https://github.com/nfbs2000/speaky-claude-cookbooks">GitHub 저장소</a>에서
-    <code>*_kr.ipynb</code> 파일을 열면 됩니다.
+    <strong>번역 범위.</strong> 설명(마크다운)만 한국어이고 코드 셀은 원본과 바이트 단위로 같습니다.
+    실행 결과와 코드 주석은 영어 그대로입니다.
+    원본은 <a href="https://github.com/nfbs2000/speaky-claude-cookbooks">GitHub 저장소</a>에서 볼 수 있습니다.
   </p>
 </main>
 </body>
