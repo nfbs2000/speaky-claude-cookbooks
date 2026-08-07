@@ -7,56 +7,35 @@
 ## 제1부: 아키텍처
 
 - [1장: AI 코딩 에이전트의 전체 기술 스택](part1/ch01.md)
-- [1장 실제 Python SDK 관찰: 첫 init부터 Result까지](evidence/ch01-live.md)
 - [2장: 도구 시스템 — 모델의 손이 되는 40개 이상의 도구](part1/ch02.md)
-- [2장 실제 Python SDK 관찰: 도구 표면과 권한 순서](evidence/ch02-live.md)
 - [3장: 에이전트 루프 - 사용자 입력에서 모델 응답까지의 전체 생명주기](part1/ch03.md)
-- [3장 실제 Python SDK 관찰: session, turn, tool result, terminal result](evidence/ch03-live.md)
 - [4장: 도구 실행 오케스트레이션 - 권한, 동시성, 스트리밍, 인터럽트](part1/ch04.md)
-- [4장 실제 Python SDK 관찰: raw/OTel에서 공개 replay까지](evidence/ch04-live.md)
 - [4b장: 플랜 모드 - 뛰기 전에 살펴보기](part1/ch04b.md)
-- [4b장 실제 Python SDK 플랜 모드 관찰: 계획 artifact와 실행 승인 경계](evidence/ch04b-live.md)
 
 ## 제2부: 프롬프트 엔지니어링
 
 - [5장: 시스템 프롬프트 아키텍처](part2/ch05.md)
-- [5장 실제 Python SDK 관찰: configured, observed, inferred 경계](evidence/ch05-live.md)
 - [6장: 프롬프트를 통한 동작 제어](part2/ch06.md)
-- [6장 실제 Python SDK 관찰: 여섯 행동 패턴과 실패 복구](evidence/ch06-live.md)
 - [6b장: API 통신 계층 - 재시도, 스트리밍, 성능 저하 대응](part2/ch06b.md)
-- [6b장 실제 Python SDK 관찰: 스트리밍, 중단, 저장, API 재시도](evidence/ch06b-live.md)
 - [7장: 모델별 튜닝과 A/B 테스트](part2/ch07.md)
-- [7장 실제 Python SDK 관찰: 같은 Opus 5의 prompt-policy A/B와 해석 경계](evidence/ch07-live.md)
 - [8장: 마이크로 하니스로서의 도구 프롬프트](part2/ch08.md)
-- [8장 실제 Python SDK 관찰: 도구 description/schema, disallowed Bash, Agent 위임 경계](evidence/ch08-live.md)
 - [8c장: 정적 시스템 프롬프트 - SDK에서 보이는 기본 성격](part2/ch08c.md)
-- [8c장 실제 Python SDK 관찰: preset, explicit policy, 파일시스템과 terminal 경계](evidence/ch08c-live.md)
 - [8d장: 동적 프롬프트 레이어 - 세션, 메모리, 팀, MCP가 뒤에 붙는 법](part2/ch08d.md)
-- [8d장 실제 Python SDK 관찰: 동적 지침, 격리, skill과 MCP의 경계](evidence/ch08d-live.md)
 - [8e장: 도구 설명 프롬프트 - Bash, Read, Grep, Agent는 어떻게 행동을 유도하나](part2/ch08e.md)
-- [8e장 실제 Python SDK 관찰: built-in 도구 입력과 description 인과 경계](evidence/ch08e-live.md)
 - [8f장: 권한/분류기 프롬프트 - 자동 승인, CLAUDE.md prefix, deny 규칙의 숨은 제어 평면](part2/ch08f.md)
-- [8f장 실제 Python SDK 권한 관찰: callback, mode, 명시적 deny의 실제 우선순위](evidence/ch08f-live.md)
 
 ## 제3부: 세션과 메시지 관측
 
 - [9장: 자동 컴팩션 - 언제, 어떻게 컨텍스트가 압축되는가](part3/ch09.md)
-- [9장 실제 Python SDK 컴팩션 관찰: summary 보존과 fresh evidence의 분리](evidence/ch09-live.md)
 - [10장: 컴팩션 이후의 파일 상태 보존](part3/ch10.md)
-- [10장 실제 Python SDK 파일 상태 관찰: summary의 V1과 디스크 V2 충돌](evidence/ch10-live.md)
 - [11장: 마이크로 컴팩션 - 정밀한 컨텍스트 가지치기](part3/ch11.md)
-- [11장 실제 Python SDK large-result 관찰: raw archive와 active context 분리](evidence/ch11-live.md)
 - [12장: 토큰 예산 전략](part3/ch12.md)
-- [12장 실제 Python SDK 토큰 예산 관찰: runtime overflow와 host preview 분리](evidence/ch12-live.md)
 
 ## 제4부: 프롬프트 캐싱
 
 - [13장: 캐시 아키텍처와 브레이크포인트 설계](part4/ch13.md)
-- [13장 실제 Python SDK 캐시 관찰: 안정 prefix와 동적 suffix 분리](evidence/ch13-live.md)
 - [14장: 캐시 브레이크 감지 시스템](part4/ch14.md)
-- [14장 실제 Python SDK 관찰: 동일 tool surface control과 변경 surface 비교](evidence/ch14-live.md)
 - [15장: 캐시 최적화 패턴](part4/ch15.md)
-- [15장 실제 Python SDK 관찰: stable prefix와 timestamp 한 글자 변경](evidence/ch15-live.md)
 
 ## 제5부: 안전성과 권한
 
@@ -86,9 +65,7 @@
 - [27장: 프로덕션급 AI 코딩 패턴](part7/ch27.md)
 - [28장: Claude Code의 한계](part7/ch28.md)
 - [29장: 옵저버빌리티 엔지니어링 - raw SDK에서 OTel까지](part7/ch29.md)
-- [29장 실제 Python SDK 옵저버빌리티 관찰](evidence/ch29-live.md)
 - [30장: 나만의 AI 에이전트 만들기 - Claude Code 패턴에서 실전까지](part7/ch30.md)
-- [30장 실제 Python SDK 관찰: 권한, 산출물, 재개, 메모리](evidence/ch30-live.md)
 
 ## 부록
 
