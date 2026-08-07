@@ -1,0 +1,16 @@
+# This fork deliberately ships no CI workflows — see scripts/sync_upstream.sh.
+# Marking the directory as ours keeps a plain `git merge upstream/main` from
+# silently restoring a workflow file whose content upstream changed.
+#
+# Note this only covers content merges. When upstream modifies a file we have
+# deleted, git raises a modify/delete conflict that no merge driver resolves;
+# sync_upstream.sh handles that case by deleting the path again before it
+# commits. Prefer the script over a bare merge.
+#
+# The driver has to exist locally for the attribute to do anything:
+#   git config merge.keep-ours.driver true
+.github/workflows/** merge=keep-ours
+
+# Notebooks are JSON. Let git treat them as text so diffs and merges behave,
+# and keep the Korean translations from being mangled by autocrlf.
+*.ipynb text eol=lf
