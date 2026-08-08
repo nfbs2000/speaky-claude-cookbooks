@@ -3330,6 +3330,10 @@
 
 
                 
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
+<p>현재 코드로 검증된 것은 worker 간 자유 대화나 native Team mailbox가 아니라 <strong>리더가 worker A 결과를 worker B 입력으로 넘긴 순차 handoff</strong>입니다. 관찰팩과 Speaky도 A→leader→B로 그려야 하며, 없는 <code>SendMessage</code> 경로를 보충해서는 안 됩니다. 예제는 순차 handoff와 실제 mailbox 기반 병렬 팀을 별도 프로그램으로 제공하고 전달 메시지·수신자·완료·취소를 출력하도록 개선해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/patterns/agents/async_multi_agent_orchestration_kr.html">비동기 멀티에이전트 오케스트레이션 노트북</a>은 직접 구현한 hub와 <code>send_message</code>를 통해 두 구조의 차이를 보여 줍니다. 현재 검증된 흐름은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch20b">Speaky Agent Flow 20b장 재생</a>에서 확인할 수 있습니다.</p>
+
               </article>
             </div>
           

@@ -3318,6 +3318,10 @@
 
 
                 
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
+<p>요청 전 설정과 응답 후 cache usage를 비교해 break 후보를 찾는 방식은 유효하지만, SDK가 실패 원인을 직접 알려 주지는 않습니다. 관찰팩이 변경 항목과 cache-read 감소를 같은 화면에 보여 줘도 그것은 인과 확정이 아니라 다음 실험 후보입니다. 예제는 동일 요청 A, 도구 schema 하나만 바꾼 B, 원래 A로 돌아간 대조를 순차 실행하고 <code>is_error</code>, 재시도, usage를 함께 표로 출력하도록 개선해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/misc/prompt_caching_kr.html">프롬프트 캐싱 노트북</a>의 자동·명시적 breakpoint 예제가 구현 기준이며, 현재 후보 관계는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch14">Speaky Agent Flow 14장 재생</a>에서 확인할 수 있습니다.</p>
+
               </article>
             </div>
           

@@ -3340,6 +3340,10 @@
 
 
                 
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
+<p>도구를 <code>tool_use</code>와 <code>tool_result</code>의 왕복으로 설명한 핵심은 정확하지만, 권한은 도구 노출과 자동 승인을 분리해 읽어야 합니다. <code>allowedTools</code>를 노출 제한으로 해석하지 말고 hook, deny, ask, permission mode, allow, <code>canUseTool</code>, 실제 handler 결과를 순서대로 관찰해야 합니다. 관찰팩은 이 순서를 직접 실행한 Python callback과 SDK 메시지로 확인하고, Speaky는 같은 호출 ID가 승인과 실행으로 이어졌는지를 보여 주기 때문에 붙습니다. 예제는 복잡한 recorder보다 <code>auto</code>·특정 도구 강제·거부를 각각 한 변수로 실행하는 세 사례로 줄이면 이해가 빠릅니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/tool_choice_kr.html">도구 선택 노트북</a>에서 기본 도구 선택 코드를, <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch02">Speaky Agent Flow 2장 재생</a>에서 권한 사건의 실제 순서를 확인할 수 있습니다.</p>
+
               </article>
             </div>
           
