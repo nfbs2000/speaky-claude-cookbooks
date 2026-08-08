@@ -129,3 +129,9 @@
 - 순서를 바꿔 반복했을 때의 분포(preset → explicit 고정 순서로 한 번씩만 실행)
 - 정적 정책의 안전·승인 행동 — 두 실행 모두 권한 콜백과 훅 콜백이 0건이다.
 - TypeScript의 배열형 시스템 프롬프트와 동적 경계 상수는 이 Python 실행에서 쓰지 않았다.
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+정적 시스템 프롬프트는 모델의 숨은 성격 자료가 아니라 호스트가 구성한 실행 조건으로 다뤄야 합니다. 관찰팩은 preset과 명시적 프롬프트가 실행된 뒤의 공개 metadata와 도구 행동을 보여 주지만 provider에 전달된 최종 전문은 보여 주지 않습니다. 예제는 한 줄 `system_prompt`와 preset 두 조건을 같은 `Read` 과제로 실행하고, 시작 metadata와 실제 도구 결과만 나란히 출력하도록 단순화하면 좋습니다. [한 줄 리서치 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/00_The_one_liner_research_agent_kr.html)이 최소 system prompt 구성을 보여 주고, 이 장의 관찰 범위는 [Speaky Agent Flow 8c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08c)에서 확인할 수 있습니다.

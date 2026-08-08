@@ -125,3 +125,9 @@
 
 - 네트워크 계층의 실제 재시도·백오프 동작. 이 장의 재시도 설명은 옵션과 관찰된 종료 경로까지
   확인한 것이고, 전송 실패를 인위적으로 만들어 관찰한 것은 아니다.
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+스트리밍, 중단, 최대 turn, 체크포인트를 서로 다른 종료·복구 표면으로 나눈 것은 실무적으로 유용합니다. 관찰팩은 호스트가 실제로 만든 중단·저장·종료를 코드와 시간선으로 보여 주지만, provider 네트워크의 재시도·백오프까지 대신 증명하지는 않습니다. 예제는 정상 stream, host abort, max-turn 종료를 각각 최소 서버/클라이언트 코드로 분리하고, 네트워크 장애는 통제 가능한 프록시를 둔 별도 실험으로 남기는 편이 좋습니다. [에이전트 호스팅 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/07_Hosting_the_agent_kr.html)이 SSE, 세션 저장, 안정된 wire format의 경계를 보여 주고, 현재 종료 경로는 [Speaky Agent Flow 6b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch06b)에서 확인할 수 있습니다.

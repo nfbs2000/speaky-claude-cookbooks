@@ -142,3 +142,9 @@
 - 유효한 로컬 플러그인 패키지와 그 뒤의 명령·에이전트·훅 사건
 - 사용자/프로젝트/로컬 설정 조합의 반복 분포, 그리고 동적 레이어와 승인 행동의 관계
   (권한 콜백 0건)
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+세션 지침, 프로젝트 설정, skill, plugin, MCP를 동적 레이어로 분리한 구조는 공식 Agent SDK의 구성 표면과 일치합니다. 다만 관찰팩의 시작 목록에 이름이 나타나는 것은 사용 가능성일 뿐 실제 사용 증거가 아니므로, 설정·적재·호출·결과를 나눠 봐야 합니다. 예제는 `setting_sources=[]`, `project`, `project+local`을 독립 세션으로 실행하고 각 조건에서 `CLAUDE.md` 표식과 도구 호출을 출력한 뒤 skill·plugin·MCP는 별도 예제로 분리하는 것이 좋습니다. [Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)이 setting source를 단계적으로 보여 주며, 이 장의 실제 적재·사용 관계는 [Speaky Agent Flow 8d장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08d)에서 확인할 수 있습니다.

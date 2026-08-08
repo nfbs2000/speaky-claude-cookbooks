@@ -80,3 +80,9 @@
 ## Builder takeaway
 
 이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+계획 artifact를 별도 세션의 실행 입력으로 가져와 실제 도구 행동과 비교하는 경계는 유용합니다. 그러나 로컬 파일 생성·읽기만으로 원격 멀티에이전트 전송이나 `Ultraplan` 내부 경로를 증명할 수 없으므로, 관찰팩도 “계획 artifact를 이용한 host orchestration”까지만 표시해야 합니다. 예제는 계획 파일 생성, content 검증, 새 세션 수신, 실행 결과를 명시적으로 출력하고 원격 구현은 task ID·수신 영수증이 확보될 때 별도 추가하는 것이 좋습니다. [이슈에서 PR까지 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_orchestrate_issue_to_pr_kr.html)이 persistent session과 단계 영수증의 기준이며, 현재 확인된 로컬 경계는 [Speaky Agent Flow 20c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20c)에서 확인할 수 있습니다.

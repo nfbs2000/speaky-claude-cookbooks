@@ -146,3 +146,9 @@
 - exact/prefix/wildcard 규칙과 설정 파일 허용까지 포함한 전체 우선순위
 - `AskUserQuestion`과 MCP elicitation을 실제로 발생시킨 실행
 - 설정을 격리했을 때 `CLAUDE.md`가 `auto` 판단에 주는 영향
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+권한을 별도 제어 평면으로 보는 핵심은 정확하지만, `canUseTool`이 모든 호출을 통과한다고 가정하면 안 됩니다. 관찰팩은 allow 규칙이나 permission mode가 callback 이전에 결정을 끝낸 사례까지 코드와 시간선으로 보여 주기 위해 필요하며, 전 호출 감사에는 `PreToolUse`, 권한 callback, handler, `permission_denials` 연결이 필요합니다. 예제는 자동 허용, 명시적 deny, 실제 사용자 승인 대기의 세 경로를 분리하고 승인 주체를 화면에 표시하도록 개선해야 합니다. [Managed Agents HITL 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_gate_human_in_the_loop_kr.html)이 요청·대기·사용자 결과의 명확한 왕복을 보여 주며, 이 장의 권한 경로는 [Speaky Agent Flow 8f장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08f)에서 확인할 수 있습니다.

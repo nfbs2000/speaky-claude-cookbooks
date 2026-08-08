@@ -125,3 +125,9 @@
 
 - 다른 운영체제의 샌드박스 구현과 경계
 - 네트워크 차단, 프로세스 생성 제한 등 파일 경계 외의 강제
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+샌드박스를 권한 뒤의 피해 제한 계층으로 보는 관점은 맞습니다. 실제 실행은 workspace 밖 쓰기 차단을 보여 줬지만 복합 명령의 마지막 단계가 성공하면 전체 결과가 성공처럼 보일 수 있으므로, 모델 설명과 exit code만으로는 부족합니다. 관찰팩은 명령 요청·결과뿐 아니라 host가 재검사한 파일 상태를 같은 Speaky 장면에 결합하기 위해 필요합니다. 예제는 한 명령에 여러 부작용을 섞지 말고 허용 경로 쓰기와 차단 경로 쓰기를 각각 실행한 뒤 파일 존재를 Python으로 확인하도록 개선해야 합니다. [사이트 신뢰성 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/03_The_site_reliability_agent_kr.html)이 조사와 변경을 분리하고 결과를 독립 확인하는 기준이며, 현재 샌드박스 경계는 [Speaky Agent Flow 18b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch18b)에서 확인할 수 있습니다.

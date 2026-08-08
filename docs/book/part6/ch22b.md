@@ -89,3 +89,9 @@
 ## Builder takeaway
 
 이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+플러그인을 skill, hook, agent, MCP 같은 확장 요소의 배포 단위로 설명하는 것은 타당합니다. 현재 코드는 인라인 로컬 플러그인의 skill과 hook 일부만 실행했으므로 marketplace 설치, 서명, update, hot reload를 증명하지 않으며 관찰팩도 그 범위를 넘으면 안 됩니다. 예제는 로컬 패키지의 manifest, 적재, 한 구성 요소 호출, 새 버전 세션을 최소 경로로 보여 주고 설치 생명주기는 실제 marketplace 영수증이 있을 때 추가하는 것이 좋습니다. [커스텀 스킬 개발 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/skills/notebooks/03_skills_custom_development_kr.html)의 패키지와 명시적 버전 생성은 독자에게 익숙한 비교 기준이며, 현재 플러그인 표면은 [Speaky Agent Flow 22b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch22b)에서 확인할 수 있습니다.

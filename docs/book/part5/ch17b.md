@@ -127,3 +127,9 @@
 
 - 같은 문서를 여러 번 반복했을 때 위험한 호출이 나오는 비율 — 두 표본은 분포가 아니다.
 - 실제 외부 유출 경로와 사람의 승인 UI
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+외부 문서를 지시가 아니라 낮은 신뢰도의 데이터로 취급하라는 원칙은 타당하지만, 두 통제 문서에서 위험 호출이 없었다는 결과만으로 방어 완성을 주장할 수는 없습니다. 관찰팩은 공격 문구, 제공된 도구, deny·hook 결정, 실제 외부 부작용이 없었다는 host 확인을 함께 재생해야 의미가 있습니다. 예제는 안전한 canary endpoint와 read-only workspace를 사용해 공격 문구·도구 표면을 바꾼 반복 probe로 개선해야 합니다. [취약점 탐지 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/06_The_vulnerability_detection_agent_kr.html)이 통제 canary, 조사, 판정, 보고 단계를 분리하는 기준이며, 현재 방어 실행은 [Speaky Agent Flow 17b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch17b)에서 확인할 수 있습니다.

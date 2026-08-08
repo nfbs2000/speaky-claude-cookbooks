@@ -132,3 +132,9 @@
 ### 이번 실행으로는 확인하지 못한 것
 
 - 도구 설명 문구만 바꾼 대조 실험 — 지시를 뺀 조건에서 같은 입력이 나오는지는 관찰하지 않았다.
+
+## Codex 최종 검토 의견
+
+이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+
+Read·Grep·Bash·Agent의 설명이 모델 행동을 유도한다는 방향은 맞지만, 현재 prompt가 원하는 입력을 직접 지정했으므로 설명의 독립 효과는 확인되지 않았습니다. 관찰팩에서 확실히 볼 수 있는 것은 실제 선택, 인자, 오류, 도구 결과이며 모델의 최종 자기보고보다 이것이 우선합니다. 예제는 설명만 바꾼 두 도구를 무작위 순서로 여러 번 순차 실행하고 선택률·인자 정확도·복구 횟수를 비교하도록 개선해야 합니다. [도구 평가 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html)이 같은 평가 구조를 제공하고, 현재 실행의 사건은 [Speaky Agent Flow 8e장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08e)에서 확인할 수 있습니다.
