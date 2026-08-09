@@ -847,6 +847,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3179,6 +3230,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3311,6 +3413,15 @@
 <li>호스트의 권한 요청과 거절은 관찰됐지만, 제품 UI에 카드가 뜨고 사람이 버튼을 누르는 경로는
   이 실행에 없다.</li>
 </ul>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_8">제 판단<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>이 장의 핵심 가치에는 동의합니다. 좋은 행동 지침은 멋진 문장이 아니라 파일 범위, 허용 도구, 실패 후 행동, 산출물 길이처럼 판정 가능한 계약이어야 합니다. 그러나 여섯 실행은 프롬프트 표현만 바꾼 실험이 아닙니다. fixture, 도구 표면, 허용 규칙, 권한 조건까지 함께 달라졌으므로 “이 문구가 이 행동을 만들었다”는 인과 결론에는 사용할 수 없습니다.</p>
+<h3 id="_9">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>검증은 이 장을 <strong>프롬프트 효과 연구</strong>보다 <strong>행동 회귀 테스트 모음</strong>으로 읽게 만들었습니다. 최소 수정, 실패 후 재실행, 파괴적 도구 거절, 읽기 전용 탐색, 실제 subagent, 80단어 제한이 각각 real tool/result로 확인된 점은 좋습니다. 특히 처음 하니스가 <code>python</code>과 <code>python3</code> 허용 규칙 불일치로 실패한 사건은 모델보다 실행 환경이 행동을 더 강하게 결정할 수 있음을 보여 주는 유용한 반례입니다.</p>
+<h3 id="_10">독자가 오해할 위험<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>“숫자를 넣은 프롬프트가 항상 더 안정적이다” 또는 “이 지침을 쓰면 이런 tool sequence가 재현된다”고 읽으면 과합니다. 각 조건은 한 번씩만 실행됐고 대조군도 없습니다. 또한 일부 TypeScript 옵션 이름을 Python 실행의 관찰 사실로 받아들이면 안 됩니다. 결과 텍스트가 요구사항을 되풀이한 것보다 실제 diff, 명령 결과, worker의 parent 관계가 더 강한 근거입니다.</p>
+<h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>먼저 동일 fixture와 동일 tool surface를 고정하고, 지침 없음/모호한 지침/측정 가능한 지침 세 조건을 순서를 바꿔 여러 번 실행하겠습니다. 평가도 답변의 인상 대신 변경 경로 수, 첫 실패 후 입력 변화, 실제 test exit, 근거 없는 성공 보고 수로 분리하겠습니다. 지금 예제들은 그 실험의 rubric과 fixture로는 훌륭하지만 아직 승자를 말할 데이터는 아닙니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/misc/building_evals_kr.html">평가 만들기 노트북</a>은 코드·사람·모델 채점을 분리하는 기준이고, 현재 회귀 사례는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch06">Speaky Agent Flow 6장 재생</a>에서 검토할 수 있습니다.</p>
 
 
 
@@ -3324,10 +3435,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>프롬프트를 관찰 가능한 행동 조건으로 바꾸라는 방향은 타당하지만, 특정 문구 뒤에 원하는 도구 순서가 한 번 나왔다는 사실은 인과 증명이 아닙니다. 관찰팩은 실제 도구 선택과 실패 복구를 보여 주지만, 원문의 주장을 검증하려면 지침 없는 대조군과 동일 fixture를 순차 반복해야 합니다. 예제는 프롬프트 A/B 각각의 결과 텍스트보다 tool sequence, 실패 수, 최종 artifact를 같은 rubric으로 비교하도록 개선하는 것이 좋습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/misc/building_evals_kr.html">평가 만들기 노트북</a>이 코드·사람·모델 채점의 경계를 보여 주며, 현재 실행에서 관찰된 차이는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch06">Speaky Agent Flow 6장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

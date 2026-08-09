@@ -90,6 +90,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-run manifest와 실행 표면 diff로 재현 조건을 고정하라는 제안은 타당합니다. 실제 코드는 host가 로컬 파일을 바꾼 뒤 새 세션에서 다른 버전을 읽은 것까지이며 자동 update나 점진 rollout은 아닙니다. 관찰팩은 버전 전후의 설정과 행동 차이를 재생하되 서버 배포·대상 집단·평가 로그가 없는 내부 생명주기를 채워 넣어서는 안 됩니다. 예제는 고정 버전 A의 평가, 명시적 버전 B, 실패 시 A rollback을 실제 실행하도록 개선하는 것이 좋습니다. [프롬프트 버전 관리·롤백 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_prompt_versioning_and_rollback_kr.html)이 이 명시적 버전·평가·복귀 패턴을 보여 주며, 현재 로컬 diff는 [Speaky Agent Flow 23b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch23b)에서 확인할 수 있습니다.
+프롬프트뿐 아니라 SDK 옵션과 init 표면을 run manifest로 남기라는 주장은 재현 가능한 교육에 꼭 필요합니다. 같은 질문이라도 도구, 권한, 스킬, 플러그인 버전이 다르면 사실상 다른 실험이기 때문입니다. 다만 현재 검증은 기능 플래그의 생성·점진 배포·제거 생명주기가 아니라, 한 로컬 플러그인 경로를 호스트가 V1에서 V2로 바꾸고 새 세션이 이를 읽은 **통제된 버전 전환**입니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+V1이 종료되고 산출물이 확보된 뒤에만 호스트가 파일을 바꾸고, V2 새 세션이 다른 manifest·script·artifact를 읽은 순서가 분명합니다. 따라서 “새 세션의 행동 차이를 설명하려면 버전과 실행 표면을 함께 보존해야 한다”는 주장에는 높은 신뢰를 둘 수 있습니다. 반면 같은 세션의 hot reload, 자동 update, marketplace, rollout cohort, signature·trust는 없었으므로 제품 배포 생명주기까지 검증됐다고 볼 수 없습니다.
+
+### 독자가 오해할 위험
+
+호스트가 직접 파일을 수정한 것을 자동 업데이트로 부르거나, 두 로컬 세션의 차이를 점진적 롤아웃의 증거로 확대하기 쉽습니다. 최종 텍스트가 ALPHA와 BETA로 달라졌다는 사실만 봐도 원인은 알 수 없습니다. 이 사례가 설득력을 갖는 이유는 호스트 변경 시점, init 버전, 실제 도구 실행, artifact 바이트가 모두 같은 전환을 가리키기 때문입니다.
+
+### 제가 다시 가르친다면
+
+이 장의 실습 이름을 “새 세션에서의 명시적 버전 전환”으로 좁히고, V1 평가, V2 평가, 실패 시 V1 rollback을 실제로 실행하겠습니다. 제품 rollout은 서버 할당·cohort·배포 receipt가 관찰될 때 별도 사례로 추가해야 합니다. [프롬프트 버전 관리·롤백 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_prompt_versioning_and_rollback_kr.html)은 버전·평가·복귀를 비교할 기준이고, 현재 로컬 전환은 [Speaky Agent Flow 23b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch23b)에서 확인할 수 있습니다.

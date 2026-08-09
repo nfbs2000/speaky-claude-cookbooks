@@ -145,6 +145,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-세션 지침, 프로젝트 설정, skill, plugin, MCP를 동적 레이어로 분리한 구조는 공식 Agent SDK의 구성 표면과 일치합니다. 다만 관찰팩의 시작 목록에 이름이 나타나는 것은 사용 가능성일 뿐 실제 사용 증거가 아니므로, 설정·적재·호출·결과를 나눠 봐야 합니다. 예제는 `setting_sources=[]`, `project`, `project+local`을 독립 세션으로 실행하고 각 조건에서 `CLAUDE.md` 표식과 도구 호출을 출력한 뒤 skill·plugin·MCP는 별도 예제로 분리하는 것이 좋습니다. [Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)이 setting source를 단계적으로 보여 주며, 이 장의 실제 적재·사용 관계는 [Speaky Agent Flow 8d장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08d)에서 확인할 수 있습니다.
+동적 문맥을 `loaded`, `used`, `missing`으로 나누라는 이 장의 틀은 실제 제품 디버깅에 유용합니다. 특히 무작위 marker를 `CLAUDE.md`에만 넣고 파일 도구를 제거한 뒤 project 설정 on/off를 비교한 실험은 깔끔합니다. project 조건에서만 marker가 정확히 나왔으므로, 프로젝트 지침 주입과 격리의 행동 차이는 신뢰할 만합니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+가장 교육적인 결과는 성공 사례가 아니라 격리 실행의 **가짜 Bash 텍스트**입니다. 모델은 `ls`를 실행한 것 같은 문자열을 만들었지만 typed ToolUse/ToolResult와 host 실행은 0건이었고, 실제로 존재하는 `CLAUDE.md`도 없다고 잘못 설명했습니다. 이 반례는 최종 답변보다 SDK 사건을 우선해야 하는 이유를 한 장면으로 증명합니다. skill+MCP는 목록·호출·결과가 연결됐지만 사용자 요청이 skill 사용을 직접 지시했으므로 skill 문구의 단독 효과는 아닙니다.
+
+### 독자가 오해할 위험
+
+`setting_sources=[]`는 프로젝트 marker를 제외했지만 기본 skill과 agent까지 제거하지는 않았습니다. `Skill` 도구 호출이 없다는 사실과 init의 skill context가 없다는 주장도 같은 말이 아닙니다. 또한 plugin은 실행하지 않았고, `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` 배열은 TypeScript 표면이므로 Python 실험 결과처럼 말할 수 없습니다. 훅 수집을 켰어도 실제 InstructionsLoaded/ConfigChange hook은 0건이었습니다.
+
+### 제가 다시 가르친다면
+
+이 장의 중심 예제를 project on/off와 가짜 Bash 반례로 삼겠습니다. 그 다음 skill, MCP, plugin, agent를 각각 독립 fixture로 분리해 `configured -> init에 loaded -> 실제 tool use -> result` 네 단계를 하나씩 확인하게 하겠습니다. 현재처럼 skill과 MCP를 한 실행에 묶으면 어느 레이어가 행동을 만들었는지 분리하기 어렵습니다. [Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)은 project setting을 단계적으로 이해하는 기준이고, marker 주입과 텍스트 위조의 실제 대비는 [Speaky Agent Flow 8d장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08d)에서 볼 수 있습니다.

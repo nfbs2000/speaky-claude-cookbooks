@@ -163,6 +163,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-현재 코드로 검증된 것은 worker 간 자유 대화나 native Team mailbox가 아니라 **리더가 worker A 결과를 worker B 입력으로 넘긴 순차 handoff**입니다. 관찰팩과 Speaky도 A→leader→B로 그려야 하며, 없는 `SendMessage` 경로를 보충해서는 안 됩니다. 예제는 순차 handoff와 실제 mailbox 기반 병렬 팀을 별도 프로그램으로 제공하고 전달 메시지·수신자·완료·취소를 출력하도록 개선해야 합니다. [비동기 멀티에이전트 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/patterns/agents/async_multi_agent_orchestration_kr.html)은 직접 구현한 hub와 `send_message`를 통해 두 구조의 차이를 보여 줍니다. 현재 검증된 흐름은 [Speaky Agent Flow 20b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20b)에서 확인할 수 있습니다.
+작업자 A의 결과를 다음 작업자 B의 입력으로 넘기는 순차 handoff는 실제 업무 자동화에서 자주 쓰이는 유용한 패턴입니다. 그러나 장 제목의 “팀과 멀티프로세스 협업”은 현재 검증된 범위보다 넓습니다. 실행된 구조는 작업자들이 서로 대화하는 팀이 아니라, 리더가 두 번의 작업을 순서대로 호출하고 중간 결과를 전달하는 중앙 조정 파이프라인입니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+A가 첫 파일을 읽고, 리더가 A의 결과를 B의 프롬프트에 넣고, B가 두 번째 파일과 함께 결합한 순서는 명확하게 관찰됐습니다. 그래서 “리더 매개 handoff가 정보 전달 수단으로 작동한다”는 주장에는 높은 신뢰를 둘 수 있습니다. 반면 `SendMessage`, `TeamCreate`, mailbox, 병렬 실행, 작업 claim, worktree 격리 중 어느 것도 실행되지 않았으므로 native team이나 멀티프로세스 협업을 입증하지는 않습니다.
+
+### 독자가 오해할 위험
+
+화면에서 A와 B를 두 캐릭터로 그리면 두 작업자가 직접 소통한 것처럼 보일 수 있습니다. 실제 데이터 경로는 `A -> 리더 -> B`이며, 리더가 내용을 누락하거나 변형하면 B가 받는 정보도 달라집니다. 이 중앙 중계 구조의 병목과 책임을 숨기면 학생은 메시지 버스 기반 팀과 프롬프트 연결 파이프라인을 같은 것으로 오해합니다.
+
+### 제가 다시 가르친다면
+
+이 장은 먼저 “리더 매개 순차 handoff”로 이름 붙여 현재 코드를 설명하고, 그다음 실제 mailbox 기반 병렬 팀을 별도 예제로 추가하겠습니다. 두 예제에서 발신자, 수신자, 전달 본문, 시작·종료 시각, 취소 경로를 나란히 보여 주면 구조 차이가 분명해집니다. [비동기 멀티에이전트 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/patterns/agents/async_multi_agent_orchestration_kr.html)은 hub와 `send_message`를 비교할 기준이며, 현재 검증된 중앙 중계 흐름은 [Speaky Agent Flow 20b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20b)에서 확인할 수 있습니다.

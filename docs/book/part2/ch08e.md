@@ -135,6 +135,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-Read·Grep·Bash·Agent의 설명이 모델 행동을 유도한다는 방향은 맞지만, 현재 prompt가 원하는 입력을 직접 지정했으므로 설명의 독립 효과는 확인되지 않았습니다. 관찰팩에서 확실히 볼 수 있는 것은 실제 선택, 인자, 오류, 도구 결과이며 모델의 최종 자기보고보다 이것이 우선합니다. 예제는 설명만 바꾼 두 도구를 무작위 순서로 여러 번 순차 실행하고 선택률·인자 정확도·복구 횟수를 비교하도록 개선해야 합니다. [도구 평가 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html)이 같은 평가 구조를 제공하고, 현재 실행의 사건은 [Speaky Agent Flow 8e장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08e)에서 확인할 수 있습니다.
+이 장의 본문은 built-in 도구 설명이 입력 습관을 만든다고 주장하지만, 현재 세 전용 실험은 그 인과를 검증하지 못했습니다. 사용자 프롬프트가 이미 `Read`의 줄 범위, `Grep`의 정확한 타입명, `Bash`의 정확한 명령을 지정했기 때문입니다. 실제로 확인된 것은 “SDK가 이 입력을 tool event로 보존하고 모델이 오류 뒤 입력을 고쳤다”는 계약이지, 비공개 built-in description이 행동을 만들었다는 사실이 아닙니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+그럼에도 예제의 교육적 가치는 있습니다. `offset=170, limit=21`, 정확한 타입명 Grep 뒤 Read, 복합 Bash 거부 뒤 bare 검증 명령으로 복구하는 순서가 명확합니다. 특히 stdout의 PASS, 숫자 exit code, 전체 run success를 서로 다른 증거로 다뤄야 한다는 교정은 실무적으로 중요합니다. 반면 ToolSearch/deferred schema는 전혀 실행되지 않았으므로 현재는 아키텍처 소개에 머뭅니다.
+
+### 독자가 오해할 위험
+
+이 장만 읽으면 모델이 설명을 보고 스스로 적절한 offset과 query를 골랐다고 생각할 수 있습니다. 실제로는 prompt가 답을 지정했습니다. Bash 거부 역시 callback이나 hook이 실행된 증거가 없으므로 “권한 훅이 막았다”고 설명할 수 없습니다. built-in tool별 OTel span도 없고, filtered snapshot의 `changed_paths=[]`를 전체 파일시스템 불변으로 확대하면 안 됩니다.
+
+### 제가 다시 가르친다면
+
+8e의 세 예제는 “built-in tool input 읽기” 실습으로 이름을 바꾸거나, 본래 주장을 유지하려면 custom wrapper 두 개를 만들어 description만 바꾼 선택 실험을 추가하겠습니다. 후자는 이미 8장의 search A/B가 더 잘 수행하고 있으므로 두 장의 역할을 명확히 분리하는 편이 낫습니다. ToolSearch는 실제 `search -> schema load -> call` 사건을 잡기 전까지 본문에서 가능성으로만 표시해야 합니다. [도구 평가 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html)은 설명 효과를 평가하는 더 적합한 구조이고, 현재 입력·결과·복구 사건은 [Speaky Agent Flow 8e장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08e)에서 확인할 수 있습니다.

@@ -1908,6 +1908,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3125,6 +3176,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3253,6 +3355,15 @@
 <li>내보내기 실패·디스크 가득·프로세스 종료 뒤의 재시도와 복구</li>
 <li>시스템 호출 수준의 지속성 영수증</li>
 </ul>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_7">제 판단<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>공식 SDK 이벤트를 보존하고 OTel·교육 그래프·평가로 투영해 사용자가 질문, 행동, 근거, 결과를 따라가게 하려는 설계는 이 책을 “보이는 책”으로 만드는 핵심입니다. 다만 이 장은 용어가 조금만 부정확해도 독자를 오도합니다. 현재 저장물은 provider의 무가공 wire bytes가 아니라 <strong>저장 전에 가림 처리된 SDK envelope</strong>이고, OTel도 Claude 런타임이 직접 내보낸 native telemetry가 아니라 이 애플리케이션 기록기가 만든 projection입니다.</p>
+<h3 id="_8">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>실제 MCP 왕복의 모든 동결 사건에 OTel carrier가 있고 tool ID와 Result의 비용·시간·token·cache 합계가 대응한 점은 로컬 projection의 완전성과 계측 정확도에 신뢰를 줍니다. 합성 credential이 prompt, partial JSON, ToolUse, handler input에서 가려지고 최종 저장소 검색에서도 남지 않은 점도 좋은 검증입니다. 그러나 raw와 OTel은 같은 기록기에서 연속 생성됐으므로 서로 독립적으로 실행 사실을 증명하지 않습니다. Datadog, Perfetto, Genkit, Opik remote, exporter failure와 비정상 종료 복구는 실행되지 않았습니다.</p>
+<h3 id="_9">독자가 오해할 위험<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>span 수와 사건 수가 같아야 한다고 가정하면 하나의 사건을 여러 관점으로 투영한 정상 사례를 오류로 판단하게 됩니다. 반대로 모든 사건에 span이 있다는 사실만으로 각 span의 의미가 충분하거나 provider 내부 동작 전체를 포착했다고 볼 수도 없습니다. 합성 secret 한 패턴의 성공을 모든 PII 탐지 성능으로 확대해서도 안 됩니다. 과거 실행이 probe 코드 전체의 해시를 보존하지 않았으므로 현재 코드를 그 실행의 정확한 원인으로 소급 확정하는 데도 한계가 있습니다.</p>
+<h3 id="_10">제가 다시 가르친다면<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>첫 화면에서 실제 도구 handler와 artifact를 행동 증거로, 가림 처리 SDK envelope를 사건 원전으로, 애플리케이션 OTel을 탐색용 투영으로 명확히 이름 붙이겠습니다. 이후 exporter 실패, disk full, 강제 종료를 주입해 재시도·flush·복구까지 별도 실험하겠습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/07_Hosting_the_agent_kr.html">에이전트 호스팅 노트북</a>은 wire format·세션 저장·OTel 운영을 비교할 기준이고, 현재 로컬 통합 결과는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch29">Speaky Agent Flow 29장 재생</a>에서 확인할 수 있습니다.</p>
 
 
 
@@ -3266,10 +3377,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>SDK 사건을 보존하고 OTel·교육 그래프·평가로 투영하는 구조는 이 책을 Speaky로 증명하는 핵심이지만 용어를 엄격히 써야 합니다. 실제 Python 코드와 host side effect가 행동의 증거이고, 애플리케이션 OTel은 그 실행 순서의 증거이며, Speaky는 둘을 독자가 검토할 수 있게 합칩니다. 저장 파일은 provider raw bytes가 아니라 redacted SDK envelope이고 같은 recorder의 raw·OTel 일치는 독립 관측이 아니라 무손실 projection 확인입니다. 예제는 최소 SDK 호출, raw message 출력, OTel span, Speaky 링크의 네 단계를 먼저 보여 주고 실패 복구는 별도 probe로 분리해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/07_Hosting_the_agent_kr.html">에이전트 호스팅 노트북</a>이 안정된 wire format·세션 저장·OTel 환경의 기준이며, 통합 결과는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch29">Speaky Agent Flow 29장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

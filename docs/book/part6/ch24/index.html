@@ -1689,6 +1689,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3041,6 +3092,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3125,6 +3227,15 @@
 </ul>
 <h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
 <p>이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.</p>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_5">제 판단<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>세션 간 메모리를 모델 내부의 신비한 기억이 아니라 transcript, summary, project instruction, artifact, external store의 조합으로 설명한 것은 이 책에서 특히 강한 주장입니다. “기억은 근거가 아니라 다시 확인할 근거를 가리키는 포인터”라는 원칙도 실무적으로 옳습니다. 이번 예제가 과거 artifact와 현재 원문을 다시 읽어 <code>STALE</code>을 판정하게 한 것은 이 원칙을 행동으로 보여 줍니다.</p>
+<h3 id="_6">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>씨앗 실행의 transcript가 store에 복제되고, 로컬 설정을 삭제한 뒤 같은 논리적 session ID로 resume하며, 프롬프트와 작업 공간에 없던 대화 token을 복구한 사슬은 session store 기반 재개의 신뢰도를 높입니다. 동시에 과거 handoff와 변경된 원문을 각각 읽어 낡음을 분류한 점도 좋습니다. 그러나 store가 <code>InMemorySessionStore</code>였고 같은 Python 호스트 프로세스가 계속 살아 있었으므로 재부팅·다른 호스트·내구성 있는 DB를 넘는 “지속적 메모리”는 검증되지 않았습니다.</p>
+<h3 id="_7">독자가 오해할 위험<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>두 SDK subprocess가 분리됐다는 이유만으로 데이터가 영구 저장됐다고 생각하면 안 됩니다. 호스트 프로세스가 종료되면 현재 메모리 store도 사라질 수 있습니다. 또 resume으로 되살아난 과거 답변은 현재 파일의 진실이 아니며, 실제로 이번 실행도 과거 marker와 현재 marker가 달랐습니다. 전용 memory recall 이벤트와 자동 compaction도 나오지 않았으므로 본문의 모든 메모리 계층이 한 번에 검증된 것은 아닙니다.</p>
+<h3 id="_8">제가 다시 가르친다면<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>현재 실험을 “동일 호스트 내 external transcript resume와 stale 재검증”으로 명확히 부르겠습니다. 다음 단계에서는 SQLite나 원격 DB store를 사용하고 Python 호스트를 완전히 종료·재시작한 뒤 같은 세션을 복구해 내구성을 별도로 시험하겠습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/memory_cookbook_kr.html">메모리 Cookbook</a>은 client-side memory와 새 세션 재사용을 비교할 기준이고, 현재 resume 경계는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch24">Speaky Agent Flow 24장 재생</a>에서 확인할 수 있습니다.</p>
 
 
 
@@ -3138,10 +3249,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>세션 간 메모리를 모델의 머릿속이 아니라 transcript, summary, artifact, session store로 설명한 것은 정확합니다. 현재 코드는 같은 host process의 resume와 stale 파일 구분까지 확인했지만 process restart 뒤 내구성은 증명하지 않았습니다. 관찰팩은 저장·재개·재검증 사건을 연결하고, 아직 실행하지 않은 영속성을 그리지 않아야 합니다. 예제는 세션 1에서 canary 메모리를 저장하고 process를 완전히 종료한 뒤 세션 2에서 DB·파일을 읽어 원문과 대조하도록 개선하는 것이 좋습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/memory_cookbook_kr.html">메모리 Cookbook</a>이 client-side memory와 새 세션 재사용을 직접 보여 주며, 현재 resume 경계는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch24">Speaky Agent Flow 24장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

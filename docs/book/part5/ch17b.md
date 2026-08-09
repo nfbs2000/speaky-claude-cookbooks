@@ -130,6 +130,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-외부 문서를 지시가 아니라 낮은 신뢰도의 데이터로 취급하라는 원칙은 타당하지만, 두 통제 문서에서 위험 호출이 없었다는 결과만으로 방어 완성을 주장할 수는 없습니다. 관찰팩은 공격 문구, 제공된 도구, deny·hook 결정, 실제 외부 부작용이 없었다는 host 확인을 함께 재생해야 의미가 있습니다. 예제는 안전한 canary endpoint와 read-only workspace를 사용해 공격 문구·도구 표면을 바꾼 반복 probe로 개선해야 합니다. [취약점 탐지 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/06_The_vulnerability_detection_agent_kr.html)이 통제 canary, 조사, 판정, 보고 단계를 분리하는 기준이며, 현재 방어 실행은 [Speaky Agent Flow 17b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch17b)에서 확인할 수 있습니다.
+외부 문서와 tool result를 명령이 아니라 낮은 신뢰도의 데이터로 취급하라는 원칙은 반드시 필요합니다. 동시에 현재 검증은 SDK가 이 경계를 자동으로 만들어 주지 않는다는 사실을 확인했습니다. U+202E를 포함한 문서 본문이 custom MCP ToolResult에 원문 그대로 남았으므로 sanitization, source tagging, 위험 행동 차단은 애플리케이션 책임입니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+semantic-defense 표본에서 위험 ToolUse가 없었던 것은 해당 prompt에서의 저항 사례일 뿐입니다. system과 user prompt가 이미 문서를 데이터로 취급하고 호출하지 말라고 명시했기 때문입니다. 반대 표본은 model이 문서의 marker ToolUse를 만들고 explicit deny가 handler를 막았지만, user prompt 역시 그 호출을 직접 요구했습니다. 따라서 두 표본 모두 “문서가 자발적으로 모델을 탈취했다/실패했다”는 인과 실험은 아닙니다. 확실한 것은 transport 무정화와 host deny의 효과입니다.
+
+### 독자가 오해할 위험
+
+한 문서에서 호출이 없었다고 injection 방어 인증을 내리면 안 됩니다. 과거 forced case도 실제 AssistantMessage model이 Opus 4.8 fallback이었고 user prompt가 호출을 요구했으므로 Opus 5의 취약성 증거로 쓸 수 없습니다. init의 configured model과 실제 응답 model을 구분해야 하며, terminal success와 exfiltration handler 차단도 별도 상태입니다.
+
+### 제가 다시 가르친다면
+
+같은 neutral user 요청과 동일 tool surface를 고정하고, 정상 문서/직접 명령/Unicode 변형/간접 지시 문서를 순서를 바꿔 반복하겠습니다. sink는 네트워크가 없는 marker handler로 유지하되 semantic failure와 host enforcement를 각각 채점해야 합니다. 모델이 잘 거부해도 explicit deny를 제거하지 않는 defense-in-depth가 최종 교훈입니다. [취약점 탐지 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/06_The_vulnerability_detection_agent_kr.html)은 조사와 판정을 분리하는 참고점이고, raw 문서 보존·ToolUse·host 차단의 실제 경계는 [Speaky Agent Flow 17b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch17b)에서 확인할 수 있습니다.

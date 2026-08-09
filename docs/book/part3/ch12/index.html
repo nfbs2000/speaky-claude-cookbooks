@@ -1149,6 +1149,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3161,6 +3212,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3308,6 +3410,15 @@
 <li>반복 표본이 없어 미리 저장 정책의 비용·지연 분포는 말할 수 없다.</li>
 <li>유니코드 payload로 바이트·문자·표현·토큰 단위가 갈라지는 실행</li>
 </ul>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_8">제 판단<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>큰 결과의 전문은 artifact로 보존하고 모델에는 검증 가능한 preview만 전달하라는 주장은 이 책에서 바로 제품 코드로 옮길 가치가 높은 원칙입니다. 60,082자 동일 산출물을 runtime 자동 외부화와 host 주도 저장 두 경로로 비교하고, 두 경우 모두 실제 파일을 host가 다시 열어 크기·marker·내용 hash를 확인한 점도 좋습니다. 자기보고가 아니라 디스크를 읽어 persistence를 판정했습니다.</p>
+<h3 id="_9">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>현재 SDK/CLI 경로가 60,082자 tool result를 1,587자 안내문으로 바꾸고 별도 파일에 보존한 동작은 확인됐습니다. host 방식은 같은 전문을 먼저 저장하고 모델에는 340자 preview만 줬습니다. 저는 제품 설계에서는 후자를 권합니다. implicit runtime spill은 편리하지만 작성 주체와 수명, 공개 가능한 경로가 불명확한 반면 host 정책은 보존 위치·수명·redaction·검증을 애플리케이션이 통제할 수 있기 때문입니다.</p>
+<h3 id="_10">독자가 오해할 위험<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>한 개의 60,082자 지점으로 정확한 50,000자 경계를 확정할 수 없고, 여러 결과의 200K 합산 한도도 실행하지 않았습니다. ASCII fixture에서는 문자와 byte가 같았을 뿐 Unicode, Python 표현 길이, 토큰 수는 서로 다른 단위입니다. <code>Error:</code>로 시작한 overflow 안내문도 block error flag와 terminal success를 따로 읽어야 합니다. thinking token 추정치를 과금 usage로 사용해서도 안 됩니다.</p>
+<h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>먼저 host persisted-preview를 권장 구현으로 제시하고, runtime 자동 외부화는 방어적 fallback으로 설명하겠습니다. preview에는 artifact ID, byte/character 수, content hash, 앞뒤 marker, 재조회 도구를 넣되 로컬 절대경로나 session ID는 공개하지 않아야 합니다. 정확한 경계를 문서화하려면 49K/50K/51K와 Unicode payload를 순차 실행하고, aggregate 주장은 같은 turn의 다중 결과 fixture로 별도 측정해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/context_engineering/context_engineering_tools_kr.html">컨텍스트 엔지니어링 노트북</a>은 큰 결과를 줄이는 일반 기준이고, 두 외부화 경로의 실제 차이는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch12">Speaky Agent Flow 12장 재생</a>에서 확인할 수 있습니다.</p>
 
 
 
@@ -3321,10 +3432,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>큰 결과는 artifact로 보존하고 모델에는 필요한 preview만 주어야 한다는 주장은 실제 동작과 공식 컨텍스트 관리 기법에 부합합니다. 관찰팩은 원본 artifact, 모델이 받은 대체 결과, 후속 행동을 연결하지만 정확한 임계치나 여러 결과의 합산 한도까지 증명하지는 못했습니다. 예제는 ASCII와 유니코드 fixture의 바이트·문자·토큰 수를 각각 출력하고 크기만 단계적으로 바꾼 뒤 결과 대체 시점을 비교하도록 개선해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/context_engineering/context_engineering_tools_kr.html">컨텍스트 엔지니어링 노트북</a>이 큰 도구 결과를 정리하는 기준을 보여 주며, 현재 overflow 사건은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch12">Speaky Agent Flow 12장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

@@ -1820,6 +1820,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3041,6 +3092,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3125,6 +3227,15 @@
 </ul>
 <h2 id="builder-takeaway">Builder takeaway<a class="headerlink" href="#builder-takeaway" title="Permanent link">&para;</a></h2>
 <p>이 장의 공개판 목표는 원문을 얕게 요약하는 것이 아니다. 책의 논지를 유지하되, 독자가 직접 열어볼 수 있는 Python cookbook과 공식 문서에 묶어 두는 것이다. 따라서 장을 읽은 뒤에는 적어도 하나의 notebook 또는 Python 파일에서 같은 개념을 확인할 수 있어야 한다. 확인할 수 없는 내부 세부는 주장으로 남기지 않고, 공개 경계나 추론으로 분리한다.</p>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_5">제 판단<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>읽기, 공개 계획, 좁은 수정, 실제 검증, 실패 복구, 위험 명령 차단, 안전한 대안, 최종 보고를 하나의 코딩 턴으로 묶은 예제는 이 책에서 가장 완성도가 높은 실무 사례 중 하나입니다. 모델 종료 뒤 호스트가 같은 결과를 독립 검산한 점도 “모델이 PASS라고 말했다”와 “코드가 실제로 통과했다”를 분리합니다. 다만 프롬프트가 행동 순서와 명령을 매우 구체적으로 지정했으므로, 이 실행은 모델이 자발적으로 좋은 관행을 선택했다기보다 <strong>하니스가 좋은 관행을 강제하고 확인할 수 있음</strong>을 증명합니다.</p>
+<h3 id="_6">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>두 번의 <code>Read</code>가 <code>Edit</code>보다 앞섰고, 공개 <code>PLAN</code> 뒤 한 파일만 수정됐으며, 첫 검증의 실제 exit 2를 읽고 수정된 명령으로 PASS한 사슬은 강합니다. 위험한 <code>git reset --hard</code>는 handler 실행 전에 거부됐고 HEAD도 유지됐습니다. 첫 실패 실험에서 재시도 인터페이스가 불명확해 13턴을 낭비한 뒤 하니스를 개선한 기록은 특히 가치가 있습니다. 실패 원인이 모델뿐 아니라 도구 계약일 수 있다는 점을 실제로 보여 주기 때문입니다.</p>
+<h3 id="_7">독자가 오해할 위험<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>이 한 과제의 성공을 모든 저장소에서 통하는 “프로덕션급 성능”으로 확대하면 안 됩니다. 구현 대상은 작은 함수 하나였고 검증 명령도 fixture가 정답을 명확히 알고 있었습니다. 공개 PLAN은 숨은 chain-of-thought가 아니며, 동적 helper sizing과 원격 평가도 실행되지 않았습니다. 또한 실패 결과에 정답에 가까운 exact retry command를 제공했으므로 복구 능력 자체의 난이도는 제한적입니다.</p>
+<h3 id="_8">제가 다시 가르친다면<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>현재 사례를 하니스 계약의 기준으로 유지하고, 두 번째 사례에서는 재시도 명령을 직접 주지 않은 채 오류 메시지만으로 복구하게 하겠습니다. 세 번째로 실제 중형 저장소에서 범위 이탈과 회귀 테스트를 평가하면 패턴의 일반성을 판단할 수 있습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_iterate_fix_failing_tests_kr.html">실패 테스트 반복 수정 노트북</a>은 실패 반복과 독립 검증을 비교할 기준이고, 이 장의 실제 복구 흐름은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch27">Speaky Agent Flow 27장 재생</a>에서 확인할 수 있습니다.</p>
 
 
 
@@ -3138,10 +3249,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>조사, 계획, 수정, 검증, 실패 복구, 위험 명령 거부, 최종 보고가 한 실행에서 이어진 것은 프로덕션 패턴을 강하게 지지합니다. 관찰팩은 최종 성공만 보여 주지 않고 첫 실패와 수정 후 재실행을 같은 코드+OTel 흐름으로 남길 때 가치가 있습니다. 다만 한 저장소의 한 과제가 모든 프로젝트 품질을 보장하지는 않습니다. 예제는 의도적으로 실패하는 작은 테스트를 준비하고 agent 수정 뒤 host가 같은 테스트를 독립 재실행하도록 개선하는 것이 좋습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_iterate_fix_failing_tests_kr.html">실패 테스트 반복 수정 노트북</a>이 event race 방지와 독립 검증을 보여 주며, 이 장의 복구 흐름은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch27">Speaky Agent Flow 27장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

@@ -916,6 +916,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3179,6 +3230,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#codex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Codex 최종 검토 의견
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codex 최종 검토 의견">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      제 판단
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      검증을 읽고 달라진 신뢰도
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      독자가 오해할 위험
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      제가 다시 가르친다면
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3312,6 +3414,15 @@
 <ul>
 <li>같은 조건 반복 실행에서의 호출 횟수 분포</li>
 </ul>
+<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
+<h3 id="_8">제 판단<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>2부에서 이 장은 비교적 강한 장입니다. 같은 질문, fixture, tool name과 handler를 유지하고 설명·schema만 모호한 조건과 충실한 조건으로 바꿨기 때문입니다. 한 번씩의 표본이라 효과 크기를 일반화할 수는 없지만, rich 조건이 <code>NO_MATCH</code> 뒤 설명에 적힌 source keyword로 복구하고 4회 호출로 끝난 반면 vague 조건은 10회 탐색했다는 차이는 “도구 설명도 실행 하니스다”라는 주장에 실제 사례 근거를 줍니다.</p>
+<h3 id="_9">검증을 읽고 달라진 신뢰도<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>제가 더 높게 평가한 부분은 모델이 fallback 도구의 결과를 그대로 믿지 않았다는 점입니다. 그 handler는 어떤 query에도 같은 marker를 돌려주는 불량 도구였고, 모델은 control query로 이를 발견해 최종 근거에서 제외했습니다. 이는 좋은 도구 사용이 호출 성공 여부가 아니라 입력 품질과 <strong>결과를 의심하고 검증하는 능력</strong>까지 포함한다는 것을 잘 보여 줍니다. 반면 10회 대 4회는 아직 재현 가능한 평균이 아닙니다.</p>
+<h3 id="_10">독자가 오해할 위험<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>run-level <code>success</code>는 내부 worker 성공과 다릅니다. 실제 위임 실패 실행에서는 specialist task가 실패했는데도 전체 Result가 success였습니다. 또한 Python에서 init의 <code>Task</code>와 완성된 호출의 <code>Agent</code>를 별도 도구로 세면 안 됩니다. <code>allowed_tools</code>는 승인 규칙이고 <code>disallowed_tools</code>는 모델에게 보이는 표면을 제거한다는 차이도 반드시 유지해야 합니다.</p>
+<h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>현재 description A/B를 순서를 바꿔 반복하고, 호출 수 외에 첫 query의 구체성, 빈 결과 뒤 query 변화, 비판별 결과 배제 여부를 rubric으로 삼겠습니다. 위임 예제에서는 worker tool surface가 전역 surface와 맞지 않아 실패했던 첫 실행부터 보여 주겠습니다. 그 실패가 Agent 정의만 잘 쓴다고 worker가 자동으로 실행 가능해지는 것은 아니라는 가장 좋은 수업입니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html">도구 평가 노트북</a>은 이 평가 구조와 맞고, 실제 두 검색 경로와 위임 복구는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch08">Speaky Agent Flow 8장 재생</a>에서 확인할 수 있습니다.</p>
 
 
 
@@ -3325,10 +3436,6 @@
 
 
                 
-<h2 id="codex">Codex 최종 검토 의견<a class="headerlink" href="#codex" title="Permanent link">&para;</a></h2>
-<p>이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.</p>
-<p>도구 설명을 작은 하니스로 보는 관점은 공식 tool-use 예제와 잘 맞습니다. 관찰팩은 모델이 어떤 도구와 인자를 실제로 선택했는지 보여 주지만, 좋은 결과 한 건만으로 설명 문구의 효과를 증명하지는 못합니다. 예제는 같은 schema와 task를 유지한 채 description만 좋은 버전·빈 버전으로 바꾸고 선택률, 인자 오류, 재시도 횟수를 비교하도록 개선해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html">도구 평가 노트북</a>은 빈 설명이 불필요한 호출과 오류를 늘리는 과정을 실제 코드로 보여 주며, 이 장의 실행 사건은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch08">Speaky Agent Flow 8장 재생</a>에서 확인할 수 있습니다.</p>
-
               </article>
             </div>
           

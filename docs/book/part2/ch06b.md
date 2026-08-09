@@ -128,6 +128,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-스트리밍, 중단, 최대 turn, 체크포인트를 서로 다른 종료·복구 표면으로 나눈 것은 실무적으로 유용합니다. 관찰팩은 호스트가 실제로 만든 중단·저장·종료를 코드와 시간선으로 보여 주지만, provider 네트워크의 재시도·백오프까지 대신 증명하지는 않습니다. 예제는 정상 stream, host abort, max-turn 종료를 각각 최소 서버/클라이언트 코드로 분리하고, 네트워크 장애는 통제 가능한 프록시를 둔 별도 실험으로 남기는 편이 좋습니다. [에이전트 호스팅 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/07_Hosting_the_agent_kr.html)이 SSE, 세션 저장, 안정된 wire format의 경계를 보여 주고, 현재 종료 경로는 [Speaky Agent Flow 6b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch06b)에서 확인할 수 있습니다.
+종료 이유를 모델 품질, 도구 실패, 호스트 중단, turn 한도, 저장·복구로 나눠 읽으라는 주장은 운영에서 매우 중요합니다. 이 구분 없이 모든 문제를 “모델이 이상하다”로 처리하면 재시도 중복과 데이터 손실을 놓칩니다. 다만 장 제목이 약속하는 재시도·성능 저하 대응에 비해 직접 실험의 중심은 스트림, 중단, 한도, 체크포인트, 세션 저장입니다. **좋은 transport 관찰 장이지만 네트워크 복원력 실험은 아직 절반만 갖춰졌습니다.**
+
+### 검증을 읽고 달라진 신뢰도
+
+58개 부분 이벤트 뒤 Read와 최종 Result가 이어지고, 실행 중 handler가 `interrupt()`로 취소되며, 성공한 도구 결과 다음에 `error_max_turns`가 오는 순서는 강하게 확인됐습니다. 실제 사용자 메시지 UUID로 파일을 되감은 결과도 설득력 있습니다. 반면 529 retry는 다른 장에서 우연히 발생한 보조 사례이고, fallback은 실행하지 않았습니다. host clock으로 잰 첫 이벤트 지연은 provider TTFT가 아니며 event gap만으로 network/model/tool 원인을 구분할 수도 없습니다.
+
+### 독자가 오해할 위험
+
+가장 위험한 해석은 “retry가 보였으니 mutation 중복도 안전하다”입니다. 관찰된 529 복구에는 중복 외부 효과가 없었고, deploy·결제·push 같은 비멱등 도구가 재실행되는 상황은 시험하지 않았습니다. `Request interrupted by user`라는 프로토콜 문구도 실제 사람이 UI에서 중단 버튼을 눌렀다는 증거가 아닙니다. 체크포인트 성공 역시 원격 Files API 전체를 검증한 것이 아닙니다.
+
+### 제가 다시 가르친다면
+
+현재 다섯 예제는 그대로 유지하되 여섯 번째에 통제 가능한 실패 프록시를 넣겠습니다. 첫 요청은 도구 결과 직전 연결을 끊고, 재시도 때 같은 `tool_use_id` 또는 idempotency key가 어떻게 처리되는지 외부 side-effect counter로 확인해야 합니다. fallback도 존재하지 않는 모델명이 아니라 의도적으로 실패하는 primary transport와 정상 secondary를 사용해 실제 모델 전환을 관찰해야 합니다. [에이전트 호스팅 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/07_Hosting_the_agent_kr.html)은 SSE와 세션 저장의 제품 경계를 보여 주며, 현재 확인된 종료·복구 경로는 [Speaky Agent Flow 6b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch06b)에서 확인할 수 있습니다.

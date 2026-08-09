@@ -132,6 +132,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-정적 시스템 프롬프트는 모델의 숨은 성격 자료가 아니라 호스트가 구성한 실행 조건으로 다뤄야 합니다. 관찰팩은 preset과 명시적 프롬프트가 실행된 뒤의 공개 metadata와 도구 행동을 보여 주지만 provider에 전달된 최종 전문은 보여 주지 않습니다. 예제는 한 줄 `system_prompt`와 preset 두 조건을 같은 `Read` 과제로 실행하고, 시작 metadata와 실제 도구 결과만 나란히 출력하도록 단순화하면 좋습니다. [한 줄 리서치 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/00_The_one_liner_research_agent_kr.html)이 최소 system prompt 구성을 보여 주고, 이 장의 관찰 범위는 [Speaky Agent Flow 8c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08c)에서 확인할 수 있습니다.
+정적 프롬프트를 “숨은 원문”이 아니라 반복 행동으로 평가하자는 방향은 건전합니다. 이번 검증의 더 중요한 결론은 짧은 explicit policy가 Claude Code preset의 대체물이 아니라는 사실입니다. 같은 수정 과제에서 preset은 한 파일을 고치고 검사와 최종 보고까지 마쳤지만, explicit 조건은 같은 변경과 PASS를 만들고도 경로 추측으로 turn을 소진해 terminal error로 끝났습니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+이 차이는 preset이 항상 우월하다는 증명이 아닙니다. 고정 순서 한 쌍이고 공통 사용자 프롬프트 자체가 최소 수정, 테스트, 보고 규칙을 이미 강하게 요구했습니다. 그럼에도 “네 줄 정책이면 기본 하니스를 재구현할 수 있다”는 생각은 반박합니다. 실행 성공은 파일 변경, 검사 성공, terminal success, 최종 보고라는 서로 다른 층으로 나눠야 한다는 점도 실제 실패가 잘 드러냈습니다.
+
+### 독자가 오해할 위험
+
+검사 출력이 PASS였다는 이유로 전체 run이 성공했다고 쓰면 안 됩니다. explicit Result는 `error_max_turns`였고 최종 보고도 없었습니다. 반대로 source snapshot에서 새 파일이 안 보였다고 전체 파일시스템이 불변인 것도 아닙니다. 실제 테스트는 `__pycache__`를 만들었고 snapshot이 이를 제외했습니다. 관찰된 행동에서 비공개 preset 문장을 역으로 복원하는 것도 불가능합니다.
+
+### 제가 다시 가르친다면
+
+custom string을 preset의 대안으로 소개하기보다, preset을 유지한 채 작은 append policy를 추가하는 예제를 먼저 보여 주겠습니다. 정말 대체를 가르치려면 neutral user prompt와 안전·범위·검증을 각각 시험하는 여러 task가 필요합니다. 한 과제의 tool count가 아니라 완료 보고와 종료 상태까지 포함해 평가해야 합니다. [한 줄 리서치 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/00_The_one_liner_research_agent_kr.html)은 최소 구성을 이해하는 출발점이고, preset과 explicit의 실제 차이는 [Speaky Agent Flow 8c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08c)에서 확인할 수 있습니다.

@@ -149,6 +149,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-권한을 별도 제어 평면으로 보는 핵심은 정확하지만, `canUseTool`이 모든 호출을 통과한다고 가정하면 안 됩니다. 관찰팩은 allow 규칙이나 permission mode가 callback 이전에 결정을 끝낸 사례까지 코드와 시간선으로 보여 주기 위해 필요하며, 전 호출 감사에는 `PreToolUse`, 권한 callback, handler, `permission_denials` 연결이 필요합니다. 예제는 자동 허용, 명시적 deny, 실제 사용자 승인 대기의 세 경로를 분리하고 승인 주체를 화면에 표시하도록 개선해야 합니다. [Managed Agents HITL 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_gate_human_in_the_loop_kr.html)이 요청·대기·사용자 결과의 명확한 왕복을 보여 주며, 이 장의 권한 경로는 [Speaky Agent Flow 8f장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08f)에서 확인할 수 있습니다.
+이 장은 현재 검증 묶음에서 가장 실무적인 장 중 하나입니다. 동일한 외부 효과 없는 MCP 도구와 동일 입력을 `callback allow`, `callback deny`, whole-tool allow, `dontAsk`, `auto` 다섯 조건에 통과시켜 permission routing만 바꿨습니다. 이 결과는 권한이 버튼 하나가 아니라 규칙, mode, callback, handler가 우선순위로 연결된 제어 평면이라는 주장을 강하게 지지합니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+가장 중요한 발견은 `can_use_tool`이 모든 요청의 감사 지점이 아니라는 것입니다. whole-tool allow, `acceptEdits`, `bypassPermissions`는 callback보다 먼저 결정을 끝낼 수 있었고, 명시적 deny는 bypass보다 강했습니다. deny와 `dontAsk`에서 handler가 0회였지만 최종 Result는 success였다는 사실도 중요합니다. 에이전트 run 성공과 개별 위험 작업 승인·실행 성공은 반드시 별도 상태로 저장해야 합니다.
+
+### 독자가 오해할 위험
+
+이 실험의 allow/deny 주체는 호스트 프로그램이지 사람의 버튼 클릭이 아닙니다. `auto`에서 handler가 실행됐어도 분류기 프롬프트나 판단 이유는 관찰되지 않았습니다. 따라서 “AI가 안전하다고 판정했다”는 설명은 증거보다 강합니다. AskUserQuestion, permission callback, MCP elicitation도 같은 최상위 메시지가 아니라 서로 다른 control/tool 통로이므로 UI에서 한 종류의 질문 카드로 합치면 안 됩니다.
+
+### 제가 다시 가르친다면
+
+현재 다섯 경로를 권한 상태 머신의 기준 예제로 유지하겠습니다. 다음 단계는 `permission_prompt_tool_name`을 실제 외부 권한 도구에 연결하고, 사용자 UI가 `tool_use_id`를 보존한 승인 영수증을 돌려준 뒤 같은 native turn의 handler가 실행되는 왕복입니다. 감사 로그는 callback만 수집하지 말고 ToolUse, PreToolUse, mode/rule 결정, callback, handler, ToolResult, terminal `permission_denials`를 결합해야 합니다. [Managed Agents HITL 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_gate_human_in_the_loop_kr.html)은 사람 대기 왕복을 보강하는 참고점이고, 현재 프로그램 주체의 권한 우선순위는 [Speaky Agent Flow 8f장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08f)에서 확인할 수 있습니다.

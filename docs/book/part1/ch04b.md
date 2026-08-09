@@ -157,6 +157,20 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-플랜 모드를 실행 전 의도 정렬 상태로 보는 관점은 좋지만 “도구를 실행하지 않는 모드”라는 단순화는 틀립니다. 실제 코드는 읽기 조사와 격리된 계획 파일 수정을 만들 수 있고, 관찰팩은 제품 파일 변경이 승인 전후 어디에서 발생했는지 확인하기 위해 필요합니다. 프로그램이 돌려준 승인과 사람이 버튼을 누른 승인은 동일하지 않으므로 Speaky 화면에서도 승인 주체를 명시해야 합니다. 예제는 계획 작성, 승인 대기, 호스트의 모드 전환, 제품 파일 수정의 네 단계를 별도 상태로 출력하도록 개선하면 좋습니다. [Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)의 plan mode 구성을 참고하고, 실제 경계는 [Speaky Agent Flow 4b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04b)에서 확인할 수 있습니다.
+플랜 모드를 “더 오래 생각하는 옵션”이 아니라 실행 권한과 계획 artifact를 분리하는 상태로 설명한 방향은 좋습니다. 그러나 이번 실제 실행은 원문의 이상적인 인간 승인 상태 머신을 그대로 증명하지 않았습니다. 정확히 관찰된 것은 **호스트 프로그램이** `set_permission_mode("plan")`으로 진입하고, 계획 turn이 끝난 뒤 `actor=host-program` 승인 사건을 기록한 다음 `set_permission_mode("acceptEdits")`로 복귀시켜 제품 파일을 수정한 흐름입니다. SDK가 이전 권한 모드를 자동 기억해 복원했거나 사람이 버튼으로 승인했다는 증거는 없습니다.
+
+### 코드에서 드러난 플랜 모드의 실제 모습
+
+`chapter04b.py`는 `app.py`의 baseline hash를 저장하고 같은 `ClaudeSDKClient`에서 계획과 실행 두 turn을 돌렸습니다. 계획 단계에서는 `Glob`와 `Read`가 실행됐고 잘못된 경로를 고친 흔적도 남았습니다. 도구 목록에 없던 `Write`는 실패했지만 격리된 계획 파일은 `Edit`로 수정됐습니다. 계획 뒤 `app.py` hash는 그대로였고, host 승인과 mode 전환 뒤에야 제품 파일 `Edit`가 성공해 hash가 바뀌었습니다. 이 대조는 “플랜 모드에서는 아무 도구도 실행되지 않는다”가 아니라 “조사와 계획 artifact 변경은 가능하지만 대상 제품 mutation은 별도 승인 경계 뒤에 둔다”가 더 정확한 설명임을 보여 줍니다.
+
+`ExitPlanMode` 요청은 두 번 모두 거부됐고 final permission denial에도 남았습니다. 즉 이 실행의 승인 경계는 `ExitPlanMode` 성공이 아니라 host가 외부에서 만든 process event입니다. 또한 계획 전후에 Bash가 한 번도 없었으므로 수정 성공을 테스트 성공으로 읽을 수 없습니다. 주 assistant는 Opus 5였지만 usage에는 Haiku 4.5도 있었고, permission callback만 보면 미리 허용된 조사 도구와 계획 파일 Edit를 놓칩니다. raw SDK, hook, callback, host event, 파일 hash를 함께 보아야 하는 이유가 여기에 있습니다.
+
+### 원문과 공개 SDK의 불일치
+
+Python SDK `0.2.128`에는 `PermissionMode`의 `plan`과 `set_permission_mode()`가 있지만 원문이 말하는 `planModeInstructions`/`plan_mode_instructions` option은 확인되지 않았습니다. 정확히 다섯 단계 heading을 보장하는 계약, full/sparse 계획 최적화, 팀리드 승인, auto mode 복원도 이번 범위 밖입니다. 그러므로 이 장은 “SDK가 제공하는 native human approval workflow”라고 단정하기보다 “host가 permission mode, 계획 artifact, 승인 주체, 실행 turn을 조합해 workflow를 만들어야 한다”라고 가르쳐야 합니다.
+
+### Cookbook과 예제에 대한 의견
+
+[Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)은 `permission_mode="plan"`을 사용하면서 계획을 메시지, Write 입력, `~/.claude/plans/` 순서로 추출하고, 사람이 검토한 뒤 plan mode를 제거해 다음 질의를 보내는 현실적인 host 패턴을 제시합니다. 이 코드는 “계획 결과를 어떻게 잃지 않을지”에는 유용하지만 실제 사용자 승인 UI나 자동 mode 복원을 증명하지는 않습니다. 책의 예제는 `baseline hash → plan init/read/plan artifact → approval actor → mode transition → product Edit → test 미실행`을 명시적으로 출력해야 합니다. [Speaky Agent Flow 4b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04b)도 승인 아이콘 하나로 축약하지 말고 `host-program`과 실제 사람을 구분해 보여 주어야 합니다.

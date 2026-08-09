@@ -83,6 +83,18 @@
 
 ## Codex 최종 검토 의견
 
-이 장의 관찰팩은 해시나 OTel만으로 주장을 참이라고 선언하려는 장치가 아닙니다. 직접 실행 코드가 행동 증거를 만들고, 같은 실행에서 수집된 OTel이 사건 순서와 관계를 보존하며, Speaky가 두 층을 독자가 검토할 수 있는 장면으로 투영합니다. 관찰하지 못한 항목은 이 결합으로도 증명된 것이 아닙니다.
+### 제 판단
 
-계획 artifact를 별도 세션의 실행 입력으로 가져와 실제 도구 행동과 비교하는 경계는 유용합니다. 그러나 로컬 파일 생성·읽기만으로 원격 멀티에이전트 전송이나 `Ultraplan` 내부 경로를 증명할 수 없으므로, 관찰팩도 “계획 artifact를 이용한 host orchestration”까지만 표시해야 합니다. 예제는 계획 파일 생성, content 검증, 새 세션 수신, 실행 결과를 명시적으로 출력하고 원격 구현은 task ID·수신 영수증이 확보될 때 별도 추가하는 것이 좋습니다. [이슈에서 PR까지 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_orchestrate_issue_to_pr_kr.html)이 persistent session과 단계 영수증의 기준이며, 현재 확인된 로컬 경계는 [Speaky Agent Flow 20c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20c)에서 확인할 수 있습니다.
+계획을 채팅 문장으로 흘려보내지 않고 검증 가능한 artifact로 만든 뒤 별도 실행 세션에 넘긴다는 설계는 좋습니다. 계획 수립과 실행의 책임을 분리하고, 실행자가 실제로 어떤 계획을 받았는지 다시 확인할 수 있기 때문입니다. 다만 현재 사례는 “원격 멀티 에이전트 Ultraplan”보다 **한 호스트가 두 로컬 SDK 세션 사이에서 계획 파일을 중계한 실행**이라고 부르는 편이 정확합니다.
+
+### 검증을 읽고 달라진 신뢰도
+
+planner 종료, 호스트의 계획 저장, executor의 계획 읽기, 실제 대상 읽기와 결과 생성 순서가 확인돼 계획 artifact handoff 자체에는 신뢰가 생겼습니다. executor가 처음 잘못된 루트 경로를 두 번 시도한 뒤 복구한 기록도, 계획이 있다고 실행 오류가 사라지는 것은 아니라는 현실적인 증거입니다. 반면 네트워크 전송, 원격 수신 영수증, polling, timeout, 승인, 재전송은 없었고 모델 청구 레이블도 요청·시작 레이블과 충돌하므로 원격 운영과 모델 동일성을 단정할 수 없습니다.
+
+### 독자가 오해할 위험
+
+서로 다른 세션이라는 이유만으로 서로 다른 머신이나 원격 에이전트라고 생각할 수 있습니다. 파일의 존재와 해시만으로도 “원격 전달 성공”을 말할 수 없고, 수신 주체가 어떤 바이트를 언제 받아 실행했는지가 필요합니다. 또한 계획을 읽었다는 사실은 계획을 정확히 준수했다는 사실과 다르므로 실행 도구 기록과 최종 artifact를 함께 비교해야 합니다.
+
+### 제가 다시 가르친다면
+
+현재 예제를 “로컬 plan/import/execute”의 기준 사례로 먼저 제시하겠습니다. 이후 원격판은 task ID, 송신 payload, 수신 영수증, 승인 결과, timeout·retry를 추가하고 같은 계획이 실제 원격 실행에 연결되는지 별도 실험으로 검증하겠습니다. [이슈에서 PR까지 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_orchestrate_issue_to_pr_kr.html)은 단계별 영수증과 지속 세션을 비교할 기준이고, 현재 확인된 로컬 경계는 [Speaky Agent Flow 20c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20c)에서 확인할 수 있습니다.
