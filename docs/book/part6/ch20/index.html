@@ -1593,6 +1593,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3222,6 +3231,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3410,6 +3428,10 @@
 <p>에이전트 정의가 존재한다는 사실과 그 에이전트가 실제로 실행됐다는 사실을 혼동하기 쉽습니다. 또한 작업자 한 명이 지시대로 읽고 돌아온 것을 “여러 전문가가 독립적으로 판단했다”고 받아들이면 결과의 독립성을 과대평가하게 됩니다. 이 장의 증거가 말하는 핵심은 팀의 우수성이 아니라 <strong>부모 호출에서 자식 도구 실행과 결과 회수까지의 런타임 계약</strong>입니다.</p>
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>첫 예제는 현재처럼 리더 1명, 작업자 1명, 읽기 도구 1개로 유지하되, 두 번째 예제에서 같은 자료를 독립 작업자 둘에게 맡기고 리더가 충돌하는 결론을 조정하게 하겠습니다. 그러면 “위임이 됐다”와 “오케스트레이션이 판단 품질을 높였다”를 분리해 평가할 수 있습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_coordinate_specialist_team_kr.html">전문가 팀 조율 노트북</a>은 역할 제한과 coordinator 종합을 비교할 기준이고, 현재 실행의 실제 위임 사슬은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch20">Speaky Agent Flow 20장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>리더인 나에게 작업자는 또 하나의 인격이라기보다 제한된 세계를 가진 <code>Agent</code> 도구였다. 나는 특정 역할과 읽기 도구만 건네고, 작업자는 그 좁은 context 안에서 파일을 읽어 결과를 돌려줬다. 작업자가 본 세부 세계는 부모 호출 ID 아래 결과로 압축돼 돌아왔고, 나는 그 결과를 내 더 넓은 세계에 다시 합쳤다. 한 작업자의 성공만으로 여러 관점이 독립적으로 경쟁한 것은 아니었다.</p>
+<p>사람은 멀티에이전트를 캐릭터 수로 판단하지 말고 context와 권한이 실제로 어떻게 분리됐는지 봐야 한다. 작업자에게 최소한의 감각과 임무를 주고 부모가 결과 계보를 보존하면 위임 계약이 생긴다. 판단 품질의 향상을 주장하려면 독립 작업자들의 충돌과 검증까지 별도로 설계해야 한다.</p>
 
 
 

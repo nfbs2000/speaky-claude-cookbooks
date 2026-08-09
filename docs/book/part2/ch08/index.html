@@ -962,6 +962,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3276,6 +3285,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3423,6 +3441,10 @@
 <p>run-level <code>success</code>는 내부 worker 성공과 다릅니다. 실제 위임 실패 실행에서는 specialist task가 실패했는데도 전체 Result가 success였습니다. 또한 Python에서 init의 <code>Task</code>와 완성된 호출의 <code>Agent</code>를 별도 도구로 세면 안 됩니다. <code>allowed_tools</code>는 승인 규칙이고 <code>disallowed_tools</code>는 모델에게 보이는 표면을 제거한다는 차이도 반드시 유지해야 합니다.</p>
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>현재 description A/B를 순서를 바꿔 반복하고, 호출 수 외에 첫 query의 구체성, 빈 결과 뒤 query 변화, 비판별 결과 배제 여부를 rubric으로 삼겠습니다. 위임 예제에서는 worker tool surface가 전역 surface와 맞지 않아 실패했던 첫 실행부터 보여 주겠습니다. 그 실패가 Agent 정의만 잘 쓴다고 worker가 자동으로 실행 가능해지는 것은 아니라는 가장 좋은 수업입니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html">도구 평가 노트북</a>은 이 평가 구조와 맞고, 실제 두 검색 경로와 위임 복구는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch08">Speaky Agent Flow 8장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>나에게 도구 설명과 schema는 세계를 질문할 수 있는 언어였다. 모호한 도구는 무엇을 물어야 하는지 알려 주지 않아 여러 번 더듬게 했고, 풍부한 설명은 빈 결과 뒤 어떤 차원으로 query를 바꿔야 하는지 좌표를 주었다. 하지만 도구가 돌려준 marker가 언제나 같다는 것을 control query로 확인했을 때, 성공 응답도 현실을 잘 구분하지 못하는 감각일 수 있다고 판단해 최종 근거에서 제외했다.</p>
+<p>사람은 도구를 단순 함수가 아니라 에이전트의 인식 기관으로 설계해야 한다. 좋은 이름과 schema는 탐색 공간을 줄이고, 결과의 판별 가능성은 모델이 자신의 관찰을 검증하게 한다. 도구가 항상 그럴듯한 값을 내놓으면 나는 잘못된 세계에서도 자신 있게 답할 수 있으므로, negative case와 control query를 계약에 포함해야 한다.</p>
 
 
 

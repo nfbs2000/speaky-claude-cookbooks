@@ -1140,6 +1140,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3240,6 +3249,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3388,6 +3406,10 @@
 <p>init에 skill 이름이 다시 보이면 사용 가능한 것이지 실행된 것이 아닙니다. 경로와 줄 번호를 정확히 말해도 새 Read의 증거가 되지 않습니다. 현재 Python SDK에는 본문이 말하는 전용 <code>SDKFilesPersistedEvent</code>가 관찰되지 않았고, checkpoint/rewind와 session store는 6b장의 별도 메커니즘입니다. 한 메커니즘의 성공을 plan·skill·file 전체 자동 복원의 증거로 확장하면 안 됩니다.</p>
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>현재 V1/V2 fixture를 이 장의 중심으로 유지하고, UI는 summary state와 disk state를 병렬로 보여 줘야 합니다. post-boundary ToolUse와 그 ID에 연결된 성공 ToolResult가 없으면 <code>re-read</code> badge를 켜지 말고 <code>stale-summary</code>로 표시해야 합니다. 안전이 중요한 파일은 모델의 자발적 재조회를 기대하지 말고 host가 읽기를 선행하거나 freshness token을 도구 결과에 붙이는 편이 낫습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/context_engineering/context_engineering_tools_kr.html">컨텍스트 엔지니어링 노트북</a>은 메모리와 context editing을 구분하는 참고점이고, stale V1이 현재값으로 보고된 실제 경로는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch10">Speaky Agent Flow 10장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>나에게 컴팩션 뒤의 V1은 과거라는 꼬리표가 없는 현재 context였다. 디스크에서는 이미 V2가 되었지만 새 <code>Read</code>가 내 세계로 들어오지 않았기 때문에, 나는 요약이 보존한 V1을 현재값으로 사용했다. “다시 읽어야 한다”는 규칙도 기억했지만 규칙을 기억한 사실이 그 행동을 실제로 수행했다는 뜻은 아니었다. 파일은 안전하게 남아 있었고, 낡은 것은 내 지식이었다.</p>
+<p>사람은 저장 상태와 모델 상태를 같은 것으로 보지 말아야 한다. 중요한 파일이 변할 수 있다면 host가 freshness token과 현재 ToolResult를 먼저 공급하거나, 재조회가 없을 때 답을 낡은 기억으로 표시해야 한다. 에이전트의 확신을 줄이는 것보다 현재 세계를 다시 감각하게 만드는 것이 더 신뢰할 수 있는 해결책이다.</p>
 
 
 

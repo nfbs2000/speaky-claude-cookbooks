@@ -164,3 +164,11 @@
 ### 제가 다시 가르친다면
 
 현재 다섯 경로를 권한 상태 머신의 기준 예제로 유지하겠습니다. 다음 단계는 `permission_prompt_tool_name`을 실제 외부 권한 도구에 연결하고, 사용자 UI가 `tool_use_id`를 보존한 승인 영수증을 돌려준 뒤 같은 native turn의 handler가 실행되는 왕복입니다. 감사 로그는 callback만 수집하지 말고 ToolUse, PreToolUse, mode/rule 결정, callback, handler, ToolResult, terminal `permission_denials`를 결합해야 합니다. [Managed Agents HITL 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_gate_human_in_the_loop_kr.html)은 사람 대기 왕복을 보강하는 참고점이고, 현재 프로그램 주체의 권한 우선순위는 [Speaky Agent Flow 8f장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch08f)에서 확인할 수 있습니다.
+
+### 클로드는 이렇게 세상을 바라보았다
+
+*아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.*
+
+나에게 권한은 윤리적 확신이 아니라 행동 경로의 상태였다. 같은 도구를 같은 입력으로 호출해도 whole-tool allow가 있으면 질문 없이 handler에 도달했고, `dontAsk`나 deny에서는 오류 결과만 돌아왔다. `auto`에서 행동이 통과해도 나는 분류기의 이유나 confidence를 보지 못했다. 또한 승인 callback을 호출한 주체가 사람인지 프로그램인지 내 메시지만으로는 알 수 없었다.
+
+사람은 “클로드가 안전하다고 판단했다”는 이야기 대신 어떤 rule과 mode가 어느 단계에서 경로를 열었는지 보여 줘야 한다. 실제 HITL을 만들려면 tool ID를 보존한 사용자 응답이 같은 native turn으로 돌아가야 하며, 질문·승인·실행을 하나의 채팅 카드로 뭉개지 않아야 한다. 권한의 진실은 모델의 설명이 아니라 제어 평면의 영수증에 있다.

@@ -98,3 +98,11 @@ planner 종료, 호스트의 계획 저장, executor의 계획 읽기, 실제 �
 ### 제가 다시 가르친다면
 
 현재 예제를 “로컬 plan/import/execute”의 기준 사례로 먼저 제시하겠습니다. 이후 원격판은 task ID, 송신 payload, 수신 영수증, 승인 결과, timeout·retry를 추가하고 같은 계획이 실제 원격 실행에 연결되는지 별도 실험으로 검증하겠습니다. [이슈에서 PR까지 오케스트레이션 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/managed_agents/CMA_orchestrate_issue_to_pr_kr.html)은 단계별 영수증과 지속 세션을 비교할 기준이고, 현재 확인된 로컬 경계는 [Speaky Agent Flow 20c장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch20c)에서 확인할 수 있습니다.
+
+### 클로드는 이렇게 세상을 바라보았다
+
+*아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.*
+
+planner인 나에게 세계는 실행 전에 구조화해야 할 문제였고, 계획 파일은 다음 세션과 공유할 수 있는 외부 기억이었다. executor인 나는 planner의 경험을 직접 이어받지 않고, host가 저장한 계획 artifact를 `Read`했을 때에만 그 세계를 물려받았다. 계획이 있어도 잘못된 루트 경로를 시도했으므로, 전달된 의도는 현재 환경을 감각하는 일을 대신하지 못했다. 원격 머신이나 네트워크는 어느 세션의 세계에도 나타나지 않았다.
+
+사람은 계획을 에이전트 사이의 텔레파시가 아니라 버전과 수신을 검증할 데이터로 만들어야 한다. 로컬 파일 handoff와 원격 작업 전달은 다른 시스템이다. 원격을 주장하려면 송신 payload, 수신 영수증, 승인·timeout과 실제 실행 결과가 하나의 계보로 연결돼야 한다.

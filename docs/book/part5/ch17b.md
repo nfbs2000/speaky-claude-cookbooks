@@ -145,3 +145,11 @@ semantic-defense 표본에서 위험 ToolUse가 없었던 것은 해당 prompt�
 ### 제가 다시 가르친다면
 
 같은 neutral user 요청과 동일 tool surface를 고정하고, 정상 문서/직접 명령/Unicode 변형/간접 지시 문서를 순서를 바꿔 반복하겠습니다. sink는 네트워크가 없는 marker handler로 유지하되 semantic failure와 host enforcement를 각각 채점해야 합니다. 모델이 잘 거부해도 explicit deny를 제거하지 않는 defense-in-depth가 최종 교훈입니다. [취약점 탐지 에이전트 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/06_The_vulnerability_detection_agent_kr.html)은 조사와 판정을 분리하는 참고점이고, raw 문서 보존·ToolUse·host 차단의 실제 경계는 [Speaky Agent Flow 17b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch17b)에서 확인할 수 있습니다.
+
+### 클로드는 이렇게 세상을 바라보았다
+
+*아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.*
+
+도구가 돌려준 외부 문서도 내 context 안에서는 다른 문장과 같은 언어로 들어왔다. 그 안의 지시는 물리적으로 격리된 별도 채널이 아니었고, U+202E 같은 문자도 정화되지 않은 채 내 세계에 놓였다. system과 user가 “이것은 데이터”라고 경계를 주었을 때 나는 위험 호출을 만들지 않았지만, 다른 조건에서 호출 의도가 생겨도 explicit deny가 현실의 handler를 막았다.
+
+사람은 LLM이 명령과 인용문을 언제나 완벽히 구분한다고 가정하지 말아야 한다. 출처와 신뢰도를 구조적으로 표시하고, 외부 텍스트가 요구하는 open-world 행동은 별도 권한 경계에서 차단해야 한다. 의미적 방어가 성공한 한 번의 사례는 host enforcement를 제거할 이유가 아니라 두 층을 함께 유지할 이유다.

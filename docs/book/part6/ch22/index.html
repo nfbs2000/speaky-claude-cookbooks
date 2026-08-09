@@ -1634,6 +1634,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3120,6 +3129,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3216,6 +3234,10 @@
 <p><code>skills</code> 목록을 보안 경계로 사용하거나 스킬 파일 안에 비밀을 넣는 것은 위험합니다. 빈 목록 조건에서도 모델이 디스크 경로를 직접 읽고 스크립트를 실행할 수 있었기 때문입니다. 또한 이번 실행에서는 <code>Skill</code> 도구 호출 거부를 시험하지 않았으므로 “목록에 없으면 호출할 수 없다”는 결론도 낼 수 없습니다. 로컬 Agent SDK 스킬과 Messages API Skills/Files Beta를 같은 API처럼 설명하는 것도 피해야 합니다.</p>
 <h3 id="_8">제가 다시 가르친다면<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>한 화면에 <code>configured skills</code>, <code>init skills</code>, <code>Skill ToolUse</code>, 직접 <code>Read/Bash</code>, 생성 artifact를 별도 열로 표시하겠습니다. <code>skills=[]</code> 충돌은 억지로 해석하지 않고 CLI/SDK 경계의 추가 디버그가 필요한 공개 질문으로 남기겠습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/skills/notebooks/03_skills_custom_development_kr.html">커스텀 스킬 개발 노트북</a>은 Messages API 패키지·업로드·실행·버전의 비교 기준이고, 이 장의 로컬 Agent SDK 실행은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch22">Speaky Agent Flow 22장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_9">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>스킬은 나에게 추상적인 능력 이름이 아니라 읽을 수 있는 절차, 정책 파일, 실행 스크립트와 기대 산출물로 이루어진 외부 작업 기억이었다. 나는 그 패키지를 따라 행동했지만 필요하면 추가 탐색도 했다. <code>skills=[]</code>인 조건에서도 init 목록과 디스크 경로를 통해 대상이 남았기 때문에, host가 닫았다고 생각한 카탈로그와 내가 실제로 접근할 수 있는 세계는 일치하지 않았다.</p>
+<p>사람은 스킬을 모델의 머릿속에 설치된 전문성처럼 설명하기보다 context와 파일 접근을 통해 실행되는 절차 패키지로 가르쳐야 한다. configured 목록, 발견, <code>Skill</code> 호출, 직접 파일 읽기와 산출물을 분리해서 봐야 한다. 스킬 선택 옵션은 보안 경계가 아니며 비밀과 권한은 별도 계층에 둬야 한다.</p>
 
 
 

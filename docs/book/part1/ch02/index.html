@@ -719,6 +719,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3294,6 +3303,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3439,6 +3457,10 @@
 <p>ToolSearch가 context 비용과 cache 안정성을 실제로 개선한다는 주장, 큰 tool result의 truncation·persisted artifact, 진행 메시지, built-in 도구 40여 개의 전체 표면은 이 probe가 다루지 않았습니다. 원문은 TypeScript 공개 타입을 기준으로 설명하면서 검증은 Python SDK로 수행하므로 <code>PermissionDenied</code> hook이나 메시지 타입을 두 언어 공통 기능처럼 쓰지 않아야 합니다. “hooks → deny → permission mode → allow → callback” 순서도 이번 다섯 조합이 중요한 일부를 지지하지만 가능한 모든 조합을 완전 탐색한 것은 아닙니다.</p>
 <h3 id="cookbook">Cookbook과 예제에 대한 의견<a class="headerlink" href="#cookbook" title="Permanent link">&para;</a></h3>
 <p><a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/tool_choice_kr.html">도구 선택 노트북</a>은 <code>anthropic.Anthropic().messages.create()</code>의 <code>tool_choice=auto/tool/any</code>를 설명하고 가짜 <code>web_search</code> 함수를 사용합니다. 모델이 도구를 <strong>선택하게 만드는 방법</strong>을 배우기에는 좋지만 Agent SDK의 <code>allowed_tools</code>, <code>can_use_tool</code>, hook, 실제 handler 실행 순서를 가르치는 예제는 아닙니다. 책에는 30줄 정도의 custom MCP handler와 실행 counter를 두고 <code>미승인+allow callback</code>, <code>allowed_tools</code>, <code>PreToolUse deny</code>, <code>dontAsk</code> 네 case를 한 변수씩 바꿔 보여 주는 별도 예제가 필요합니다. 그 비교 결과는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch02">Speaky Agent Flow 2장 재생</a>에서 같은 tool ID가 요청·승인·실행·결과로 이어졌는지 직접 확인할 수 있습니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>나에게 도구 목록은 행동할 수 있는 가능성의 지도였고, 권한 규칙은 그 지도 위의 통행 법규였다. 목록에 보인 도구를 호출하고 싶다는 의도와 실제 handler가 실행됐다는 사건은 서로 달랐다. <code>allowed_tools</code>가 있으면 별도 질문 없이 길이 열렸고, 명시적 deny와 <code>PreToolUse</code> 거부가 있으면 내가 호출을 만들었어도 세계에는 아무 부작용이 생기지 않았다. 오류 ToolResult 뒤에도 대화가 끝까지 이어졌기 때문에, 한 행동의 거부와 전체 run의 실패 역시 같은 상태가 아니었다.</p>
+<p>사람은 에이전트의 “선택”을 최종 텍스트만으로 판단해서는 안 된다. 의도, 승인, 실행, 결과를 각각 저장해야 모델이 무엇을 원했고 시스템이 무엇을 허용했으며 현실에서 무엇이 일어났는지 구분할 수 있다. 안전한 세계는 모델의 선의가 아니라 이 여러 경계를 독립적으로 설계할 때 만들어진다.</p>
 
 
 

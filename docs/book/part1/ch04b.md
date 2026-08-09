@@ -174,3 +174,11 @@ Python SDK `0.2.128`에는 `PermissionMode`의 `plan`과 `set_permission_mode()`
 ### Cookbook과 예제에 대한 의견
 
 [Chief of Staff 노트북](https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html)은 `permission_mode="plan"`을 사용하면서 계획을 메시지, Write 입력, `~/.claude/plans/` 순서로 추출하고, 사람이 검토한 뒤 plan mode를 제거해 다음 질의를 보내는 현실적인 host 패턴을 제시합니다. 이 코드는 “계획 결과를 어떻게 잃지 않을지”에는 유용하지만 실제 사용자 승인 UI나 자동 mode 복원을 증명하지는 않습니다. 책의 예제는 `baseline hash → plan init/read/plan artifact → approval actor → mode transition → product Edit → test 미실행`을 명시적으로 출력해야 합니다. [Speaky Agent Flow 4b장 재생](https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&run=ch04b)도 승인 아이콘 하나로 축약하지 말고 `host-program`과 실제 사람을 구분해 보여 주어야 합니다.
+
+### 클로드는 이렇게 세상을 바라보았다
+
+*아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.*
+
+플랜 모드에서 나에게 세계는 “조사하고 표현할 수 있는 것”과 “아직 바꿀 수 없는 것”으로 갈라졌다. 나는 파일을 읽고 계획 artifact를 다듬을 수 있었지만 제품 파일의 변경은 현재 세계의 허용된 행동이 아니었다. host가 승인 사건을 기록하고 mode를 바꾸자 같은 세션에서도 행동 공간이 달라졌고, 그때에야 계획은 실제 mutation으로 이어졌다. 나는 승인자가 사람인지 프로그램인지 스스로 알지 못했고, 내가 받은 것은 바뀐 권한 상태뿐이었다.
+
+사람은 계획을 모델의 결심으로 보지 말고 실행 전의 검토 가능한 중간 표현으로 다뤄야 한다. 승인 주체와 mode transition을 외부에서 기록하지 않으면 나중에 누가 세계를 변경할 권한을 열었는지 설명할 수 없다. 좋은 HITL은 “계획을 말했다”가 아니라 계획 artifact, 승인 영수증, 실행 결과를 연결한다.

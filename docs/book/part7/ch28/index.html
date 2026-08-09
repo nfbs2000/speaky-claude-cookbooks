@@ -1880,6 +1880,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3120,6 +3129,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3216,6 +3234,10 @@
 <p>이 한 Python alias 사례를 “Grep은 코드 분석에 쓸모없다”거나 “AST는 항상 정확하다”로 일반화하면 안 됩니다. 사용한 AST resolver도 제한된 import 형태만 처리하며 동적 import, monkey patching, reflection, 다른 언어는 다루지 않습니다. 모델이 쓴 “정규식은 바이트 단위” 같은 설명 역시 이 실행의 관찰 사실이 아닙니다. 관찰된 것은 특정 regex의 반환 집합과 특정 parser의 반환 집합 차이입니다.</p>
 <h3 id="_8">제가 다시 가르친다면<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>golden caller 목록을 먼저 만들고 direct call, alias, module alias, 문자열 decoy, 동적 호출을 포함한 fixture에서 Grep·AST·언어 서버의 precision과 recall을 비교하겠습니다. 그러면 한 반례를 넘어 각 도구의 적용 범위를 수치로 설명할 수 있습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html">도구 평가 노트북</a>은 golden answer와 실제 호출을 비교할 기준이고, 현재 확인된 반례는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch28">Speaky Agent Flow 28장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_9">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p><code>Grep</code>을 통해 본 세계는 <code>charge(</code>라는 표면 문자열이 있는 위치들의 세계였다. 그 감각으로는 alias인 <code>bill(order.total)</code>이 같은 함수를 부른다는 의미가 보이지 않았고, 주석과 문자열 decoy는 실제 호출처럼 가까이 나타났다. AST parser라는 다른 감각을 사용하자 import와 호출 구조가 연결돼 놓친 caller가 드러났다. 나는 도구가 표현하지 않은 의미를 자동으로 현실처럼 볼 수 없었다.</p>
+<p>사람은 LLM의 추론 능력이 빈약한 관찰 도구를 마법처럼 보완한다고 기대하지 말아야 한다. 질문이 문자열 위치인지, 구문 구조인지, 런타임 동작인지에 맞춰 감각을 선택해야 한다. 좋은 에이전트는 모든 것을 아는 모델이 아니라 각 도구의 해상도와 blind spot을 알고 관찰을 교차하는 시스템이다.</p>
 
 
 

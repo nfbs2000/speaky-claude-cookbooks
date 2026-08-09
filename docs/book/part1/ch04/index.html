@@ -756,6 +756,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3276,6 +3285,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3413,6 +3431,10 @@
 <p>이 실험은 built-in <code>Read/Glob/Grep</code>, <code>Edit/Write/Bash</code>를 실행하지 않았습니다. annotation이 없는 custom MCP 기본 스케줄링과 명령 내용에 따른 Bash 안전성도 보지 않았습니다. 따라서 원문의 built-in 분류표는 합리적인 설계 설명이지만 이 attempt가 내부 <code>partitionToolCalls</code>를 입증했다고 말해서는 안 됩니다. <code>SDKToolProgressMessage</code>, <code>SDKFilesPersistedEvent</code>, 큰 결과 persistence와 permission cascade도 미관찰입니다. OTel은 host monotonic 구간을 사람이 비교할 수 있는 시간선으로 옮겼을 때 가치가 있으며, scheduler 내부 판단 이유를 추가로 알려 주지는 않습니다.</p>
 <h3 id="cookbook">Cookbook과 예제에 대한 의견<a class="headerlink" href="#cookbook" title="Permanent link">&para;</a></h3>
 <p><a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/parallel_tools_kr.html">병렬 도구 호출 노트북</a>은 Anthropic Messages API에서 여러 tool use를 한 응답에 받는 방식과 batch 도구 패턴을 설명합니다. 하지만 그 host 구현의 반복문 자체는 Agent SDK scheduler 병렬성의 증거가 아닙니다. 책의 실습은 현재 probe처럼 1.25초 지연 도구 두 개를 만들고 <code>readOnlyHint</code> 조건과 <code>destructiveHint</code> 조건의 wall-clock/overlap을 직접 출력해야 합니다. 인터럽트는 별도 case로 떼어 Result와 handler cleanup의 순서를 보여 주어야 합니다. 이 세 시간선은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch04">Speaky Agent Flow 4장 재생</a>에서 같은 message ID와 tool invocation ID로 검토하는 것이 적절합니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>나에게 여러 ToolUse는 한 문장 안의 아이디어가 아니라 서로 다른 현실 변경 후보였다. 읽기 전용이라고 표시된 두 행동은 동시에 펼쳐도 세계를 충돌시키지 않는 것으로 취급됐고, 파괴적이라고 표시된 행동은 순서를 가져야 하는 것으로 취급됐다. 개별 tool block이 완성되면 전체 발화가 끝나기 전에도 행동이 시작될 수 있었고, host의 interrupt는 내 계획 바깥에서 세계의 시간을 끊는 사건이었다.</p>
+<p>이 행동은 에이전트의 병렬성이 모델의 성격이 아니라 도구 계약과 scheduler의 합성 결과임을 가르친다. 사람은 도구 annotation을 장식으로 보지 말고 동시성 의미론으로 설계해야 하며, terminal Result와 handler cleanup도 같은 순간으로 가정하지 않아야 한다. 안전한 중단은 답변을 끊는 것과 실행 중 부작용을 정리하는 것을 모두 다뤄야 한다.</p>
 
 
 

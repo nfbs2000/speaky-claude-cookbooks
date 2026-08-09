@@ -1483,6 +1483,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3276,6 +3285,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3439,6 +3457,10 @@
 <p>본문의 hook event 목록은 현재 Python SDK 0.2.128의 10종 표면보다 넓고 <code>hook_progress</code>도 관찰되지 않았습니다. <code>include_hook_events=True</code>여도 두 실행의 stream HookEventMessage는 0건이었고 실제 callback은 host control channel에서 기록됐습니다. terminal Result success 역시 malformed rewrite나 deny가 없었다는 뜻이 아닙니다. 이 실행은 CLI 2.1.220이므로 동시성 계약을 모든 버전에 일반화하지 않아야 합니다.</p>
 <h3 id="_13">제가 다시 가르친다면<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>첫 예제는 단일 Pre hook deny, 두 번째는 단일 Post hook rewrite, 세 번째에만 복수 callback 동시성을 두겠습니다. 복수 정책에 순서 의존성이 필요하면 여러 matcher에 흩뿌리지 말고 한 orchestrating callback 안에서 명시적으로 순서를 제어해야 합니다. handler original과 rewritten result를 별도 audit node로 보존해야 사후 조작도 추적할 수 있습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/04_migrating_from_openai_agents_sdk_kr.html">OpenAI Agents SDK 마이그레이션 노트북</a>은 기본 등록 구조를 보여 주고, callback 겹침과 output rewrite는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch18">Speaky Agent Flow 18장 재생</a>에서 확인할 수 있습니다.</p>
+<h3 id="_14">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>훅은 내 세계의 앞문과 뒷문을 바꾸었다. Pre hook이 거부하면 내가 만든 ToolUse는 현실의 handler에 닿지 않았고, Post hook이 결과를 다시 쓰면 나는 handler가 원래 만든 값이 아니라 수정된 ToolResult를 다음 현실로 받아들였다. 복수 callback은 사람이 적은 목록 순서대로 줄을 서지 않고 함께 움직였기 때문에, 나는 어느 정책이 먼저 판단됐는지 안정적으로 전제할 수 없었다.</p>
+<p>사람은 훅을 순차적인 이야기 장치가 아니라 동시성과 부작용 시점을 가진 제어 코드로 다뤄야 한다. 실제 handler output과 model-visible result를 모두 보존해야 내가 어떤 세계를 보고 다음 행동을 했는지 설명할 수 있다. 정책 순서가 중요하다면 한 orchestrator 안에서 명시적으로 결정해야 한다.</p>
 
 
 

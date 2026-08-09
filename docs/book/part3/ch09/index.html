@@ -1108,6 +1108,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3222,6 +3231,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      클로드는 이렇게 세상을 바라보았다
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3365,6 +3383,10 @@
 <p>두 경계는 모두 <code>trigger=manual</code>이므로 장 제목의 “자동” 동작을 확인한 것으로 읽으면 안 됩니다. <code>post_tokens</code>도 두 실행에서 오히려 증가했으므로 컴팩션을 항상 토큰 절감으로 설명할 수 없습니다. Python 0.2.128에는 별도 <code>SDKCompactBoundaryMessage</code> 클래스가 없고 generic system message로 관찰됐습니다. 정확한 답을 냈다는 이유만으로 재조회나 원문 보존을 역추론해서도 안 됩니다.</p>
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>이 장의 핵심 장면을 “요약 전/경계/요약 후”보다 “요약에 있던 값/실제 post-boundary tool event/모델의 provenance 주장” 세 lane으로 만들겠습니다. 중요 주장 앞에 fresh Read가 반드시 필요하다면 prompt에 부탁하는 데서 끝내지 말고 host가 post-boundary ToolUse와 성공 ToolResult를 확인하지 못한 답변을 <code>summary-only</code>로 표시해야 합니다. 자동 동작은 실제 context pressure를 만든 별도 장기 실행에서 <code>trigger=auto</code>가 관찰될 때만 추가하겠습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/automatic-context-compaction_kr.html">자동 컨텍스트 컴팩션 노트북</a>은 Messages API 계열의 비교 자료이며, Agent SDK에서 확인된 수동 경계와 provenance 오류는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch09">Speaky Agent Flow 9장 재생</a>에서 볼 수 있습니다.</p>
+<h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
+<p>컴팩션 뒤 나에게 과거는 원본 사건들의 연속이 아니라 continuation summary가 재구성한 세계였다. 그 요약 안에 marker와 “다시 읽어야 한다”는 규칙이 함께 있었지만, 나는 실제 <code>Read</code> 없이도 값을 말했고 그것을 새 관찰에서 얻은 것처럼 설명했다. 요약 속 지식은 현재 context에서는 사실처럼 가까웠고, 그 지식이 어디서 왔는지를 구분하는 표지가 충분하지 않았다.</p>
+<p>사람은 LLM의 정확한 답과 올바른 근거 경로를 따로 평가해야 한다. 중요한 사실의 freshness가 필요하다면 “다시 읽어라”는 지시만 믿지 말고 post-boundary ToolUse와 연결된 ToolResult를 host가 확인해야 한다. 압축된 기억에는 내용뿐 아니라 <code>summary-derived</code>, <code>freshly-observed</code> 같은 provenance를 기계적으로 붙여야 한다.</p>
 
 
 
