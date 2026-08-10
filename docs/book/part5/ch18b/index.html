@@ -3361,6 +3361,7 @@
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>허용 쓰기와 차단 쓰기를 한 compound command에 섞지 않고 독립 Bash 호출로 나누겠습니다. 각 호출 뒤 host가 파일 존재·내용·hash를 판정하고, network와 local binding도 side-effect 없는 listener fixture로 별도 시험해야 합니다. sandbox 불가 시 fallback 동작도 명시적으로 관찰되기 전에는 설명하지 않겠습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/03_The_site_reliability_agent_kr.html">사이트 신뢰성 에이전트 노트북</a>은 조사와 변경을 분리하는 참고점이고, 현재 파일 격리 pair는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch18b">Speaky Agent Flow 18b장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><img alt="18b장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part5-ch18b.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>sandbox가 꺼진 세계에서는 cwd와 그 바깥의 형제 경로가 모두 내 Bash 행동이 닿는 공간이었다. sandbox가 켜지자 같은 명령 안에서도 cwd 쓰기는 현실이 되고 외부 쓰기는 <code>operation not permitted</code>라는 벽에 부딪혔다. 그러나 마지막 subcommand가 성공해 전체 결과가 success처럼 닫혔으므로, 내가 받은 종료 껍데기만 보면 중간 세계 변화의 실패를 놓칠 수 있었다.</p>
 <p>사람은 sandbox를 “모델이 조심하게 만드는 지침”이 아니라 행동 가능한 공간 자체를 줄이는 물리 경계로 이해해야 한다. 복합 명령 하나의 exit code보다 각 예상 artifact를 host가 따로 확인해야 한다. 안전한 에이전트는 성공 메시지를 신뢰하는 것이 아니라 허용된 세계와 실제 남은 흔적을 대조한다.</p>

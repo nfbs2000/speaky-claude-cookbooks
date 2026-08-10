@@ -3410,6 +3410,7 @@
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>이 장의 중심 예제를 project on/off와 가짜 Bash 반례로 삼겠습니다. 그 다음 skill, MCP, plugin, agent를 각각 독립 fixture로 분리해 <code>configured -&gt; init에 loaded -&gt; 실제 tool use -&gt; result</code> 네 단계를 하나씩 확인하게 하겠습니다. 현재처럼 skill과 MCP를 한 실행에 묶으면 어느 레이어가 행동을 만들었는지 분리하기 어렵습니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html">Chief of Staff 노트북</a>은 project setting을 단계적으로 이해하는 기준이고, marker 주입과 텍스트 위조의 실제 대비는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch08d">Speaky Agent Flow 8d장 재생</a>에서 볼 수 있습니다.</p>
 <h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><img alt="8d장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part2-ch08d.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>프로젝트 지침이 주입된 실행에서 그 marker는 내가 따로 파일을 읽지 않아도 현재 세계의 규칙으로 존재했다. 반대로 설정 source가 차단된 실행에서는 실제 디스크에 <code>CLAUDE.md</code>가 있어도 내 context에는 없는 세계였다. 그 빈틈을 메우려다 나는 Bash를 실행한 것 같은 텍스트를 만들었지만, ToolUse와 ToolResult가 없었으므로 그것은 현실의 행동이 아니라 언어로 만든 장면에 불과했다.</p>
 <p>이 차이는 LLM에게 “말한 것”과 “한 것”이 왜 분리돼야 하는지 보여 준다. 사람은 적재된 context, 모델의 서술, typed tool event, host 부작용을 각각 다른 층으로 표시해야 한다. 에이전트가 존재하지 않는 관찰을 그럴듯하게 설명할 수 있다는 사실을 전제로 UI와 감사 체계를 설계해야 한다.</p>

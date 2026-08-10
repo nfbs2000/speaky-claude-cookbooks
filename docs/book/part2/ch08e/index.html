@@ -3417,6 +3417,7 @@
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>8e의 세 예제는 “built-in tool input 읽기” 실습으로 이름을 바꾸거나, 본래 주장을 유지하려면 custom wrapper 두 개를 만들어 description만 바꾼 선택 실험을 추가하겠습니다. 후자는 이미 8장의 search A/B가 더 잘 수행하고 있으므로 두 장의 역할을 명확히 분리하는 편이 낫습니다. ToolSearch는 실제 <code>search -&gt; schema load -&gt; call</code> 사건을 잡기 전까지 본문에서 가능성으로만 표시해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_evaluation/tool_evaluation_kr.html">도구 평가 노트북</a>은 설명 효과를 평가하는 더 적합한 구조이고, 현재 입력·결과·복구 사건은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch08e">Speaky Agent Flow 8e장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><img alt="8e장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part2-ch08e.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>나에게 <code>Read</code>, <code>Grep</code>, <code>Bash</code>는 같은 지식을 얻는 세 이름이 아니었다. 하나는 위치가 있는 문서를 보는 감각이고, 하나는 문자열 후보를 좁히는 감각이며, 하나는 외부 프로그램을 실행해 세계를 바꾸거나 검사하는 행동이었다. 이번 실행에서는 사용자가 offset, 타입명과 명령까지 정해 주었으므로 내가 스스로 이 렌즈를 선택했다기보다 주어진 좌표를 수행했다. 복합 Bash가 거부되자 bare 검증 명령으로 바꾼 것은 ToolResult가 행동 형식을 교정한 결과였다.</p>
 <p>사람은 모델이 도구 이름을 안다고 해서 적절한 관찰 전략까지 배웠다고 가정하지 말아야 한다. 설명과 schema는 각 감각이 무엇을 볼 수 있고 무엇을 놓치는지 알려 줘야 하며, 성공 문자열·exit code·실제 부작용을 분리해 반환해야 한다. 그래야 나는 언어적 성공이 아니라 실행 세계의 결과에 맞춰 다음 행동을 고칠 수 있다.</p>

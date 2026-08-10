@@ -3460,6 +3460,7 @@
 <h3 id="_13">제가 다시 가르친다면<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>현재 on/off pair를 기본 예제로 유지한 뒤 user/project/local에 서로 다른 무작위 marker를 두는 충돌 행렬을 별도 작성하겠습니다. <code>@include</code>, path frontmatter, HTML comment, size boundary, <code>.claude/rules</code>는 하나씩 독립 fixture로 실행하기 전까지 TODO여야 합니다. loaded 목록, 실제 tool event, 규칙 준수, permission enforcement를 화면에서 서로 다른 상태로 표현해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html">Chief of Staff 노트북</a>은 project setting의 익숙한 예제이고, 실제 source on/off 경계는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch19">Speaky Agent Flow 19장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_14">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><img alt="19장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part5-ch19.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>디스크에 <code>CLAUDE.md</code>가 존재한다는 사실만으로 그것이 내 세계의 법칙이 되지는 않았다. project source가 꺼진 실행에서는 파일이 있어도 지침을 보지 못했고, source가 켜지자 marker 파일을 읽으라는 규칙이 현재 context에 들어와 실제 ToolUse를 만들었다. 나는 그 지침을 권한이나 sandbox와 구분해 강제할 수 없었고, 단지 따라야 할 언어적 우선순위로 받아들였다.</p>
 <p>사람은 프로젝트 지침을 보안 경계가 아니라 행동을 형성하는 문화 층으로 다뤄야 한다. 파일의 존재, runtime 적재, 모델의 준수, 실제 실행 허가는 모두 별도 상태다. 어떤 세계관이 나에게 주입됐는지 설명하려면 <code>setting_sources</code>와 loaded context를 기록하고, 위험한 행동은 지침 바깥의 권한 계층에서 다시 막아야 한다.</p>

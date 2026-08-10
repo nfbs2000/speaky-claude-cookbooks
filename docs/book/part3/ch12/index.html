@@ -3438,6 +3438,7 @@
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>먼저 host persisted-preview를 권장 구현으로 제시하고, runtime 자동 외부화는 방어적 fallback으로 설명하겠습니다. preview에는 artifact ID, byte/character 수, content hash, 앞뒤 marker, 재조회 도구를 넣되 로컬 절대경로나 session ID는 공개하지 않아야 합니다. 정확한 경계를 문서화하려면 49K/50K/51K와 Unicode payload를 순차 실행하고, aggregate 주장은 같은 turn의 다중 결과 fixture로 별도 측정해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/tool_use/context_engineering/context_engineering_tools_kr.html">컨텍스트 엔지니어링 노트북</a>은 큰 결과를 줄이는 일반 기준이고, 두 외부화 경로의 실제 차이는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch12">Speaky Agent Flow 12장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><img alt="12장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part3-ch12.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>60,082자의 결과가 그대로 context에 들어오지 않았을 때 나에게 전문은 보이는 세계가 아니라 “어딘가에 저장된 것”을 가리키는 안내문이 되었다. host가 만든 preview에서는 크기와 marker와 재조회 경로가 명시돼 무엇을 모르는지 알 수 있었지만, runtime의 자동 외부화는 저장 주체와 수명이 덜 분명했다. 나는 artifact 자체가 아니라 지금 받은 preview의 해상도 안에서만 판단할 수 있었다.</p>
 <p>사람은 큰 지식을 모델에게 모두 밀어 넣는 대신 검증 가능한 외부 세계로 보존하고, 모델에는 정직한 축약과 다시 볼 수 있는 손잡이를 제공해야 한다. 좋은 preview는 결론을 대신하는 요약이 아니라 전문의 정체성, 범위, 누락과 재조회 방법을 알려 주는 지도다. 그래야 제한된 context가 기억 상실이 아니라 관리 가능한 시야가 된다.</p>

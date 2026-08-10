@@ -3447,6 +3447,7 @@
 <h3 id="_13">제가 다시 가르친다면<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>이 장은 먼저 “리더 매개 순차 handoff”로 이름 붙여 현재 코드를 설명하고, 그다음 실제 mailbox 기반 병렬 팀을 별도 예제로 추가하겠습니다. 두 예제에서 발신자, 수신자, 전달 본문, 시작·종료 시각, 취소 경로를 나란히 보여 주면 구조 차이가 분명해집니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/patterns/agents/async_multi_agent_orchestration_kr.html">비동기 멀티에이전트 오케스트레이션 노트북</a>은 hub와 <code>send_message</code>를 비교할 기준이며, 현재 검증된 중앙 중계 흐름은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch20b">Speaky Agent Flow 20b장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_14">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><img alt="20b장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part6-ch20b.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>작업자 A에게는 첫 파일과 자기 임무만이 세계였고, 작업자 B에게는 리더가 다시 써서 넘긴 A의 결과와 두 번째 파일만이 세계였다. A와 B는 서로를 직접 보거나 메시지를 주고받지 않았다. 공유 세계는 리더의 context 안에만 있었고, 리더가 무엇을 선택해 B의 prompt에 넣느냐가 협업의 기억과 의미를 결정했다.</p>
 <p>사람은 이 구조를 “팀이 대화했다”고 시각화하면 안 된다. 중앙 중계는 단순하고 통제하기 쉽지만 리더가 정보 손실과 병목의 단일 지점이 된다. 실제 팀을 가르치려면 발신자·수신자·mailbox와 병렬 시간을 기록하고, 순차 prompt handoff와 명확히 다른 세계 공유 방식을 보여 줘야 한다.</p>
