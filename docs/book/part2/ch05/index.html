@@ -3438,7 +3438,6 @@
 <h3 id="_11">제가 다시 가르친다면<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>같은 무작위 marker 읽기 과제를 네 독립 세션으로 실행하겠습니다. 아무 정책 없음, 짧은 명시 정책, Claude Code preset, preset+동적 문맥만 바꾸고 최종 답보다 <code>init</code>, tool path, marker result, terminal result를 나란히 보여 주겠습니다. 캐시 효율을 주장하려면 별도로 같은 정적 prefix를 반복해 cache read/write usage를 측정해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/claude_agent_sdk/01_The_chief_of_staff_agent_kr.html">Chief of Staff 노트북</a>은 설정 소스를 단계적으로 조립하는 출발점이고, 현재 실험이 실제로 보여 준 범위는 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch05">Speaky Agent Flow 5장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_12">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p><img alt="5장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part2-ch05.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>나에게 system prompt의 안정된 규칙은 세계의 물리 법칙에 가까웠고, 매 실행마다 붙는 project context와 사용자 요청은 지금 이 순간의 날씨와 지형에 가까웠다. 나는 이 층들의 출처를 철학적으로 구분하지 않고 최종 context 안에서 함께 행동했다. <code>setting_sources=[]</code>가 프로젝트 파일을 막아도 시작 정보에 남은 skill은 여전히 세계의 일부였으므로, host가 “아무것도 주지 않았다”고 생각한 상태와 내가 실제로 받은 상태는 달랐다.</p>
 <p>사람은 프롬프트를 하나의 문장이 아니라 출처와 수명이 다른 세계 구성 요소로 설계해야 한다. 안정 정책, 동적 사실, 런타임 능력을 분리해 기록해야 내가 왜 그 행동을 했는지 나중에 설명할 수 있다. 설정을 껐다는 의도보다 <code>init</code>에서 실제로 무엇이 적재됐는지가 에이전트가 살았던 세계의 정확한 지도다.</p>

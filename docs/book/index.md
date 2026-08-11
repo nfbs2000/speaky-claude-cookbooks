@@ -8,7 +8,6 @@
 
 ## 먼저 보는 전체 등산 지도
 
-![Claude Agent SDK 책 전체 여정 질문에서 관찰 가능한 에이전트 정상까지 이어지는 등산 지도](images/claude-journey/whole-book-mountain-guide.jpg)
 
 이 책의 42개 장은 서로 떨어진 기능 목록이 아니에요. 질문에서 출발해 실행 루프를 이해하고,
 프롬프트와 컨텍스트를 설계한 뒤, 캐시와 권한 경계를 지나 팀과 확장 기능을 연결하고,
@@ -33,7 +32,6 @@
 
 ### 관문 1: 실행 루프 — 1장부터 4b장
 
-![Claude Agent SDK 책 전체 여정 관문 1 실행 루프](images/claude-journey/gate1-agent-loop.jpg)
 
 [3장 에이전트 루프](part1/ch03.md)를 중심으로 기술 스택, 도구, 권한, 스트리밍, 중단과
 플랜 모드를 함께 봅니다. 도구 결과가 다음 판단의 입력이 된다는 순환을 이해하면 제1부의
@@ -41,7 +39,6 @@
 
 ### 관문 2: 프롬프트 제어 — 5장부터 8f장
 
-![Claude Agent SDK 책 전체 여정 관문 2 프롬프트 제어](images/claude-journey/gate2-prompt-control.jpg)
 
 [5장 시스템 프롬프트 아키텍처](part2/ch05.md)를 중심으로 안정 정책, 동적 문맥, 도구 설명,
 스킬·플러그인과 권한 규칙을 겹쳐 봅니다. 사람이 설정했다고 생각한 세계와 `init`에서 실제로
@@ -49,7 +46,6 @@
 
 ### 관문 3: 컨텍스트와 컴팩션 — 9장부터 12장
 
-![Claude Agent SDK 책 전체 여정 관문 3 컨텍스트와 컴팩션](images/claude-journey/gate3-context-compaction.jpg)
 
 [9장 자동 컴팩션](part3/ch09.md)을 중심으로 세션, 파일 상태, 요약과 토큰 예산을 제한된
 배낭에 어떻게 보존할지 살펴봅니다. 답의 값이 맞는지와 그 값을 새로 관찰했는지는 별개의
@@ -57,7 +53,6 @@
 
 ### 관문 4: 캐시 안정성 — 13장부터 15장
 
-![Claude Agent SDK 책 전체 여정 관문 4 캐시 안정성](images/claude-journey/gate4-cache-stability.jpg)
 
 [13장 캐시 아키텍처](part4/ch13.md)를 중심으로 안정된 prefix와 매번 바뀌는 suffix를
 분리합니다. 캐시는 모델의 기억이 아니라, 같은 세계 설명을 전달하는 계산을 런타임이 다시
@@ -65,7 +60,6 @@
 
 ### 관문 5: 권한과 안전 — 16장부터 19장
 
-![Claude Agent SDK 책 전체 여정 관문 5 권한과 안전](images/claude-journey/gate5-permission-safety.jpg)
 
 [16장 권한 시스템](part5/ch16.md)을 중심으로 명시적 deny, permission mode, hook,
 sandbox와 지침을 독립된 경계로 봅니다. 모델의 도구 의도, 호스트의 결정과 실제 부작용은
@@ -73,7 +67,6 @@ sandbox와 지침을 독립된 경계로 봅니다. 모델의 도구 의도, 호
 
 ### 관문 6: 팀과 확장 — 20장부터 24장
 
-![Claude Agent SDK 책 전체 여정 관문 6 팀과 확장](images/claude-journey/gate6-team-extension.jpg)
 
 [20장 에이전트 생성과 오케스트레이션](part6/ch20.md)을 중심으로 worker, skill, plugin,
 기능 플래그와 memory를 연결합니다. 팀의 수보다 부모 호출, 자식 실행, 결과 회수와 리더의
@@ -81,7 +74,6 @@ sandbox와 지침을 독립된 경계로 봅니다. 모델의 도구 의도, 호
 
 ### 관문 7: 관찰에서 설계로 — 25장부터 30장
 
-![Claude Agent SDK 책 전체 여정 관문 7 관찰 가능한 에이전트](images/claude-journey/gate7-observable-agent.jpg)
 
 [30장 나만의 AI 에이전트 만들기](part7/ch30.md)를 정상으로 삼아 하니스, 프로덕션 패턴,
 한계, 텔레메트리와 평가를 하나의 시스템으로 닫습니다. 모델 호출 하나가 아니라 행동, 실패,

@@ -148,7 +148,6 @@ semantic-defense 표본에서 위험 ToolUse가 없었던 것은 해당 prompt�
 
 ### 클로드는 이렇게 세상을 바라보았다
 
-![17b장 클로드 1인칭 세계관 4컷 만화](../images/claude-worldview/part5-ch17b.jpg)
 
 *아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.*
 

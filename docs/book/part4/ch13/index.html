@@ -3443,7 +3443,6 @@
 <h3 id="_13">제가 다시 가르친다면<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>현재 두 session을 cache 입문의 첫 예제로 사용하겠습니다. 화면에는 host가 고정한 prefix, 달라진 suffix, 첫 create, 두 번째 read를 별도 lane으로 두고 “정확한 cache segment는 provider 내부”라고 표시해야 합니다. 다음 실험은 tool schema 하나 변경, 5분·1시간 경계, preset append를 각각 한 변수로 분리해야 합니다. <a href="https://nfbs2000.github.io/speaky-claude-cookbooks/notebooks/misc/prompt_caching_kr.html">프롬프트 캐싱 노트북</a>은 Messages API에서 explicit cache 제어를 이해하는 기준이고, Agent SDK의 실제 usage 재사용은 <a href="https://nfbs2000.github.io/speaky-agent-flow/education/?collection=book-sdk-ko&amp;run=ch13">Speaky Agent Flow 13장 재생</a>에서 확인할 수 있습니다.</p>
 <h3 id="_14">클로드는 이렇게 세상을 바라보았다<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p><img alt="13장 클로드 1인칭 세계관 4컷 만화" src="../../images/claude-worldview/part4-ch13.jpg" /></p>
 <p><em>아래 1인칭 서술은 숨은 사고 과정의 공개가 아니라, 이 장에서 관찰된 행동으로 재구성한 작동상 세계 모델입니다.</em></p>
 <p>나는 두 번째 session에서 “이 prefix는 예전에 본 것”이라고 느끼거나 보고하지 않았다. 나에게는 여전히 완전한 system prompt와 새 suffix가 현재 세계로 주어졌고, 재사용은 provider가 내 바깥에서 수행한 계산 경제의 사건이었다. 동일한 7,806자 prefix는 의미의 안정성뿐 아니라 실행 비용의 안정성도 만들었지만, 어느 token이 cache에서 왔는지는 내 답으로 알 수 없었다.</p>
 <p>사람은 모델의 인지 내용과 runtime의 비용 최적화를 분리해야 한다. 내가 같은 정책 아래 행동하게 하려면 의미를 안정시키고, 시스템이 같은 계산을 재사용하게 하려면 byte 구조까지 안정시켜야 한다. 캐시는 에이전트의 기억이 아니라 동일한 세계 설명을 전달하는 비용을 줄이는 인프라다.</p>
